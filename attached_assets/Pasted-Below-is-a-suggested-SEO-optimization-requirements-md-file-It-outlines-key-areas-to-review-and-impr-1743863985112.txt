@@ -1,0 +1,124 @@
+Below is a suggested SEO_optimization_requirements.md file. It outlines key areas to review and improve on tkhongsap.io. Feel free to modify or expand these requirements based on your team’s specific goals or current site configuration.
+
+⸻
+
+SEO Optimization Requirements
+
+Table of Contents
+	1.	On-Page SEO
+	2.	Technical SEO
+	3.	Content Strategy
+	4.	Off-Page SEO
+	5.	Analytics and Monitoring
+
+⸻
+
+1. On-Page SEO
+	1.	Page Titles
+	•	Ensure each page has a unique, descriptive title tag (50–60 characters) that includes primary keywords.
+	•	Example: Service Name | tkhongsap.io
+	2.	Meta Descriptions
+	•	Create unique meta descriptions (120–160 characters) for all pages to entice click-through from SERPs.
+	•	Include relevant keywords but maintain a clear, natural-sounding description.
+	3.	Headings (H1, H2, H3)
+	•	Use a single H1 tag per page to describe the main topic.
+	•	Use H2/H3 for subtopics to improve content structure and readability.
+	•	Ensure keywords appear in headings where relevant, but avoid keyword stuffing.
+	4.	URL Structure
+	•	Use short, descriptive URLs (e.g., domain.com/service-name) rather than numerical or random strings.
+	•	Avoid unnecessary parameters and maintain consistency (lowercase, hyphens as separators).
+	5.	Internal Linking
+	•	Link relevant pages together to help users and search engines understand your site structure.
+	•	Use descriptive anchor text that matches the linked page’s topic or keywords.
+	6.	Image Optimization
+	•	Compress images to reduce file size without losing quality (using tools like TinyPNG or similar).
+	•	Add descriptive alt attributes that explain what each image depicts.
+	•	Use descriptive file names (e.g., keyword-image.jpg instead of IMG001.jpg).
+
+⸻
+
+2. Technical SEO
+	1.	Site Speed & Performance
+	•	Evaluate current site performance with tools like Google PageSpeed Insights or GTmetrix.
+	•	Minimize CSS and JS files, leverage browser caching, and use a Content Delivery Network (CDN) if possible.
+	2.	Mobile Responsiveness
+	•	Ensure the site is responsive on all devices.
+	•	Use Google’s Mobile-Friendly Test to verify mobile usability.
+	3.	Indexing and Crawlability
+	•	Validate that robots.txt is properly configured and not blocking important content.
+	•	Generate and submit an XML sitemap to Google Search Console and Bing Webmaster Tools.
+	•	Include canonical tags where duplicate content or similar pages exist.
+	4.	Structured Data (Schema Markup)
+	•	Implement relevant schema.org markup (e.g., Organization, FAQ, Article) to enhance SERP appearances.
+	•	Use Google’s Rich Results Test to verify correct implementation.
+	5.	Security (HTTPS)
+	•	Check for a valid SSL certificate (HTTPS).
+	•	Ensure all internal links point to HTTPS rather than HTTP to avoid mixed content issues.
+	6.	404 Errors and Redirects
+	•	Check the site for broken links (404 errors) and fix them or redirect to relevant pages.
+	•	Use 301 redirects for content that’s been moved or replaced.
+
+⸻
+
+3. Content Strategy
+	1.	Keyword Research
+	•	Identify primary and secondary keywords relevant to your audience’s search intent.
+	•	Map keywords to specific pages (e.g., a unique target keyword for each core page).
+	2.	Topic Clusters
+	•	Group content around main topic “pillars” and related subtopics to signal authority on specific subjects.
+	•	Internally link subtopic pages back to the main pillar page.
+	3.	Content Quality & Updates
+	•	Ensure each page has at least 300–500 words of well-structured, original content.
+	•	Regularly update or expand key pages/blog posts with current information to keep them fresh.
+	4.	Multimedia and Engagement
+	•	Incorporate relevant images, videos, or infographics to improve user engagement.
+	•	Provide clear calls-to-action (CTAs) to guide visitors (e.g., “Contact Us,” “Learn More,” “Sign Up”).
+
+⸻
+
+4. Off-Page SEO
+	1.	Backlink Acquisition
+	•	Develop a strategy to earn high-quality backlinks from relevant, authoritative websites.
+	•	Use tactics such as guest blogging, industry directories, and partnership collaborations.
+	2.	Social Media Presence
+	•	Maintain active profiles on relevant social platforms (e.g., Facebook, LinkedIn, Twitter).
+	•	Share new content to drive traffic and engagement signals.
+	3.	Local SEO (If Applicable)
+	•	If targeting a local audience, create or update your Google Business Profile.
+	•	Ensure your business name, address, and phone number (NAP) are consistent across all citations.
+	4.	Influencer Partnerships
+	•	Identify influencers or thought leaders in your niche who could share or link to your content.
+	•	Offer valuable content or collaborate on joint projects to earn natural backlinks.
+
+⸻
+
+5. Analytics and Monitoring
+	1.	Set Up Google Analytics & Search Console
+	•	Track site traffic, user behavior, conversions, and acquisition channels.
+	•	Monitor for index coverage issues, search queries, click-through rates (CTR), and potential penalties.
+	2.	Keyword & Ranking Monitoring
+	•	Track your primary keyword rankings regularly using an SEO tool (e.g., SEMrush, Ahrefs, Moz).
+	•	Identify pages that drop in rankings and investigate potential causes (content issues, technical errors, etc.).
+	3.	Regular Audits
+	•	Perform periodic site audits to catch and fix any newly appearing issues.
+	•	Keep an eye on site speed, broken links, or outdated content.
+	4.	Goal and Conversion Tracking
+	•	Define and measure specific conversion goals (e.g., form fills, sign-ups, product purchases).
+	•	Integrate conversion tracking in Google Analytics or your preferred analytics platform.
+
+⸻
+
+Action Steps Summary
+	1.	Technical Foundations: Improve site speed, ensure mobile-friendliness, validate SSL, and verify indexing.
+	2.	On-Page Enhancements: Update page titles, meta descriptions, headings, and internal links.
+	3.	Content Strategy: Conduct keyword research, expand or refresh existing content, and maintain a content calendar.
+	4.	Link Building & Off-Page: Strengthen your backlink profile, build authority, and engage on social media.
+	5.	Ongoing Monitoring: Track performance metrics, audit regularly, and iterate based on data.
+
+⸻
+
+Note: Implementing these optimizations in a structured, step-by-step manner will help tkhongsap.io rank better over time, increase organic visibility, and improve user experience.
+
+⸻
+
+End of SEO_optimization_requirements.md
