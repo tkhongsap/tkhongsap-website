@@ -9,11 +9,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Newsletter subscription endpoint
   app.post("/api/subscribe", async (req, res) => {
     try {
+      console.log("Subscription request received:", req.body);
+      
       const subscriberData = insertSubscriberSchema.parse(req.body);
+      console.log("Parsed subscription data:", subscriberData);
       
       // Check if subscriber already exists
+      console.log("Checking if email already exists:", subscriberData.email);
       const existingSubscriber = await storage.getSubscriberByEmail(subscriberData.email);
+      
       if (existingSubscriber) {
+        console.log("Subscriber already exists:", existingSubscriber);
         return res.status(200).json({ 
           success: true, 
           message: "You're already subscribed to our newsletter!" 
@@ -21,15 +27,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       
       // Create new subscriber
+      console.log("Creating new subscriber with data:", subscriberData);
       const newSubscriber = await storage.createSubscriber(subscriberData);
+      console.log("Subscriber created successfully:", newSubscriber);
       
       res.status(201).json({ 
         success: true, 
         message: "Successfully subscribed to the newsletter!" 
       });
     } catch (error) {
+      console.error("Error in subscribe endpoint:", error);
+      
       if (error instanceof z.ZodError) {
         const validationError = fromZodError(error);
+        console.log("Validation error:", validationError.message);
         return res.status(400).json({ 
           success: false, 
           message: validationError.message 

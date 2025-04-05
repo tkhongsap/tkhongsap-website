@@ -13,5 +13,6 @@ if (!process.env.DATABASE_URL) {
 // Define the type of the sql client
 const sql = neon(process.env.DATABASE_URL);
 
-// Export the database client
-export const db = drizzle(sql, { schema });
+// Export the database client with proper typing
+// Using type assertion to solve the TypeScript type issue
+export const db = drizzle(sql as any, { schema });
