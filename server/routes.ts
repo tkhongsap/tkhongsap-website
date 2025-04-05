@@ -6,6 +6,46 @@ import { z } from "zod";
 import { fromZodError } from "zod-validation-error";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Sitemap.xml endpoint
+  app.get("/sitemap.xml", (req, res) => {
+    const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://totrakoolkhongsap.replit.app/</loc>
+    <lastmod>2025-04-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://totrakoolkhongsap.replit.app/about</loc>
+    <lastmod>2025-04-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://totrakoolkhongsap.replit.app/portfolio</loc>
+    <lastmod>2025-04-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://totrakoolkhongsap.replit.app/writing</loc>
+    <lastmod>2025-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://totrakoolkhongsap.replit.app/contact</loc>
+    <lastmod>2025-04-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+</urlset>`;
+    
+    res.header('Content-Type', 'application/xml');
+    res.send(sitemap);
+  });
+  
   // Newsletter subscription endpoint
   app.post("/api/subscribe", async (req, res) => {
     try {

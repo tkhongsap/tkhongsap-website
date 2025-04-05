@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Github } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Project } from "@/data/projects";
+import OptimizedImage from "./optimized-image";
 
 interface ProjectCardProps {
   project: Project;
@@ -22,17 +23,12 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="h-48 bg-gray-200 relative">
-        {project.image && (
-          <div className="w-full h-full flex items-center justify-center bg-gray-200">
-            <svg className="w-full h-48 text-gray-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="24" height="24" fill="none"/>
-              <path d="M4 5H20V19H4V5Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M4 5L12 13L20 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M4 19L9 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M20 19L15 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </div>
-        )}
+        <OptimizedImage 
+          src={project.image || '#'} 
+          alt={`Project thumbnail for ${project.title}`}
+          height={192}
+          className="w-full h-full object-cover"
+        />
       </div>
       
       <CardContent className="p-5">
@@ -54,6 +50,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
               className="text-primary font-medium hover:underline"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`View ${project.caseStudyLabel || "Case Study"} for ${project.title}`}
             >
               {project.caseStudyLabel || "Case Study"}
             </a>
@@ -65,8 +62,9 @@ export default function ProjectCard({ project }: ProjectCardProps) {
               className="text-gray-600 hover:text-primary transition-colors"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`View source code for ${project.title} on GitHub`}
             >
-              <Github size={20} />
+              <Github size={20} aria-hidden="true" />
             </a>
           )}
         </div>

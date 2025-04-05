@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Article } from "@/data/articles";
+import OptimizedImage from "./optimized-image";
 
 interface ArticleCardProps {
   article: Article;
@@ -10,6 +11,17 @@ interface ArticleCardProps {
 export default function ArticleCard({ article, className }: ArticleCardProps) {
   return (
     <div className={cn("border-b border-gray-200 pb-12 last:border-0", className)}>
+      {article.imageUrl && (
+        <div className="mb-4 overflow-hidden rounded-lg">
+          <OptimizedImage 
+            src={article.imageUrl || '#'} 
+            alt={`Image for article: ${article.title}`}
+            height={240}
+            className="w-full h-60 object-cover transition-transform hover:scale-105 duration-300"
+          />
+        </div>
+      )}
+      
       <h3 className="text-2xl font-bold mb-3">
         <a 
           href={article.url} 
@@ -32,9 +44,10 @@ export default function ArticleCard({ article, className }: ArticleCardProps) {
         className="text-primary font-medium inline-flex items-center hover:underline"
         target="_blank"
         rel="noopener noreferrer"
+        aria-label={`Read more about ${article.title}`}
       >
         Read more
-        <ArrowRight className="h-5 w-5 ml-1" />
+        <ArrowRight className="h-5 w-5 ml-1" aria-hidden="true" />
       </a>
     </div>
   );

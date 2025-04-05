@@ -1,8 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /404
 
+# Sitemap
 Sitemap: https://totrakoolkhongsap.replit.app/sitemap.xml
-
-# Disallow server paths and API routes
-Disallow: /api/
-Disallow: /server/

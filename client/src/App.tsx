@@ -1,4 +1,5 @@
-import { Switch, Route } from "wouter";
+import { Switch, Route, useLocation } from "wouter";
+import { useEffect } from "react";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -10,8 +11,21 @@ import About from "@/pages/about";
 import Portfolio from "@/pages/portfolio";
 import Writing from "@/pages/writing";
 import Contact from "@/pages/contact";
+import GoogleAnalytics from "@/components/google-analytics";
 
 function Router() {
+  // Track page changes for analytics
+  const [location] = useLocation();
+  
+  useEffect(() => {
+    // Track page view in Google Analytics
+    if (window.gtag) {
+      window.gtag('config', 'G-MEASUREMENT_ID', {
+        page_path: location,
+      });
+    }
+  }, [location]);
+  
   return (
     <Switch>
       <Route path="/" component={Home} />
@@ -34,6 +48,8 @@ function App() {
         </main>
         <Footer />
       </div>
+      {/* Add Google Analytics */}
+      <GoogleAnalytics />
       <Toaster />
     </QueryClientProvider>
   );
