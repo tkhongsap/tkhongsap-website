@@ -63,9 +63,12 @@ export class MemStorage implements IStorage {
   async createSubscriber(insertSubscriber: InsertSubscriber): Promise<Subscriber> {
     const id = this.subscriberCurrentId++;
     const createdAt = new Date().toISOString();
+    // Ensure name is either string or null, not undefined
+    const name = insertSubscriber.name || null;
     const subscriber: Subscriber = { 
-      ...insertSubscriber, 
       id, 
+      name,
+      email: insertSubscriber.email, 
       createdAt 
     };
     this.subscribers.set(id, subscriber);
@@ -99,4 +102,10 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+// Import the PgStorage class when available
+import { PgStorage } from './pg-storage';
+
+// Use PostgreSQL storage when DATABASE_URL is available, otherwise use MemStorage
+export const storage: IStorage = process.env.DATABASE_URL
+  ? new PgStorage()
+  : new MemStorage();
