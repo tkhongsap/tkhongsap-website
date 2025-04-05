@@ -1,12 +1,7 @@
 
-import { drizzle } from 'drizzle-orm/neon-serverless';
-import { neon, neonConfig } from '@neondatabase/serverless';
+import { drizzle } from 'drizzle-orm/neon-http';
+import { neon } from '@neondatabase/serverless';
 import * as schema from '../shared/schema';
-import WebSocket from 'ws';
-
-// Configure Neon to use the WebSocket implementation
-neonConfig.webSocketConstructor = WebSocket;
-neonConfig.fetchConnectionCache = true;
 
 if (!process.env.DATABASE_URL) {
   throw new Error(
@@ -15,14 +10,14 @@ if (!process.env.DATABASE_URL) {
   );
 }
 
-console.log("Initializing database connection...");
+console.log("Initializing database connection with URL:", process.env.DATABASE_URL.replace(/:[^:@]*@/, ':****@'));
 
-// Create the Neon client with the DATABASE_URL
+// Create the Neon client with the DATABASE_URL using HTTP mode instead of WebSockets
+// This is more reliable in serverless environments
 const sql = neon(process.env.DATABASE_URL);
 
-// Create and export Drizzle ORM client
-// Using any to bypass TypeScript error with the Neon client
-const db = drizzle(sql as any, { schema });
+// Create and export Drizzle ORM client using neon-http instead of neon-serverless
+const db = drizzle(sql, { schema });
 
 console.log("Database connection initialized successfully");
 
