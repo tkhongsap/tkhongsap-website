@@ -1,7 +1,12 @@
 
 import { drizzle } from 'drizzle-orm/neon-serverless';
-import { neon } from '@neondatabase/serverless';
+import { neon, neonConfig } from '@neondatabase/serverless';
 import * as schema from '../shared/schema';
+import WebSocket from 'ws';
+
+// Configure Neon to use the WebSocket implementation
+neonConfig.webSocketConstructor = WebSocket;
+neonConfig.fetchConnectionCache = true;
 
 if (!process.env.DATABASE_URL) {
   throw new Error(
@@ -10,9 +15,15 @@ if (!process.env.DATABASE_URL) {
   );
 }
 
-// Define the type of the sql client
+console.log("Initializing database connection...");
+
+// Create the Neon client with the DATABASE_URL
 const sql = neon(process.env.DATABASE_URL);
 
-// Export the database client with proper typing
-// Using type assertion to solve the TypeScript type issue
-export const db = drizzle(sql as any, { schema });
+// Create and export Drizzle ORM client
+// Using any to bypass TypeScript error with the Neon client
+const db = drizzle(sql as any, { schema });
+
+console.log("Database connection initialized successfully");
+
+export { db };

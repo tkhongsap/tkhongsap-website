@@ -62,7 +62,7 @@ export class PgStorage implements IStorage {
         .values({
           email: insertSubscriber.email,
           name,
-          createdAt
+          createdAt  // Field name should match what's in subscriberTable model, not DB column name
         })
         .returning();
       
@@ -108,7 +108,7 @@ export class PgStorage implements IStorage {
         .insert(contactMessages)
         .values({
           ...insertMessage,
-          createdAt
+          createdAt // Field name should match what's in contactMessages model, not DB column name
         })
         .returning();
       return result[0];
