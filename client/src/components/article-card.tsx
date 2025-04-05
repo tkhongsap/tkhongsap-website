@@ -1,4 +1,4 @@
-import { ArrowRight, Calendar } from "lucide-react";
+import { ArrowRight, Calendar, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Article } from "@/data/articles";
 import OptimizedImage from "./optimized-image";
@@ -11,26 +11,23 @@ interface ArticleCardProps {
 }
 
 export default function ArticleCard({ article, className }: ArticleCardProps) {
-  // Determine the platform (Medium or LinkedIn) for displaying badge
-  const platform = article.url.includes('medium.com') ? 'Medium' : 
-                  article.url.includes('linkedin.com') ? 'LinkedIn' : 'External';
-  
   return (
     <div className={cn(
-      "border-b border-gray-200 pb-12 last:border-0 group",
-      "hover:shadow-md hover:bg-gray-50 dark:hover:bg-gray-900 p-6 -mx-6 rounded-lg transition-all duration-300", 
+      "border border-gray-200 rounded-lg overflow-hidden group",
+      "hover:shadow-lg transition-all duration-200", 
       className
     )}>
-      <div className="md:flex md:gap-6">
+      {/* Card Layout */}
+      <div className="flex flex-col h-full">
         {/* Featured Image */}
         {article.imageUrl && (
-          <div className="mb-6 md:mb-0 md:w-1/3 overflow-hidden rounded-lg">
+          <div className="w-full h-48 overflow-hidden">
             <OptimizedImage 
               src={article.imageUrl} 
-              alt={`Image for article: ${article.title}`}
+              alt={`Featured image for article: ${article.title}`}
               height={240}
               width={400}
-              className="w-full h-48 md:h-full object-cover transition-transform group-hover:scale-105 duration-500"
+              className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-500"
               loading="lazy"
               objectFit="cover"
             />
@@ -38,21 +35,28 @@ export default function ArticleCard({ article, className }: ArticleCardProps) {
         )}
         
         {/* Content */}
-        <div className={cn(
-          "flex flex-col",
-          article.imageUrl ? "md:w-2/3" : "w-full"
-        )}>
-          <div className="flex items-center gap-3 mb-2">
-            <Badge variant="outline" className="text-xs">
-              {platform}
+        <div className="flex flex-col flex-grow p-6">
+          {/* Metadata Row */}
+          <div className="flex items-center gap-3 mb-3">
+            <Badge variant="outline" className="text-xs font-medium">
+              {article.platform}
             </Badge>
-            <div className="flex items-center text-gray-500 text-sm">
-              <Calendar className="h-3.5 w-3.5 mr-1" />
+            
+            <div className="flex items-center text-gray-500 text-xs">
+              <Calendar className="h-3 w-3 mr-1" />
               {article.date}
             </div>
+            
+            {article.readingTime && (
+              <div className="flex items-center text-gray-500 text-xs">
+                <Clock className="h-3 w-3 mr-1" />
+                {article.readingTime}
+              </div>
+            )}
           </div>
           
-          <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">
+          {/* Title */}
+          <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors line-clamp-2">
             <a 
               href={article.url} 
               target="_blank"
@@ -63,20 +67,24 @@ export default function ArticleCard({ article, className }: ArticleCardProps) {
             </a>
           </h3>
           
-          <p className="text-lg text-gray-700 dark:text-gray-300 mb-4 flex-grow">
-            {article.excerpt}
-          </p>
+          {/* Executive Summary */}
+          <div className="mb-4 flex-grow">
+            <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
+              {article.summary}
+            </p>
+          </div>
           
+          {/* CTA */}
           <div className="mt-auto pt-2">
-            <Button variant="ghost" size="sm" className="group/button" asChild>
+            <Button variant="outline" size="sm" className="w-full group/button" asChild>
               <a 
                 href={article.url} 
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`Read more about ${article.title}`}
+                aria-label={`Read full article: ${article.title}`}
                 className="hover:no-underline"
               >
-                Read full article
+                Read Full Article on {article.platform}
                 <ArrowRight className="h-4 w-4 ml-1 transition-transform group-hover/button:translate-x-1" aria-hidden="true" />
               </a>
             </Button>
