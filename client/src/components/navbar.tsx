@@ -49,20 +49,20 @@ export default function Navbar() {
       "fixed w-full bg-white z-50 transition-all duration-200",
       isScrolled ? "shadow-sm" : ""
     )}>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-4">
-          <Link href="/" className="text-xl font-bold">
+      <div className="container">
+        <div className="flex justify-between items-center py-6">
+          <Link href="/" className="text-2xl font-bold text-[#333333]">
             Totrakool Khongsap
           </Link>
           
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-10">
             {navLinks.map((link) => (
               <Link 
                 key={link.name}
                 href={link.path}
                 className={cn(
-                  "font-medium hover:text-primary transition-colors",
+                  "font-medium text-[#444444] hover:text-primary transition-colors",
                   location === link.path && "text-primary"
                 )}
                 onClick={() => handleLinkClick(link.path)}
@@ -70,7 +70,7 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
-            <Button asChild variant="default" className="bg-primary hover:bg-primary/90 text-white">
+            <Button asChild variant="default" className="bg-primary hover:bg-primary/90 text-white rounded-md px-6">
               <Link href="/#newsletter" onClick={() => handleLinkClick("/#newsletter")}>
                 Subscribe
               </Link>
@@ -80,7 +80,7 @@ export default function Navbar() {
           {/* Mobile Navigation Button */}
           <button 
             type="button" 
-            className="md:hidden text-foreground focus:outline-none" 
+            className="md:hidden text-[#333333] focus:outline-none" 
             onClick={toggleMenu}
             aria-label="Toggle menu"
           >
@@ -92,13 +92,13 @@ export default function Navbar() {
         <div className={cn("md:hidden overflow-hidden transition-all duration-300", 
           isOpen ? "max-h-96" : "max-h-0"
         )}>
-          <div className="flex flex-col space-y-3 pb-4">
+          <div className="flex flex-col space-y-5 pb-6">
             {navLinks.map((link) => (
               <Link 
                 key={link.name}
                 href={link.path}
                 className={cn(
-                  "font-medium hover:text-primary transition-colors",
+                  "font-medium text-lg text-[#444444] hover:text-primary transition-colors",
                   location === link.path && "text-primary"
                 )}
                 onClick={() => handleLinkClick(link.path)}
@@ -106,7 +106,7 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
-            <Button asChild variant="default" className="bg-primary hover:bg-primary/90 text-white">
+            <Button asChild variant="default" className="bg-primary hover:bg-primary/90 text-white rounded-md w-full py-3 mt-4">
               <Link 
                 href="/#newsletter"
                 onClick={() => handleLinkClick("/#newsletter")}

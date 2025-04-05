@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Code, BarChart, Lightbulb } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import NewsletterForm from "@/components/newsletter-form";
 import { projects } from "@/data/projects";
@@ -11,36 +11,53 @@ export default function Home() {
   return (
     <div className="pt-20">
       {/* Hero Section */}
-      <section id="home" className="pt-12 pb-20 md:pt-20 md:pb-28">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="home" className="section bg-[#F8F8F8]">
+        <div className="container">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+            <h1 className="leading-tight mb-6 text-[#333333]">
               From Algorithms to Impact: Transforming Business with AI-Driven Innovation
             </h1>
-            <p className="text-xl md:text-2xl mb-10 text-gray-700">
+            <p className="text-xl md:text-2xl mb-10 text-[#444444]">
               I'm Totrakool Khongsap—an AI Strategist blending data science, finance, and leadership.
             </p>
             
             {/* Newsletter Signup */}
-            <div className="bg-gray-100 p-6 rounded-lg mb-12">
-              <h3 className="text-xl font-semibold mb-3">Join my newsletter</h3>
-              <p className="mb-4">Get insights on AI trends and updates on my weekend coding/writing projects.</p>
+            <div id="newsletter" className="bg-white p-8 rounded-lg shadow-sm mb-12">
+              <h3 className="mb-3">Join my newsletter</h3>
+              <p className="mb-6 text-[#444444]">Get insights on AI trends and updates on my weekend coding/writing projects.</p>
               <NewsletterForm />
             </div>
             
             {/* Value Propositions */}
-            <div className="grid md:grid-cols-3 gap-8">
-              <div>
-                <h3 className="text-lg font-semibold mb-2">AI Strategy</h3>
-                <p className="text-gray-700">Developing AI solutions that solve real business problems and drive measurable ROI.</p>
+            <div className="grid md:grid-cols-3 gap-10">
+              <div className="group">
+                <div className="flex items-center mb-4">
+                  <div className="bg-primary/10 p-3 rounded-full mr-3">
+                    <BarChart className="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 className="group-hover:text-primary transition-colors">AI Strategy</h3>
+                </div>
+                <p className="text-[#444444]">Developing AI solutions that solve real business problems and drive measurable ROI.</p>
               </div>
-              <div>
-                <h3 className="text-lg font-semibold mb-2">Data-Driven Leadership</h3>
-                <p className="text-gray-700">Bridging technical expertise with strategic business acumen for holistic solutions.</p>
+              
+              <div className="group">
+                <div className="flex items-center mb-4">
+                  <div className="bg-primary/10 p-3 rounded-full mr-3">
+                    <Lightbulb className="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 className="group-hover:text-primary transition-colors">Data-Driven Leadership</h3>
+                </div>
+                <p className="text-[#444444]">Bridging technical expertise with strategic business acumen for holistic solutions.</p>
               </div>
-              <div>
-                <h3 className="text-lg font-semibold mb-2">Weekend Innovation</h3>
-                <p className="text-gray-700">Sharing learnings from side projects and exploring AI's potential for societal good.</p>
+              
+              <div className="group">
+                <div className="flex items-center mb-4">
+                  <div className="bg-primary/10 p-3 rounded-full mr-3">
+                    <Code className="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 className="group-hover:text-primary transition-colors">Weekend Innovation</h3>
+                </div>
+                <p className="text-[#444444]">Sharing learnings from side projects and exploring AI's potential for societal good.</p>
               </div>
             </div>
           </div>
@@ -49,28 +66,30 @@ export default function Home() {
       
       {/* Featured Project Section */}
       {featuredProject && (
-        <section className="py-16 bg-gray-100">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="section bg-white">
+          <div className="container">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold mb-10">Featured Work</h2>
+              <h2 className="mb-10">Featured Work</h2>
               
-              <div className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold mb-3">{featuredProject.title}</h3>
-                  <p className="text-gray-700 mb-4">
+              <div className="card">
+                <div className="p-8">
+                  <h3 className="mb-4">{featuredProject.title}</h3>
+                  <p className="text-[#444444] mb-6">
                     {featuredProject.description}
                   </p>
-                  <div className="flex flex-wrap gap-2 mb-4">
+                  <div className="flex flex-wrap gap-2 mb-6">
                     {featuredProject.technologies.map((tech, index) => (
-                      <span key={index} className="bg-gray-100 px-3 py-1 rounded-full text-sm">
+                      <span key={index} className="bg-[#F8F8F8] px-3 py-1 rounded-full text-sm">
                         {tech}
                       </span>
                     ))}
                   </div>
-                  <Link href="/portfolio" className="text-primary font-medium inline-flex items-center hover:underline">
-                    Learn more
-                    <ArrowRight className="h-5 w-5 ml-1" />
-                  </Link>
+                  <Button asChild variant="outline" className="group border-primary text-primary hover:bg-primary hover:text-white">
+                    <Link href="/portfolio" className="inline-flex items-center">
+                      Learn more
+                      <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </Button>
                 </div>
               </div>
             </div>

@@ -6,6 +6,7 @@ import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Mail } from "lucide-react";
 import {
   Form,
   FormControl,
@@ -67,8 +68,8 @@ export default function NewsletterForm({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className={className}>
-        <div className="space-y-4">
-          {showNameField && (
+        {showNameField && (
+          <div className="mb-6">
             <FormField
               control={form.control}
               name="name"
@@ -77,7 +78,7 @@ export default function NewsletterForm({
                   <FormControl>
                     <Input 
                       placeholder="Your name" 
-                      className="w-full px-4 py-3 rounded border border-gray-300 focus:border-primary" 
+                      className="w-full px-4 py-3 rounded-md border border-gray-300 focus:border-primary focus:ring-primary" 
                       {...field} 
                     />
                   </FormControl>
@@ -85,40 +86,51 @@ export default function NewsletterForm({
                 </FormItem>
               )}
             />
-          )}
+          </div>
+        )}
 
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input 
-                    placeholder="Your email address" 
-                    className="w-full px-4 py-3 rounded border border-gray-300 focus:border-primary" 
-                    {...field} 
-                    required 
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+        <div className={showNameField ? '' : 'flex flex-col sm:flex-row gap-3'}>
+          <div className={showNameField ? 'mb-4' : 'flex-1'}>
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <div className="relative">
+                      {!showNameField && (
+                        <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                          <Mail className="h-5 w-5" />
+                        </span>
+                      )}
+                      <Input 
+                        placeholder="Your email address" 
+                        className={`w-full rounded-md border border-gray-300 focus:border-primary focus:ring-primary ${!showNameField ? 'pl-10 py-3' : 'px-4 py-3'}`}
+                        {...field} 
+                        required 
+                      />
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
 
           <Button 
             type="submit" 
-            className="w-full bg-primary hover:bg-primary/90 text-white font-medium" 
+            className={`bg-primary hover:bg-primary/90 text-white font-medium ${showNameField ? 'w-full py-3' : 'py-3 px-6'}`}
             disabled={isSubmitting}
           >
             {isSubmitting ? "Subscribing..." : "Subscribe"}
           </Button>
-          
-          {showNameField && (
-            <p className="text-sm text-gray-600 mt-2 text-center">
-              I respect your privacy. Unsubscribe at any time.
-            </p>
-          )}
         </div>
+        
+        {showNameField && (
+          <p className="text-sm text-[#666666] mt-4 text-center">
+            I respect your privacy. Unsubscribe at any time.
+          </p>
+        )}
       </form>
     </Form>
   );
