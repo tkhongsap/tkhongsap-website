@@ -1,10 +1,45 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import helmet from "helmet";
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// Use Helmet for security headers
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+      fontSrc: ["'self'", "https://fonts.gstatic.com"],
+      imgSrc: ["'self'", "data:", "https:"],
+      connectSrc: ["'self'"]
+    },
+  },
+  hsts: {
+    maxAge: 31536000, // 1 year in seconds
+    includeSubDomains: true,
+    preload: true
+  },
+  frameguard: {
+    action: "sameorigin"
+  },
+  referrerPolicy: {
+    policy: "strict-origin-when-cross-origin"
+  }
+}));
+
+// Add custom permissions policy header (since it's not in helmet's type)
+app.use((req, res, next) => {
+  res.setHeader(
+    'Permissions-Policy', 
+    'camera=(), microphone=(), geolocation=()'
+  );
+  next();
+});
 
 app.use((req, res, next) => {
   const start = Date.now();
