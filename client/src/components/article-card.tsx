@@ -1,4 +1,4 @@
-import { ArrowRight, Calendar, Clock } from "lucide-react";
+import { ArrowRight, Calendar, Clock, Tag } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Article } from "@/data/articles";
 import OptimizedImage from "./optimized-image";
@@ -8,13 +8,15 @@ import { Button } from "@/components/ui/button";
 interface ArticleCardProps {
   article: Article;
   className?: string;
+  onCategoryClick?: (category: string) => void;
 }
 
-export default function ArticleCard({ article, className }: ArticleCardProps) {
+export default function ArticleCard({ article, className, onCategoryClick }: ArticleCardProps) {
   return (
     <div className={cn(
       "border border-gray-200 rounded-lg overflow-hidden group",
       "hover:shadow-lg transition-all duration-200", 
+      "dark:border-gray-700 bg-white dark:bg-gray-800",
       className
     )}>
       {/* Card Layout */}
@@ -37,7 +39,7 @@ export default function ArticleCard({ article, className }: ArticleCardProps) {
         {/* Content */}
         <div className="flex flex-col flex-grow p-6">
           {/* Metadata Row */}
-          <div className="flex items-center gap-3 mb-3">
+          <div className="flex flex-wrap items-center gap-3 mb-3">
             <Badge variant="outline" className="text-xs font-medium">
               {article.platform}
             </Badge>
@@ -73,6 +75,25 @@ export default function ArticleCard({ article, className }: ArticleCardProps) {
               {article.summary}
             </p>
           </div>
+          
+          {/* Categories */}
+          {article.categories && article.categories.length > 0 && (
+            <div className="mb-4">
+              <div className="flex flex-wrap gap-2 items-center">
+                <Tag className="h-3 w-3 text-gray-500" />
+                {article.categories.map((category, idx) => (
+                  <Badge 
+                    key={`${article.id}-category-${idx}`}
+                    variant="secondary"
+                    className="text-xs cursor-pointer hover:bg-primary hover:text-white transition-colors"
+                    onClick={() => onCategoryClick && onCategoryClick(category)}
+                  >
+                    {category}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          )}
           
           {/* CTA */}
           <div className="mt-auto pt-2">
