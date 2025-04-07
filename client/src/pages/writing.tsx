@@ -1,6 +1,5 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { articles } from "@/data/articles";
-import ArticleCard from "@/components/article-card";
 import NewsletterForm from "@/components/newsletter-form";
 import SEO from "@/components/seo";
 import SchemaMarkup from "@/components/schema-markup";
@@ -25,6 +24,59 @@ import {
 } from "@/components/ui/select";
 import { scrollToElement } from "@/lib/utils";
 
+// Medium Embed Component
+function MediumEmbed({ url }: { url: string }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  useEffect(() => {
+    // Ensure the Medium embed script is loaded
+    if (!window.document.getElementById('medium-embed-script')) {
+      const script = document.createElement('script');
+      script.id = 'medium-embed-script';
+      script.src = 'https://medium-embed.vercel.app/embed.js';
+      script.async = true;
+      document.body.appendChild(script);
+      
+      script.onload = () => {
+        if (containerRef.current) {
+          renderEmbed();
+        }
+      };
+    } else if (containerRef.current) {
+      renderEmbed();
+    }
+    
+    function renderEmbed() {
+      if (containerRef.current) {
+        // Trigger Medium's embed system
+        containerRef.current.innerHTML = `<a 
+          class="m-story" 
+          data-width="100%" 
+          data-border="1px solid #ddd" 
+          data-border-radius="5px" 
+          data-shadow="none" 
+          href="${url}">
+        </a>`;
+        
+        // @ts-ignore
+        if (window.mediumEmbed) {
+          // @ts-ignore
+          window.mediumEmbed.createMediumEmbed();
+        }
+      }
+    }
+    
+    return () => {
+      // Clean up on unmount
+      if (containerRef.current) {
+        containerRef.current.innerHTML = '';
+      }
+    };
+  }, [url]);
+  
+  return <div ref={containerRef} className="medium-embed-container my-8 bg-white dark:bg-gray-800 rounded-lg p-4"></div>;
+}
+
 export default function Writing() {
   // State for search and filtering
   const [searchQuery, setSearchQuery] = useState("");
@@ -34,7 +86,7 @@ export default function Writing() {
   const [showScrollTop, setShowScrollTop] = useState(false);
   
   // Constants
-  const ARTICLES_PER_PAGE = 10;
+  const ARTICLES_PER_PAGE = 5; // Fewer articles per page since Medium embeds take more space
   
   // Extract all unique categories from articles
   const uniqueCategories = Array.from(
@@ -136,8 +188,8 @@ export default function Writing() {
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">Writing</h1>
             <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300">
-              Executive summaries of my articles on AI strategy, technology leadership, and digital transformation.
-              Read here, then continue on LinkedIn or Medium for the full content.
+              A collection of my Medium articles on AI, automation, productivity, personal growth, and technology.
+              Browse my publications and dive deeper into the topics that interest you.
             </p>
           </div>
         </div>
@@ -276,19 +328,14 @@ export default function Writing() {
       <section id="articles" className="py-16 bg-gray-50 dark:bg-gray-900">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-2xl font-bold mb-8 text-center">Executive Summaries</h2>
+            <h2 className="text-2xl font-bold mb-8 text-center">My Medium Articles</h2>
             
             {displayedArticles.length > 0 ? (
               <>
-                {/* Single column layout with 10 articles per page */}
+                {/* Single column layout with Medium embeds */}
                 <div className="grid grid-cols-1 gap-8 max-w-4xl mx-auto">
                   {displayedArticles.map(article => (
-                    <ArticleCard 
-                      key={article.id} 
-                      article={article} 
-                      className="h-full"
-                      onCategoryClick={handleCategoryClick}
-                    />
+                    <MediumEmbed key={article.id} url={article.url} />
                   ))}
                 </div>
                 
