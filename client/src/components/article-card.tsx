@@ -12,38 +12,8 @@ interface ArticleCardProps {
 }
 
 export default function ArticleCard({ article, className, onCategoryClick }: ArticleCardProps) {
-  // Function to attempt to extract Medium article ID from URL
-  const getMediumImageUrl = (url: string): string => {
-    try {
-      // Try to extract article ID from URL
-      const urlPath = new URL(url).pathname;
-      const segments = urlPath.split('/');
-      const lastSegment = segments[segments.length - 1];
-      
-      // Check if last segment has a hyphen and at least 12 chars (likely an ID)
-      if (lastSegment && lastSegment.includes('-') && lastSegment.length >= 12) {
-        return `https://miro.medium.com/v2/resize:fit:1200/1*-IMtZtcUK-QuVa1ypGCJbg.jpeg`;
-      }
-    } catch (e) {
-      // If URL parsing fails, just use the default image
-    }
-    
-    // Fallback based on category
-    if (article.categories.includes('AI')) {
-      return "https://miro.medium.com/v2/resize:fit:1200/1*wQTLVXmPIJZ1x1oDYqfXYg.jpeg";
-    } else if (article.categories.includes('Coding')) {
-      return "https://miro.medium.com/v2/resize:fit:1200/1*jfdwtvU6V6g99q3G7gq7dQ.jpeg";
-    } else if (article.categories.includes('Well-being')) {
-      return "https://miro.medium.com/v2/resize:fit:1200/1*wdB6-KF8GlhGNhMOvH0Kew.jpeg";
-    } else if (article.categories.includes('Podcast')) {
-      return "https://miro.medium.com/v2/resize:fit:1200/1*vXWVmfL4yGtaOZXzemVfuQ.jpeg";
-    } else {
-      return "https://miro.medium.com/v2/resize:fit:1200/1*T-w_k1OsJJ14Q-N_iXQpOw.jpeg";
-    }
-  };
-
-  // Use Medium's default image format or fallback to the category-based one
-  const imageUrl = getMediumImageUrl(article.url);
+  // The imageUrl is now properly set in the articles.ts file
+  // so we'll use it directly from the article object
 
   return (
     <div className={cn(
@@ -57,7 +27,7 @@ export default function ArticleCard({ article, className, onCategoryClick }: Art
         {/* Featured Image - Left side on desktop, top on mobile */}
         <div className="w-full md:w-1/3 h-48 md:h-auto overflow-hidden">
           <OptimizedImage 
-            src={imageUrl} 
+            src={article.imageUrl || ""} 
             alt={`Featured image for article: ${article.title}`}
             height={300}
             width={400}
