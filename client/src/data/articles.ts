@@ -8,6 +8,8 @@ export interface Article {
   url: string; // Link to the full article
   imageUrl?: string; // Featured image
   categories: string[]; // Categories for filtering
+  author?: string; // Author of the article
+  content?: string; // Full content or excerpt
 }
 
 // Function to extract title from Medium URL
@@ -402,23 +404,124 @@ function getMediumCoverImage(url: string, categories: string[]): string {
   return categoryImages[imageIndex];
 }
 
-// Generate articles from the URLs
-export const articles: Article[] = articleUrls.map((url, index) => {
-  const title = extractTitleFromUrl(url);
-  const categories = determineCategories(title, url);
-  const date = generatePublicationDate(index, articleUrls.length);
-  const readingTime = generateReadingTime(title, categories);
-  const coverImage = getMediumCoverImage(url, categories);
+// Import all article JSON files from the articles directory
+// This uses Vite's import.meta.glob feature to dynamically import all JSON files
+const articleFiles = import.meta.glob('./articles/*.json', { eager: true });
+
+// Function to format a date string from various formats
+function formatDateString(dateString: string | null): string {
+  if (!dateString) {
+    // Return current date if no date provided
+    return new Date().toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  }
   
-  return {
-    id: `article-${index + 1}`,
-    title,
-    date,
-    summary: generateSummary(title, url, categories),
-    readingTime,
-    platform: "Medium" as const, // Type assertion to satisfy the union type
-    url,
-    imageUrl: coverImage,
-    categories
-  };
-}).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()); // Sort by date (newest first)
+  // Try to parse the date
+  const date = new Date(dateString);
+  
+  // Check if the date is valid
+  if (isNaN(date.getTime())) {
+    // Return current date if invalid
+    return new Date().toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  }
+  
+  // Format the date
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
+
+// Function to extract a summary from the content
+function extractSummary(content: string): string {
+  if (!content) return '';
+  
+  // Remove any HTML tags if present
+  const cleanContent = content.replace(/<[^>]*>/g, '');
+  
+  // Get the first paragraph or part of it
+  const firstParagraph = cleanContent.split('\n\n')[0];
+  
+  // If the first paragraph is too short, get more text
+  if (firstParagraph.length < 50) {
+    return cleanContent.substring(0, 150) + '...';
+  }
+  
+  // Return the first paragraph or truncate if it's too long
+  return firstParagraph.length > 150 
+    ? firstParagraph.substring(0, 150) + '...' 
+    : firstParagraph;
+}
+
+// Process and transform the imported JSON files into Article objects
+export const articles: Article[] = Object.entries(articleFiles)
+  .map(([path, module]) => {
+    // Cast the imported module to any to access its properties
+    const jsonData = module as any;
+    
+    // Extract filename from path to use as ID
+    const fileName = path.split('/').pop()?.replace('.json', '') || '';
+    
+    // Extract date from filename if available (format: YYYYMMDD-Title.json)
+    let dateFromFilename: string | null = null;
+    const dateMatch = fileName.match(/^(\d{8})/);
+    if (dateMatch) {
+      const dateStr = dateMatch[1];
+      const year = dateStr.substring(0, 4);
+      const month = dateStr.substring(4, 6);
+      const day = dateStr.substring(6, 8);
+      dateFromFilename = `${year}-${month}-${day}`;
+    }
+    
+    // Use the data from the JSON file
+    const title = jsonData.title || extractTitleFromUrl(jsonData.url);
+    const url = jsonData.url;
+    // Use filename date or JSON publish_date, falling back to current date
+    const dateSrc = dateFromFilename || jsonData.publish_date;
+    const date = formatDateString(dateSrc);
+    const readingTime = jsonData.read_time || generateReadingTime(title, []);
+    // Determine categories from title and URL if not in the JSON
+    const categories = determineCategories(title, url);
+    // Get author from JSON or use default
+    const author = jsonData.author || "Totrakool Khongsap";
+    // Get platform from URL
+    let platform: "LinkedIn" | "Medium" | "Other" = "Other";
+    if (url.includes("medium.com")) {
+      platform = "Medium";
+    } else if (url.includes("linkedin.com")) {
+      platform = "LinkedIn";
+    }
+    
+    // Use content from JSON, or generate a summary if not available
+    const content = jsonData.content || '';
+    const summary = jsonData.summary || extractSummary(content) || generateSummary(title, url, categories);
+    
+    // Use cover image from JSON if available, or generate one
+    const imageUrl = jsonData.cover_image || getMediumCoverImage(url, categories);
+    
+    return {
+      id: fileName,
+      title,
+      date,
+      summary,
+      readingTime,
+      platform,
+      url,
+      imageUrl,
+      categories,
+      author,
+      content
+    };
+  })
+  // Sort by date (newest first)
+  .sort((a, b) => {
+    return new Date(b.date).getTime() - new Date(a.date).getTime();
+  });
