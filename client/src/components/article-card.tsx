@@ -1,4 +1,4 @@
-import { ArrowRight, Calendar, Clock, Tag } from "lucide-react";
+import { ArrowRight, Calendar, Clock, Tag, MessageSquare, ThumbsUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Article } from "@/data/articles";
 import OptimizedImage from "./optimized-image";
@@ -56,6 +56,12 @@ export default function ArticleCard({ article, className, onCategoryClick }: Art
                 {article.readingTime}
               </div>
             )}
+            
+            {article.author && (
+              <div className="text-gray-500 text-xs ml-auto">
+                by {article.author}
+              </div>
+            )}
           </div>
           
           {/* Title */}
@@ -96,6 +102,25 @@ export default function ArticleCard({ article, className, onCategoryClick }: Art
             </div>
           )}
           
+          {/* Engagement metrics */}
+          <div className="flex items-center gap-4 mb-4 text-sm text-gray-500">
+            {/* Only show if claps is defined */}
+            {article.claps !== undefined && (
+              <div className="flex items-center gap-1">
+                <ThumbsUp className="h-4 w-4" />
+                <span>{article.claps}</span>
+              </div>
+            )}
+            
+            {/* Only show if comments is defined */}
+            {article.comments !== undefined && (
+              <div className="flex items-center gap-1">
+                <MessageSquare className="h-4 w-4" />
+                <span>{article.comments}</span>
+              </div>
+            )}
+          </div>
+
           {/* CTA */}
           <div className="mt-auto pt-2">
             <Button variant="outline" size="sm" className="w-full md:w-auto group/button" asChild>

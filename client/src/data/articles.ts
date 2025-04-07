@@ -10,6 +10,9 @@ export interface Article {
   categories: string[]; // Categories for filtering
   author?: string; // Author of the article
   content?: string; // Full content or excerpt
+  claps?: number; // Number of claps/likes (Medium)
+  comments?: number; // Number of comments (Medium)
+  publish_date?: string; // Original publish date from the JSON
 }
 
 // Function to extract title from Medium URL
@@ -404,9 +407,10 @@ function getMediumCoverImage(url: string, categories: string[]): string {
   return categoryImages[imageIndex];
 }
 
-// Import all article JSON files from the articles directory
-// This uses Vite's import.meta.glob feature to dynamically import all JSON files
-const articleFiles = import.meta.glob('./articles/*.json', { eager: true });
+// Import sample articles
+import sampleArticle1 from './articles/20250104-How_to_Build_Effective_AI_Agents.json';
+import sampleArticle2 from './articles/20250304-The_Future_of_AI_Agents.json';
+import sampleArticle3 from './articles/20250221-Mastering_Social_Intelligence.json';
 
 // Function to format a date string from various formats
 function formatDateString(dateString: string | null): string {
@@ -461,67 +465,84 @@ function extractSummary(content: string): string {
     : firstParagraph;
 }
 
-// Process and transform the imported JSON files into Article objects
-export const articles: Article[] = Object.entries(articleFiles)
-  .map(([path, module]) => {
-    // Cast the imported module to any to access its properties
-    const jsonData = module as any;
+// Create a function to convert a JSON article to our Article interface
+function convertJsonToArticle(json: any, index: number): Article {
+  // Extract ID from filename if available, or generate one
+  const fileName = `article-${index + 1}`;
     
-    // Extract filename from path to use as ID
-    const fileName = path.split('/').pop()?.replace('.json', '') || '';
-    
-    // Extract date from filename if available (format: YYYYMMDD-Title.json)
-    let dateFromFilename: string | null = null;
-    const dateMatch = fileName.match(/^(\d{8})/);
-    if (dateMatch) {
-      const dateStr = dateMatch[1];
-      const year = dateStr.substring(0, 4);
-      const month = dateStr.substring(4, 6);
-      const day = dateStr.substring(6, 8);
-      dateFromFilename = `${year}-${month}-${day}`;
-    }
-    
-    // Use the data from the JSON file
-    const title = jsonData.title || extractTitleFromUrl(jsonData.url);
-    const url = jsonData.url;
-    // Use filename date or JSON publish_date, falling back to current date
-    const dateSrc = dateFromFilename || jsonData.publish_date;
-    const date = formatDateString(dateSrc);
-    const readingTime = jsonData.read_time || generateReadingTime(title, []);
-    // Determine categories from title and URL if not in the JSON
-    const categories = determineCategories(title, url);
-    // Get author from JSON or use default
-    const author = jsonData.author || "Totrakool Khongsap";
-    // Get platform from URL
-    let platform: "LinkedIn" | "Medium" | "Other" = "Other";
-    if (url.includes("medium.com")) {
-      platform = "Medium";
-    } else if (url.includes("linkedin.com")) {
-      platform = "LinkedIn";
-    }
-    
-    // Use content from JSON, or generate a summary if not available
-    const content = jsonData.content || '';
-    const summary = jsonData.summary || extractSummary(content) || generateSummary(title, url, categories);
-    
-    // Use cover image from JSON if available, or generate one
-    const imageUrl = jsonData.cover_image || getMediumCoverImage(url, categories);
-    
-    return {
-      id: fileName,
-      title,
-      date,
-      summary,
-      readingTime,
-      platform,
-      url,
-      imageUrl,
-      categories,
-      author,
-      content
-    };
-  })
-  // Sort by date (newest first)
-  .sort((a, b) => {
-    return new Date(b.date).getTime() - new Date(a.date).getTime();
-  });
+  // Use the data from the JSON file
+  const title = json.title || extractTitleFromUrl(json.url);
+  const url = json.url;
+  // Use JSON publish_date, falling back to current date
+  const date = formatDateString(json.publish_date);
+  const readingTime = json.read_time || generateReadingTime(title, []);
+  // Determine categories from title and URL
+  const categories = determineCategories(title, url);
+  // Get author from JSON or use default
+  const author = json.author || "Totrakool Khongsap";
+  // Get platform from URL
+  let platform: "LinkedIn" | "Medium" | "Other" = "Other";
+  if (url.includes("medium.com")) {
+    platform = "Medium";
+  } else if (url.includes("linkedin.com")) {
+    platform = "LinkedIn";
+  }
+  
+  // Use content from JSON, or generate a summary if not available
+  const content = json.content || '';
+  const summary = json.summary || extractSummary(content) || generateSummary(title, url, categories);
+  
+  // Use cover image from JSON if available, or generate one
+  const imageUrl = json.cover_image || getMediumCoverImage(url, categories);
+  
+  // Additional properties from JSON
+  const claps = json.claps !== undefined ? Number(json.claps) : undefined;
+  const comments = json.comments !== undefined ? Number(json.comments) : undefined;
+  
+  return {
+    id: fileName,
+    title,
+    date,
+    summary,
+    readingTime,
+    platform,
+    url,
+    imageUrl,
+    categories,
+    author,
+    content,
+    claps,
+    comments,
+    publish_date: json.publish_date
+  };
+}
+
+// Convert our sample JSON articles to Article objects
+const sampleArticle1Converted = convertJsonToArticle(sampleArticle1, 0);
+const sampleArticle2Converted = convertJsonToArticle(sampleArticle2, 1);
+const sampleArticle3Converted = convertJsonToArticle(sampleArticle3, 2);
+
+// Generate articles from the existing URLs, but add our sample articles at the beginning
+export const articles: Article[] = [
+  sampleArticle1Converted, 
+  sampleArticle2Converted,
+  sampleArticle3Converted,
+  ...articleUrls.map((url, index) => {
+  const title = extractTitleFromUrl(url);
+  const categories = determineCategories(title, url);
+  const date = generatePublicationDate(index, articleUrls.length);
+  const readingTime = generateReadingTime(title, categories);
+  const coverImage = getMediumCoverImage(url, categories);
+  
+  return {
+    id: `article-${index + 4}`, // Start from index 4 since we already have three articles
+    title,
+    date,
+    summary: generateSummary(title, url, categories),
+    readingTime,
+    platform: "Medium" as const,
+    url,
+    imageUrl: coverImage,
+    categories
+  };
+})].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()); // Sort by date (newest first)
