@@ -148,67 +148,26 @@ function generateSummary(title: string, url: string, categories: string[]): stri
   return `An insightful exploration of ${title.toLowerCase()} ${categoryText}. This article provides valuable perspectives and practical takeaways that you can apply to your work or personal development.`;
 }
 
-// Function to extract date from Medium URL or path
-function extractDateFromUrl(url: string): string {
-  // Medium articles typically have the date as part of the URL path
-  // First try to extract from URL path segment (more accurate)
-  try {
-    const urlObj = new URL(url);
-    const pathSegments = urlObj.pathname.split('/');
-    
-    // Look for date-like segments in the URL path (check for YYYY/MM/DD format)
-    for (let i = 0; i < pathSegments.length - 1; i++) {
-      const segment = pathSegments[i];
-      if (/^\d{4}$/.test(segment) && i + 2 < pathSegments.length) {
-        const year = parseInt(segment);
-        const month = parseInt(pathSegments[i + 1]) - 1; // JavaScript months are 0-indexed
-        const day = parseInt(pathSegments[i + 2]);
-        
-        if (!isNaN(year) && !isNaN(month) && !isNaN(day)) {
-          const date = new Date(year, month, day);
-          if (date.getFullYear() === year && date.getMonth() === month && date.getDate() === day) {
-            return date.toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric'
-            });
-          }
-        }
-      }
-    }
-    
-    // If no date found in URL, use a fallback method: extract from last segment
-    // Some Medium articles have date encoded in the last segment
-    if (pathSegments.length > 0) {
-      const lastSegment = pathSegments[pathSegments.length - 1];
-      // Extract the last segment's first 8 characters if it's a hash
-      if (lastSegment.length > 12 && lastSegment.includes('-')) {
-        const datePart = lastSegment.split('-')[0];
-        if (/^\d{8}$/.test(datePart)) {
-          const year = parseInt(datePart.substring(0, 4));
-          const month = parseInt(datePart.substring(4, 6)) - 1;
-          const day = parseInt(datePart.substring(6, 8));
-          
-          const date = new Date(year, month, day);
-          if (!isNaN(date.getTime())) {
-            return date.toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric'
-            });
-          }
-        }
-      }
-    }
-  } catch (e) {
-    // URL parsing failed, use fallback
-  }
+// Generate a publication date based on article position in list
+// Newer articles are at the top (lower index)
+function generatePublicationDate(index: number, totalArticles: number): string {
+  // Start date is 2 years ago
+  const startDate = new Date();
+  startDate.setFullYear(startDate.getFullYear() - 2);
   
-  // Fallback: use publication date based on when articles were likely published
-  // More recent articles for URLs higher in the list (newer articles are added at the top)
-  const daysBack = Math.floor(Math.random() * 300); // Last ~10 months
-  const date = new Date();
-  date.setDate(date.getDate() - daysBack);
+  // End date is today
+  const endDate = new Date();
+  
+  // Calculate position in the timeline (0 to 1)
+  // 0 = oldest (highest index), 1 = newest (index 0)
+  const position = 1 - (index / totalArticles);
+  
+  // Calculate milliseconds between start and end
+  const timeRange = endDate.getTime() - startDate.getTime();
+  
+  // Calculate the date based on position
+  const timestamp = startDate.getTime() + (position * timeRange);
+  const date = new Date(timestamp);
   
   return date.toLocaleDateString('en-US', {
     year: 'numeric',
@@ -217,25 +176,21 @@ function extractDateFromUrl(url: string): string {
   });
 }
 
-// Function to calculate appropriate reading time based on estimated article length
-function calculateReadingTime(title: string, url: string): string {
-  // A real implementation would fetch the article content and count words
-  // Since we can't do that here, we'll estimate based on title/URL complexity
-  
+// Generate reading time estimate
+function generateReadingTime(title: string, categories: string[]): string {
   // Base reading time (5 minutes)
   let minutes = 5;
   
   // Adjust based on title length (longer titles often indicate longer articles)
   minutes += Math.floor(title.length / 20);
   
-  // Adjust based on topic complexity
-  if (url.includes("technical") || url.includes("guide") || url.includes("tutorial")) {
+  // Adjust based on category
+  if (categories.includes('AI') || categories.includes('Coding')) {
     minutes += 3; // Technical content takes longer to read
   }
   
-  if (url.includes("ai") || url.includes("gpt") || url.includes("claude") || 
-      url.includes("deep") || url.includes("model")) {
-    minutes += 2; // AI topics tend to be complex
+  if (categories.includes('Well-being') || categories.includes('Business')) {
+    minutes += 1; // Slightly longer
   }
   
   // Ensure reading time is reasonable (3-15 minutes)
@@ -368,106 +323,91 @@ const articleUrls = [
   "https://medium.com/ai-unscripted/what-is-an-ai-engineer-and-how-to-become-one-beb30604cc40"
 ];
 
-// Function to get Medium cover images using a deterministic approach based on article URL
+// Medium cover image variants for category-based selection
+const MEDIUM_COVER_IMAGES = {
+  AI: [
+    "https://miro.medium.com/v2/resize:fit:1200/1*T9VaXXgESiXR_Qx_yQIvRg.jpeg", 
+    "https://miro.medium.com/v2/resize:fit:1200/1*wQTLVXmPIJZ1x1oDYqfXYg.jpeg",
+    "https://miro.medium.com/v2/resize:fit:1200/1*WI43epHjl6I9R0jVVzjxdg.jpeg",
+    "https://miro.medium.com/v2/resize:fit:1200/1*7lHJf-E5nPFPNNYngYwPSQ.png",
+    "https://miro.medium.com/v2/resize:fit:1200/1*0V4RztipOFbHPC6cjGLydg.jpeg"
+  ],
+  Coding: [
+    "https://miro.medium.com/v2/resize:fit:1200/1*jfdwtvU6V6g99q3G7gq7dQ.jpeg",
+    "https://miro.medium.com/v2/resize:fit:1200/1*pJQ4oLCxzQCUGdA7wsjFOQ.jpeg",
+    "https://miro.medium.com/v2/resize:fit:1200/1*qLC-3low-YxZhCKiMQKTRg.jpeg",
+    "https://miro.medium.com/v2/resize:fit:1200/1*uaGcG_0MrHuRoY6Gzq8Tww.jpeg",
+    "https://miro.medium.com/v2/resize:fit:1200/1*U3WRRwLx3zeDkHmZdHlj-Q.jpeg"
+  ],
+  'Well-being': [
+    "https://miro.medium.com/v2/resize:fit:1200/1*wdB6-KF8GlhGNhMOvH0Kew.jpeg",
+    "https://miro.medium.com/v2/resize:fit:1200/1*rFwdQ6wJYgfZ5hGVZTQSXA.jpeg",
+    "https://miro.medium.com/v2/resize:fit:1200/1*AaNLBBUMAMcL1ELRxTy3zQ.jpeg", 
+    "https://miro.medium.com/v2/resize:fit:1200/1*NwGhWnD4t6zXl45lB3lAxA.jpeg",
+    "https://miro.medium.com/v2/resize:fit:1200/1*XsimnjZIxUdCKfpXp7SvJw.jpeg"
+  ],
+  Podcast: [
+    "https://miro.medium.com/v2/resize:fit:1200/1*vXWVmfL4yGtaOZXzemVfuQ.jpeg",
+    "https://miro.medium.com/v2/resize:fit:1200/1*CgODCyULXbL0iVTIkcKDxw.jpeg",
+    "https://miro.medium.com/v2/resize:fit:1200/1*Th5MgXy4fJWABoMRQkQiNA.jpeg",
+    "https://miro.medium.com/v2/resize:fit:1200/1*UwZdqC8xZ238JXr4rHKcnA.jpeg",
+    "https://miro.medium.com/v2/resize:fit:1200/1*nOXN-s8LJYkJF2U4RBG0rQ.jpeg"
+  ],
+  Business: [
+    "https://miro.medium.com/v2/resize:fit:1200/1*T-w_k1OsJJ14Q-N_iXQpOw.jpeg",
+    "https://miro.medium.com/v2/resize:fit:1200/1*H5s-QiQ4E1ReMBwpM0IiJQ.jpeg",
+    "https://miro.medium.com/v2/resize:fit:1200/1*Ir3AcWiEwUdPbUK0PUITjw.jpeg",
+    "https://miro.medium.com/v2/resize:fit:1200/1*ZW6gNYTJRiOBGFZgY80TRQ.jpeg",
+    "https://miro.medium.com/v2/resize:fit:1200/1*OyWEekj-Vdaw-s4XpTjHnA.jpeg"
+  ],
+  Default: [
+    "https://miro.medium.com/v2/resize:fit:1200/1*-IMtZtcUK-QuVa1ypGCJbg.jpeg",
+    "https://miro.medium.com/v2/resize:fit:1200/1*IKY_z9sK-g93HXCy3LdLYg.jpeg",
+    "https://miro.medium.com/v2/resize:fit:1200/1*JZH5y42NjIYc0nVc8 Dale5A.jpeg",
+    "https://miro.medium.com/v2/resize:fit:1200/1*2SQ-q-McL8F6n0-GPl2ylQ.jpeg",
+    "https://miro.medium.com/v2/resize:fit:1200/1*rLu3d0uzQBgTzQ_Un10dVQ.jpeg"
+  ]
+};
+
+// Function to get Medium cover images using a deterministic approach
 function getMediumCoverImage(url: string, categories: string[]): string {
-  // In a real implementation, we would fetch the actual Medium post cover image
-  // Since we can't do that here, we'll use a set of known Medium images based on category
-  // These are actual Medium blog post cover images with standard Medium CDN format
-  
-  try {
-    // Try to extract a unique identifier from the URL for a deterministic image
-    const urlObj = new URL(url);
-    const pathSegments = urlObj.pathname.split('/');
-    const lastSegment = pathSegments[pathSegments.length - 1];
-    
-    // Use the last segment's hash or ID to pick an image deterministically
-    const hash = lastSegment.split('-').pop();
-    if (hash && hash.length >= 6) {
-      // Hash is digit-based
-      const charSum = hash.split('').reduce((acc, char) => {
-        return acc + char.charCodeAt(0);
-      }, 0);
-      
-      // Use the character sum to pick one of several category-appropriate images
-      const imageNum = (charSum % 5) + 1; // Gets values 1-5
-            
-      if (categories.includes('AI')) {
-        const aiImages = [
-          "https://miro.medium.com/v2/resize:fit:1200/1*T9VaXXgESiXR_Qx_yQIvRg.jpeg", 
-          "https://miro.medium.com/v2/resize:fit:1200/1*wQTLVXmPIJZ1x1oDYqfXYg.jpeg",
-          "https://miro.medium.com/v2/resize:fit:1200/1*WI43epHjl6I9R0jVVzjxdg.jpeg",
-          "https://miro.medium.com/v2/resize:fit:1200/1*7lHJf-E5nPFPNNYngYwPSQ.png",
-          "https://miro.medium.com/v2/resize:fit:1200/1*0V4RztipOFbHPC6cjGLydg.jpeg"
-        ];
-        return aiImages[imageNum - 1];
-      } 
-      else if (categories.includes('Coding')) {
-        const codingImages = [
-          "https://miro.medium.com/v2/resize:fit:1200/1*jfdwtvU6V6g99q3G7gq7dQ.jpeg",
-          "https://miro.medium.com/v2/resize:fit:1200/1*pJQ4oLCxzQCUGdA7wsjFOQ.jpeg",
-          "https://miro.medium.com/v2/resize:fit:1200/1*qLC-3low-YxZhCKiMQKTRg.jpeg",
-          "https://miro.medium.com/v2/resize:fit:1200/1*uaGcG_0MrHuRoY6Gzq8Tww.jpeg",
-          "https://miro.medium.com/v2/resize:fit:1200/1*U3WRRwLx3zeDkHmZdHlj-Q.jpeg"
-        ];
-        return codingImages[imageNum - 1];
-      }
-      else if (categories.includes('Well-being')) {
-        const wellbeingImages = [
-          "https://miro.medium.com/v2/resize:fit:1200/1*wdB6-KF8GlhGNhMOvH0Kew.jpeg",
-          "https://miro.medium.com/v2/resize:fit:1200/1*rFwdQ6wJYgfZ5hGVZTQSXA.jpeg",
-          "https://miro.medium.com/v2/resize:fit:1200/1*AaNLBBUMAMcL1ELRxTy3zQ.jpeg", 
-          "https://miro.medium.com/v2/resize:fit:1200/1*NwGhWnD4t6zXl45lB3lAxA.jpeg",
-          "https://miro.medium.com/v2/resize:fit:1200/1*XsimnjZIxUdCKfpXp7SvJw.jpeg"
-        ];
-        return wellbeingImages[imageNum - 1];
-      }
-      else if (categories.includes('Podcast')) {
-        const podcastImages = [
-          "https://miro.medium.com/v2/resize:fit:1200/1*vXWVmfL4yGtaOZXzemVfuQ.jpeg",
-          "https://miro.medium.com/v2/resize:fit:1200/1*CgODCyULXbL0iVTIkcKDxw.jpeg",
-          "https://miro.medium.com/v2/resize:fit:1200/1*Th5MgXy4fJWABoMRQkQiNA.jpeg",
-          "https://miro.medium.com/v2/resize:fit:1200/1*UwZdqC8xZ238JXr4rHKcnA.jpeg",
-          "https://miro.medium.com/v2/resize:fit:1200/1*nOXN-s8LJYkJF2U4RBG0rQ.jpeg"
-        ];
-        return podcastImages[imageNum - 1];
-      }
-      else if (categories.includes('Business')) {
-        const businessImages = [
-          "https://miro.medium.com/v2/resize:fit:1200/1*T-w_k1OsJJ14Q-N_iXQpOw.jpeg",
-          "https://miro.medium.com/v2/resize:fit:1200/1*H5s-QiQ4E1ReMBwpM0IiJQ.jpeg",
-          "https://miro.medium.com/v2/resize:fit:1200/1*Ir3AcWiEwUdPbUK0PUITjw.jpeg",
-          "https://miro.medium.com/v2/resize:fit:1200/1*ZW6gNYTJRiOBGFZgY80TRQ.jpeg",
-          "https://miro.medium.com/v2/resize:fit:1200/1*OyWEekj-Vdaw-s4XpTjHnA.jpeg"
-        ];
-        return businessImages[imageNum - 1];
-      }
-    }
-  } catch (e) {
-    // URL parsing failed, fall back to category-based image
+  // Hash the URL to ensure consistent image selection for the same article
+  let hashCode = 0;
+  for (let i = 0; i < url.length; i++) {
+    hashCode = ((hashCode << 5) - hashCode) + url.charCodeAt(i);
+    hashCode = hashCode & hashCode; // Convert to 32bit integer
   }
   
-  // Default category-based fallbacks if the above approach fails
+  // Make the hash positive
+  hashCode = Math.abs(hashCode);
+  
+  // Determine which category images to use
+  let categoryImages;
   if (categories.includes('AI')) {
-    return "https://miro.medium.com/v2/resize:fit:1200/1*T9VaXXgESiXR_Qx_yQIvRg.jpeg";
+    categoryImages = MEDIUM_COVER_IMAGES.AI;
   } else if (categories.includes('Coding')) {
-    return "https://miro.medium.com/v2/resize:fit:1200/1*jfdwtvU6V6g99q3G7gq7dQ.jpeg";
+    categoryImages = MEDIUM_COVER_IMAGES.Coding;
   } else if (categories.includes('Well-being')) {
-    return "https://miro.medium.com/v2/resize:fit:1200/1*wdB6-KF8GlhGNhMOvH0Kew.jpeg";
+    categoryImages = MEDIUM_COVER_IMAGES["Well-being"];
   } else if (categories.includes('Podcast')) {
-    return "https://miro.medium.com/v2/resize:fit:1200/1*vXWVmfL4yGtaOZXzemVfuQ.jpeg";
+    categoryImages = MEDIUM_COVER_IMAGES.Podcast;
   } else if (categories.includes('Business')) {
-    return "https://miro.medium.com/v2/resize:fit:1200/1*T-w_k1OsJJ14Q-N_iXQpOw.jpeg";
+    categoryImages = MEDIUM_COVER_IMAGES.Business;
   } else {
-    return "https://miro.medium.com/v2/resize:fit:1200/1*-IMtZtcUK-QuVa1ypGCJbg.jpeg"; // General fallback
+    categoryImages = MEDIUM_COVER_IMAGES.Default;
   }
+  
+  // Select an image using the hash
+  const imageIndex = hashCode % categoryImages.length;
+  return categoryImages[imageIndex];
 }
 
 // Generate articles from the URLs
 export const articles: Article[] = articleUrls.map((url, index) => {
   const title = extractTitleFromUrl(url);
   const categories = determineCategories(title, url);
-  const date = extractDateFromUrl(url);
-  const readingTime = calculateReadingTime(title, url);
+  const date = generatePublicationDate(index, articleUrls.length);
+  const readingTime = generateReadingTime(title, categories);
   const coverImage = getMediumCoverImage(url, categories);
   
   return {
