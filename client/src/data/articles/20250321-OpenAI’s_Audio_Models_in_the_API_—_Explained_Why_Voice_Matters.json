@@ -1,0 +1,11 @@
+{
+  "title": "OpenAI’s Audio Models in the API — Explained: Why Voice Matters",
+  "url": "https://medium.com/@kenji-onisuka/openais-audio-models-in-the-api-explained-why-voice-matters-9432eed62162",
+  "author": "Kenji",
+  "publish_date": "Mar 21, 2025",
+  "read_time": "3 min read",
+  "claps": 58,
+  "comments": 1,
+  "content": "1\n\nZion\n highlighted\n\nMárcio Siqueira\n highlighted\n\nZion\n highlighted\n\nZion\n highlighted\n\nMember-only story\n\nOpenAI’s Audio Models in the API — Explained: Why Voice Matters\n\nA new wave of speech‑centered AI that listens\n\nKenji\n\n58\n\n1\n\nV\noice It is a direct and natural way to communicate, and it is now central to the latest wave of AI applications.\n\nContext: The Next Step in AI Interaction\n\nOpenAI’s release includes new speech‑to‑text models (gpt‑4o‑mini‑transcribe and gpt‑4o‑transcribe) and a text‑to‑speech model (gpt‑4o‑mini‑tts), all available through the API.\n\nInstead of a rigid back-and-forth of typed chat, developers can now use real voice input and output.\n\nHere’s why it’s a big deal:\n\nKey Highlights\n\nVoice-enabled AI sounds great, but how does it perform in practice? Let’s break down some highlights:\n\nEach of these capabilities addresses a real-world need, making voice interactions smoother and more intuitive.\n\nA Peek Under the Hood: Technical Insights\n\nBehind these capabilities are sophisticated technologies specifically crafted for audio:\n\nComprehensive API Capabilities\n\nThese technical advancements ensure better performance and a consistently smoother user experience.\n\nFinal Thoughts\n\nAI interactions have come a long way, from simple text-based chatbots to intelligent voice agents that understand, process, and respond in real time. OpenAI’s latest audio models push this even further, making conversations with AI feel more natural than ever.\n\nWhether transcribing speech with near-human accuracy, generating expressive voices or enabling real-time voice agents, these tools shape how we interact with technology.\n\nThe shift is clear: AI started as text, evolved into chat, and now, it’s stepping fully into voice. And with each step, it gets closer to feeling like a real conversation.",
+  "scraped_at": "2025-04-07 08:25:57"
+}
