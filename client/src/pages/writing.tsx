@@ -280,8 +280,8 @@ export default function Writing() {
             
             {displayedArticles.length > 0 ? (
               <>
-                {/* Responsive Article Grid - 3 columns on desktop, 2 on tablet, 1 on mobile */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {/* Single column layout with 10 articles per page */}
+                <div className="grid grid-cols-1 gap-8 max-w-4xl mx-auto">
                   {displayedArticles.map(article => (
                     <ArticleCard 
                       key={article.id} 
