@@ -1,0 +1,9 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# Your rule content
+
+ Mocking data is only needed for tests, never mock data for dev or prod
