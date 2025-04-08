@@ -113,7 +113,7 @@ export default function Writing() {
   
   // Website schema data for Writing page with Articles schema
   const writingSchemaData = {
-    name: 'Ta Khongsap | Articles & Insights',
+    name: 'Ta Khongsap | AI Insights & Analysis',
     description: 'Real insights on AI, strategy, and software development that help you think sharper and build faster. No buzzwords, no fluff—just practical takeaways.',
     url: 'https://totrakoolkhongsap.replit.app/writing'
   };
@@ -121,7 +121,7 @@ export default function Writing() {
   return (
     <div>
       <SEO 
-        title="Writing | Ta Khongsap - AI Strategist"
+        title="AI Insights | Ta Khongsap - AI Strategist"
         description="No buzzwords. No fluff. Just real insights on AI, strategy, and the future of software development that you can use to think sharper and build faster."
         canonicalUrl="/writing"
         type="website"
@@ -134,9 +134,10 @@ export default function Writing() {
       <section className="bg-gradient-to-r from-gray-50 to-gray-100 pt-28 pb-12 dark:from-gray-900 dark:to-gray-800">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">Writing</h1>
-            <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">
               AI is moving fast—and so are the conversations that matter.
+            </h1>
+            <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300">
               This space is where I share distilled insights from the frontlines: hands-on experiments, thought shifts, and tactical wins from working with AI, strategy, and the future of software development.
             </p>
             <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 mt-4">
