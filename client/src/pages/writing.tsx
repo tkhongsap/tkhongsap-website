@@ -114,7 +114,7 @@ export default function Writing() {
   // Website schema data for Writing page with Articles schema
   const writingSchemaData = {
     name: 'Ta Khongsap | AI Insights & Analysis',
-    description: 'Real insights on AI, strategy, and software development that help you think sharper and build faster. No buzzwords, no fluff—just practical takeaways.',
+    description: 'AI is moving fast. The way we build, lead, and think is changing with it. Distilled takeaways from my experiments across tech, strategy, and the future of work.',
     url: 'https://totrakoolkhongsap.replit.app/writing'
   };
 
@@ -122,7 +122,7 @@ export default function Writing() {
     <div>
       <SEO 
         title="AI Insights | Ta Khongsap - AI Strategist"
-        description="No buzzwords. No fluff. Just real insights on AI, strategy, and the future of software development that you can use to think sharper and build faster."
+        description="AI is moving fast. The way we build, lead, and think is changing with it. Distilled takeaways from my experiments across tech, strategy, and the future of work."
         canonicalUrl="/writing"
         type="website"
         imageUrl={articles[0]?.imageUrl} // Use first article image for social sharing
@@ -135,16 +135,16 @@ export default function Writing() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">
-              AI is moving fast—and so are the conversations that matter.
+              AI is moving fast.
             </h1>
             <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300">
-              This space is where I share distilled insights from the frontlines: hands-on experiments, thought shifts, and tactical wins from working with AI, strategy, and the future of software development.
+              The way we build, lead, and think is changing with it.
             </p>
             <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 mt-4">
-              No buzzwords. No fluff. Just real takeaways you can use to think sharper, build faster, and stay ahead.
+              These are distilled takeaways from my experiments—lessons, wins, and losses—across tech, strategy, and the future of work.
             </p>
             <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 mt-4">
-              Want the full stories? Follow along on Medium or LinkedIn.
+              For full stories, follow me on Medium or LinkedIn.
             </p>
           </div>
         </div>
