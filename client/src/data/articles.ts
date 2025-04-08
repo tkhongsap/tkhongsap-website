@@ -117,8 +117,60 @@ function extractFirstParagraph(content: string): string {
   return firstRealParagraph || 'Click to read the full article on Medium.';
 }
 
+// Function to parse date in various formats
+function parsePublishDate(dateStr: string): Date {
+  // First, try to extract date from the filename if available
+  if (dateStr.startsWith('20')) {
+    // If it's in YYYYMMDD format from filename
+    const year = parseInt(dateStr.substring(0, 4));
+    const month = parseInt(dateStr.substring(4, 6)) - 1; // JS months are 0-indexed
+    const day = parseInt(dateStr.substring(6, 8));
+    return new Date(year, month, day);
+  }
+  
+  // Handle common date formats
+  // For "Feb 23, 2025" format (from publish_date in JSON)
+  const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  
+  if (dateStr.includes(',')) {
+    // Format: "Month Day, Year" (e.g., "Feb 23, 2025")
+    const parts = dateStr.split(' ');
+    if (parts.length === 3) {
+      const month = monthNames.indexOf(parts[0]);
+      const day = parseInt(parts[1].replace(',', ''));
+      const year = parseInt(parts[2]);
+      if (month !== -1 && !isNaN(day) && !isNaN(year)) {
+        return new Date(year, month, day);
+      }
+    }
+  }
+  
+  // Handle "Month Day Year" format (e.g., "February 23 2025")
+  const fullMonthRegex = /^([A-Za-z]+)\s+(\d{1,2})\s+(\d{4})$/;
+  const fullMonthMatch = dateStr.match(fullMonthRegex);
+  if (fullMonthMatch) {
+    const monthName = fullMonthMatch[1];
+    const day = parseInt(fullMonthMatch[2]);
+    const year = parseInt(fullMonthMatch[3]);
+    const month = new Date(`${monthName} 1, 2000`).getMonth();
+    if (!isNaN(month) && !isNaN(day) && !isNaN(year)) {
+      return new Date(year, month, day);
+    }
+  }
+  
+  // Last resort: try native Date parsing
+  const date = new Date(dateStr);
+  if (!isNaN(date.getTime())) {
+    return date;
+  }
+  
+  // If all parsing fails, return current date
+  console.warn(`Unable to parse date: ${dateStr}, using current date instead`);
+  return new Date();
+}
+
 // Function to convert the JSON data to an Article object
-function jsonToArticle(json: any, id: string): Article {
+function jsonToArticle(json: any, id: string, filename?: string): Article {
   // Format the reading time to match our schema
   const readingTime = json.read_time.replace(' read', '');
   
@@ -128,10 +180,25 @@ function jsonToArticle(json: any, id: string): Article {
   // Determine categories
   const categories = determineCategories(json.title, json.content);
   
+  // Get date from filename if possible (more reliable for sorting)
+  let date = json.publish_date;
+  if (filename && filename.includes('-')) {
+    const datePrefix = filename.split('-')[0];
+    if (datePrefix.length === 8 && /^\d+$/.test(datePrefix)) {
+      // Format YYYYMMDD to a readable date
+      const year = datePrefix.substring(0, 4);
+      const month = parseInt(datePrefix.substring(4, 6)) - 1; // JS months are 0-indexed
+      const day = datePrefix.substring(6, 8);
+      const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 
+                           'July', 'August', 'September', 'October', 'November', 'December'];
+      date = `${monthNames[month]} ${parseInt(day)}, ${year}`;
+    }
+  }
+  
   return {
     id,
     title: json.title,
-    date: json.publish_date,
+    date,
     summary,
     readingTime,
     platform: "Medium",
@@ -159,7 +226,7 @@ const importAllArticles = (): Article[] => {
       
       // Convert the JSON module to an Article
       const articleData = module as any;
-      articles.push(jsonToArticle(articleData, id));
+      articles.push(jsonToArticle(articleData, id, filename));
     });
   } catch (error) {
     console.error('Error importing articles:', error);
@@ -167,8 +234,12 @@ const importAllArticles = (): Article[] => {
     return [];
   }
   
-  // Sort by date (newest first)
-  return articles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  // Sort by date (newest first) using the improved date parsing function
+  return articles.sort((a, b) => {
+    const dateA = parsePublishDate(a.date);
+    const dateB = parsePublishDate(b.date);
+    return dateB.getTime() - dateA.getTime();
+  });
 };
 
 // Export the articles array
