@@ -33,12 +33,17 @@ export default function Home() {
         <section id="home" className="section bg-[#F8F8F8]">
           <div className="container">
             <div className="max-w-4xl mx-auto">
-              <h1 className="leading-tight mb-6 text-[#333333]">
-                AI Isn't an Option—It's the New Baseline
+              <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-8 text-[#333333]">
+                AI Isn't an Option<span className="text-primary">—</span>It's the <span className="text-primary">New Baseline</span>
               </h1>
-              <p className="text-xl md:text-2xl mb-10 text-[#444444]">
-                We're entering an extraordinary era—one where we can create more than ever before. At every step, progress demands skill, judgment, and knowledge. Now, by embracing AI as an active collaborator rather than a mere consultant, we're revolutionizing the very notion of what's possible.
-              </p>
+              <div className="space-y-4 mb-10">
+                <p className="text-lg md:text-xl leading-relaxed text-[#444444]">
+                  We're entering an extraordinary era—one where we can create more than ever before.
+                </p>
+                <p className="text-lg md:text-xl leading-relaxed text-[#444444]">
+                  At every step, progress demands skill, judgment, and knowledge. Now, by embracing AI as an active collaborator rather than a mere consultant, we're revolutionizing the very notion of what's possible.
+                </p>
+              </div>
               
               {/* Newsletter Signup */}
               <div id="newsletter" className="bg-white p-8 rounded-lg shadow-sm mb-12">
