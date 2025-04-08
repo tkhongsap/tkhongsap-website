@@ -175,6 +175,20 @@ function jsonToArticle(json: any, id: string, filename?: string): Article {
     }
   }
   
+  // Process the image URL - if it's from an external source, use it directly
+  let imageUrl = json.cover_image_url || undefined;
+  
+  // If the URL is from miro.medium.com, make sure it's properly formatted
+  if (imageUrl && imageUrl.includes('miro.medium.com')) {
+    // Ensure we're getting a reasonable size image
+    if (imageUrl.includes('resize:fit:')) {
+      // URL already has sizing parameters, keep it as is
+    } else {
+      // Add sizing parameters if not present
+      imageUrl = imageUrl.replace('miro.medium.com/v2/', 'miro.medium.com/v2/resize:fit:800/');
+    }
+  }
+  
   return {
     id,
     title: json.title,
@@ -184,7 +198,7 @@ function jsonToArticle(json: any, id: string, filename?: string): Article {
     readingTime,
     platform: "Medium",
     url: json.url,
-    imageUrl: json.cover_image_url,
+    imageUrl,
     categories
   };
 }

@@ -103,7 +103,7 @@ export default function About() {
                     <div className="mb-6 flex justify-center">
                       <div className="w-48 h-48 rounded-full overflow-hidden flex items-center justify-center border-2 border-primary">
                         <OptimizedImage 
-                          src="/profile-picture-small.jpg" 
+                          src="/images/Ta Khongsap OPEN-TEC.jpg" 
                           alt="Ta Khongsap profile picture"
                           width={180}
                           height={180}

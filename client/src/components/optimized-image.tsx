@@ -36,7 +36,7 @@ export default function OptimizedImage({
   decoding = 'async',
 }: OptimizedImageProps) {
   // For placeholder or SVG images
-  if (src.startsWith('#')) {
+  if (!src || src === "#" || src.startsWith('#')) {
     return (
       <div 
         className={cn(
@@ -61,9 +61,12 @@ export default function OptimizedImage({
   // Check if the image is already a WebP format
   const isWebP = src.toLowerCase().endsWith('.webp');
   
-  // Generate responsive srcset if width is provided
+  // Check if this is an external URL
+  const isExternalUrl = src.startsWith('http://') || src.startsWith('https://');
+  
+  // Generate responsive srcset if width is provided and not an external URL
   const generateSrcSet = () => {
-    if (!width) return undefined;
+    if (!width || isExternalUrl) return undefined;
     
     // For WebP sources, just use them directly
     if (isWebP) {
@@ -83,8 +86,6 @@ export default function OptimizedImage({
   const loadingConfig = priority ? { loading: 'eager' as const } : { loading };
 
   // Process image src path
-  // If src starts with '/', it's an absolute path and we need to keep it as is
-  // This is important for properly serving static assets from the server
   const imgSrc = src;
 
   return (
@@ -95,7 +96,7 @@ export default function OptimizedImage({
       height={height}
       {...loadingConfig}
       decoding={decoding}
-      sizes={sizes}
+      sizes={isExternalUrl ? undefined : sizes}
       srcSet={generateSrcSet()}
       className={cn(className)}
       style={{ objectFit }}
