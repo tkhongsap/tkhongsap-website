@@ -2,6 +2,7 @@ import { Check } from "lucide-react";
 import { Linkedin, Github } from "lucide-react";
 import SEO from "@/components/seo";
 import SchemaMarkup from "@/components/schema-markup";
+import OptimizedImage from "@/components/optimized-image";
 
 export default function About() {
   const expertiseAreas = [
@@ -19,8 +20,8 @@ export default function About() {
     description: 'AI Strategist with over 15 years of experience in data science, finance, and leadership, specializing in leveraging AI to optimize business operations and drive strategic growth.',
     url: 'https://totrakoolkhongsap.replit.app/about',
     sameAs: [
-      'https://linkedin.com/in/totrakool-k-b504a912',
-      'https://github.com/'
+      'https://www.linkedin.com/in/totrakool-k-b504a912/',
+      'https://github.com/tkhongsap'
     ]
   };
 
@@ -68,10 +69,15 @@ export default function About() {
                 <div className="md:w-1/3">
                   <div className="bg-gray-100 rounded-lg p-6">
                     <div className="mb-6 flex justify-center">
-                      <div className="w-48 h-48 rounded-full bg-gray-300 overflow-hidden flex items-center justify-center">
-                        <svg className="w-24 h-24 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
+                      <div className="w-48 h-48 rounded-full overflow-hidden flex items-center justify-center border-2 border-primary">
+                        <OptimizedImage 
+                          src="/assets/profile-picture.png" 
+                          alt="Totrakool Khongsap profile picture"
+                          width={190}
+                          height={190}
+                          objectFit="cover"
+                          className="rounded-full"
+                        />
                       </div>
                     </div>
                     
@@ -81,7 +87,7 @@ export default function About() {
                       
                       <div className="flex justify-center space-x-4">
                         <a 
-                          href="https://linkedin.com/in/totrakool-k-b504a912" 
+                          href="https://www.linkedin.com/in/totrakool-k-b504a912/" 
                           target="_blank" 
                           rel="noopener noreferrer" 
                           className="text-gray-700 hover:text-primary transition-colors"
@@ -90,7 +96,7 @@ export default function About() {
                           <Linkedin size={24} />
                         </a>
                         <a 
-                          href="https://github.com/" 
+                          href="https://github.com/tkhongsap" 
                           target="_blank" 
                           rel="noopener noreferrer" 
                           className="text-gray-700 hover:text-primary transition-colors"
