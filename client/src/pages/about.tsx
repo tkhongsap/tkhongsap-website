@@ -29,15 +29,14 @@ export default function About() {
         <section id="about" className="py-20">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold mb-10">About Me</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-10">Why This Matters</h2>
               
               <div className="flex flex-col md:flex-row gap-10">
                 <div className="md:w-2/3">
                   
                   {/* Section 1: The 10X Multiplier */}
                   <div className="mb-8">
-                    <div className="flex items-center mb-4">
-                      <ZapIcon className="h-6 w-6 text-primary mr-2" />
+                    <div className="mb-4">
                       <h3 className="text-2xl font-bold">The 10X Multiplier</h3>
                     </div>
                     
@@ -56,8 +55,7 @@ export default function About() {
                   
                   {/* Section 2: Why AI Mastery Isn't Obvious */}
                   <div className="mb-8">
-                    <div className="flex items-center mb-4">
-                      <BrainCircuit className="h-6 w-6 text-primary mr-2" />
+                    <div className="mb-4">
                       <h3 className="text-2xl font-bold">Why AI Mastery Isn't Obvious</h3>
                     </div>
                     
@@ -78,28 +76,17 @@ export default function About() {
                   
                   {/* Section 3: AI as a Shared Resource */}
                   <div className="mb-8">
-                    <div className="flex items-center mb-4">
-                      <Share2 className="h-6 w-6 text-primary mr-2" />
+                    <div className="mb-4">
                       <h3 className="text-2xl font-bold">AI as a Shared Resource</h3>
                     </div>
                     
                     <p className="text-lg mb-4">
                       The best teams treat AI insights as <strong>shared knowledge</strong>. When someone discovers an impactful technique, openly sharing it propels everyone forward, sparking a cycle of continuous improvement.
                     </p>
-                    
-                    <p className="text-lg">
-                      Creating a culture of AI collaboration offers three key benefits:
-                    </p>
-                    <ol className="list-decimal pl-6 mb-4 space-y-2">
-                      <li>Accelerated team learning curve</li>
-                      <li>Elimination of redundant experimentation</li>
-                      <li>Democratized access to powerful AI capabilities</li>
-                    </ol>
                   </div>
 
-                  {/* Call to Action */}
+                  {/* Navigation buttons without the heading */}
                   <div className="mt-10 mb-8">
-                    <h3 className="text-xl font-bold mb-4">Ready to Transform Your Approach to AI?</h3>
                     <div className="flex flex-wrap gap-4">
                       <Button className="flex items-center" onClick={() => window.location.href = '/contact'}>
                         Contact Me <ArrowRight className="ml-2 h-4 w-4" />
