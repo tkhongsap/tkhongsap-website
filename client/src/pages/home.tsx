@@ -14,16 +14,16 @@ export default function Home() {
   const homeSchemaData = {
     url: 'https://tkhongsap.io/',
     name: 'Totrakool Khongsap | AI Strategist & Data Scientist',
-    description: 'Totrakool Khongsap is an AI Strategist and Data Scientist specializing in enterprise AI transformation, machine learning solutions, and data-driven business strategies that deliver measurable ROI.'
+    description: 'Totrakool Khongsap helps businesses implement AI solutions that supercharge their boldest projects and deliver measurable results, moving beyond existing limitations.'
   };
 
   return (
     <div>
       <SEO 
         title="AI Strategy & Data Science Expert | Totrakool Khongsap"
-        description="Expert in AI strategy, machine learning, and data science solutions that deliver measurable business impact. Helping organizations transform with data-driven innovation."
+        description="AI isn't an option—it's the new baseline. Discover how the right AI implementations can supercharge your boldest projects and help you outpace old expectations."
         canonicalUrl="/"
-        keywords="AI strategy, data science expert, machine learning solutions, enterprise AI, digital transformation, business intelligence, ROI-focused AI"
+        keywords="AI implementation, data science, AI solutions, enterprise AI, digital transformation, business intelligence, AI strategy, AI baseline"
         pageUrl="/"
       />
       <SchemaMarkup type="website" data={homeSchemaData} />
@@ -34,10 +34,13 @@ export default function Home() {
           <div className="container">
             <div className="max-w-4xl mx-auto">
               <h1 className="leading-tight mb-6 text-[#333333]">
-                From Algorithms to Impact: Transforming Business with AI-Driven Innovation
+                AI Isn't an Option—It's the New Baseline
               </h1>
               <p className="text-xl md:text-2xl mb-10 text-[#444444]">
-                I'm <span className="text-primary">Ta</span> <span className="text-[#333333]">Khongsap</span>—an AI Strategist blending data science, finance, and leadership.
+                Welcome to a world where our tools themselves multiply the impact of every great idea.
+              </p>
+              <p className="text-xl md:text-2xl mb-10 text-[#444444]">
+                Think you've seen speed before? Watch what happens when the right AI supercharges even your boldest projects. If you're ready to outpace old expectations, you're in the right place.
               </p>
               
               {/* Newsletter Signup */}
