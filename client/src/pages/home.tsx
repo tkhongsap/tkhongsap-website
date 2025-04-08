@@ -46,42 +46,46 @@ export default function Home() {
               </div>
               
               {/* Newsletter Signup */}
-              <div id="newsletter" className="bg-white p-8 rounded-lg shadow-sm mb-12">
-                <h2 className="mb-3 text-2xl">Join my newsletter</h2>
-                <p className="mb-6 text-[#444444]">Get insights on AI trends and updates on my weekend coding/writing projects.</p>
+              <div id="newsletter" className="bg-white p-8 rounded-lg shadow-md mb-12 border-l-4 border-primary">
+                <h2 className="mb-3 text-2xl font-bold flex items-center">
+                  <span className="text-primary mr-2">→</span> Join my newsletter
+                </h2>
+                <p className="mb-6 text-[#444444] leading-relaxed">
+                  Get exclusive insights on AI trends, productivity tips, and coding breakthroughs delivered straight to your inbox.
+                </p>
                 <NewsletterForm />
               </div>
               
               {/* Value Propositions */}
               <div className="grid md:grid-cols-3 gap-10">
-                <div className="group">
+                <div className="group hover:shadow-md hover:bg-white p-5 rounded-lg transition-all duration-300">
                   <div className="flex items-center mb-4">
                     <div className="bg-primary/10 p-3 rounded-full mr-3">
                       <BarChart className="h-6 w-6 text-primary" />
                     </div>
-                    <h3 className="group-hover:text-primary transition-colors">AI Tools & Technologies</h3>
+                    <h3 className="font-semibold text-lg group-hover:text-primary transition-colors">AI Tools & Technologies</h3>
                   </div>
-                  <p className="text-[#444444]">Discover how cutting-edge solutions like Google NotebookLM, Cursor AI, and LLMs supercharge workflows and amplify creativity.</p>
+                  <p className="text-[#444444] leading-relaxed">Discover how cutting-edge solutions like Google NotebookLM, Cursor AI, and LLMs supercharge workflows and amplify creativity.</p>
                 </div>
                 
-                <div className="group">
+                <div className="group hover:shadow-md hover:bg-white p-5 rounded-lg transition-all duration-300">
                   <div className="flex items-center mb-4">
                     <div className="bg-primary/10 p-3 rounded-full mr-3">
                       <Lightbulb className="h-6 w-6 text-primary" />
                     </div>
-                    <h3 className="group-hover:text-primary transition-colors">Productivity & Efficiency</h3>
+                    <h3 className="font-semibold text-lg group-hover:text-primary transition-colors">Productivity & Efficiency</h3>
                   </div>
-                  <p className="text-[#444444]">Explore powerful tips—from the "90% Rule" to AI-boosted prompts—to beat perfectionism, sharpen focus, and get more done.</p>
+                  <p className="text-[#444444] leading-relaxed">Explore powerful tips—from the "90% Rule" to AI-boosted prompts—to beat perfectionism, sharpen focus, and get more done.</p>
                 </div>
                 
-                <div className="group">
+                <div className="group hover:shadow-md hover:bg-white p-5 rounded-lg transition-all duration-300">
                   <div className="flex items-center mb-4">
                     <div className="bg-primary/10 p-3 rounded-full mr-3">
                       <Code className="h-6 w-6 text-primary" />
                     </div>
-                    <h3 className="group-hover:text-primary transition-colors">The Future of Software Development</h3>
+                    <h3 className="font-semibold text-lg group-hover:text-primary transition-colors">The Future of Software Development</h3>
                   </div>
-                  <p className="text-[#444444]">Learn how AI is reshaping coding by empowering both newcomers and pros, potentially signaling the end of "traditional" development.</p>
+                  <p className="text-[#444444] leading-relaxed">Learn how AI is reshaping coding by empowering both newcomers and pros, potentially signaling the end of "traditional" development.</p>
                 </div>
               </div>
             </div>
