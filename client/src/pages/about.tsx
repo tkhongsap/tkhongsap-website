@@ -1,7 +1,8 @@
-import { Linkedin, Github } from "lucide-react";
+import { Linkedin, Github, ZapIcon, BrainCircuit, Share2, ArrowRight } from "lucide-react";
 import SEO from "@/components/seo";
 import SchemaMarkup from "@/components/schema-markup";
 import OptimizedImage from "@/components/optimized-image";
+import { Button } from "@/components/ui/button";
 
 export default function About() {
   // Person schema data
@@ -32,18 +33,82 @@ export default function About() {
               
               <div className="flex flex-col md:flex-row gap-10">
                 <div className="md:w-2/3">
-                  <p className="text-lg mb-6">
-                    Here's the fascinating reality of AI today: we're witnessing a profound shift where our tools themselves have become 10X multipliers. Think about the most productive individuals you know—their ability to consistently exceed expectations. Now, imagine empowering those same people with AI tools that exponentially amplify their impact. Projects we might've laughed off as impossible a year ago are now tackled effortlessly.
-                  </p>
-                  <p className="text-lg mb-6">
-                    Mastering AI has rapidly become an essential skill, no longer a niche expertise but as fundamental as using email. Whether you're in marketing, analytics, or leadership, competence in AI isn't optional—it's crucial for staying competitive.
-                  </p>
-                  <p className="text-lg mb-6">
-                    Yet, truly effective AI usage isn't immediately obvious. People often abandon AI after initial disappointing results, missing out on its immense potential. The real magic emerges when we refine our questions, provide richer context, and iterate our approaches—similar to becoming fluent in a new language.
-                  </p>
-                  <p className="text-lg mb-8">
-                    The best teams treat AI insights as shared knowledge. When someone discovers an impactful technique, openly sharing it propels everyone forward, sparking a cycle of continuous improvement.
-                  </p>
+                  
+                  {/* Section 1: The 10X Multiplier */}
+                  <div className="mb-8">
+                    <div className="flex items-center mb-4">
+                      <ZapIcon className="h-6 w-6 text-primary mr-2" />
+                      <h3 className="text-2xl font-bold">The 10X Multiplier</h3>
+                    </div>
+                    
+                    <p className="text-lg mb-4">
+                      Here's the fascinating reality of AI today: we're witnessing a profound shift where our tools themselves have become <strong>10X multipliers</strong>. Think about the most productive individuals you know—their ability to consistently exceed expectations. Now, imagine empowering those same people with AI tools that <em>exponentially amplify their impact</em>.
+                    </p>
+                    
+                    <blockquote className="border-l-4 border-primary pl-4 py-2 bg-gray-50 italic text-gray-700 my-4">
+                      Projects we might've laughed off as impossible a year ago are now tackled effortlessly.
+                    </blockquote>
+                    
+                    <p className="text-lg">
+                      Mastering AI has rapidly become an essential skill, no longer a niche expertise but as fundamental as using email. Whether you're in marketing, analytics, or leadership, competence in AI isn't optional—it's <strong>crucial for staying competitive</strong>.
+                    </p>
+                  </div>
+                  
+                  {/* Section 2: Why AI Mastery Isn't Obvious */}
+                  <div className="mb-8">
+                    <div className="flex items-center mb-4">
+                      <BrainCircuit className="h-6 w-6 text-primary mr-2" />
+                      <h3 className="text-2xl font-bold">Why AI Mastery Isn't Obvious</h3>
+                    </div>
+                    
+                    <p className="text-lg mb-4">
+                      Yet, truly effective AI usage isn't immediately obvious. People often abandon AI after initial disappointing results, missing out on its immense potential.
+                    </p>
+                    
+                    <p className="text-lg">
+                      The real magic emerges when we:
+                    </p>
+                    <ul className="list-disc pl-6 mb-4 space-y-2">
+                      <li>Refine our questions for clarity and specificity</li>
+                      <li>Provide richer context to guide the AI</li>
+                      <li>Iterate our approaches through experimentation</li>
+                      <li>Learn from each interaction, similar to becoming fluent in a new language</li>
+                    </ul>
+                  </div>
+                  
+                  {/* Section 3: AI as a Shared Resource */}
+                  <div className="mb-8">
+                    <div className="flex items-center mb-4">
+                      <Share2 className="h-6 w-6 text-primary mr-2" />
+                      <h3 className="text-2xl font-bold">AI as a Shared Resource</h3>
+                    </div>
+                    
+                    <p className="text-lg mb-4">
+                      The best teams treat AI insights as <strong>shared knowledge</strong>. When someone discovers an impactful technique, openly sharing it propels everyone forward, sparking a cycle of continuous improvement.
+                    </p>
+                    
+                    <p className="text-lg">
+                      Creating a culture of AI collaboration offers three key benefits:
+                    </p>
+                    <ol className="list-decimal pl-6 mb-4 space-y-2">
+                      <li>Accelerated team learning curve</li>
+                      <li>Elimination of redundant experimentation</li>
+                      <li>Democratized access to powerful AI capabilities</li>
+                    </ol>
+                  </div>
+
+                  {/* Call to Action */}
+                  <div className="mt-10 mb-8">
+                    <h3 className="text-xl font-bold mb-4">Ready to Transform Your Approach to AI?</h3>
+                    <div className="flex flex-wrap gap-4">
+                      <Button className="flex items-center" onClick={() => window.location.href = '/contact'}>
+                        Contact Me <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                      <Button variant="outline" className="flex items-center" onClick={() => window.location.href = '/portfolio'}>
+                        View My Projects <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
                 </div>
                 
                 <div className="md:w-1/3">
