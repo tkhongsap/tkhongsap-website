@@ -1,6 +1,7 @@
 export interface Article {
   id: string;
   title: string;
+  subtitle?: string; // Optional subtitle or tagline
   date: string;
   summary: string; // Executive summary of the article
   readingTime?: string; // Optional reading time estimate
@@ -11,8 +12,9 @@ export interface Article {
 }
 
 // Function to determine article categories based on title and content
-function determineCategories(title: string, content?: string): string[] {
+function determineCategories(title: string, subtitle?: string, content?: string): string[] {
   const titleLower = title.toLowerCase();
+  const subtitleLower = subtitle?.toLowerCase() || '';
   const contentLower = content?.toLowerCase() || '';
   const categories: string[] = [];
   
@@ -26,7 +28,11 @@ function determineCategories(title: string, content?: string): string[] {
     titleLower.includes('claude') ||
     titleLower.includes('gemini') ||
     titleLower.includes('openai') ||
-    titleLower.includes('grok')
+    titleLower.includes('grok') ||
+    subtitleLower.includes('ai') ||
+    subtitleLower.includes('artificial intelligence') ||
+    contentLower.includes('artificial intelligence') ||
+    contentLower.includes('large language model')
   ) {
     categories.push('AI');
   }
@@ -40,6 +46,8 @@ function determineCategories(title: string, content?: string): string[] {
     titleLower.includes('software') ||
     titleLower.includes('github') ||
     titleLower.includes('cursor') ||
+    subtitleLower.includes('coding') ||
+    subtitleLower.includes('programming') ||
     contentLower.includes('coding with') ||
     contentLower.includes('debugging')
   ) {
@@ -54,7 +62,9 @@ function determineCategories(title: string, content?: string): string[] {
     titleLower.includes('mental') ||
     titleLower.includes('life') ||
     titleLower.includes('focus') ||
-    titleLower.includes('joy')
+    titleLower.includes('joy') ||
+    subtitleLower.includes('well-being') ||
+    subtitleLower.includes('mental health')
   ) {
     categories.push('Well-being');
   }
@@ -65,14 +75,17 @@ function determineCategories(title: string, content?: string): string[] {
     titleLower.includes('work') ||
     titleLower.includes('strategy') ||
     titleLower.includes('leadership') ||
-    titleLower.includes('organization')
+    titleLower.includes('organization') ||
+    subtitleLower.includes('business') ||
+    subtitleLower.includes('leadership')
   ) {
     categories.push('Business');
   }
   
   // Podcast category
   if (
-    titleLower.includes('podcast')
+    titleLower.includes('podcast') ||
+    subtitleLower.includes('podcast')
   ) {
     categories.push('Podcast');
   }
@@ -81,9 +94,51 @@ function determineCategories(title: string, content?: string): string[] {
   if (
     titleLower.includes('technology') ||
     titleLower.includes('tech') ||
-    titleLower.includes('innovation')
+    subtitleLower.includes('technology') ||
+    subtitleLower.includes('tech') ||
+    contentLower.includes('technology trends')
   ) {
     categories.push('Technology');
+  }
+  
+  // Innovation category
+  if (
+    titleLower.includes('innovation') ||
+    titleLower.includes('innovate') ||
+    titleLower.includes('breakthrough') ||
+    subtitleLower.includes('innovation') ||
+    contentLower.includes('innovative') ||
+    contentLower.includes('cutting-edge')
+  ) {
+    categories.push('Innovation');
+  }
+  
+  // FutureOfWork category
+  if (
+    titleLower.includes('future of work') ||
+    titleLower.includes('remote work') ||
+    titleLower.includes('hybrid work') ||
+    titleLower.includes('workplace') ||
+    subtitleLower.includes('future of work') ||
+    subtitleLower.includes('workplace') ||
+    contentLower.includes('future of work') ||
+    contentLower.includes('workplace evolution')
+  ) {
+    categories.push('FutureOfWork');
+  }
+  
+  // Productivity category
+  if (
+    titleLower.includes('productivity') ||
+    titleLower.includes('efficient') ||
+    titleLower.includes('workflow') ||
+    titleLower.includes('time management') ||
+    subtitleLower.includes('productivity') ||
+    subtitleLower.includes('efficiency') ||
+    contentLower.includes('productivity hack') ||
+    contentLower.includes('time management')
+  ) {
+    categories.push('Productivity');
   }
   
   // If no specific category is detected, assign as General
@@ -239,7 +294,7 @@ function jsonToArticle(json: any, id: string, filename?: string): Article {
   const summary = extractFirstParagraph(json.content);
   
   // Determine categories
-  const categories = determineCategories(json.title, json.content);
+  const categories = determineCategories(json.title, json.subtitle, json.content);
   
   // Get date from filename if possible (more reliable for sorting)
   let date = json.publish_date;
@@ -259,6 +314,7 @@ function jsonToArticle(json: any, id: string, filename?: string): Article {
   return {
     id,
     title: json.title,
+    subtitle: json.subtitle,
     date,
     summary,
     readingTime,
