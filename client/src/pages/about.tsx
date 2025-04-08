@@ -1,18 +1,9 @@
-import { Check } from "lucide-react";
 import { Linkedin, Github } from "lucide-react";
 import SEO from "@/components/seo";
 import SchemaMarkup from "@/components/schema-markup";
 import OptimizedImage from "@/components/optimized-image";
 
 export default function About() {
-  const expertiseAreas = [
-    "Strategic AI implementation & business optimization",
-    "Data-driven decision making & performance management",
-    "Financial strategy & analytics",
-    "Python programming & data science",
-    "Cross-functional leadership & team development"
-  ];
-
   // Person schema data
   const personSchemaData = {
     name: 'Totrakool Khongsap',
@@ -42,28 +33,17 @@ export default function About() {
               <div className="flex flex-col md:flex-row gap-10">
                 <div className="md:w-2/3">
                   <p className="text-lg mb-6">
-                    With over 15 years of experience in data science, finance, and leadership, I specialize in leveraging AI to optimize business operations and drive strategic growth.
+                    Here's the fascinating reality of AI today: we're witnessing a profound shift where our tools themselves have become 10X multipliers. Think about the most productive individuals you know—their ability to consistently exceed expectations. Now, imagine empowering those same people with AI tools that exponentially amplify their impact. Projects we might've laughed off as impossible a year ago are now tackled effortlessly.
                   </p>
                   <p className="text-lg mb-6">
-                    My background bridges technical expertise with business acumen, allowing me to translate complex AI concepts into tangible business value. Throughout my career, I've worked with organizations ranging from startups to enterprise corporations, helping them harness the power of data and AI.
+                    Mastering AI has rapidly become an essential skill, no longer a niche expertise but as fundamental as using email. Whether you're in marketing, analytics, or leadership, competence in AI isn't optional—it's crucial for staying competitive.
+                  </p>
+                  <p className="text-lg mb-6">
+                    Yet, truly effective AI usage isn't immediately obvious. People often abandon AI after initial disappointing results, missing out on its immense potential. The real magic emerges when we refine our questions, provide richer context, and iterate our approaches—similar to becoming fluent in a new language.
                   </p>
                   <p className="text-lg mb-8">
-                    Beyond my professional work, I'm passionate about weekend coding projects and writing about technology and well-being. I firmly believe in AI's potential to foster societal peace and prosperity when developed and deployed responsibly.
+                    The best teams treat AI insights as shared knowledge. When someone discovers an impactful technique, openly sharing it propels everyone forward, sparking a cycle of continuous improvement.
                   </p>
-                  
-                  <blockquote className="border-l-4 border-primary pl-4 italic text-gray-700 mb-8">
-                    My mission is to democratize AI knowledge and create solutions that not only optimize business performance but also contribute positively to society at large.
-                  </blockquote>
-                  
-                  <h3 className="text-xl font-bold mb-4">Areas of Expertise</h3>
-                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
-                    {expertiseAreas.map((area, index) => (
-                      <li key={index} className="flex items-start">
-                        <Check className="h-6 w-6 text-primary mr-2 flex-shrink-0" />
-                        <span>{area}</span>
-                      </li>
-                    ))}
-                  </ul>
                 </div>
                 
                 <div className="md:w-1/3">
