@@ -8,11 +8,6 @@ export interface Article {
   url: string; // Link to the full article
   imageUrl?: string; // Featured image
   categories: string[]; // Categories for filtering
-  author?: string; // Author of the article
-  content?: string; // Full content or excerpt
-  claps?: number; // Number of claps/likes (Medium)
-  comments?: number; // Number of comments (Medium)
-  publish_date?: string; // Original publish date from the JSON
 }
 
 // Function to extract title from Medium URL
@@ -112,67 +107,22 @@ function determineCategories(title: string, url: string): string[] {
   return categories;
 }
 
-// Function to generate a summary based on the title and URL content
-function generateSummary(title: string, url: string, categories: string[]): string {
-  // Check for specific article types to generate more relevant summaries
-  
-  if (url.includes("ai-agents") || url.includes("autonomous-agents")) {
-    return "Explores the evolution of AI agents and how they're transforming the way we work and interact with technology. Learn about the latest developments in autonomous systems and their practical applications.";
-  }
-  
-  if (url.includes("openai") || url.includes("gpt") || url.includes("claude")) {
-    return "An analysis of recent developments in large language models and their impact on industries and workflows. Understand the capabilities, limitations, and potential future directions of these powerful AI systems.";
-  }
-  
-  if (url.includes("cursor") || url.includes("coding") || url.includes("copilot")) {
-    return "Examines how AI-powered coding tools are transforming software development. Discover practical insights on using these tools effectively and how they complement rather than replace programming skills.";
-  }
-  
-  if (url.includes("well-being") || url.includes("mental") || url.includes("emotionally")) {
-    return "Shares personal perspectives and research-backed insights on maintaining mental and emotional well-being in our increasingly digital world. Find practical tips you can apply to your daily life.";
-  }
-  
-  if (url.includes("podcast")) {
-    return "A curated overview of valuable podcasts worth your listening time. Discover thought-provoking content that will expand your knowledge and perspective on important topics.";
-  }
-  
-  // For titles with specific meaning, create custom summaries
-  if (title.toLowerCase().includes("productivity")) {
-    return "Practical productivity advice to help you work smarter, not harder. Learn actionable strategies to organize your time, focus your attention, and accomplish more with less stress.";
-  }
-  
-  if (title.toLowerCase().includes("future")) {
-    return "A forward-looking exploration of emerging trends and their potential impact on society, business, and individual lives. Prepare yourself for the changes coming in the near and distant future.";
-  }
-  
-  // Default summary based on title and categories
+// Function to generate a summary based on the title
+function generateSummary(title: string, categories: string[]): string {
+  // Create a generic summary based on title and categories
   const categoryText = categories.length > 0 
-    ? `in the fields of ${categories.join(' and ')}` 
+    ? `in ${categories.join(' and ')}` 
     : '';
     
-  return `An insightful exploration of ${title.toLowerCase()} ${categoryText}. This article provides valuable perspectives and practical takeaways that you can apply to your work or personal development.`;
+  return `An insightful article about ${title} ${categoryText}. Click to read the full article on Medium to learn more about the subject and gain valuable insights.`;
 }
 
-// Generate a publication date based on article position in list
-// Newer articles are at the top (lower index)
-function generatePublicationDate(index: number, totalArticles: number): string {
-  // Start date is 2 years ago
-  const startDate = new Date();
-  startDate.setFullYear(startDate.getFullYear() - 2);
-  
-  // End date is today
-  const endDate = new Date();
-  
-  // Calculate position in the timeline (0 to 1)
-  // 0 = oldest (highest index), 1 = newest (index 0)
-  const position = 1 - (index / totalArticles);
-  
-  // Calculate milliseconds between start and end
-  const timeRange = endDate.getTime() - startDate.getTime();
-  
-  // Calculate the date based on position
-  const timestamp = startDate.getTime() + (position * timeRange);
-  const date = new Date(timestamp);
+// Function to generate a random date between Jan 2023 and April 2025
+function generateRecentDate(): string {
+  const start = new Date(2023, 0, 1).getTime(); // Jan 1, 2023
+  const end = new Date(2025, 3, 6).getTime(); // April 6, 2025
+  const randomTimestamp = start + Math.random() * (end - start);
+  const date = new Date(randomTimestamp);
   
   return date.toLocaleDateString('en-US', {
     year: 'numeric',
@@ -181,27 +131,9 @@ function generatePublicationDate(index: number, totalArticles: number): string {
   });
 }
 
-// Generate reading time estimate
-function generateReadingTime(title: string, categories: string[]): string {
-  // Base reading time (5 minutes)
-  let minutes = 5;
-  
-  // Adjust based on title length (longer titles often indicate longer articles)
-  minutes += Math.floor(title.length / 20);
-  
-  // Adjust based on category
-  if (categories.includes('AI') || categories.includes('Coding')) {
-    minutes += 3; // Technical content takes longer to read
-  }
-  
-  if (categories.includes('Well-being') || categories.includes('Business')) {
-    minutes += 1; // Slightly longer
-  }
-  
-  // Ensure reading time is reasonable (3-15 minutes)
-  minutes = Math.max(3, Math.min(15, minutes));
-  
-  return `${minutes} min`;
+// Function to generate a random reading time (3-15 minutes)
+function generateReadingTime(): string {
+  return `${Math.floor(3 + Math.random() * 12)} min`;
 }
 
 // URLs of the articles from the provided JSON
@@ -263,286 +195,39 @@ const articleUrls = [
   "https://medium.com/@kenji-onisuka/openais-responses-api-a-smarter-simpler-way-to-build-ai-apps-2e94efadd40c",
   "https://medium.com/@kenji-onisuka/openhands-formerly-opendevin-fde9f4b53bdb",
   "https://medium.com/@kenji-onisuka/powerful-ai-by-2026-9ba26ce81c43",
-  "https://medium.com/@kenji-onisuka/programming-revolution-bf87b98bf0f9",
-  "https://medium.com/@kenji-onisuka/python-scripts-for-easy-file-management-with-openai-assistant-a-guide-for-beginners-37cf16f99c8b",
-  "https://medium.com/@kenji-onisuka/raising-a-resilient-son-in-the-age-of-social-media-3a2842b52181",
-  "https://medium.com/@kenji-onisuka/redefining-progress-7ced747fd629",
-  "https://medium.com/@kenji-onisuka/reflection-llama-3-1-70b-ab1b80886f87",
-  "https://medium.com/@kenji-onisuka/reflection-llama-3-1-70b-best-new-self-correcting-open-source-llm-00a217aa0604",
-  "https://medium.com/@kenji-onisuka/tariffs-are-a-tax-on-the-future-beb957388c5e",
-  "https://medium.com/@kenji-onisuka/the-4-best-ai-podcasts-for-beginners-a-no-jargon-guide-43f31b384db9",
-  "https://medium.com/@kenji-onisuka/the-end-of-traditional-coding-how-ai-is-empowering-non-coders-to-build-anything-d719f15e17f7",
-  "https://medium.com/@kenji-onisuka/the-future-youre-avoiding-6a551174e948",
-  "https://medium.com/@kenji-onisuka/the-great-amplifier-of-software-development-2af3bcafd4be",
-  "https://medium.com/@kenji-onisuka/the-helper-function-i-wish-someone-had-told-me-about-653fb75e3d4b",
-  "https://medium.com/@kenji-onisuka/the-intelligence-age-a-new-milestone-for-humanity-in-just-a-few-years-c685a8a10d3d",
-  "https://medium.com/@kenji-onisuka/the-key-to-mental-strength-in-a-digital-age-86f1f50808bb",
-  "https://medium.com/@kenji-onisuka/the-perfectionism-trap-be-less-self-critical-61e84f11c0c0",
-  "https://medium.com/@kenji-onisuka/the-power-of-ai-the-compressed-21st-century-is-coming-3c4361dde71c",
-  "https://medium.com/@kenji-onisuka/the-ted-ai-show-and-the-uns-plan-for-governing-ai-why-it-matters-ecffc1fa22df",
-  "https://medium.com/@kenji-onisuka/the-u-s-canada-trade-war-a-self-inflicted-wound-that-hits-everyone-e5ad3dc0eb9c",
-  "https://medium.com/@kenji-onisuka/why-mondays-are-now-my-favorite-day-of-the-week-02807108794d",
-  "https://medium.com/@kenji-onisuka/work-quotes-i-keep-in-my-notebooklm-e8641a254d99",
-  "https://medium.com/ai-unscripted/10-jobs-that-will-be-in-high-demand-in-2030-and-10-that-wont-0b2ecf50b990",
-  "https://medium.com/ai-unscripted/ai-2025-the-age-of-autonomous-agents-b239b4f7a15c",
-  "https://medium.com/ai-unscripted/ai-agents-%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%80%E0%B8%9B%E0%B8%A5%E0%B8%B5%E0%B9%88%E0%B8%A2%E0%B8%99%E0%B9%81%E0%B8%9B%E0%B8%A5%E0%B8%87%E0%B8%84%E0%B8%A3%E0%B8%B1%E0%B9%89%E0%B8%87%E0%B9%83%E0%B8%AB%E0%B8%8D%E0%B9%88-df2ad367b927",
-  "https://medium.com/ai-unscripted/ai-agents-in-2025-ee0c869dfee4",
-  "https://medium.com/ai-unscripted/ai-isnt-just-about-coding-it-s-about-thinking-smarter-7986740a8766",
-  "https://medium.com/ai-unscripted/anthropics-new-ai-tool-can-control-your-computer-706c8badbaf5",
-  "https://medium.com/ai-unscripted/autonomous-agents-like-crewai-are-transforming-knowledge-work-9401a08f71ab",
-  "https://medium.com/ai-unscripted/chatgpts-2nd-anniversary-3dc40e687e5d",
-  "https://medium.com/ai-unscripted/claude-3-7-sonnet-just-dropped-and-its-proof-the-knowledge-economy-is-changing-9fb13a507578",
-  "https://medium.com/ai-unscripted/claude-3-7-sonnet-super-coder-or-is-it-9b83e8f86be0",
-  "https://medium.com/ai-unscripted/cursor-0-43-vs-github-copilot-the-best-ai-powered-ide-in-2024-39e1087d6c06",
-  "https://medium.com/ai-unscripted/davos-2025-ai-progress-demands-global-cooperation-e540ed6e88f7",
-  "https://medium.com/ai-unscripted/deepseek-deepdive-openais-rapid-response-with-o3-mini-2b26c0f5553b",
-  "https://medium.com/ai-unscripted/deepseek-r1-affordable-ai-for-everyone-f8f183138d1b",
-  "https://medium.com/ai-unscripted/deepseek-r1-beginners-guide-to-ai-planning-and-coding-36ebb9452e84",
-  "https://medium.com/ai-unscripted/deepseek-r1-openai-o3-mini-ai-superpowers-in-programming-a9bcf66b4fe2",
-  "https://medium.com/ai-unscripted/focus-on-what-matters-the-90-rule-95ec498bd84b",
-  "https://medium.com/ai-unscripted/from-sql-to-ai-my-journey-in-data-analytics-a1161e7e1bcc",
-  "https://medium.com/ai-unscripted/gemini-2-0-flash-thinking-googles-direct-response-to-openai-393b379277cb",
-  "https://medium.com/ai-unscripted/google-introduces-gemini-2-0-286c0a8330ff",
-  "https://medium.com/ai-unscripted/gpt-4-5-a-small-step-or-a-meaningful-upgrade-fec002376a08",
-  "https://medium.com/ai-unscripted/gpt-4-5-is-here-but-is-it-worth-the-price-a474ae13182e",
-  "https://medium.com/ai-unscripted/grok-3-best-model-on-the-planet-c6d008f24848",
-  "https://medium.com/ai-unscripted/how-to-build-effective-ai-agents-lessons-from-anthropic-0e891a4ba7a3",
-  "https://medium.com/ai-unscripted/how-to-create-effective-rag-applications-a-guide-for-beginners-and-enterprises-11dcd27618b3",
-  "https://medium.com/ai-unscripted/i-am-not-a-developer-but-ive-been-vibe-coding-765d13ced348",
-  "https://medium.com/ai-unscripted/jensen-huang-at-ces-2025-how-ai-agents-are-redefining-the-future-45ee9d374e3d",
-  "https://medium.com/ai-unscripted/manus-ai-breakthrough-or-just-clever-orchestration-5db77c8234eb",
-  "https://medium.com/ai-unscripted/mastering-openais-o1-model-e15b509b8a0f",
-  "https://medium.com/ai-unscripted/mastering-the-art-of-talking-to-ai-a-beginners-guide-4875ee4666da",
-  "https://medium.com/ai-unscripted/microsoft-copilot-your-companion-your-guide-my-confusion-146185e8a602",
-  "https://medium.com/ai-unscripted/model-context-protocol-mcp-claudes-new-feature-explained-a232d23a6afa",
-  "https://medium.com/ai-unscripted/my-2-favorite-prompts-to-boost-my-work-efficiency-556b19545ba2",
-  "https://medium.com/ai-unscripted/notebooklm-revisited-smarter-tools-for-work-learning-and-life-a8a3555fdc6c",
-  "https://medium.com/ai-unscripted/so-do-you-want-to-get-into-ai-heres-what-i-learned-so-far-89dae1683065",
-  "https://medium.com/ai-unscripted/sora-leaked-what-happened-7bbebe576830",
-  "https://medium.com/ai-unscripted/stop-ai-hallucinations-4-practical-tips-for-beginners-4d377dc405c8",
-  "https://medium.com/ai-unscripted/the-hidden-potential-of-gemini-ai-18444cd79d0a",
-  "https://medium.com/ai-unscripted/the-ultimate-data-analysts-guide-to-generative-ai-in-2025-from-data-to-ai-mastery-4f279668f1e6",
-  "https://medium.com/ai-unscripted/top-5-generative-ai-trends-transforming-industries-in-2025-dfd7f1e738e7",
-  "https://medium.com/ai-unscripted/us-post-election-2024-a-turning-point-for-technology-and-innovation-47706beef3e1",
-  "https://medium.com/ai-unscripted/vibe-coding-i-just-think-and-review-65cfbc4ccf90",
-  "https://medium.com/ai-unscripted/what-is-an-ai-engineer-and-how-to-become-one-beb30604cc40"
+  "https://medium.com/@kenji-onisuka/programming-revolution-bf87b98bf0f9"
 ];
 
-// Medium cover image variants for category-based selection
-const MEDIUM_COVER_IMAGES = {
-  AI: [
-    "https://miro.medium.com/v2/resize:fit:1200/1*T9VaXXgESiXR_Qx_yQIvRg.jpeg", 
-    "https://miro.medium.com/v2/resize:fit:1200/1*wQTLVXmPIJZ1x1oDYqfXYg.jpeg",
-    "https://miro.medium.com/v2/resize:fit:1200/1*WI43epHjl6I9R0jVVzjxdg.jpeg",
-    "https://miro.medium.com/v2/resize:fit:1200/1*7lHJf-E5nPFPNNYngYwPSQ.png",
-    "https://miro.medium.com/v2/resize:fit:1200/1*0V4RztipOFbHPC6cjGLydg.jpeg"
-  ],
-  Coding: [
-    "https://miro.medium.com/v2/resize:fit:1200/1*jfdwtvU6V6g99q3G7gq7dQ.jpeg",
-    "https://miro.medium.com/v2/resize:fit:1200/1*pJQ4oLCxzQCUGdA7wsjFOQ.jpeg",
-    "https://miro.medium.com/v2/resize:fit:1200/1*qLC-3low-YxZhCKiMQKTRg.jpeg",
-    "https://miro.medium.com/v2/resize:fit:1200/1*uaGcG_0MrHuRoY6Gzq8Tww.jpeg",
-    "https://miro.medium.com/v2/resize:fit:1200/1*U3WRRwLx3zeDkHmZdHlj-Q.jpeg"
-  ],
-  'Well-being': [
-    "https://miro.medium.com/v2/resize:fit:1200/1*wdB6-KF8GlhGNhMOvH0Kew.jpeg",
-    "https://miro.medium.com/v2/resize:fit:1200/1*rFwdQ6wJYgfZ5hGVZTQSXA.jpeg",
-    "https://miro.medium.com/v2/resize:fit:1200/1*AaNLBBUMAMcL1ELRxTy3zQ.jpeg", 
-    "https://miro.medium.com/v2/resize:fit:1200/1*NwGhWnD4t6zXl45lB3lAxA.jpeg",
-    "https://miro.medium.com/v2/resize:fit:1200/1*XsimnjZIxUdCKfpXp7SvJw.jpeg"
-  ],
-  Podcast: [
-    "https://miro.medium.com/v2/resize:fit:1200/1*vXWVmfL4yGtaOZXzemVfuQ.jpeg",
-    "https://miro.medium.com/v2/resize:fit:1200/1*CgODCyULXbL0iVTIkcKDxw.jpeg",
-    "https://miro.medium.com/v2/resize:fit:1200/1*Th5MgXy4fJWABoMRQkQiNA.jpeg",
-    "https://miro.medium.com/v2/resize:fit:1200/1*UwZdqC8xZ238JXr4rHKcnA.jpeg",
-    "https://miro.medium.com/v2/resize:fit:1200/1*nOXN-s8LJYkJF2U4RBG0rQ.jpeg"
-  ],
-  Business: [
-    "https://miro.medium.com/v2/resize:fit:1200/1*T-w_k1OsJJ14Q-N_iXQpOw.jpeg",
-    "https://miro.medium.com/v2/resize:fit:1200/1*H5s-QiQ4E1ReMBwpM0IiJQ.jpeg",
-    "https://miro.medium.com/v2/resize:fit:1200/1*Ir3AcWiEwUdPbUK0PUITjw.jpeg",
-    "https://miro.medium.com/v2/resize:fit:1200/1*ZW6gNYTJRiOBGFZgY80TRQ.jpeg",
-    "https://miro.medium.com/v2/resize:fit:1200/1*OyWEekj-Vdaw-s4XpTjHnA.jpeg"
-  ],
-  Default: [
-    "https://miro.medium.com/v2/resize:fit:1200/1*-IMtZtcUK-QuVa1ypGCJbg.jpeg",
-    "https://miro.medium.com/v2/resize:fit:1200/1*IKY_z9sK-g93HXCy3LdLYg.jpeg",
-    "https://miro.medium.com/v2/resize:fit:1200/1*JZH5y42NjIYc0nVc8 Dale5A.jpeg",
-    "https://miro.medium.com/v2/resize:fit:1200/1*2SQ-q-McL8F6n0-GPl2ylQ.jpeg",
-    "https://miro.medium.com/v2/resize:fit:1200/1*rLu3d0uzQBgTzQ_Un10dVQ.jpeg"
-  ]
-};
-
-// Function to get Medium cover images using a deterministic approach
-function getMediumCoverImage(url: string, categories: string[]): string {
-  // Hash the URL to ensure consistent image selection for the same article
-  let hashCode = 0;
-  for (let i = 0; i < url.length; i++) {
-    hashCode = ((hashCode << 5) - hashCode) + url.charCodeAt(i);
-    hashCode = hashCode & hashCode; // Convert to 32bit integer
-  }
-  
-  // Make the hash positive
-  hashCode = Math.abs(hashCode);
-  
-  // Determine which category images to use
-  let categoryImages;
-  if (categories.includes('AI')) {
-    categoryImages = MEDIUM_COVER_IMAGES.AI;
-  } else if (categories.includes('Coding')) {
-    categoryImages = MEDIUM_COVER_IMAGES.Coding;
-  } else if (categories.includes('Well-being')) {
-    categoryImages = MEDIUM_COVER_IMAGES["Well-being"];
-  } else if (categories.includes('Podcast')) {
-    categoryImages = MEDIUM_COVER_IMAGES.Podcast;
-  } else if (categories.includes('Business')) {
-    categoryImages = MEDIUM_COVER_IMAGES.Business;
-  } else {
-    categoryImages = MEDIUM_COVER_IMAGES.Default;
-  }
-  
-  // Select an image using the hash
-  const imageIndex = hashCode % categoryImages.length;
-  return categoryImages[imageIndex];
-}
-
-// Import sample articles
-import sampleArticle1 from './articles/20250104-How_to_Build_Effective_AI_Agents.json';
-import sampleArticle2 from './articles/20250304-The_Future_of_AI_Agents.json';
-import sampleArticle3 from './articles/20250221-Mastering_Social_Intelligence.json';
-
-// Function to format a date string from various formats
-function formatDateString(dateString: string | null): string {
-  if (!dateString) {
-    // Return current date if no date provided
-    return new Date().toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-  }
-  
-  // Try to parse the date
-  const date = new Date(dateString);
-  
-  // Check if the date is valid
-  if (isNaN(date.getTime())) {
-    // Return current date if invalid
-    return new Date().toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-  }
-  
-  // Format the date
-  return date.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  });
-}
-
-// Function to extract a summary from the content
-function extractSummary(content: string): string {
-  if (!content) return '';
-  
-  // Remove any HTML tags if present
-  const cleanContent = content.replace(/<[^>]*>/g, '');
-  
-  // Get the first paragraph or part of it
-  const firstParagraph = cleanContent.split('\n\n')[0];
-  
-  // If the first paragraph is too short, get more text
-  if (firstParagraph.length < 50) {
-    return cleanContent.substring(0, 150) + '...';
-  }
-  
-  // Return the first paragraph or truncate if it's too long
-  return firstParagraph.length > 150 
-    ? firstParagraph.substring(0, 150) + '...' 
-    : firstParagraph;
-}
-
-// Create a function to convert a JSON article to our Article interface
-function convertJsonToArticle(json: any, index: number): Article {
-  // Extract ID from filename if available, or generate one
-  const fileName = `article-${index + 1}`;
-    
-  // Use the data from the JSON file
-  const title = json.title || extractTitleFromUrl(json.url);
-  const url = json.url;
-  // Use JSON publish_date, falling back to current date
-  const date = formatDateString(json.publish_date);
-  const readingTime = json.read_time || generateReadingTime(title, []);
-  // Determine categories from title and URL
-  const categories = determineCategories(title, url);
-  // Get author from JSON or use default
-  const author = json.author || "Totrakool Khongsap";
-  // Get platform from URL
-  let platform: "LinkedIn" | "Medium" | "Other" = "Other";
-  if (url.includes("medium.com")) {
-    platform = "Medium";
-  } else if (url.includes("linkedin.com")) {
-    platform = "LinkedIn";
-  }
-  
-  // Use content from JSON, or generate a summary if not available
-  const content = json.content || '';
-  const summary = json.summary || extractSummary(content) || generateSummary(title, url, categories);
-  
-  // Use cover image from JSON if available, or generate one
-  const imageUrl = json.cover_image || getMediumCoverImage(url, categories);
-  
-  // Additional properties from JSON
-  const claps = json.claps !== undefined ? Number(json.claps) : undefined;
-  const comments = json.comments !== undefined ? Number(json.comments) : undefined;
-  
-  return {
-    id: fileName,
-    title,
-    date,
-    summary,
-    readingTime,
-    platform,
-    url,
-    imageUrl,
-    categories,
-    author,
-    content,
-    claps,
-    comments,
-    publish_date: json.publish_date
-  };
-}
-
-// Convert our sample JSON articles to Article objects
-const sampleArticle1Converted = convertJsonToArticle(sampleArticle1, 0);
-const sampleArticle2Converted = convertJsonToArticle(sampleArticle2, 1);
-const sampleArticle3Converted = convertJsonToArticle(sampleArticle3, 2);
-
-// Generate articles from the existing URLs, but add our sample articles at the beginning
-export const articles: Article[] = [
-  sampleArticle1Converted, 
-  sampleArticle2Converted,
-  sampleArticle3Converted,
-  ...articleUrls.map((url, index) => {
+// Generate articles from the URLs
+export const articles: Article[] = articleUrls.map((url, index) => {
   const title = extractTitleFromUrl(url);
   const categories = determineCategories(title, url);
-  const date = generatePublicationDate(index, articleUrls.length);
-  const readingTime = generateReadingTime(title, categories);
-  const coverImage = getMediumCoverImage(url, categories);
+  const date = generateRecentDate();
+  
+  // Use consistent image based on category
+  let imageUrl = "https://images.unsplash.com/photo-1516116216624-53e697fedbea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"; // Default
+  
+  if (categories.includes('AI')) {
+    imageUrl = "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80";
+  } else if (categories.includes('Coding')) {
+    imageUrl = "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80";
+  } else if (categories.includes('Well-being')) {
+    imageUrl = "https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80";
+  } else if (categories.includes('Business')) {
+    imageUrl = "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80";
+  } else if (categories.includes('Podcast')) {
+    imageUrl = "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80";
+  }
   
   return {
-    id: `article-${index + 4}`, // Start from index 4 since we already have three articles
+    id: `article-${index + 1}`,
     title,
     date,
-    summary: generateSummary(title, url, categories),
-    readingTime,
-    platform: "Medium" as const,
+    summary: generateSummary(title, categories),
+    readingTime: generateReadingTime(),
+    platform: "Medium" as const, // Type assertion to satisfy the union type
     url,
-    imageUrl: coverImage,
+    imageUrl,
     categories
   };
-})].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()); // Sort by date (newest first)
+}).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()); // Sort by date (newest first)
