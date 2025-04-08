@@ -109,6 +109,7 @@ export default function About() {
                           height={190}
                           objectFit="cover"
                           className="rounded-full"
+                          priority={true}
                         />
                       </div>
                     </div>
