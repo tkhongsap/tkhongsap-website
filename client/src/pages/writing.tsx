@@ -114,7 +114,7 @@ export default function Writing() {
   // Website schema data for Writing page with Articles schema
   const writingSchemaData = {
     name: 'Ta Khongsap | Articles & Insights',
-    description: 'Executive summaries of articles on AI strategy, technology leadership, and business transformation by Ta Khongsap, AI Strategist.',
+    description: 'Real insights on AI, strategy, and software development that help you think sharper and build faster. No buzzwords, no fluff—just practical takeaways.',
     url: 'https://totrakoolkhongsap.replit.app/writing'
   };
 
@@ -122,7 +122,7 @@ export default function Writing() {
     <div>
       <SEO 
         title="Writing | Ta Khongsap - AI Strategist"
-        description="Read executive summaries of Ta Khongsap's articles on AI strategy, data science, and business transformation published on LinkedIn and Medium."
+        description="No buzzwords. No fluff. Just real insights on AI, strategy, and the future of software development that you can use to think sharper and build faster."
         canonicalUrl="/writing"
         type="website"
         imageUrl={articles[0]?.imageUrl} // Use first article image for social sharing
@@ -136,8 +136,14 @@ export default function Writing() {
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">Writing</h1>
             <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300">
-              Executive summaries of my articles on AI strategy, technology leadership, and digital transformation.
-              Read here, then continue on LinkedIn or Medium for the full content.
+              AI is moving fast—and so are the conversations that matter.
+              This space is where I share distilled insights from the frontlines: hands-on experiments, thought shifts, and tactical wins from working with AI, strategy, and the future of software development.
+            </p>
+            <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 mt-4">
+              No buzzwords. No fluff. Just real takeaways you can use to think sharper, build faster, and stay ahead.
+            </p>
+            <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 mt-4">
+              Want the full stories? Follow along on Medium or LinkedIn.
             </p>
           </div>
         </div>
@@ -276,7 +282,7 @@ export default function Writing() {
       <section id="articles" className="py-16 bg-gray-50 dark:bg-gray-900">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-2xl font-bold mb-8 text-center">Executive Summaries</h2>
+            <h2 className="text-2xl font-bold mb-8 text-center">Featured Insights</h2>
             
             {displayedArticles.length > 0 ? (
               <>
