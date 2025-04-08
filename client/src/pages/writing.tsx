@@ -113,20 +113,20 @@ export default function Writing() {
   
   // Website schema data for Writing page with Articles schema
   const writingSchemaData = {
-    name: 'Totrakool Khongsap | Articles & Insights',
-    description: 'Executive summaries of articles on AI strategy, technology leadership, and business transformation by Totrakool Khongsap, AI Strategist.',
+    name: 'Ta Khongsap | Articles & Insights',
+    description: 'Executive summaries of articles on AI strategy, technology leadership, and business transformation by Ta Khongsap, AI Strategist.',
     url: 'https://totrakoolkhongsap.replit.app/writing'
   };
 
   return (
     <div>
       <SEO 
-        title="Writing | Totrakool Khongsap - AI Strategist"
-        description="Read executive summaries of Totrakool Khongsap's articles on AI strategy, data science, and business transformation published on LinkedIn and Medium."
+        title="Writing | Ta Khongsap - AI Strategist"
+        description="Read executive summaries of Ta Khongsap's articles on AI strategy, data science, and business transformation published on LinkedIn and Medium."
         canonicalUrl="/writing"
         type="website"
         imageUrl={articles[0]?.imageUrl} // Use first article image for social sharing
-        imageAlt="Totrakool Khongsap's Featured Article"
+        imageAlt="Ta Khongsap's Featured Article"
       />
       <SchemaMarkup type="website" data={writingSchemaData} />
       

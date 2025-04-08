@@ -6,8 +6,8 @@ export default function NotFound() {
   return (
     <div>
       <SEO
-        title="Page Not Found | 404 Error | Totrakool Khongsap"
-        description="The page you are looking for does not exist. Navigate back to the homepage to explore Totrakool Khongsap's AI strategy expertise."
+        title="Page Not Found | 404 Error | Ta Khongsap"
+        description="The page you are looking for does not exist. Navigate back to the homepage to explore Ta Khongsap's AI strategy expertise."
         canonicalUrl="/404"
         noindex={true}
       />
@@ -20,7 +20,7 @@ export default function NotFound() {
             </div>
 
             <p className="mt-4 text-sm text-gray-600">
-              The page you are looking for could not be found. Return to the homepage to explore Totrakool Khongsap's AI strategy expertise.
+              The page you are looking for could not be found. Return to the homepage to explore Ta Khongsap's AI strategy expertise.
             </p>
           </CardContent>
         </Card>

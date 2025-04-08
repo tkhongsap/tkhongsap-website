@@ -20,7 +20,7 @@ export default function Portfolio() {
 
   // Professional Service schema data for Portfolio page
   const professionalServiceData = {
-    name: 'Totrakool Khongsap - AI Strategic Services',
+    name: 'Ta Khongsap - AI Strategic Services',
     description: 'AI strategy and consulting services with a portfolio of successful projects across AI solutions, data analysis, and finance.',
     serviceType: ['AI Strategy', 'Data Science', 'Business Intelligence'],
     url: 'https://totrakoolkhongsap.replit.app/portfolio'
@@ -29,8 +29,8 @@ export default function Portfolio() {
   return (
     <div>
       <SEO 
-        title="Portfolio | Totrakool Khongsap - AI Strategist"
-        description="View Totrakool Khongsap's AI projects across finance, data science, and business intelligence with case studies and technology details."
+        title="Portfolio | Ta Khongsap - AI Strategist"
+        description="View Ta Khongsap's AI projects across finance, data science, and business intelligence with case studies and technology details."
         canonicalUrl="/portfolio"
         type="website"
       />

@@ -13,15 +13,15 @@ export default function Home() {
   // SEO data for Home page
   const homeSchemaData = {
     url: 'https://totrakoolkhongsap.replit.app/',
-    name: 'Totrakool Khongsap | AI Strategist',
-    description: 'Totrakool Khongsap is an AI Strategist blending data science, finance, and leadership to transform business with AI-driven innovation.'
+    name: 'Ta Khongsap | AI Strategist',
+    description: 'Ta Khongsap is an AI Strategist blending data science, finance, and leadership to transform business with AI-driven innovation.'
   };
 
   return (
     <div>
       <SEO 
-        title="Home | Totrakool Khongsap - AI Strategist"
-        description="Totrakool Khongsap is an AI Strategist blending data science, finance, and leadership to transform business with AI-driven innovation."
+        title="Home | Ta Khongsap - AI Strategist"
+        description="Ta Khongsap is an AI Strategist blending data science, finance, and leadership to transform business with AI-driven innovation."
         canonicalUrl="/"
       />
       <SchemaMarkup type="website" data={homeSchemaData} />
@@ -35,7 +35,7 @@ export default function Home() {
                 From Algorithms to Impact: Transforming Business with AI-Driven Innovation
               </h1>
               <p className="text-xl md:text-2xl mb-10 text-[#444444]">
-                I'm Totrakool Khongsap—an AI Strategist blending data science, finance, and leadership.
+                I'm <span className="text-primary">Ta</span> <span className="text-[#333333]">Khongsap</span>—an AI Strategist blending data science, finance, and leadership.
               </p>
               
               {/* Newsletter Signup */}

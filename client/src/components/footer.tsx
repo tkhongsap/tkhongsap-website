@@ -10,7 +10,7 @@ export default function Footer() {
         <div className="max-w-5xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center mb-12">
             <div className="mb-8 md:mb-0">
-              <h2 className="text-2xl font-bold">Totrakool Khongsap</h2>
+              <h2 className="text-2xl font-bold"><span className="text-primary">Ta</span> <span className="text-white">Khongsap</span></h2>
               <p className="text-gray-400 mt-2">Empowering Business with AI & Analytics</p>
             </div>
             
@@ -25,7 +25,7 @@ export default function Footer() {
                 <Linkedin size={28} />
               </a>
               <a 
-                href="https://github.com/" 
+                href="https://github.com/tkhongsap" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="text-gray-400 hover:text-white transition-colors"
@@ -46,7 +46,7 @@ export default function Footer() {
           <div className="border-t border-gray-700 pt-10">
             <div className="flex flex-col md:flex-row justify-between items-center">
               <p className="text-gray-400 mb-4 md:mb-0">
-                &copy; {currentYear} Totrakool Khongsap. All rights reserved.
+                &copy; {currentYear} Ta Khongsap. All rights reserved.
               </p>
               
               <div className="flex space-x-8">

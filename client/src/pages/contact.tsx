@@ -34,8 +34,8 @@ export default function Contact() {
   
   // Schema data for the Contact page
   const contactSchemaData = {
-    name: 'Contact Totrakool Khongsap - AI Strategist',
-    description: 'Get in touch with Totrakool Khongsap for AI strategy consulting, speaking engagements, or collaborative projects.',
+    name: 'Contact Ta Khongsap - AI Strategist',
+    description: 'Get in touch with Ta Khongsap for AI strategy consulting, speaking engagements, or collaborative projects.',
     url: 'https://totrakoolkhongsap.replit.app/contact',
     contactPoint: {
       email: 'ta.khongsap@gmail.com',
@@ -78,8 +78,8 @@ export default function Contact() {
   return (
     <>
       <SEO 
-        title="Contact | Totrakool Khongsap - AI Strategist"
-        description="Get in touch with Totrakool Khongsap for AI strategy consulting, speaking engagements, or collaboration opportunities. Reach out today via phone, email, or message form."
+        title="Contact | Ta Khongsap - AI Strategist"
+        description="Get in touch with Ta Khongsap for AI strategy consulting, speaking engagements, or collaboration opportunities. Reach out today via phone, email, or message form."
         canonicalUrl="/contact"
         type="website"
       />

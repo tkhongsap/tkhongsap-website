@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 export default function About() {
   // Person schema data
   const personSchemaData = {
-    name: 'Totrakool Khongsap',
+    name: 'Ta Khongsap',
     jobTitle: 'AI Strategist & Data Science Leader',
     description: 'AI Strategist with over 15 years of experience in data science, finance, and leadership, specializing in leveraging AI to optimize business operations and drive strategic growth.',
     url: 'https://totrakoolkhongsap.replit.app/about',
@@ -20,8 +20,8 @@ export default function About() {
   return (
     <>
       <SEO 
-        title="About | Totrakool Khongsap - AI Strategist"
-        description="Learn about Totrakool Khongsap's professional journey, expertise in AI strategy, and leadership experience in data science and business transformation."
+        title="About | Ta Khongsap - AI Strategist"
+        description="Learn about Ta Khongsap's professional journey, expertise in AI strategy, and leadership experience in data science and business transformation."
         canonicalUrl="/about"
       />
       <SchemaMarkup type="person" data={personSchemaData} />
@@ -104,7 +104,7 @@ export default function About() {
                       <div className="w-48 h-48 rounded-full overflow-hidden flex items-center justify-center border-2 border-primary">
                         <OptimizedImage 
                           src="/assets/profile-picture.jpg" 
-                          alt="Totrakool Khongsap profile picture"
+                          alt="Ta Khongsap profile picture"
                           width={190}
                           height={190}
                           objectFit="cover"
@@ -114,7 +114,7 @@ export default function About() {
                     </div>
                     
                     <div className="text-center">
-                      <h3 className="text-xl font-bold mb-2">Totrakool Khongsap</h3>
+                      <h3 className="text-xl font-bold mb-2"><span className="text-primary">Ta</span> <span className="text-gray-800">Khongsap</span></h3>
                       <p className="text-gray-700 mb-4">AI Strategist & Data Science Leader</p>
                       
                       <div className="flex justify-center space-x-4">

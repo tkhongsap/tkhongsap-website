@@ -51,8 +51,8 @@ export default function Navbar() {
     )}>
       <div className="container">
         <div className="flex justify-between items-center py-6">
-          <Link href="/" className="text-2xl font-bold text-[#333333]">
-            Totrakool Khongsap
+          <Link href="/" className="text-2xl font-bold">
+            <span className="text-primary">Ta</span> <span className="text-[#333333]">Khongsap</span>
           </Link>
           
           {/* Desktop Navigation */}
