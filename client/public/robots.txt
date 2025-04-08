@@ -1,8 +1,9 @@
+# robots.txt for tkhongsap.io
 User-agent: *
 Allow: /
 
-Sitemap: https://totrakoolkhongsap.replit.app/sitemap.xml
+# Allow all crawlers to access all site content
+Disallow:
 
-# Disallow server paths and API routes
-Disallow: /api/
-Disallow: /server/
+# Sitemaps
+Sitemap: https://tkhongsap.io/sitemap.xml

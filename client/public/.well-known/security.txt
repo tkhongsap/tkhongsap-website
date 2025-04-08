@@ -1,4 +1,6 @@
-Contact: mailto:your-email@example.com
-Expires: 2026-04-05T00:00:00.000Z
+# Security contact information for tkhongsap.io
+Contact: mailto:security@tkhongsap.io
+Expires: 2026-04-08T12:00:00.000Z
 Preferred-Languages: en
-Canonical: https://yourdomain.com/.well-known/security.txt
+Canonical: https://tkhongsap.io/.well-known/security.txt
+Policy: https://tkhongsap.io/security-policy

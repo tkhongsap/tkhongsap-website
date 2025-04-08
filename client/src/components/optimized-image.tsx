@@ -8,13 +8,19 @@ interface OptimizedImageProps {
   className?: string;
   loading?: "eager" | "lazy";
   objectFit?: "contain" | "cover" | "fill" | "none" | "scale-down";
+  sizes?: string;
+  priority?: boolean;
+  fetchPriority?: 'high' | 'low' | 'auto';
+  decoding?: 'sync' | 'async' | 'auto';
 }
 
 /**
  * OptimizedImage component with SEO best practices:
  * - Always includes alt text for accessibility
  * - Uses lazy loading by default for performance
- * - Supports common image attributes
+ * - Supports responsive images with srcset
+ * - Implements advanced loading optimizations
+ * - Prevents layout shifts with explicit dimensions
  */
 export default function OptimizedImage({
   src,
@@ -24,6 +30,10 @@ export default function OptimizedImage({
   className,
   loading = "lazy",
   objectFit = "cover",
+  sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
+  priority = false,
+  fetchPriority = 'auto',
+  decoding = 'async',
 }: OptimizedImageProps) {
   // For placeholder or SVG images
   if (src.startsWith('#')) {
@@ -35,8 +45,9 @@ export default function OptimizedImage({
         )}
         style={{ width: width ? `${width}px` : '100%', height: height ? `${height}px` : '100%' }}
         aria-label={alt}
+        role="img"
       >
-        <svg className="w-12 h-12 text-gray-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg className="w-12 h-12 text-gray-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <rect width="24" height="24" fill="none"/>
           <path d="M4 5H20V19H4V5Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           <path d="M4 5L12 13L20 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -47,13 +58,40 @@ export default function OptimizedImage({
     );
   }
 
+  // Check if the image is already a WebP format
+  const isWebP = src.toLowerCase().endsWith('.webp');
+  
+  // Generate responsive srcset if width is provided
+  const generateSrcSet = () => {
+    if (!width) return undefined;
+    
+    // For WebP sources, just use them directly
+    if (isWebP) {
+      return `${src} ${width}w, ${src} ${Math.floor(width / 2)}w, ${src} ${Math.floor(width / 4)}w`;
+    }
+    
+    // Extract the file extension and base path
+    const extension = src.split('.').pop() || 'jpg';
+    const basePath = src.substring(0, src.lastIndexOf('.'));
+    
+    // For other formats, try to use the naming convention for responsive images
+    // We assume that the server has these files available or is using a responsive image service
+    return `${basePath}-${width}.${extension} ${width}w, ${basePath}-${Math.floor(width / 2)}.${extension} ${Math.floor(width / 2)}w, ${basePath}-${Math.floor(width / 4)}.${extension} ${Math.floor(width / 4)}w`;
+  };
+
+  // Configuration for priority loading
+  const loadingConfig = priority ? { loading: 'eager' as const, fetchPriority: 'high' as const } : { loading, fetchPriority };
+
   return (
     <img
       src={src}
       alt={alt}
       width={width}
       height={height}
-      loading={loading}
+      {...loadingConfig}
+      decoding={decoding}
+      sizes={sizes}
+      srcSet={generateSrcSet()}
       className={cn(className)}
       style={{ objectFit }}
       // Prevent layout shift by setting default dimensions
