@@ -10,6 +10,7 @@
   --color-background: #f8f9fa; /* Slightly off-white for reduced eye strain */
   --color-card-background: #ffffff;
   --color-shadow: rgba(0, 0, 0, 0.08);
+  --color-primary: #ff4d4d; /* Primary brand color */
 }
 
 @layer base {
@@ -81,6 +82,16 @@
   :focus {
     outline: 2px solid var(--color-link);
     outline-offset: 2px;
+  }
+  
+  /* Custom focus styles for navigation links */
+  header a:focus, 
+  nav a:focus,
+  .nav-link:focus,
+  button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 77, 77, 0.4);
+    border-radius: 0.25rem;
   }
 
   /* Skip to main content link for keyboard accessibility */
