@@ -80,7 +80,7 @@ export default function OptimizedImage({
   };
 
   // Configuration for priority loading
-  const loadingConfig = priority ? { loading: 'eager' as const, fetchPriority: 'high' as const } : { loading, fetchPriority };
+  const loadingConfig = priority ? { loading: 'eager' as const, fetchpriority: 'high' as const } : { loading };
 
   return (
     <img
