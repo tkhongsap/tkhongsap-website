@@ -80,7 +80,7 @@ export default function OptimizedImage({
   };
 
   // Configuration for priority loading
-  const loadingConfig = priority ? { loading: 'eager' as const, fetchpriority: 'high' as const } : { loading };
+  const loadingConfig = priority ? { loading: 'eager' as const } : { loading };
 
   // Process image src path
   // If src starts with '/', it's an absolute path and we need to keep it as is
