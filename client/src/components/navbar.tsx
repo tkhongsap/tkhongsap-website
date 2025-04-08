@@ -7,7 +7,8 @@ import { cn, scrollToElement } from "@/lib/utils";
 const navLinks = [
   { name: "Home", path: "/" },
   { name: "About", path: "/about" },
-  { name: "Portfolio", path: "/portfolio" },
+  // Portfolio hidden temporarily - under construction
+  // { name: "Portfolio", path: "/portfolio" },
   { name: "Writing", path: "/writing" },
   { name: "Contact", path: "/contact" },
 ];

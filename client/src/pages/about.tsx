@@ -91,9 +91,7 @@ export default function About() {
                       <Button className="flex items-center" onClick={() => window.location.href = '/contact'}>
                         Contact Me <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>
-                      <Button variant="outline" className="flex items-center" onClick={() => window.location.href = '/portfolio'}>
-                        View My Projects <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
+                      {/* Portfolio button removed temporarily - under construction */}
                     </div>
                   </div>
                 </div>
