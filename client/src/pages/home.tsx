@@ -58,9 +58,9 @@ export default function Home() {
               
               {/* Value Propositions */}
               <div className="grid md:grid-cols-3 gap-10">
-                <div className="group hover:shadow-md hover:bg-white p-5 rounded-lg transition-all duration-300">
-                  <div className="flex items-center mb-4">
-                    <div className="bg-primary/10 p-3 rounded-full mr-3">
+                <div className="group hover:shadow-md hover:bg-white p-5 rounded-lg transition-all duration-300 text-center">
+                  <div className="flex flex-col items-center mb-4">
+                    <div className="bg-primary/10 p-3 rounded-full mb-3">
                       <BarChart className="h-6 w-6 text-primary" />
                     </div>
                     <h3 className="font-semibold text-lg group-hover:text-primary transition-colors">AI Tools & Technologies</h3>
@@ -68,9 +68,9 @@ export default function Home() {
                   <p className="text-[#444444] leading-relaxed">Discover how cutting-edge solutions like Google NotebookLM, Cursor AI, and LLMs supercharge workflows and amplify creativity.</p>
                 </div>
                 
-                <div className="group hover:shadow-md hover:bg-white p-5 rounded-lg transition-all duration-300">
-                  <div className="flex items-center mb-4">
-                    <div className="bg-primary/10 p-3 rounded-full mr-3">
+                <div className="group hover:shadow-md hover:bg-white p-5 rounded-lg transition-all duration-300 text-center">
+                  <div className="flex flex-col items-center mb-4">
+                    <div className="bg-primary/10 p-3 rounded-full mb-3">
                       <Lightbulb className="h-6 w-6 text-primary" />
                     </div>
                     <h3 className="font-semibold text-lg group-hover:text-primary transition-colors">Productivity & Efficiency</h3>
@@ -78,9 +78,9 @@ export default function Home() {
                   <p className="text-[#444444] leading-relaxed">Explore powerful tips—from the "90% Rule" to AI-boosted prompts—to beat perfectionism, sharpen focus, and get more done.</p>
                 </div>
                 
-                <div className="group hover:shadow-md hover:bg-white p-5 rounded-lg transition-all duration-300">
-                  <div className="flex items-center mb-4">
-                    <div className="bg-primary/10 p-3 rounded-full mr-3">
+                <div className="group hover:shadow-md hover:bg-white p-5 rounded-lg transition-all duration-300 text-center">
+                  <div className="flex flex-col items-center mb-4">
+                    <div className="bg-primary/10 p-3 rounded-full mb-3">
                       <Code className="h-6 w-6 text-primary" />
                     </div>
                     <h3 className="font-semibold text-lg group-hover:text-primary transition-colors">The Future of Software Development</h3>
