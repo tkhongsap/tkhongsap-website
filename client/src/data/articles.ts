@@ -99,22 +99,83 @@ function extractFirstParagraph(content: string): string {
   // Remove any Medium-specific prefixes like "Member-only story"
   const cleanContent = content.replace(/^Member-only story\n\n/, '');
   
-  // Split by double newlines to get paragraphs
-  const paragraphs = cleanContent.split('\n\n');
+  // Look for content after the author name marker
+  const authorMarker = "\n\nKenji\n\n";
+  let contentAfterAuthor = "";
   
-  // Skip title paragraphs and find the first real paragraph
-  // Often the first few entries might be title, author, publication name
+  if (cleanContent.includes(authorMarker)) {
+    contentAfterAuthor = cleanContent.split(authorMarker)[1];
+    
+    // Also handle cases where AI Unscripted might appear after the author
+    if (contentAfterAuthor.startsWith("AI Unscripted")) {
+      const lines = contentAfterAuthor.split('\n\n');
+      // Skip the publication name and any single numbers (claps)
+      for (let i = 0; i < lines.length; i++) {
+        if (lines[i].trim() !== "AI Unscripted" && isNaN(Number(lines[i].trim()))) {
+          contentAfterAuthor = lines.slice(i).join('\n\n');
+          break;
+        }
+      }
+    }
+  } else {
+    contentAfterAuthor = cleanContent;
+  }
+  
+  // Split by double newlines to get paragraphs
+  const paragraphs = contentAfterAuthor.split('\n\n');
+  
+  // Find the first substantial paragraph (not a heading, not too short)
   let firstRealParagraph = '';
   for (let i = 0; i < paragraphs.length; i++) {
-    // Skip very short paragraphs (likely headings) or ones that match the title
     const paragraph = paragraphs[i].trim();
-    if (paragraph.length > 40 && !paragraph.includes('AI Unscripted') && isNaN(Number(paragraph))) {
+    
+    // Skip very short paragraphs, likely headings
+    if (paragraph.length > 40 && 
+        !paragraph.includes('AI Unscripted') && 
+        isNaN(Number(paragraph)) &&
+        !paragraph.startsWith('#')) {
       firstRealParagraph = paragraph;
       break;
     }
   }
   
-  return firstRealParagraph || 'Click to read the full article on Medium.';
+  // If we found a paragraph, extract first 1-3 sentences (max ~200 chars)
+  if (firstRealParagraph) {
+    // Split by sentence ending punctuation followed by space or end of string
+    const sentences = firstRealParagraph.split(/(?<=[.!?])\s+|(?<=[.!?])$/);
+    
+    if (sentences.length === 1) {
+      // If it's just one sentence, use it all (up to 250 chars)
+      return sentences[0].length > 250 
+        ? sentences[0].substring(0, 247) + '...' 
+        : sentences[0];
+    } else {
+      // Take first 2-3 sentences depending on length
+      let summary = sentences[0];
+      let charCount = sentences[0].length;
+      
+      // Add second sentence if available and total under 200 chars
+      if (sentences.length > 1 && charCount + sentences[1].length < 200) {
+        summary += ' ' + sentences[1];
+        charCount += sentences[1].length + 1;
+        
+        // Add third sentence if available and total under 250 chars
+        if (sentences.length > 2 && charCount + sentences[2].length < 250) {
+          summary += ' ' + sentences[2];
+        } else if (charCount < 200) {
+          // Add ellipsis if we're not adding the third sentence but have more
+          summary += '...';
+        }
+      } else if (sentences.length > 1) {
+        // Add ellipsis if we're not adding the second sentence but have more
+        summary += '...';
+      }
+      
+      return summary;
+    }
+  }
+  
+  return 'Click to read the full article on Medium.';
 }
 
 // Function to parse date in various formats
