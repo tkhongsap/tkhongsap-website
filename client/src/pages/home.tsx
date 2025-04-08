@@ -37,10 +37,7 @@ export default function Home() {
                 AI Isn't an Option—It's the New Baseline
               </h1>
               <p className="text-xl md:text-2xl mb-10 text-[#444444]">
-                Welcome to a world where our tools themselves multiply the impact of every great idea.
-              </p>
-              <p className="text-xl md:text-2xl mb-10 text-[#444444]">
-                Think you've seen speed before? Watch what happens when the right AI supercharges even your boldest projects. If you're ready to outpace old expectations, you're in the right place.
+                We're entering an extraordinary era—one where we can create more than ever before. At every step, progress demands skill, judgment, and knowledge. Now, by embracing AI as an active collaborator rather than a mere consultant, we're revolutionizing the very notion of what's possible.
               </p>
               
               {/* Newsletter Signup */}
