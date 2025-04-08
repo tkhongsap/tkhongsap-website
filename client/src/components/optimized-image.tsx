@@ -82,9 +82,14 @@ export default function OptimizedImage({
   // Configuration for priority loading
   const loadingConfig = priority ? { loading: 'eager' as const, fetchpriority: 'high' as const } : { loading };
 
+  // Process image src path
+  // If src starts with '/', it's an absolute path and we need to keep it as is
+  // This is important for properly serving static assets from the server
+  const imgSrc = src;
+
   return (
     <img
-      src={src}
+      src={imgSrc}
       alt={alt}
       width={width}
       height={height}
@@ -94,8 +99,10 @@ export default function OptimizedImage({
       srcSet={generateSrcSet()}
       className={cn(className)}
       style={{ objectFit }}
+      crossOrigin="anonymous" // Allow cross-origin access
       // Prevent layout shift by setting default dimensions
       onError={(e) => {
+        console.error(`Failed to load image: ${imgSrc}`);
         const target = e.target as HTMLImageElement;
         target.onerror = null;
         target.src = 'data:image/svg+xml;charset=utf-8,%3Csvg height=\'150\' width=\'150\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Crect width=\'100%25\' height=\'100%25\' fill=\'%23f1f1f1\'/%3E%3C/svg%3E';

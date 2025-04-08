@@ -102,14 +102,15 @@ export default function About() {
                   <div className="bg-gray-100 rounded-lg p-6">
                     <div className="mb-6 flex justify-center">
                       <div className="w-48 h-48 rounded-full overflow-hidden flex items-center justify-center border-2 border-primary">
-                        <OptimizedImage 
-                          src="/assets/profile-picture.jpg" 
+                        <img 
+                          src="/profile-picture.jpg" 
                           alt="Ta Khongsap profile picture"
                           width={190}
                           height={190}
-                          objectFit="cover"
+                          style={{ objectFit: 'cover' }}
                           className="rounded-full"
-                          priority={true}
+                          loading="eager"
+                          fetchpriority="high"
                         />
                       </div>
                     </div>
