@@ -69,24 +69,15 @@ export default function About() {
                 <div className="md:w-1/3">
                   <div className="bg-gray-100 rounded-lg p-6">
                     <div className="mb-6 flex justify-center">
-                      <div className="w-48 h-48 relative">
-                        {/* Blue animated border circle effect */}
-                        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-blue-600 animate-pulse" style={{ padding: '6px' }}>
-                          <div className="absolute top-0 left-0 w-full h-full rounded-full bg-gradient-to-br from-blue-500 to-blue-300 opacity-70 animate-spin-slow"></div>
-                        </div>
-                        {/* Inner white spacing */}
-                        <div className="absolute inset-0 rounded-full" style={{ margin: '6px', background: 'white' }}></div>
-                        {/* Profile image */}
-                        <div className="absolute inset-0 rounded-full overflow-hidden" style={{ margin: '8px' }}>
-                          <OptimizedImage 
-                            src="/assets/profile-picture.jpg" 
-                            alt="Totrakool Khongsap profile picture"
-                            width={190}
-                            height={190}
-                            objectFit="cover"
-                            className="rounded-full"
-                          />
-                        </div>
+                      <div className="w-48 h-48 rounded-full overflow-hidden flex items-center justify-center border-2 border-primary">
+                        <OptimizedImage 
+                          src="/assets/profile-picture.jpg" 
+                          alt="Totrakool Khongsap profile picture"
+                          width={190}
+                          height={190}
+                          objectFit="cover"
+                          className="rounded-full"
+                        />
                       </div>
                     </div>
                     
