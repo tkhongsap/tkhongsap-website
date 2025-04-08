@@ -10,7 +10,8 @@ const navLinks = [
   // Portfolio hidden temporarily - under construction
   // { name: "Portfolio", path: "/portfolio" },
   { name: "Writing", path: "/writing" },
-  { name: "Contact", path: "/contact" },
+  // Contact hidden temporarily during initial launch
+  // { name: "Contact", path: "/contact" },
 ];
 
 export default function Navbar() {

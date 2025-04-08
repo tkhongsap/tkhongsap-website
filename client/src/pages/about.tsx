@@ -85,12 +85,10 @@ export default function About() {
                     </p>
                   </div>
 
-                  {/* Navigation buttons without the heading */}
+                  {/* Navigation buttons section - currently empty */}
                   <div className="mt-10 mb-8">
                     <div className="flex flex-wrap gap-4">
-                      <Button className="flex items-center" onClick={() => window.location.href = '/contact'}>
-                        Contact Me <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
+                      {/* Contact button removed temporarily during initial launch */}
                       {/* Portfolio button removed temporarily - under construction */}
                     </div>
                   </div>
