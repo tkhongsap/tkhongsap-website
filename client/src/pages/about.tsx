@@ -71,7 +71,7 @@ export default function About() {
                     <div className="mb-6 flex justify-center">
                       <div className="w-48 h-48 rounded-full overflow-hidden flex items-center justify-center border-2 border-primary">
                         <OptimizedImage 
-                          src="/assets/profile-picture.png" 
+                          src="/assets/profile-picture.jpg" 
                           alt="Totrakool Khongsap profile picture"
                           width={190}
                           height={190}
