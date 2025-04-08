@@ -19,11 +19,11 @@ export default function ArticleCard({ article, className, onCategoryClick }: Art
       "dark:border-gray-700 bg-white dark:bg-gray-800",
       className
     )}>
-      {/* Card Layout */}
-      <div className="flex flex-col h-full">
-        {/* Featured Image */}
-        {article.imageUrl && (
-          <div className="w-full h-48 overflow-hidden">
+      {/* Card Layout - Horizontal with image on the left */}
+      <div className="flex flex-col md:flex-row h-full">
+        {/* Featured Image - Left side on medium+ screens */}
+        {article.imageUrl ? (
+          <div className="w-full md:w-1/3 h-48 md:h-auto overflow-hidden">
             <OptimizedImage 
               src={article.imageUrl} 
               alt={`Featured image for article: ${article.title}`}
@@ -34,10 +34,14 @@ export default function ArticleCard({ article, className, onCategoryClick }: Art
               objectFit="cover"
             />
           </div>
+        ) : (
+          <div className="hidden md:block md:w-1/3 bg-gray-100 dark:bg-gray-700">
+            {/* Placeholder if no image */}
+          </div>
         )}
         
-        {/* Content */}
-        <div className="flex flex-col flex-grow p-6">
+        {/* Content - Right side on medium+ screens */}
+        <div className="flex flex-col flex-grow p-6 md:w-2/3">
           {/* Metadata Row */}
           <div className="flex flex-wrap items-center gap-3 mb-3">
             <Badge variant="outline" className="text-xs font-medium">
