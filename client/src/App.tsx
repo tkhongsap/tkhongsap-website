@@ -12,6 +12,7 @@ import Portfolio from "@/pages/portfolio";
 import Writing from "@/pages/writing";
 import Contact from "@/pages/contact";
 import GoogleAnalytics from "@/components/google-analytics";
+import SubscriptionMessage from "@/components/subscription-message";
 
 function Router() {
   // Track page changes for analytics
@@ -50,6 +51,7 @@ function App() {
       </div>
       {/* Add Google Analytics */}
       <GoogleAnalytics />
+      <SubscriptionMessage />
       <Toaster />
     </QueryClientProvider>
   );

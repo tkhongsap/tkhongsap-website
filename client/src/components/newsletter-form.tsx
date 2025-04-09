@@ -53,6 +53,15 @@ export default function NewsletterForm({
         description: result.message || "Thanks for subscribing to the newsletter!",
       });
       
+      // Show resend option if user needs to confirm
+      if (result.message?.includes("Please check your email to confirm")) {
+        // Track the email to offer resend option
+        localStorage.setItem("pendingConfirmationEmail", data.email);
+        
+        // We could show a UI element here offering to resend the confirmation email
+        // but for now we'll just keep it simple
+      }
+      
       form.reset();
     } catch (error) {
       toast({
@@ -62,6 +71,25 @@ export default function NewsletterForm({
       });
     } finally {
       setIsSubmitting(false);
+    }
+  }
+  
+  // Function to resend confirmation email
+  async function resendConfirmation(email: string) {
+    try {
+      const response = await apiRequest("POST", "/api/newsletter/resend-confirmation", { email });
+      const result = await response.json();
+      
+      toast({
+        title: "Confirmation Email Sent",
+        description: result.message || "Please check your inbox for the confirmation email.",
+      });
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Failed to resend confirmation",
+        description: error instanceof Error ? error.message : "An unexpected error occurred",
+      });
     }
   }
 
