@@ -1,0 +1,20 @@
+[build]
+  command = "npm run build"
+  publish = "public"
+
+# SPA Routing Configuration
+[[redirects]]
+  from = "/api/*"
+  to = "/api/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Cache Control Headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "no-store"
