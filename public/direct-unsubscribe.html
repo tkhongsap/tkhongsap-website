@@ -64,22 +64,27 @@
 <body>
     <div class="card">
         <h1>Newsletter Unsubscribe</h1>
-        <p>Use this page to manually unsubscribe from the newsletter.</p>
+        <p>Your unsubscribe request is being processed automatically...</p>
         
         <div>
             <label for="token">Unsubscribe Token:</label>
             <input type="text" id="token" style="width: 100%; padding: 8px; margin-top: 5px; border-radius: 4px; border: 1px solid #ddd;" 
-                   placeholder="Paste your token here">
+                   placeholder="Token is automatically extracted from the URL">
         </div>
         
         <button id="unsubscribe-btn" class="button">Unsubscribe</button>
         
-        <div id="result" class="result"></div>
+        <div id="result" class="result">
+            <div class="loader" style="text-align: center; margin: 20px 0;">
+                <div style="border: 4px solid #f3f3f3; border-top: 4px solid #FF4D4D; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; display: inline-block;"></div>
+                <p>Processing your unsubscribe request...</p>
+            </div>
+        </div>
         
         <div>
-            <h3>How to use this page:</h3>
+            <h3>Manual unsubscribe (if needed):</h3>
             <ol>
-                <li>Check your email with the unsubscribe link</li>
+                <li>If automatic unsubscribe doesn't work, check your email with the unsubscribe link</li>
                 <li>Copy the token (the long string after "token=" in the URL)</li>
                 <li>Paste it in the field above</li>
                 <li>Click the "Unsubscribe" button</li>
@@ -87,62 +92,94 @@
         </div>
     </div>
     
+    <style>
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    
     <script>
+        // Function to process unsubscribe request
+        async function processUnsubscribe(token) {
+            const resultDiv = document.getElementById('result');
+            
+            if (!token) {
+                resultDiv.className = 'result error';
+                resultDiv.style.display = 'block';
+                resultDiv.innerHTML = '<strong>Error:</strong> No unsubscribe token provided.';
+                return;
+            }
+            
+            try {
+                const apiUrl = `/api/newsletter/unsubscribe?token=${encodeURIComponent(token)}`;
+                console.log('Calling API:', apiUrl);
+                
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+                
+                resultDiv.style.display = 'block';
+                
+                if (data.success) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `
+                        <strong>Success!</strong> 
+                        <p>${data.message || 'You have been successfully unsubscribed from the newsletter.'}</p>
+                        <p>You can now close this page.</p>
+                    `;
+                    
+                    // Update the UI to show unsubscribed state
+                    document.querySelector('h1').textContent = 'Successfully Unsubscribed';
+                    document.querySelector('.card > p').textContent = 'You have been successfully unsubscribed from the newsletter.';
+                    document.getElementById('unsubscribe-btn').style.display = 'none';
+                    document.getElementById('token').readOnly = true;
+                    document.querySelector('.card > div:last-child').style.display = 'none'; // Hide the instructions
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.innerHTML = `
+                        <strong>Error:</strong> 
+                        <p>${data.message || 'Failed to process your unsubscribe request.'}</p>
+                    `;
+                }
+                
+                console.log('API Response:', data);
+                
+            } catch (error) {
+                console.error('Error unsubscribing:', error);
+                resultDiv.className = 'result error';
+                resultDiv.style.display = 'block';
+                resultDiv.innerHTML = `
+                    <strong>Error:</strong> 
+                    <p>An error occurred while trying to unsubscribe you from the newsletter.</p>
+                    <pre>${error.message}</pre>
+                `;
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             // Try to get token from URL
             const urlParams = new URLSearchParams(window.location.search);
             const tokenFromUrl = urlParams.get('token');
             
-            if (tokenFromUrl) {
-                document.getElementById('token').value = tokenFromUrl;
+            // Hide the loader initially if no token
+            if (!tokenFromUrl) {
+                document.getElementById('result').style.display = 'none';
             }
             
-            document.getElementById('unsubscribe-btn').addEventListener('click', async function() {
+            if (tokenFromUrl) {
+                document.getElementById('token').value = tokenFromUrl;
+                
+                // Automatically process the unsubscribe request if token is in URL
+                processUnsubscribe(tokenFromUrl);
+            } else {
+                // No token in URL, show empty form for manual entry
+                document.querySelector('.card > p').textContent = 'Please enter your unsubscribe token below.';
+            }
+            
+            // Still allow manual unsubscribe as a fallback
+            document.getElementById('unsubscribe-btn').addEventListener('click', function() {
                 const token = document.getElementById('token').value.trim();
-                const resultDiv = document.getElementById('result');
-                
-                if (!token) {
-                    resultDiv.className = 'result error';
-                    resultDiv.style.display = 'block';
-                    resultDiv.innerHTML = '<strong>Error:</strong> Please enter an unsubscribe token.';
-                    return;
-                }
-                
-                try {
-                    const apiUrl = `/api/newsletter/unsubscribe?token=${encodeURIComponent(token)}`;
-                    console.log('Calling API:', apiUrl);
-                    
-                    const response = await fetch(apiUrl);
-                    const data = await response.json();
-                    
-                    resultDiv.style.display = 'block';
-                    
-                    if (data.success) {
-                        resultDiv.className = 'result success';
-                        resultDiv.innerHTML = `
-                            <strong>Success!</strong> 
-                            <p>${data.message || 'You have been successfully unsubscribed from the newsletter.'}</p>
-                        `;
-                    } else {
-                        resultDiv.className = 'result error';
-                        resultDiv.innerHTML = `
-                            <strong>Error:</strong> 
-                            <p>${data.message || 'Failed to process your unsubscribe request.'}</p>
-                        `;
-                    }
-                    
-                    console.log('API Response:', data);
-                    
-                } catch (error) {
-                    console.error('Error unsubscribing:', error);
-                    resultDiv.className = 'result error';
-                    resultDiv.style.display = 'block';
-                    resultDiv.innerHTML = `
-                        <strong>Error:</strong> 
-                        <p>An error occurred while trying to unsubscribe you from the newsletter.</p>
-                        <pre>${error.message}</pre>
-                    `;
-                }
+                processUnsubscribe(token);
             });
         });
     </script>
