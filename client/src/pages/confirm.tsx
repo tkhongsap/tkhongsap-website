@@ -6,6 +6,8 @@ import { Loader2, CheckCircle2, XCircle, ExternalLink } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { useToast } from "@/hooks/use-toast";
+import SEO from "@/components/seo";
+import SchemaMarkup from "@/components/schema-markup";
 
 /**
  * Confirmation Page
@@ -20,6 +22,13 @@ export default function ConfirmPage() {
   const [debugInfo, setDebugInfo] = useState<string>('');
   const { toast } = useToast();
   const isDevelopment = process.env.NODE_ENV !== 'production';
+  
+  // SEO data for confirmation page
+  const confirmSchemaData = {
+    url: 'https://tkhongsap.io/confirm',
+    name: 'Confirm Newsletter Subscription | Totrakool Khongsap',
+    description: 'Confirm your subscription to receive updates on AI trends, productivity tips, and coding insights from Totrakool Khongsap.'
+  };
   
   // Extract token from URL on component mount
   useEffect(() => {
@@ -133,6 +142,14 @@ export default function ConfirmPage() {
   if (token === null) {
     return (
       <div className="container max-w-md py-16">
+        <SEO 
+          title="Invalid Confirmation Link | Newsletter Subscription"
+          description="Unable to confirm your newsletter subscription due to an invalid or missing token. Please check your email for the correct confirmation link."
+          canonicalUrl="/confirm"
+          keywords="newsletter confirmation, subscription error, invalid token"
+          pageUrl="/confirm"
+        />
+        <SchemaMarkup type="website" data={confirmSchemaData} />
         <Card>
           <CardHeader>
             <CardTitle>Invalid Confirmation</CardTitle>
@@ -201,6 +218,14 @@ export default function ConfirmPage() {
   if (isLoading) {
     return (
       <div className="container max-w-md py-16">
+        <SEO 
+          title="Confirming Your Subscription | Newsletter"
+          description="Please wait while we confirm your newsletter subscription to receive updates on AI trends and insights."
+          canonicalUrl="/confirm"
+          keywords="newsletter confirmation, subscription confirmation, confirm email"
+          pageUrl="/confirm"
+        />
+        <SchemaMarkup type="website" data={confirmSchemaData} />
         <Card>
           <CardHeader>
             <CardTitle>Confirming Subscription</CardTitle>
@@ -247,6 +272,14 @@ export default function ConfirmPage() {
       
     return (
       <div className="container max-w-md py-16">
+        <SEO 
+          title="Confirmation Failed | Newsletter Subscription"
+          description="We encountered an error while trying to confirm your newsletter subscription. Please try again or contact support."
+          canonicalUrl="/confirm"
+          keywords="newsletter error, subscription failed, confirmation problem"
+          pageUrl="/confirm"
+        />
+        <SchemaMarkup type="website" data={confirmSchemaData} />
         <Card>
           <CardHeader>
             <CardTitle>Confirmation Failed</CardTitle>
@@ -293,6 +326,14 @@ export default function ConfirmPage() {
   // Show success state
   return (
     <div className="container max-w-md py-16">
+      <SEO 
+        title="Subscription Confirmed | Newsletter Success"
+        description="Your newsletter subscription has been successfully confirmed. You'll now receive updates on AI trends, productivity tips, and coding insights."
+        canonicalUrl="/confirm"
+        keywords="newsletter confirmed, subscription success, email updates"
+        pageUrl="/confirm"
+      />
+      <SchemaMarkup type="website" data={confirmSchemaData} />
       <Card>
         <CardHeader>
           <CardTitle>Subscription Confirmed!</CardTitle>

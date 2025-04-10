@@ -6,6 +6,8 @@ import { Loader2, CheckCircle2, XCircle } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { useToast } from "@/hooks/use-toast";
+import SEO from "@/components/seo";
+import SchemaMarkup from "@/components/schema-markup";
 
 /**
  * Unsubscribe Page
@@ -20,6 +22,13 @@ export default function UnsubscribePage() {
   const [debugInfo, setDebugInfo] = useState<string>('');
   const { toast } = useToast();
   const isDevelopment = process.env.NODE_ENV !== 'production';
+  
+  // SEO data for unsubscribe page
+  const unsubscribeSchemaData = {
+    url: 'https://tkhongsap.io/unsubscribe',
+    name: 'Unsubscribe from Newsletter | Totrakool Khongsap',
+    description: 'Manage your newsletter preferences and unsubscribe from updates on AI trends, productivity tips, and coding insights.'
+  };
   
   // Extract token from URL on component mount
   useEffect(() => {
@@ -96,6 +105,14 @@ export default function UnsubscribePage() {
   if (token === null) {
     return (
       <div className="container max-w-md py-16">
+        <SEO 
+          title="Invalid Unsubscribe Link | Newsletter Management"
+          description="Unable to process your unsubscribe request due to an invalid or missing token. Please check your email for the correct unsubscribe link."
+          canonicalUrl="/unsubscribe"
+          keywords="newsletter unsubscribe, manage subscription, invalid unsubscribe link"
+          pageUrl="/unsubscribe"
+        />
+        <SchemaMarkup type="website" data={unsubscribeSchemaData} />
         <Card>
           <CardHeader>
             <CardTitle>Invalid Unsubscribe Link</CardTitle>
@@ -156,6 +173,14 @@ export default function UnsubscribePage() {
   if (isLoading) {
     return (
       <div className="container max-w-md py-16">
+        <SEO 
+          title="Processing Unsubscribe Request | Newsletter Management"
+          description="Please wait while we process your request to unsubscribe from the newsletter."
+          canonicalUrl="/unsubscribe"
+          keywords="newsletter unsubscribe, cancel subscription, email preferences"
+          pageUrl="/unsubscribe"
+        />
+        <SchemaMarkup type="website" data={unsubscribeSchemaData} />
         <Card>
           <CardHeader>
             <CardTitle>Processing Unsubscribe Request</CardTitle>
@@ -201,6 +226,14 @@ export default function UnsubscribePage() {
       
     return (
       <div className="container max-w-md py-16">
+        <SEO 
+          title="Unsubscribe Failed | Newsletter Management"
+          description="We encountered an error while processing your unsubscribe request. Please try again or contact support."
+          canonicalUrl="/unsubscribe"
+          keywords="unsubscribe error, newsletter problem, subscription management"
+          pageUrl="/unsubscribe"
+        />
+        <SchemaMarkup type="website" data={unsubscribeSchemaData} />
         <Card>
           <CardHeader>
             <CardTitle>Unsubscribe Failed</CardTitle>
@@ -246,6 +279,14 @@ export default function UnsubscribePage() {
   // Show success state
   return (
     <div className="container max-w-md py-16">
+      <SEO 
+        title="Successfully Unsubscribed | Newsletter Management"
+        description="You have been successfully unsubscribed from the newsletter. You will no longer receive updates from us."
+        canonicalUrl="/unsubscribe"
+        keywords="unsubscribe successful, newsletter cancelled, email preferences updated"
+        pageUrl="/unsubscribe"
+      />
+      <SchemaMarkup type="website" data={unsubscribeSchemaData} />
       <Card>
         <CardHeader>
           <CardTitle>Successfully Unsubscribed</CardTitle>
