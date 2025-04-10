@@ -79,7 +79,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
           await storage.createConfirmationToken(existingSubscriber.id, token, tokenExpiration);
           
           // Send confirmation email
-          const confirmationUrl = `${process.env.SITE_URL || `https://${req.headers.host}`}/api/newsletter/confirm?token=${token}`;
+          // Use the full protocol and host for the confirmation URL
+          const protocol = req.protocol || 'http';
+          const confirmationUrl = `${protocol}://${req.headers.host}/api/newsletter/confirm?token=${token}`;
+          console.log("Generated confirmation URL:", confirmationUrl);
           await emailService.sendConfirmationEmail(updatedSubscriber!, confirmationUrl);
           
           return res.status(200).json({ 
@@ -119,7 +122,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
       await storage.createConfirmationToken(newSubscriber.id, token, tokenExpiration);
       
       // Send confirmation email
-      const confirmationUrl = `${process.env.SITE_URL || `https://${req.headers.host}`}/api/newsletter/confirm?token=${token}`;
+      // Use the full protocol and host for the confirmation URL
+      const protocol = req.protocol || 'http';
+      const confirmationUrl = `${protocol}://${req.headers.host}/api/newsletter/confirm?token=${token}`;
+      console.log("Generated confirmation URL:", confirmationUrl);
       await emailService.sendConfirmationEmail(newSubscriber, confirmationUrl);
       
       res.status(201).json({ 
@@ -292,7 +298,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
       await storage.createConfirmationToken(subscriber.id, token, tokenExpiration);
       
       // Send confirmation email
-      const confirmationUrl = `${process.env.SITE_URL || `https://${req.headers.host}`}/api/newsletter/confirm?token=${token}`;
+      // Use the full protocol and host for the confirmation URL
+      const protocol = req.protocol || 'http';
+      const confirmationUrl = `${protocol}://${req.headers.host}/api/newsletter/confirm?token=${token}`;
+      console.log("Generated confirmation URL:", confirmationUrl);
       await emailService.sendConfirmationEmail(subscriber, confirmationUrl);
       
       res.status(200).json({

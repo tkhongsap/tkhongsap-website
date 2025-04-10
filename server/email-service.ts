@@ -267,7 +267,13 @@ export class SendGridEmailService implements IEmailService {
         subject: options.subject,
         text: options.text || '',
         html: options.html,
-        replyTo
+        replyTo,
+        trackingSettings: {
+          clickTracking: {
+            enable: false,
+            enableText: false
+          }
+        }
       };
       
       await sgMail.send(msg);
