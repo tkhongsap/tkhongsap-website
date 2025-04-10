@@ -11,7 +11,8 @@ import About from "@/pages/about";
 import Portfolio from "@/pages/portfolio";
 import Writing from "@/pages/writing";
 import Contact from "@/pages/contact";
-import ConfirmPage from "@/pages/ConfirmPage";
+import ConfirmPage from "@/pages/confirm";
+import UnsubscribePage from "@/pages/unsubscribe";
 import GoogleAnalytics from "@/components/google-analytics";
 import SubscriptionMessage from "@/components/subscription-message";
 
@@ -36,6 +37,7 @@ function Router() {
       <Route path="/writing" component={Writing} />
       <Route path="/contact" component={Contact} />
       <Route path="/confirm" component={ConfirmPage} />
+      <Route path="/unsubscribe" component={UnsubscribePage} />
       <Route component={NotFound} />
     </Switch>
   );
