@@ -135,11 +135,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       let confirmationUrl;
       if (isProduction) {
-        // In production, point to the frontend confirmation page
-        confirmationUrl = `${process.env.SITE_URL}/confirm?token=${token}`;
+        // In production, point to the direct-confirm.html page instead of SPA route
+        confirmationUrl = `${process.env.SITE_URL}/direct-confirm.html?token=${token}`;
       } else {
-        // In development, use localhost with the frontend confirmation page
-        confirmationUrl = `${req.protocol || 'http'}://${req.headers.host}/confirm?token=${token}`;
+        // In development, use localhost with direct-confirm.html
+        confirmationUrl = `${req.protocol || 'http'}://${req.headers.host}/direct-confirm.html?token=${token}`;
       }
       console.log("Generated confirmation URL:", confirmationUrl);
       await emailService.sendConfirmationEmail(newSubscriber, confirmationUrl);
@@ -350,11 +350,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       let confirmationUrl;
       if (isProduction) {
-        // In production, point to the frontend confirmation page
-        confirmationUrl = `${process.env.SITE_URL}/confirm?token=${token}`;
+        // In production, point to the direct-confirm.html page instead of SPA route
+        confirmationUrl = `${process.env.SITE_URL}/direct-confirm.html?token=${token}`;
       } else {
-        // In development, use localhost with the frontend confirmation page
-        confirmationUrl = `${req.protocol || 'http'}://${req.headers.host}/confirm?token=${token}`;
+        // In development, use localhost with direct-confirm.html
+        confirmationUrl = `${req.protocol || 'http'}://${req.headers.host}/direct-confirm.html?token=${token}`;
       }
       console.log("Generated confirmation URL:", confirmationUrl);
       await emailService.sendConfirmationEmail(subscriber, confirmationUrl);
