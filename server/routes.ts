@@ -79,14 +79,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
           await storage.createConfirmationToken(existingSubscriber.id, token, tokenExpiration);
           
           // Send confirmation email
-          // During testing, use the local API endpoint directly
-          const apiUrl = `${req.protocol || 'http'}://${req.headers.host}/api/newsletter/confirm?token=${token}`;
+          // Determine if we're in production (has SITE_URL set) or development
+          const isProduction = !!process.env.SITE_URL;
           
-          // In production, we would point to a frontend page that handles the confirmation
-          // const confirmationUrl = `${process.env.SITE_URL}/confirm?token=${token}`;
-          
-          // For testing purposes, use the direct API endpoint
-          const confirmationUrl = apiUrl;
+          let confirmationUrl;
+          if (isProduction) {
+            // In production, point to the frontend confirmation page
+            confirmationUrl = `${process.env.SITE_URL}/confirm?token=${token}`;
+          } else {
+            // In development, use localhost with the frontend confirmation page
+            confirmationUrl = `${req.protocol || 'http'}://${req.headers.host}/confirm?token=${token}`;
+          }
           console.log("Generated confirmation URL:", confirmationUrl);
           await emailService.sendConfirmationEmail(updatedSubscriber!, confirmationUrl);
           
@@ -127,14 +130,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
       await storage.createConfirmationToken(newSubscriber.id, token, tokenExpiration);
       
       // Send confirmation email
-      // During testing, use the local API endpoint directly
-      const apiUrl = `${req.protocol || 'http'}://${req.headers.host}/api/newsletter/confirm?token=${token}`;
+      // Determine if we're in production (has SITE_URL set) or development
+      const isProduction = !!process.env.SITE_URL;
       
-      // In production, we would point to a frontend page that handles the confirmation
-      // const confirmationUrl = `${process.env.SITE_URL}/confirm?token=${token}`;
-      
-      // For testing purposes, use the direct API endpoint
-      const confirmationUrl = apiUrl;
+      let confirmationUrl;
+      if (isProduction) {
+        // In production, point to the frontend confirmation page
+        confirmationUrl = `${process.env.SITE_URL}/confirm?token=${token}`;
+      } else {
+        // In development, use localhost with the frontend confirmation page
+        confirmationUrl = `${req.protocol || 'http'}://${req.headers.host}/confirm?token=${token}`;
+      }
       console.log("Generated confirmation URL:", confirmationUrl);
       await emailService.sendConfirmationEmail(newSubscriber, confirmationUrl);
       
@@ -257,9 +263,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Send welcome email
       await emailService.sendWelcomeEmail(confirmedSubscriber!);
       
-      // Redirect to confirmation success page
-      // (in a real app, we'd have a nice confirmation page)
-      res.redirect(`/?confirmed=true`);
+      // Return success JSON instead of redirecting
+      // The frontend confirmation page will handle the response
+      res.status(200).json({
+        success: true,
+        message: "Your subscription has been confirmed successfully!"
+      });
       
     } catch (error) {
       console.error("Error in confirm subscription endpoint:", error);
@@ -308,14 +317,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
       await storage.createConfirmationToken(subscriber.id, token, tokenExpiration);
       
       // Send confirmation email
-      // During testing, use the local API endpoint directly
-      const apiUrl = `${req.protocol || 'http'}://${req.headers.host}/api/newsletter/confirm?token=${token}`;
+      // Determine if we're in production (has SITE_URL set) or development
+      const isProduction = !!process.env.SITE_URL;
       
-      // In production, we would point to a frontend page that handles the confirmation
-      // const confirmationUrl = `${process.env.SITE_URL}/confirm?token=${token}`;
-      
-      // For testing purposes, use the direct API endpoint
-      const confirmationUrl = apiUrl;
+      let confirmationUrl;
+      if (isProduction) {
+        // In production, point to the frontend confirmation page
+        confirmationUrl = `${process.env.SITE_URL}/confirm?token=${token}`;
+      } else {
+        // In development, use localhost with the frontend confirmation page
+        confirmationUrl = `${req.protocol || 'http'}://${req.headers.host}/confirm?token=${token}`;
+      }
       console.log("Generated confirmation URL:", confirmationUrl);
       await emailService.sendConfirmationEmail(subscriber, confirmationUrl);
       
@@ -358,8 +370,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Update subscriber status to unsubscribed
       await storage.updateSubscriberStatus(subscriber.id, "unsubscribed");
       
-      // Redirect to unsubscribe confirmation page
-      res.redirect(`/?unsubscribed=true`);
+      // Return JSON response instead of redirecting
+      res.status(200).json({
+        success: true,
+        message: "You have been successfully unsubscribed from our newsletter."
+      });
       
     } catch (error) {
       console.error("Error in unsubscribe endpoint:", error);
