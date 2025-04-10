@@ -79,9 +79,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
           await storage.createConfirmationToken(existingSubscriber.id, token, tokenExpiration);
           
           // Send confirmation email
-          // Use the full protocol and host for the confirmation URL
-          const protocol = req.protocol || 'http';
-          const confirmationUrl = `${protocol}://${req.headers.host}/api/newsletter/confirm?token=${token}`;
+          // Use the SITE_URL environment variable for production URLs, fallback to request URL for development
+          const siteUrl = process.env.SITE_URL || `${req.protocol || 'http'}://${req.headers.host}`;
+          const confirmationUrl = `${siteUrl}/api/newsletter/confirm?token=${token}`;
           console.log("Generated confirmation URL:", confirmationUrl);
           await emailService.sendConfirmationEmail(updatedSubscriber!, confirmationUrl);
           
@@ -122,9 +122,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       await storage.createConfirmationToken(newSubscriber.id, token, tokenExpiration);
       
       // Send confirmation email
-      // Use the full protocol and host for the confirmation URL
-      const protocol = req.protocol || 'http';
-      const confirmationUrl = `${protocol}://${req.headers.host}/api/newsletter/confirm?token=${token}`;
+      // Use the SITE_URL environment variable for production URLs, fallback to request URL for development
+      const siteUrl = process.env.SITE_URL || `${req.protocol || 'http'}://${req.headers.host}`;
+      const confirmationUrl = `${siteUrl}/api/newsletter/confirm?token=${token}`;
       console.log("Generated confirmation URL:", confirmationUrl);
       await emailService.sendConfirmationEmail(newSubscriber, confirmationUrl);
       
@@ -298,9 +298,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       await storage.createConfirmationToken(subscriber.id, token, tokenExpiration);
       
       // Send confirmation email
-      // Use the full protocol and host for the confirmation URL
-      const protocol = req.protocol || 'http';
-      const confirmationUrl = `${protocol}://${req.headers.host}/api/newsletter/confirm?token=${token}`;
+      // Use the SITE_URL environment variable for production URLs, fallback to request URL for development
+      const siteUrl = process.env.SITE_URL || `${req.protocol || 'http'}://${req.headers.host}`;
+      const confirmationUrl = `${siteUrl}/api/newsletter/confirm?token=${token}`;
       console.log("Generated confirmation URL:", confirmationUrl);
       await emailService.sendConfirmationEmail(subscriber, confirmationUrl);
       
