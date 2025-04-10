@@ -308,9 +308,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
       await storage.createConfirmationToken(subscriber.id, token, tokenExpiration);
       
       // Send confirmation email
-      // Use the SITE_URL environment variable for production URLs, fallback to request URL for development
-      const siteUrl = process.env.SITE_URL || `${req.protocol || 'http'}://${req.headers.host}`;
-      const confirmationUrl = `${siteUrl}/api/newsletter/confirm?token=${token}`;
+      // During testing, use the local API endpoint directly
+      const apiUrl = `${req.protocol || 'http'}://${req.headers.host}/api/newsletter/confirm?token=${token}`;
+      
+      // In production, we would point to a frontend page that handles the confirmation
+      // const confirmationUrl = `${process.env.SITE_URL}/confirm?token=${token}`;
+      
+      // For testing purposes, use the direct API endpoint
+      const confirmationUrl = apiUrl;
       console.log("Generated confirmation URL:", confirmationUrl);
       await emailService.sendConfirmationEmail(subscriber, confirmationUrl);
       
