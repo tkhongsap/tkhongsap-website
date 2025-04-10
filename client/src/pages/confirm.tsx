@@ -19,6 +19,7 @@ export default function ConfirmPage() {
   const [token, setToken] = useState<string | null>(null);
   const [debugInfo, setDebugInfo] = useState<string>('');
   const { toast } = useToast();
+  const isDevelopment = process.env.NODE_ENV !== 'production';
   
   // Extract token from URL on component mount
   useEffect(() => {
@@ -26,29 +27,31 @@ export default function ConfirmPage() {
     const tokenParam = params.get('token');
     setToken(tokenParam);
     
-    // Add debug information
-    setDebugInfo(`
-      Page loaded at: ${new Date().toISOString()}
-      URL: ${window.location.href}
-      Token: ${tokenParam}
-      Hostname: ${window.location.hostname}
-      Origin: ${window.location.origin}
-      API URL: ${window.location.hostname === 'localhost' 
-        ? `/api/newsletter/confirm?token=${tokenParam}`
-        : `${window.location.origin}/api/newsletter/confirm?token=${tokenParam}`}
-    `);
-    
-    // Log for debugging
-    console.log('Confirmation page loaded', {
-      url: window.location.href,
-      token: tokenParam,
-      hostname: window.location.hostname,
-      origin: window.location.origin,
-      apiUrl: window.location.hostname === 'localhost' 
-        ? `/api/newsletter/confirm?token=${tokenParam}`
-        : `${window.location.origin}/api/newsletter/confirm?token=${tokenParam}`
-    });
-  }, []);
+    // Add debug information only in development
+    if (isDevelopment) {
+      setDebugInfo(`
+        Page loaded at: ${new Date().toISOString()}
+        URL: ${window.location.href}
+        Token: ${tokenParam}
+        Hostname: ${window.location.hostname}
+        Origin: ${window.location.origin}
+        API URL: ${window.location.hostname === 'localhost' 
+          ? `/api/newsletter/confirm?token=${tokenParam}`
+          : `${window.location.origin}/api/newsletter/confirm?token=${tokenParam}`}
+      `);
+      
+      // Log for debugging
+      console.log('Confirmation page loaded', {
+        url: window.location.href,
+        token: tokenParam,
+        hostname: window.location.hostname,
+        origin: window.location.origin,
+        apiUrl: window.location.hostname === 'localhost' 
+          ? `/api/newsletter/confirm?token=${tokenParam}`
+          : `${window.location.origin}/api/newsletter/confirm?token=${tokenParam}`
+      });
+    }
+  }, [isDevelopment]);
   
   // Function to manually confirm subscription
   const manuallyConfirm = async () => {
@@ -58,8 +61,10 @@ export default function ConfirmPage() {
       // Construct the direct API URL with full domain
       const apiUrl = `${window.location.origin}/api/newsletter/confirm?token=${token}`;
       
-      console.log('Manually confirming with URL:', apiUrl);
-      setDebugInfo(prev => prev + `\nAttempting manual confirmation at: ${new Date().toISOString()}\nAPI URL: ${apiUrl}`);
+      if (isDevelopment) {
+        console.log('Manually confirming with URL:', apiUrl);
+        setDebugInfo(prev => prev + `\nAttempting manual confirmation at: ${new Date().toISOString()}\nAPI URL: ${apiUrl}`);
+      }
       
       // Make the fetch request
       const response = await fetch(apiUrl, {
@@ -75,12 +80,14 @@ export default function ConfirmPage() {
       try {
         result = await response.json();
       } catch (jsonError) {
-        console.error('Failed to parse JSON response:', jsonError);
-        setDebugInfo(prev => prev + `\nError parsing JSON response: ${jsonError instanceof Error ? jsonError.message : String(jsonError)}`);
-        
-        // Fallback to text response if JSON parsing fails
-        const textResponse = await response.text();
-        setDebugInfo(prev => prev + `\nText response: ${textResponse}`);
+        if (isDevelopment) {
+          console.error('Failed to parse JSON response:', jsonError);
+          setDebugInfo(prev => prev + `\nError parsing JSON response: ${jsonError instanceof Error ? jsonError.message : String(jsonError)}`);
+          
+          // Fallback to text response if JSON parsing fails
+          const textResponse = await response.text();
+          setDebugInfo(prev => prev + `\nText response: ${textResponse}`);
+        }
         
         result = { 
           success: response.ok, 
@@ -88,8 +95,10 @@ export default function ConfirmPage() {
         };
       }
       
-      console.log('Manual confirmation result:', result);
-      setDebugInfo(prev => prev + `\nAPI Response: ${JSON.stringify(result)}`);
+      if (isDevelopment) {
+        console.log('Manual confirmation result:', result);
+        setDebugInfo(prev => prev + `\nAPI Response: ${JSON.stringify(result)}`);
+      }
       
       // Show toast with result
       if (result.success) {
@@ -107,8 +116,10 @@ export default function ConfirmPage() {
         });
       }
     } catch (error) {
-      console.error('Manual confirmation error:', error);
-      setDebugInfo(prev => prev + `\nError: ${error instanceof Error ? error.message : String(error)}`);
+      if (isDevelopment) {
+        console.error('Manual confirmation error:', error);
+        setDebugInfo(prev => prev + `\nError: ${error instanceof Error ? error.message : String(error)}`);
+      }
       
       toast({
         variant: "destructive",
@@ -153,15 +164,19 @@ export default function ConfirmPage() {
         ? `/api/newsletter/confirm?token=${token}`
         : `${window.location.origin}/api/newsletter/confirm?token=${token}`;
       
-      console.log('Automatic confirmation attempt with URL:', apiUrl);
-      setDebugInfo(prev => prev + `\nAutomatic confirmation attempt at: ${new Date().toISOString()}\nAPI URL: ${apiUrl}`);
+      if (isDevelopment) {
+        console.log('Automatic confirmation attempt with URL:', apiUrl);
+        setDebugInfo(prev => prev + `\nAutomatic confirmation attempt at: ${new Date().toISOString()}\nAPI URL: ${apiUrl}`);
+      }
         
       try {
         const response = await fetch(apiUrl);
         const responseJson = await response.json();
         
-        console.log('API Response:', responseJson);
-        setDebugInfo(prev => prev + `\nAPI Response: ${JSON.stringify(responseJson)}`);
+        if (isDevelopment) {
+          console.log('API Response:', responseJson);
+          setDebugInfo(prev => prev + `\nAPI Response: ${JSON.stringify(responseJson)}`);
+        }
         
         if (!response.ok) {
           throw new Error(responseJson.message || 'Failed to confirm subscription');
@@ -169,8 +184,10 @@ export default function ConfirmPage() {
         
         return responseJson;
       } catch (error) {
-        console.error('API request failed:', error);
-        setDebugInfo(prev => prev + `\nAPI Request Error: ${error instanceof Error ? error.message : String(error)}`);
+        if (isDevelopment) {
+          console.error('API request failed:', error);
+          setDebugInfo(prev => prev + `\nAPI Request Error: ${error instanceof Error ? error.message : String(error)}`);
+        }
         throw error;
       }
     },
@@ -210,10 +227,12 @@ export default function ConfirmPage() {
               </div>
             </div>
             
-            <div className="mt-6 p-4 bg-gray-100 dark:bg-gray-800 rounded-md text-xs overflow-auto max-h-48">
-              <p className="font-semibold mb-2">Debug Information:</p>
-              <pre className="whitespace-pre-wrap">{debugInfo}</pre>
-            </div>
+            {isDevelopment && (
+              <div className="mt-6 p-4 bg-gray-100 dark:bg-gray-800 rounded-md text-xs overflow-auto max-h-48">
+                <p className="font-semibold mb-2">Debug Information:</p>
+                <pre className="whitespace-pre-wrap">{debugInfo}</pre>
+              </div>
+            )}
           </CardContent>
         </Card>
       </div>
@@ -256,10 +275,12 @@ export default function ConfirmPage() {
               </div>
             </div>
             
-            <div className="mt-6 p-4 bg-gray-100 dark:bg-gray-800 rounded-md text-xs overflow-auto max-h-48">
-              <p className="font-semibold mb-2">Debug Information:</p>
-              <pre className="whitespace-pre-wrap">{debugInfo}</pre>
-            </div>
+            {isDevelopment && (
+              <div className="mt-6 p-4 bg-gray-100 dark:bg-gray-800 rounded-md text-xs overflow-auto max-h-48">
+                <p className="font-semibold mb-2">Debug Information:</p>
+                <pre className="whitespace-pre-wrap">{debugInfo}</pre>
+              </div>
+            )}
           </CardContent>
           <CardFooter>
             <Button onClick={() => setLocation('/')}>Return to Home</Button>
@@ -285,10 +306,12 @@ export default function ConfirmPage() {
             </p>
           </div>
           
-          <div className="mt-6 p-4 bg-gray-100 dark:bg-gray-800 rounded-md text-xs overflow-auto max-h-48">
-            <p className="font-semibold mb-2">Debug Information:</p>
-            <pre className="whitespace-pre-wrap">{debugInfo}</pre>
-          </div>
+          {isDevelopment && (
+            <div className="mt-6 p-4 bg-gray-100 dark:bg-gray-800 rounded-md text-xs overflow-auto max-h-48">
+              <p className="font-semibold mb-2">Debug Information:</p>
+              <pre className="whitespace-pre-wrap">{debugInfo}</pre>
+            </div>
+          )}
         </CardContent>
         <CardFooter>
           <Button onClick={() => setLocation('/')}>Return to Home</Button>

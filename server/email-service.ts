@@ -464,24 +464,37 @@ export class SendGridEmailService implements IEmailService {
 
 /**
  * Determines which email service to use based on environment
- * Falls back to mock service if no real service is configured
+ * Falls back to mock service if no real service is configured in development
+ * In production, will throw an error if no email service is configured
  */
 function createEmailService(): IEmailService {
   // Check if we have service credentials to use a real email service
   const emailService = process.env.EMAIL_SERVICE;
+  const isDevelopment = process.env.NODE_ENV !== 'production';
   
   if (emailService === 'sendgrid') {
     try {
       return new SendGridEmailService();
     } catch (error) {
       console.error('Failed to initialize SendGrid email service:', error);
-      console.log('Falling back to mock email service');
-      return new MockEmailService();
+      
+      if (isDevelopment) {
+        console.log('Falling back to mock email service in development environment');
+        return new MockEmailService();
+      } else {
+        // In production, we should fail if email service configuration is invalid
+        throw new Error('Email service configuration failed in production environment. Please check your settings.');
+      }
     }
   }
   
-  console.log("Using mock email service");
-  return new MockEmailService();
+  if (isDevelopment) {
+    console.log("Using mock email service for development environment");
+    return new MockEmailService();
+  } else {
+    // In production, we require a properly configured email service
+    throw new Error('No email service configured for production environment. Set EMAIL_SERVICE in your environment variables.');
+  }
 }
 
 export const emailService: IEmailService = createEmailService();
