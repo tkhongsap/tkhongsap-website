@@ -150,7 +150,7 @@ export class MockEmailService implements IEmailService {
   
   async sendNewsletterToSubscriber(newsletter: Newsletter, subscriber: Subscriber, trackingId?: number): Promise<boolean> {
     const name = subscriber.name || "there";
-    const unsubscribeUrl = `${process.env.SITE_URL || 'http://localhost:3000'}/unsubscribe?token=${subscriber.unsubscribeToken}`;
+    const unsubscribeUrl = `${process.env.SITE_URL || 'http://localhost:3000'}/direct-unsubscribe.html?token=${subscriber.unsubscribeToken}`;
     
     // Add tracking pixel if trackingId is provided
     let trackingPixel = '';
@@ -372,7 +372,7 @@ export class SendGridEmailService implements IEmailService {
   
   async sendNewsletterToSubscriber(newsletter: Newsletter, subscriber: Subscriber, trackingId?: number): Promise<boolean> {
     const name = subscriber.name || "there";
-    const unsubscribeUrl = `${process.env.SITE_URL || 'http://localhost:3000'}/unsubscribe?token=${subscriber.unsubscribeToken}`;
+    const unsubscribeUrl = `${process.env.SITE_URL || 'http://localhost:3000'}/direct-unsubscribe.html?token=${subscriber.unsubscribeToken}`;
     
     // Add tracking pixel if trackingId is provided
     let trackingPixel = '';
