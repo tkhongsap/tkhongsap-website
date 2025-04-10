@@ -1,0 +1,12 @@
+{
+  "handlers": [
+    {
+      "path": "/api/.*",
+      "target": "express.js"
+    },
+    {
+      "path": ".*",
+      "target": "index.html"
+    }
+  ]
+}
