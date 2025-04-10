@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'wouter';
 import { useQuery } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
-import { Loader2, CheckCircle2, XCircle } from 'lucide-react';
+import { Loader2, CheckCircle2, XCircle, ExternalLink } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { useToast } from "@/hooks/use-toast";
 
 /**
  * Unsubscribe Page
@@ -16,13 +17,77 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 export default function UnsubscribePage() {
   const [location, setLocation] = useLocation();
   const [token, setToken] = useState<string | null>(null);
+  const [debugInfo, setDebugInfo] = useState<string>('');
+  const { toast } = useToast();
   
   // Extract token from URL on component mount
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const tokenParam = params.get('token');
     setToken(tokenParam);
+    
+    // Add debug information
+    setDebugInfo(`
+      Page loaded at: ${new Date().toISOString()}
+      URL: ${window.location.href}
+      Token: ${tokenParam}
+      Hostname: ${window.location.hostname}
+      Origin: ${window.location.origin}
+    `);
+    
+    // Log for debugging
+    console.log('Unsubscribe page loaded', {
+      url: window.location.href,
+      token: tokenParam,
+      hostname: window.location.hostname,
+      origin: window.location.origin
+    });
   }, []);
+  
+  // Function to manually unsubscribe
+  const manuallyUnsubscribe = async () => {
+    if (!token) return;
+    
+    try {
+      // Construct the direct API URL with full domain
+      const apiUrl = `${window.location.origin}/api/newsletter/unsubscribe?token=${token}`;
+      
+      console.log('Manually unsubscribing with URL:', apiUrl);
+      setDebugInfo(prev => prev + `\nAttempting manual unsubscribe at: ${new Date().toISOString()}\nAPI URL: ${apiUrl}`);
+      
+      // Make the fetch request
+      const response = await fetch(apiUrl);
+      const result = await response.json();
+      
+      console.log('Manual unsubscribe result:', result);
+      setDebugInfo(prev => prev + `\nAPI Response: ${JSON.stringify(result)}`);
+      
+      // Show toast with result
+      if (result.success) {
+        toast({
+          title: "Success!",
+          description: "You have been successfully unsubscribed from the newsletter.",
+        });
+        // Force reload the page
+        window.location.reload();
+      } else {
+        toast({
+          variant: "destructive",
+          title: "Unsubscribe Failed",
+          description: result.message || "Failed to process your unsubscribe request",
+        });
+      }
+    } catch (error) {
+      console.error('Manual unsubscribe error:', error);
+      setDebugInfo(prev => prev + `\nError: ${error instanceof Error ? error.message : String(error)}`);
+      
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "An error occurred while trying to unsubscribe",
+      });
+    }
+  };
   
   // If no token is provided, show an error
   if (token === null) {
@@ -58,22 +123,28 @@ export default function UnsubscribePage() {
       const apiUrl = window.location.hostname === 'localhost' 
         ? `/api/newsletter/unsubscribe?token=${token}`
         : `${window.location.origin}/api/newsletter/unsubscribe?token=${token}`;
+      
+      console.log('Automatic unsubscribe attempt with URL:', apiUrl);
+      setDebugInfo(prev => prev + `\nAutomatic unsubscribe attempt at: ${new Date().toISOString()}\nAPI URL: ${apiUrl}`);
         
       const response = await fetch(apiUrl);
+      const responseJson = await response.json();
+      
+      console.log('API Response:', responseJson);
+      setDebugInfo(prev => prev + `\nAPI Response: ${JSON.stringify(responseJson)}`);
       
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to process unsubscribe request');
+        throw new Error(responseJson.message || 'Failed to process unsubscribe request');
       }
       
-      return response.json();
+      return responseJson;
     },
     retry: false,
     // Only start the query once we have a token
     enabled: token !== null
   });
   
-  // Show loading state
+  // Show loading state with debug button
   if (isLoading) {
     return (
       <div className="container max-w-md py-16">
@@ -82,15 +153,38 @@ export default function UnsubscribePage() {
             <CardTitle>Processing Unsubscribe Request</CardTitle>
             <CardDescription>Please wait while we process your request...</CardDescription>
           </CardHeader>
-          <CardContent className="flex justify-center py-6">
-            <Loader2 className="h-12 w-12 animate-spin text-primary" />
+          <CardContent>
+            <div className="flex justify-center py-6">
+              <Loader2 className="h-12 w-12 animate-spin text-primary" />
+            </div>
+            
+            <div className="mt-4">
+              <Alert>
+                <AlertTitle>Is the page stuck loading?</AlertTitle>
+                <AlertDescription>
+                  Try the manual unsubscribe button below:
+                </AlertDescription>
+              </Alert>
+              
+              <div className="flex justify-center mt-4">
+                <Button onClick={manuallyUnsubscribe} className="flex items-center gap-2">
+                  <ExternalLink className="h-4 w-4" />
+                  Manually Unsubscribe
+                </Button>
+              </div>
+            </div>
+            
+            <div className="mt-6 p-4 bg-gray-100 dark:bg-gray-800 rounded-md text-xs overflow-auto max-h-48">
+              <p className="font-semibold mb-2">Debug Information:</p>
+              <pre className="whitespace-pre-wrap">{debugInfo}</pre>
+            </div>
           </CardContent>
         </Card>
       </div>
     );
   }
   
-  // Show error state
+  // Show error state with debug button
   if (isError) {
     const errorMessage = error instanceof Error 
       ? error.message 
@@ -109,6 +203,27 @@ export default function UnsubscribePage() {
               <AlertTitle>Error</AlertTitle>
               <AlertDescription>{errorMessage}</AlertDescription>
             </Alert>
+            
+            <div className="mt-4">
+              <Alert>
+                <AlertTitle>Try Manual Unsubscribe</AlertTitle>
+                <AlertDescription>
+                  The automatic unsubscribe failed. Try the manual unsubscribe button:
+                </AlertDescription>
+              </Alert>
+              
+              <div className="flex justify-center mt-4">
+                <Button onClick={manuallyUnsubscribe} className="flex items-center gap-2">
+                  <ExternalLink className="h-4 w-4" />
+                  Manually Unsubscribe
+                </Button>
+              </div>
+            </div>
+            
+            <div className="mt-6 p-4 bg-gray-100 dark:bg-gray-800 rounded-md text-xs overflow-auto max-h-48">
+              <p className="font-semibold mb-2">Debug Information:</p>
+              <pre className="whitespace-pre-wrap">{debugInfo}</pre>
+            </div>
           </CardContent>
           <CardFooter>
             <Button onClick={() => setLocation('/')}>Return to Home</Button>
@@ -135,6 +250,11 @@ export default function UnsubscribePage() {
             <p className="text-center text-muted-foreground">
               You can always resubscribe in the future if you change your mind.
             </p>
+          </div>
+          
+          <div className="mt-6 p-4 bg-gray-100 dark:bg-gray-800 rounded-md text-xs overflow-auto max-h-48">
+            <p className="font-semibold mb-2">Debug Information:</p>
+            <pre className="whitespace-pre-wrap">{debugInfo}</pre>
           </div>
         </CardContent>
         <CardFooter>
