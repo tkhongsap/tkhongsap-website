@@ -54,7 +54,12 @@ export default function UnsubscribePage() {
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ['/api/newsletter/unsubscribe', token],
     queryFn: async () => {
-      const response = await fetch(`/api/newsletter/unsubscribe?token=${token}`);
+      // Ensure API URL works for both local development and production
+      const apiUrl = window.location.hostname === 'localhost' 
+        ? `/api/newsletter/unsubscribe?token=${token}`
+        : `${window.location.origin}/api/newsletter/unsubscribe?token=${token}`;
+        
+      const response = await fetch(apiUrl);
       
       if (!response.ok) {
         const errorData = await response.json();
@@ -63,7 +68,9 @@ export default function UnsubscribePage() {
       
       return response.json();
     },
-    retry: false
+    retry: false,
+    // Only start the query once we have a token
+    enabled: token !== null
   });
   
   // Show loading state

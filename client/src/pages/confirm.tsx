@@ -54,7 +54,12 @@ export default function ConfirmPage() {
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ['/api/newsletter/confirm', token],
     queryFn: async () => {
-      const response = await fetch(`/api/newsletter/confirm?token=${token}`);
+      // Ensure API URL works for both local development and production
+      const apiUrl = window.location.hostname === 'localhost' 
+        ? `/api/newsletter/confirm?token=${token}`
+        : `${window.location.origin}/api/newsletter/confirm?token=${token}`;
+        
+      const response = await fetch(apiUrl);
       
       if (!response.ok) {
         const errorData = await response.json();
@@ -63,7 +68,9 @@ export default function ConfirmPage() {
       
       return response.json();
     },
-    retry: false
+    retry: false,
+    // Only start the query once we have a token
+    enabled: token !== null
   });
   
   // Show loading state
