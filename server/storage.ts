@@ -414,3 +414,10 @@ import { PgStorage } from './pg-storage';
 export const storage: IStorage = process.env.DATABASE_URL
   ? new PgStorage()
   : new MemStorage();
+
+// Log which storage implementation is being used
+if (process.env.DATABASE_URL) {
+  console.log("Using PgStorage (PostgreSQL)");
+} else {
+  console.log("DATABASE_URL not found. Using MemStorage (In-Memory)");
+}

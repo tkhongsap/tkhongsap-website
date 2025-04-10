@@ -224,27 +224,34 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Confirm subscription endpoint
   app.get("/api/newsletter/confirm", async (req, res) => {
     try {
+      console.log("📧 Confirm subscription request received");
       const token = req.query.token as string;
       
       if (!token) {
+        console.log("❌ No token provided in confirmation request");
         return res.status(400).json({
           success: false,
           message: "Invalid token"
         });
       }
       
+      console.log(`🔍 Looking for subscriber with confirmation token: ${token.substring(0, 8)}...`);
       // Find subscriber by token
       const subscriber = await storage.getSubscriberByConfirmationToken(token);
       
       if (!subscriber) {
+        console.log("❌ No subscriber found with the provided token");
         return res.status(404).json({
           success: false,
           message: "Invalid or expired token"
         });
       }
       
+      console.log(`✅ Found subscriber: ${subscriber.email} with status: ${subscriber.status}`);
+      
       // Check if token is expired
       if (subscriber.tokenExpiration && new Date(subscriber.tokenExpiration) < new Date()) {
+        console.log("❌ Token has expired");
         return res.status(400).json({
           success: false,
           message: "Confirmation link has expired. Please request a new one."
@@ -253,25 +260,46 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Update subscriber status to confirmed
       const now = new Date();
+      console.log(`🔄 Updating status to confirmed for subscriber ID: ${subscriber.id}`);
       const confirmedSubscriber = await storage.updateSubscriberConfirmation(subscriber.id, now);
+      
+      if (!confirmedSubscriber) {
+        console.log("❌ Failed to update subscriber confirmation status");
+        return res.status(500).json({
+          success: false,
+          message: "Failed to update subscription status"
+        });
+      }
+      
+      console.log(`✅ Subscriber status updated to: ${confirmedSubscriber.status}`);
       
       // Clear confirmation token (empty string and past date to prevent reuse)
       const pastDate = new Date();
       pastDate.setDate(pastDate.getDate() - 1); // 1 day in the past
+      console.log(`🔄 Invalidating confirmation token for subscriber ID: ${subscriber.id}`);
       await storage.createConfirmationToken(subscriber.id, "", pastDate);
       
       // Send welcome email
-      await emailService.sendWelcomeEmail(confirmedSubscriber!);
+      console.log(`📤 Sending welcome email to: ${confirmedSubscriber.email}`);
+      try {
+        await emailService.sendWelcomeEmail(confirmedSubscriber);
+        console.log("✅ Welcome email sent successfully");
+      } catch (emailError) {
+        // Don't fail if welcome email fails - just log it
+        console.error("⚠️ Error sending welcome email:", emailError);
+        // Continue with confirmation success response
+      }
       
       // Return success JSON instead of redirecting
       // The frontend confirmation page will handle the response
+      console.log("✅ Confirmation successful - returning success response");
       res.status(200).json({
         success: true,
         message: "Your subscription has been confirmed successfully!"
       });
       
     } catch (error) {
-      console.error("Error in confirm subscription endpoint:", error);
+      console.error("❌ Error in confirm subscription endpoint:", error);
       res.status(500).json({
         success: false,
         message: "An error occurred while confirming your subscription"

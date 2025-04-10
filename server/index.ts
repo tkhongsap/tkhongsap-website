@@ -72,6 +72,14 @@ app.use((req, res, next) => {
 });
 
 (async () => {
+  // Log environment configuration at startup
+  console.log("\n===== Server Environment Configuration =====");
+  console.log(`NODE_ENV: ${process.env.NODE_ENV || 'not set'}`);
+  console.log(`DATABASE_URL: ${process.env.DATABASE_URL ? 'set (length: ' + process.env.DATABASE_URL.length + ')' : '*** NOT SET - USING IN-MEMORY STORAGE ***'}`);
+  console.log(`SITE_URL: ${process.env.SITE_URL || 'not set'}`);
+  console.log(`SMTP Configuration: ${process.env.SMTP_HOST ? 'set' : 'not set'}`);
+  console.log("============================================\n");
+
   const server = await registerRoutes(app);
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {

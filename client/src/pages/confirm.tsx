@@ -33,6 +33,9 @@ export default function ConfirmPage() {
       Token: ${tokenParam}
       Hostname: ${window.location.hostname}
       Origin: ${window.location.origin}
+      API URL: ${window.location.hostname === 'localhost' 
+        ? `/api/newsletter/confirm?token=${tokenParam}`
+        : `${window.location.origin}/api/newsletter/confirm?token=${tokenParam}`}
     `);
     
     // Log for debugging
@@ -40,7 +43,10 @@ export default function ConfirmPage() {
       url: window.location.href,
       token: tokenParam,
       hostname: window.location.hostname,
-      origin: window.location.origin
+      origin: window.location.origin,
+      apiUrl: window.location.hostname === 'localhost' 
+        ? `/api/newsletter/confirm?token=${tokenParam}`
+        : `${window.location.origin}/api/newsletter/confirm?token=${tokenParam}`
     });
   }, []);
   
@@ -56,8 +62,31 @@ export default function ConfirmPage() {
       setDebugInfo(prev => prev + `\nAttempting manual confirmation at: ${new Date().toISOString()}\nAPI URL: ${apiUrl}`);
       
       // Make the fetch request
-      const response = await fetch(apiUrl);
-      const result = await response.json();
+      const response = await fetch(apiUrl, {
+        // Adding cache-control headers to prevent caching issues
+        headers: {
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'Pragma': 'no-cache',
+          'Expires': '0',
+        }
+      });
+      
+      let result;
+      try {
+        result = await response.json();
+      } catch (jsonError) {
+        console.error('Failed to parse JSON response:', jsonError);
+        setDebugInfo(prev => prev + `\nError parsing JSON response: ${jsonError instanceof Error ? jsonError.message : String(jsonError)}`);
+        
+        // Fallback to text response if JSON parsing fails
+        const textResponse = await response.text();
+        setDebugInfo(prev => prev + `\nText response: ${textResponse}`);
+        
+        result = { 
+          success: response.ok, 
+          message: response.ok ? "Subscription confirmed" : "Failed to confirm subscription" 
+        };
+      }
       
       console.log('Manual confirmation result:', result);
       setDebugInfo(prev => prev + `\nAPI Response: ${JSON.stringify(result)}`);
@@ -68,8 +97,8 @@ export default function ConfirmPage() {
           title: "Success!",
           description: "Your subscription has been confirmed successfully!",
         });
-        // Force reload the page
-        window.location.reload();
+        // Force reload the page after a short delay
+        setTimeout(() => window.location.reload(), 1000);
       } else {
         toast({
           variant: "destructive",
@@ -84,7 +113,7 @@ export default function ConfirmPage() {
       toast({
         variant: "destructive",
         title: "Error",
-        description: "An error occurred while trying to confirm your subscription",
+        description: "An error occurred while trying to confirm your subscription. Please try again.",
       });
     }
   };
@@ -127,19 +156,26 @@ export default function ConfirmPage() {
       console.log('Automatic confirmation attempt with URL:', apiUrl);
       setDebugInfo(prev => prev + `\nAutomatic confirmation attempt at: ${new Date().toISOString()}\nAPI URL: ${apiUrl}`);
         
-      const response = await fetch(apiUrl);
-      const responseJson = await response.json();
-      
-      console.log('API Response:', responseJson);
-      setDebugInfo(prev => prev + `\nAPI Response: ${JSON.stringify(responseJson)}`);
-      
-      if (!response.ok) {
-        throw new Error(responseJson.message || 'Failed to confirm subscription');
+      try {
+        const response = await fetch(apiUrl);
+        const responseJson = await response.json();
+        
+        console.log('API Response:', responseJson);
+        setDebugInfo(prev => prev + `\nAPI Response: ${JSON.stringify(responseJson)}`);
+        
+        if (!response.ok) {
+          throw new Error(responseJson.message || 'Failed to confirm subscription');
+        }
+        
+        return responseJson;
+      } catch (error) {
+        console.error('API request failed:', error);
+        setDebugInfo(prev => prev + `\nAPI Request Error: ${error instanceof Error ? error.message : String(error)}`);
+        throw error;
       }
-      
-      return responseJson;
     },
-    retry: false,
+    retry: 1, // Try once more in case of network issues
+    retryDelay: 1000, // Wait 1 second before retry
     // Only start the query once we have a token
     enabled: token !== null
   });
