@@ -56,6 +56,18 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             </a>
           )}
           
+          {project.demoUrl && (
+            <a 
+              href={project.demoUrl} 
+              className="text-primary font-medium hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`View live demo for ${project.title}`}
+            >
+              View Demo
+            </a>
+          )}
+          
           {project.githubUrl && (
             <a 
               href={project.githubUrl} 

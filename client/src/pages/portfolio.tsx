@@ -18,30 +18,30 @@ export default function Portfolio() {
     ? projects
     : projects.filter(project => project.category === activeFilter);
 
-  // Professional Service schema data for Portfolio page
-  const professionalServiceData = {
-    name: 'Ta Khongsap - AI Strategic Services',
-    description: 'AI strategy and consulting services with a portfolio of successful projects across AI solutions, data analysis, and finance.',
-    serviceType: ['AI Strategy', 'Data Science', 'Business Intelligence'],
+  // Schema data for Weekend Projects page
+  const pageSchemaData = {
+    name: 'Ta Khongsap - Weekend Projects',
+    description: 'A collection of fun and innovative personal projects I build during my free time, showcasing creative problem-solving and coding skills.',
+    serviceType: ['Creative Coding', 'Algorithm Visualization', 'Interactive Tools'],
     url: 'https://totrakoolkhongsap.replit.app/portfolio'
   };
 
   return (
     <div>
       <SEO 
-        title="Portfolio | Ta Khongsap - AI Strategist"
-        description="View Ta Khongsap's AI projects across finance, data science, and business intelligence with case studies and technology details."
+        title="Weekend Projects | Ta Khongsap"
+        description="Explore Ta Khongsap's creative weekend projects, including algorithm visualizations and interactive tools built for fun and learning."
         canonicalUrl="/portfolio"
         type="website"
       />
-      <SchemaMarkup type="professionalService" data={professionalServiceData} />
+      <SchemaMarkup type="professionalService" data={pageSchemaData} />
       
       <div className="pt-20">
-        <section id="portfolio" className="py-20 bg-gray-100">
+        <section id="weekend-projects" className="py-20 bg-gray-100">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-5xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">Portfolio</h2>
-              <p className="text-lg text-gray-700 mb-10">A selection of AI solutions, MVPs, and POCs I've worked on.</p>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">Weekend Projects</h2>
+              <p className="text-lg text-gray-700 mb-10">A collection of creative personal projects I build during my free time to explore new ideas and technologies.</p>
               
               {/* Filters */}
               <div className="flex flex-wrap gap-3 mb-8">
