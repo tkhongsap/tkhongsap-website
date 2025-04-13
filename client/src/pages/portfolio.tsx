@@ -75,14 +75,14 @@ export default function Portfolio() {
                 </Button>
               </div>
               
-              {/* Project Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* Project Grid - Single Column Layout */}
+              <div className="grid grid-cols-1 gap-6 max-w-4xl mx-auto">
                 {filteredProjects.map(project => (
-                  <ProjectCard key={project.id} project={project} />
+                  <ProjectCard key={project.id} project={project} className="h-full" />
                 ))}
                 
                 {filteredProjects.length === 0 && (
-                  <div className="col-span-3 text-center py-12">
+                  <div className="text-center py-12">
                     <p className="text-gray-500 text-lg">No projects found in this category.</p>
                   </div>
                 )}
