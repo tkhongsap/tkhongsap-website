@@ -66,5 +66,13 @@ export const projects: Project[] = [
     category: "finance",
     demoUrl: "#",
     githubUrl: "https://github.com/"
+  },
+  {
+    id: "tower-of-hanoi",
+    title: "Tower of Hanoi Visualization",
+    description: "A visual demonstration of the Tower of Hanoi puzzle, showcasing recursive algorithm solving.",
+    technologies: ["JavaScript", "HTML", "CSS"],
+    category: "ai",
+    demoUrl: "https://tower-of-hanoi-visual-tkhongsap.replit.app/",
   }
 ];

@@ -8,7 +8,7 @@ const navLinks = [
   { name: "Home", path: "/" },
   { name: "About", path: "/about" },
   // Portfolio hidden temporarily - under construction
-  // { name: "Portfolio", path: "/portfolio" },
+  { name: "Portfolio", path: "/portfolio" },
   { name: "Writing", path: "/writing" },
   // Contact hidden temporarily during initial launch
   // { name: "Contact", path: "/contact" },

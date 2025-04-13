@@ -1,30 +1,30 @@
-# Portfolio & Weekend Projects Page
+# Portfolio Page Features
 
-A brief overview of the tasks required to display a hidden Portfolio page, featuring real examples like the Tower of Hanoi visualization project.
+An outline of tasks to properly showcase and maintain the `portfolio.tsx` page, highlighting authentic weekend projects such as the Tower of Hanoi visualization.
 
 ## Completed Tasks
-- [ ] **Basic Page Setup**  
-  - Created a hidden Portfolio page template in the website codebase.
-  - Ensured consistent styling (fonts, colors) with the rest of the site.
-- [ ] **Decision to Highlight Real Projects**  
-  - Chose not to display placeholder items.
-  - Selected the Tower of Hanoi visualization as a key project to feature.
+- [x] **Create `portfolio.tsx` Page Structure**  
+  - Established a base design and layout consistent with the rest of the website.
+  - Tested basic styling to ensure responsiveness.
+- [x] **Add Navigation or Direct Link to Portfolio**  
+  - Integrated `portfolio.tsx` into the website's main menu or footer links.
+  - Confirm the page is accessible and user-friendly on both desktop and mobile.
+- [x] **Incorporate Tower of Hanoi Project**  
+  - Include a short description of the Tower of Hanoi visualization's purpose and features.
+  - Link to the live project at [https://tower-of-hanoi-visual-tkhongsap.replit.app/](https://tower-of-hanoi-visual-tkhongsap.replit.app/).
 
 ## In Progress Tasks
-- [ ] **Reveal Page in Navigation**  
-  - Temporarily unhide the Portfolio page (or add a direct link) for testing.
-  - Check for layout or responsiveness issues.
-- [ ] **Tower of Hanoi Project Section**  
-  - Embed or link to the Tower of Hanoi visualization (https://tower-of-hanoi-visual-tkhongsap.replit.app/).
-  - Write a short description explaining the goal of the project and its key features.
+- [ ] **Showcase Additional Projects**  
+  - Identify other weekend or personal projects to include.
+  - Provide short demos or descriptions for each project.
 
-## Upcoming Tasks
-- [ ] **Additional Projects**  
-  - Identify and list more personal or weekend projects to showcase.
-  - Provide quick screenshots or short demos if applicable.
-- [ ] **User Feedback & Analytics**  
-  - Decide if you want a simple feedback form on the Portfolio page.
-  - Track user visits to see if they navigate to the featured projects.
 - [ ] **Final Review & Launch**  
-  - Conduct a final pass to ensure content and links work as expected.
-  - Fully reveal the Portfolio page for public access.
+  - Confirm all links, images, and text render properly in various browsers.
+  - Make any final design tweaks before officially promoting the page.
+
+---
+
+**How to Use This File**  
+- Regularly update each task status—move items from Upcoming to In Progress, and finally to Completed.  
+- Expand on tasks if you decide to add new features or sections to `portfolio.tsx`.  
+- Keep reviewing this document so your project goals remain clear and organized.
