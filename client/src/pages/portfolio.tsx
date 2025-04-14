@@ -21,7 +21,7 @@ export default function Portfolio() {
   // Schema data for Weekend Projects page
   const pageSchemaData = {
     name: 'Ta Khongsap - Weekend Projects',
-    description: 'A collection of fun and innovative personal projects I build during my free time, showcasing creative problem-solving and coding skills.',
+    description: 'The best way to learn is by doing. These projects are my playground for tinkering and testing ideas—built during free time with no pressure.',
     serviceType: ['Creative Coding', 'Algorithm Visualization', 'Interactive Tools'],
     url: 'https://totrakoolkhongsap.replit.app/portfolio'
   };
@@ -30,7 +30,7 @@ export default function Portfolio() {
     <div>
       <SEO 
         title="Weekend Projects | Ta Khongsap"
-        description="Explore Ta Khongsap's creative weekend projects, including algorithm visualizations and interactive tools built for fun and learning."
+        description="The best way to learn is by doing. Explore Ta Khongsap's playground for tinkering and testing ideas—each project represents a question answered through building."
         canonicalUrl="/portfolio"
         type="website"
       />
@@ -41,7 +41,7 @@ export default function Portfolio() {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-5xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold mb-6">Weekend Projects</h2>
-              <p className="text-lg text-gray-700 mb-10">A collection of creative personal projects I build during my free time to explore new ideas and technologies.</p>
+              <p className="text-lg text-gray-700 mb-10">The best way to learn is by doing. These projects are my playground for tinkering and testing ideas—built during free time with no pressure. Some remain curious explorations, others evolve into concepts I've applied professionally. Each represents a question I wanted to answer through building.</p>
               
               {/* Filters */}
               <div className="flex flex-wrap gap-3 mb-8">
