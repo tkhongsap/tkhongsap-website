@@ -20,7 +20,7 @@ export const projects: Project[] = [
     category: "ai",
     demoUrl: "https://enterprise-rag-diagram-project.tkhongsap.io/",
     githubUrl: "https://github.com/tkhongsap/Enterprise-RAG-Framework",
-    image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1536&q=80", // Unsplash image showing AI/data visualization
+    image: "https://www.canva.com/design/DAGkmnOVG2U/_Y9GbEOoBWFfJvYX0SBDXw/view?utm_content=DAGkmnOVG2U&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hc7b51ca435", // Canva design for Enterprise RAG diagram
   },
   {
     id: "tower-of-hanoi",
