@@ -11,10 +11,6 @@ export interface Project {
   demoUrl?: string;
 }
 
-// Import project images
-import enterpriseRagImage from '../assets/enterprise-rag-diagram.png';
-import towerOfHanoiImage from '../assets/tower-of-hanoi.png';
-
 export const projects: Project[] = [
   {
     id: "enterprise-rag",
@@ -24,7 +20,7 @@ export const projects: Project[] = [
     category: "ai",
     demoUrl: "https://enterprise-rag-diagram-project.tkhongsap.io/",
     githubUrl: "https://github.com/tkhongsap/Enterprise-RAG-Framework",
-    image: enterpriseRagImage, // Using imported image
+    image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1536&q=80", // Revert to working image
   },
   {
     id: "tower-of-hanoi",
@@ -34,6 +30,6 @@ export const projects: Project[] = [
     category: "ai",
     demoUrl: "https://tower-hanoi-project.tkhongsap.io/",
     githubUrl: "https://github.com/tkhongsap/tower-of-hanoi-visual",
-    image: towerOfHanoiImage, // Using imported image
+    image: "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80", // Revert to working image
   }
 ];
