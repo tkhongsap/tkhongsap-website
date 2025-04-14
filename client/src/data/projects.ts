@@ -2,7 +2,7 @@ export interface Project {
   id: string;
   title: string;
   description: string;
-  image?: string;
+  image?: string | any; // Allow both string paths and imported image assets
   technologies: string[];
   category: 'ai' | 'data' | 'finance';
   githubUrl?: string;
@@ -10,6 +10,10 @@ export interface Project {
   caseStudyLabel?: string;
   demoUrl?: string;
 }
+
+// Import project images
+import enterpriseRagImage from '../assets/enterprise-rag-diagram.png';
+import towerOfHanoiImage from '../assets/tower-of-hanoi.png';
 
 export const projects: Project[] = [
   {
@@ -20,7 +24,7 @@ export const projects: Project[] = [
     category: "ai",
     demoUrl: "https://enterprise-rag-diagram-project.tkhongsap.io/",
     githubUrl: "https://github.com/tkhongsap/Enterprise-RAG-Framework",
-    image: "/images/enterprise-rag-diagram.png", // Local image for Enterprise RAG diagram
+    image: enterpriseRagImage, // Using imported image
   },
   {
     id: "tower-of-hanoi",
@@ -30,6 +34,6 @@ export const projects: Project[] = [
     category: "ai",
     demoUrl: "https://tower-hanoi-project.tkhongsap.io/",
     githubUrl: "https://github.com/tkhongsap/tower-of-hanoi-visual",
-    image: "/images/tower-of-hanoi.png", // Local image for Tower of Hanoi visualization
+    image: towerOfHanoiImage, // Using imported image
   }
 ];

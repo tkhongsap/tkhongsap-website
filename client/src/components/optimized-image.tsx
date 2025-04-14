@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 interface OptimizedImageProps {
-  src: string;
+  src: string | any; // Allow both string paths and imported image assets
   alt: string;
   width?: number;
   height?: number;
@@ -58,34 +58,42 @@ export default function OptimizedImage({
     );
   }
 
-  // Check if the image is already a WebP format
-  const isWebP = src.toLowerCase().endsWith('.webp');
+  // Configuration for priority loading
+  const loadingConfig = priority ? { loading: 'eager' as const } : { loading };
   
-  // Check if this is an external URL
-  const isExternalUrl = src.startsWith('http://') || src.startsWith('https://');
+  // For imported Vite images or other assets, they're already processed and optimized
+  // No need for srcSet or sizes attributes in that case
+  const isViteImport = typeof src === 'object' || (typeof src === 'string' && src.includes('data:') || src.includes('blob:'));
   
-  // Generate responsive srcset if width is provided and not an external URL
+  // Only generate srcSet for string URLs that aren't data: or blob: URLs
+  const isStringUrl = typeof src === 'string' && !src.includes('data:') && !src.includes('blob:');
+  const isExternalUrl = isStringUrl && (src.startsWith('http://') || src.startsWith('https://'));
+
+  // Generate responsive srcset if width is provided and it's a normal string URL path
   const generateSrcSet = () => {
-    if (!width || isExternalUrl) return undefined;
+    if (!width || isViteImport || isExternalUrl) return undefined;
+    
+    // Check if the image is already a WebP format
+    const isWebP = isStringUrl && src.toLowerCase().endsWith('.webp');
     
     // For WebP sources, just use them directly
     if (isWebP) {
       return `${src} ${width}w, ${src} ${Math.floor(width / 2)}w, ${src} ${Math.floor(width / 4)}w`;
     }
     
-    // Extract the file extension and base path
-    const extension = src.split('.').pop() || 'jpg';
-    const basePath = src.substring(0, src.lastIndexOf('.'));
+    // Extract the file extension and base path (for string URLs only)
+    if (isStringUrl) {
+      const extension = src.split('.').pop() || 'jpg';
+      const basePath = src.substring(0, src.lastIndexOf('.'));
+      
+      // For other formats, try to use the naming convention for responsive images
+      return `${basePath}-${width}.${extension} ${width}w, ${basePath}-${Math.floor(width / 2)}.${extension} ${Math.floor(width / 2)}w, ${basePath}-${Math.floor(width / 4)}.${extension} ${Math.floor(width / 4)}w`;
+    }
     
-    // For other formats, try to use the naming convention for responsive images
-    // We assume that the server has these files available or is using a responsive image service
-    return `${basePath}-${width}.${extension} ${width}w, ${basePath}-${Math.floor(width / 2)}.${extension} ${Math.floor(width / 2)}w, ${basePath}-${Math.floor(width / 4)}.${extension} ${Math.floor(width / 4)}w`;
+    return undefined;
   };
 
-  // Configuration for priority loading
-  const loadingConfig = priority ? { loading: 'eager' as const } : { loading };
-
-  // Process image src path
+  // Use the src directly, Vite will handle imported images properly
   const imgSrc = src;
 
   return (
