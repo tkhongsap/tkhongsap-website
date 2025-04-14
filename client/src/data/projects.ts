@@ -20,7 +20,7 @@ export const projects: Project[] = [
     category: "ai",
     demoUrl: "https://enterprise-rag-diagram-project.tkhongsap.io/",
     githubUrl: "https://github.com/tkhongsap/Enterprise-RAG-Framework",
-    image: "https://images.unsplash.com/photo-1639803938666-e76aeab59f13?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1332&q=80", // Unsplash image showing AI/data visualization
+    image: "/images/enterprise-rag-diagram.png",
   },
   {
     id: "tower-of-hanoi",
@@ -30,6 +30,6 @@ export const projects: Project[] = [
     category: "ai",
     demoUrl: "https://tower-hanoi-project.tkhongsap.io/",
     githubUrl: "https://github.com/tkhongsap/tower-of-hanoi-visual",
-    image: "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80", // Unsplash image related to puzzle/tower
+    image: "/images/tower-of-hanoi.png",
   }
 ];
