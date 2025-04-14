@@ -1,3 +1,7 @@
+// Import the images directly
+import enterpriseRagDiagram from '../assets/enterprise-rag-diagram.png';
+import towerOfHanoi from '../assets/tower-of-hanoi.png';
+
 export interface Project {
   id: string;
   title: string;
@@ -20,7 +24,7 @@ export const projects: Project[] = [
     category: "ai",
     demoUrl: "https://enterprise-rag-diagram-project.tkhongsap.io/",
     githubUrl: "https://github.com/tkhongsap/Enterprise-RAG-Framework",
-    image: "/images/enterprise-rag-diagram.png",
+    image: enterpriseRagDiagram,
   },
   {
     id: "tower-of-hanoi",
@@ -30,6 +34,6 @@ export const projects: Project[] = [
     category: "ai",
     demoUrl: "https://tower-hanoi-project.tkhongsap.io/",
     githubUrl: "https://github.com/tkhongsap/tower-of-hanoi-visual",
-    image: "/images/tower-of-hanoi.png",
+    image: towerOfHanoi,
   }
 ];
