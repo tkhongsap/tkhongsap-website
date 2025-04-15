@@ -114,7 +114,8 @@ export default function OptimizedImage({
         console.error(`Failed to load image: ${imgSrc}`);
         const target = e.target as HTMLImageElement;
         target.onerror = null;
-        target.src = 'data:image/svg+xml;charset=utf-8,%3Csvg height=\'150\' width=\'150\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Crect width=\'100%25\' height=\'100%25\' fill=\'%23f1f1f1\'/%3E%3C/svg%3E';
+        // Fallback to a simple colored placeholder with project initial
+        target.src = 'data:image/svg+xml;charset=utf-8,%3Csvg height=\'150\' width=\'150\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Crect width=\'100%25\' height=\'100%25\' fill=\'%23718096\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-size=\'60\' fill=\'%23ffffff\'%3ET%3C/text%3E%3C/svg%3E';
       }}
     />
   );
