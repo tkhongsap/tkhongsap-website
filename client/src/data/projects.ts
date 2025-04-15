@@ -30,6 +30,6 @@ export const projects: Project[] = [
     category: "ai",
     demoUrl: "https://tower-hanoi-project.tkhongsap.io/",
     githubUrl: "https://github.com/tkhongsap/tower-of-hanoi-visual",
-    image: "https://source.unsplash.com/random/800x600/?tower", // Direct random tower image from Unsplash source API
+    image: "/images/tower-of-hanoi.jpg", // Local image stored on the server
   }
 ];
