@@ -20,7 +20,7 @@ export const projects: Project[] = [
     category: "ai",
     demoUrl: "https://enterprise-rag-diagram-project.tkhongsap.io/",
     githubUrl: "https://github.com/tkhongsap/Enterprise-RAG-Framework",
-    image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1536&q=80", // Revert to working image
+    image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1536&q=80",
   },
   {
     id: "tower-of-hanoi",
@@ -30,6 +30,16 @@ export const projects: Project[] = [
     category: "ai",
     demoUrl: "https://tower-hanoi-project.tkhongsap.io/",
     githubUrl: "https://github.com/tkhongsap/tower-of-hanoi-visual",
-    image: "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80", // Revert to working image
+    image: "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+  },
+  {
+    id: "rubik-cube-simulation",
+    title: "3D Rubik's Cube Simulator",
+    description: "A modern, interactive 3D Rubik's Cube simulator supporting 3x3x3 up to 7x7x7 cubes, built with Three.js and Tailwind CSS. Scramble and solve cubes of various sizes with smooth animations and a clean UI.",
+    technologies: ["Three.js", "JavaScript", "Tailwind CSS", "HTML5"],
+    category: "creative",
+    demoUrl: "https://rubik-cube-simulation.tkhongsap.io/",
+    githubUrl: "https://github.com/tkhongsap/rubik-cube-master",
+    image: "/images/rubiks-cube.svg",
   }
 ];
