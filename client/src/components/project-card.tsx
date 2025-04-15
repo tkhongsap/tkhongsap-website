@@ -40,7 +40,8 @@ export default function ProjectCard({ project, className }: ProjectCardProps) {
             <Badge variant="outline" className="text-xs font-medium">
               {project.category === 'ai' ? 'AI & Algorithms' : 
                project.category === 'data' ? 'Data Visualization' : 
-               project.category === 'finance' ? 'Finance Tools' : 'Creative Coding'}
+               project.category === 'finance' ? 'Finance Tools' : 
+               project.category === 'creative' ? 'Creative Coding' : 'Other'}
             </Badge>
           </div>
           

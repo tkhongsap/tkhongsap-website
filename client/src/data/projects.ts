@@ -4,7 +4,7 @@ export interface Project {
   description: string;
   image?: string | any; // Allow both string paths and imported image assets
   technologies: string[];
-  category: 'ai' | 'data' | 'finance';
+  category: 'ai' | 'data' | 'finance' | 'creative';
   githubUrl?: string;
   caseStudyUrl?: string;
   caseStudyLabel?: string;

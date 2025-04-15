@@ -5,7 +5,7 @@ import ProjectCard from "@/components/project-card";
 import SEO from "@/components/seo";
 import SchemaMarkup from "@/components/schema-markup";
 
-type ProjectCategory = 'all' | 'ai' | 'data' | 'finance';
+type ProjectCategory = 'all' | 'ai' | 'data' | 'finance' | 'creative';
 
 export default function Portfolio() {
   const [activeFilter, setActiveFilter] = useState<ProjectCategory>('all');
@@ -72,6 +72,13 @@ export default function Portfolio() {
                   className={activeFilter === 'finance' ? 'bg-primary text-white' : ''}
                 >
                   Finance
+                </Button>
+                <Button 
+                  variant={activeFilter === 'creative' ? 'default' : 'outline'}
+                  onClick={() => handleFilterChange('creative')}
+                  className={activeFilter === 'creative' ? 'bg-primary text-white' : ''}
+                >
+                  Creative Coding
                 </Button>
               </div>
               
