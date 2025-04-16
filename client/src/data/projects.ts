@@ -40,6 +40,6 @@ export const projects: Project[] = [
     category: "creative",
     demoUrl: "https://rubik-cube-simulation.tkhongsap.io/",
     githubUrl: "https://github.com/tkhongsap/rubik-cube-master",
-    image: "https://images.unsplash.com/photo-1591991731833-b4807cf7ef94?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
+    image: "https://i.imgur.com/ewePKQd.png",
   }
 ];
