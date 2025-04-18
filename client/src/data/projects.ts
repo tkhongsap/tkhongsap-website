@@ -16,12 +16,12 @@ export const projects: Project[] = [
     id: "invoice-ocr-extraction",
     title: "Invoice OCR Extraction",
     description:
-      "An automated invoice processing system that uses OCR technology to extract key data from invoices, streamlining financial workflows and reducing manual data entry.",
+      "An automated invoice processing system that uses OCR technology to extract key data from invoices, enabling and streamlining workflows and reducing manual data entry.",
     technologies: ["OCR", "JavaScript", "React", "Node.js", "Computer Vision"],
     category: "data",
     demoUrl: "https://invoice-ocr-extraction.tkhongsap.io/",
-    githubUrl: "https://github.com/tkhongsap/invoice-ocr-extraction",
-    image: "https://i.imgur.com/NcT3ZdH.png",
+    githubUrl: "https://github.com/tkhongsap/docs-ai-extraction",
+    image: "https://i.imgur.com/v9Zqp1p.png",
   },
   {
     id: "enterprise-rag",
