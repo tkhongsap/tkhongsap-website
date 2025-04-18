@@ -18,7 +18,7 @@ export const projects: Project[] = [
     description:
       "An automated invoice processing system that uses OCR technology to extract key data from invoices, enabling and streamlining workflows and reducing manual data entry.",
     technologies: ["OCR", "JavaScript", "React", "Node.js", "Computer Vision"],
-    category: "data",
+    category: "ai",
     demoUrl: "https://invoice-ocr-extraction.tkhongsap.io/",
     githubUrl: "https://github.com/tkhongsap/docs-ai-extraction",
     image: "https://i.imgur.com/v9Zqp1p.png",
