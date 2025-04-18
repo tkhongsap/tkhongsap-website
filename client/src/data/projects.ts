@@ -13,6 +13,17 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: "invoice-ocr-extraction",
+    title: "Invoice OCR Extraction",
+    description:
+      "An automated invoice processing system that uses OCR technology to extract key data from invoices, streamlining financial workflows and reducing manual data entry.",
+    technologies: ["OCR", "JavaScript", "React", "Node.js", "Computer Vision"],
+    category: "data",
+    demoUrl: "https://invoice-ocr-extraction.tkhongsap.io/",
+    githubUrl: "https://github.com/tkhongsap/invoice-ocr-extraction",
+    image: "https://i.imgur.com/NcT3ZdH.png",
+  },
+  {
     id: "enterprise-rag",
     title: "Enterprise RAG Framework",
     description:
