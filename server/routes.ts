@@ -11,8 +11,63 @@ import { z } from "zod";
 import { fromZodError } from "zod-validation-error";
 import crypto from "crypto";
 import { emailService } from "./email-service";
+import { basicAuthMiddleware, adminOnlyMiddleware } from "./auth-middleware";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Create initial admin user
+  app.post("/api/setup/admin", async (req, res) => {
+    try {
+      // Check if setup is allowed (no existing users)
+      const users = await storage.getAllUsers();
+      
+      if (users.length > 0) {
+        return res.status(403).json({
+          success: false,
+          message: "Setup not allowed - users already exist"
+        });
+      }
+      
+      const { username, password } = req.body;
+      
+      if (!username || !password) {
+        return res.status(400).json({
+          success: false,
+          message: "Username and password are required"
+        });
+      }
+      
+      // Password strength validation
+      if (password.length < 10) {
+        return res.status(400).json({
+          success: false,
+          message: "Password must be at least 10 characters long"
+        });
+      }
+      
+      const userData = {
+        username,
+        password
+      };
+      
+      const user = await storage.createUser(userData);
+      
+      // Don't return the password hash in the response
+      const { password: _, ...userWithoutPassword } = user;
+      
+      res.status(201).json({
+        success: true,
+        message: "Admin user created successfully",
+        user: userWithoutPassword
+      });
+    } catch (error) {
+      console.error("Error creating admin user:", error);
+      res.status(500).json({
+        success: false,
+        message: "An error occurred while creating the admin user"
+      });
+    }
+  });
+
   // Sitemap.xml endpoint
   app.get("/sitemap.xml", (req, res) => {
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
@@ -196,7 +251,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Get all subscribers (admin endpoint)
-  app.get("/api/subscribers", async (req, res) => {
+  app.get("/api/subscribers", basicAuthMiddleware, adminOnlyMiddleware, async (req, res) => {
     try {
       const subscribers = await storage.getAllSubscribers();
       res.status(200).json(subscribers);
@@ -209,7 +264,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Get all contact messages (admin endpoint)
-  app.get("/api/contact-messages", async (req, res) => {
+  app.get("/api/contact-messages", basicAuthMiddleware, adminOnlyMiddleware, async (req, res) => {
     try {
       const messages = await storage.getAllContactMessages();
       res.status(200).json(messages);
@@ -467,7 +522,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Admin API endpoints for newsletters
   
   // Get all newsletters
-  app.get("/api/newsletters", async (req, res) => {
+  app.get("/api/newsletters", basicAuthMiddleware, adminOnlyMiddleware, async (req, res) => {
     try {
       const newsletters = await storage.getAllNewsletters();
       res.status(200).json(newsletters);
@@ -481,7 +536,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
   
   // Get newsletters by status
-  app.get("/api/newsletters/status/:status", async (req, res) => {
+  app.get("/api/newsletters/status/:status", basicAuthMiddleware, adminOnlyMiddleware, async (req, res) => {
     try {
       const status = req.params.status;
       const newsletters = await storage.getNewslettersByStatus(status);
@@ -496,7 +551,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
   
   // Get newsletter by ID
-  app.get("/api/newsletters/:id", async (req, res) => {
+  app.get("/api/newsletters/:id", basicAuthMiddleware, adminOnlyMiddleware, async (req, res) => {
     try {
       const id = parseInt(req.params.id);
       if (isNaN(id)) {
@@ -526,7 +581,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
   
   // Create new newsletter
-  app.post("/api/newsletters", async (req, res) => {
+  app.post("/api/newsletters", basicAuthMiddleware, adminOnlyMiddleware, async (req, res) => {
     try {
       const newsletterData = insertNewsletterSchema.parse(req.body);
       const newNewsletter = await storage.createNewsletter(newsletterData);
@@ -555,7 +610,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
   
   // Update newsletter status
-  app.patch("/api/newsletters/:id/status", async (req, res) => {
+  app.patch("/api/newsletters/:id/status", basicAuthMiddleware, adminOnlyMiddleware, async (req, res) => {
     try {
       const id = parseInt(req.params.id);
       const { status } = req.body;
@@ -600,7 +655,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
   
   // Send newsletter immediately
-  app.post("/api/newsletters/:id/send", async (req, res) => {
+  app.post("/api/newsletters/:id/send", basicAuthMiddleware, adminOnlyMiddleware, async (req, res) => {
     try {
       const id = parseInt(req.params.id);
       

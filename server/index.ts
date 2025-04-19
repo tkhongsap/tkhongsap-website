@@ -2,7 +2,12 @@ import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import helmet from "helmet";
+import session from "express-session";
+import MemoryStore from "memorystore";
+import csurf from "csurf";
+import { db } from "./db";
 
+const MemoryStoreSession = MemoryStore(session);
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -41,6 +46,35 @@ app.use((req, res, next) => {
   next();
 });
 
+// Session configuration
+const isProduction = process.env.NODE_ENV === 'production';
+const SESSION_SECRET = process.env.SESSION_SECRET || 'please-change-this-secret-in-production';
+
+if (isProduction && SESSION_SECRET === 'please-change-this-secret-in-production') {
+  console.warn('WARNING: Using default session secret in production environment!');
+  console.warn('Please set a proper SESSION_SECRET environment variable.');
+}
+
+// Setup session
+app.use(session({
+  secret: SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  store: new MemoryStoreSession({
+    checkPeriod: 86400000 // prune expired entries every 24h
+  }),
+  cookie: {
+    secure: isProduction, // true in production
+    httpOnly: true,
+    maxAge: 1000 * 60 * 60 * 24 // 24 hours
+  }
+}));
+
+// Setup CSRF protection for state-changing requests
+const csrfProtection = csurf();
+// Apply CSRF protection to all non-GET, non-HEAD, non-OPTIONS routes after 
+// session middleware is initialized
+
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;
@@ -71,6 +105,21 @@ app.use((req, res, next) => {
   next();
 });
 
+// Apply CSRF protection to all API routes that modify state
+app.use('/api', (req: Request, res: Response, next: NextFunction) => {
+  // Skip CSRF for GET, HEAD, OPTIONS
+  if (['GET', 'HEAD', 'OPTIONS'].includes(req.method)) {
+    return next();
+  }
+  
+  csrfProtection(req, res, next);
+});
+
+// Add CSRF token generation route
+app.get('/api/csrf-token', csrfProtection, (req: Request, res: Response) => {
+  res.json({ csrfToken: req.csrfToken() });
+});
+
 (async () => {
   // Log environment configuration at startup
   console.log("\n===== Server Environment Configuration =====");
@@ -78,6 +127,7 @@ app.use((req, res, next) => {
   console.log(`DATABASE_URL: ${process.env.DATABASE_URL ? 'set (length: ' + process.env.DATABASE_URL.length + ')' : '*** NOT SET - USING IN-MEMORY STORAGE ***'}`);
   console.log(`SITE_URL: ${process.env.SITE_URL || 'not set'}`);
   console.log(`SMTP Configuration: ${process.env.SMTP_HOST ? 'set' : 'not set'}`);
+  console.log(`Session Secret: ${SESSION_SECRET === 'please-change-this-secret-in-production' ? '*** DEFAULT *** (please change in production)' : 'custom secret set'}`);
   console.log("============================================\n");
 
   const server = await registerRoutes(app);

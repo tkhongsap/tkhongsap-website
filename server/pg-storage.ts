@@ -18,6 +18,7 @@ import {
 } from '@shared/schema';
 import { eq, and, count, sql, gte, lte } from 'drizzle-orm';
 import { IStorage } from './storage';
+import { hashPassword } from './auth-utils';
 
 export class PgStorage implements IStorage {
   constructor() {
@@ -45,9 +46,26 @@ export class PgStorage implements IStorage {
     }
   }
 
+  async getAllUsers(): Promise<User[]> {
+    try {
+      return await db.select().from(users);
+    } catch (error) {
+      console.error("Error in getAllUsers:", error);
+      throw error;
+    }
+  }
+
   async createUser(insertUser: InsertUser): Promise<User> {
     try {
-      const result = await db.insert(users).values(insertUser).returning();
+      // Hash the password before storing it
+      const { password, ...userData } = insertUser;
+      const hashedPassword = await hashPassword(password);
+      
+      const result = await db.insert(users).values({
+        ...userData,
+        password: hashedPassword
+      }).returning();
+      
       return result[0];
     } catch (error) {
       console.error("Error in createUser:", error);

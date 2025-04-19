@@ -13,6 +13,7 @@ A modern, minimal personal website for Ta Khongsap that showcases professional e
 - 📨 **Newsletter System**: Email subscription service with tracking capabilities
 - 🔍 **SEO Optimized**: Structured data and meta tags for better search engine visibility
 - ♿ **Accessibility**: Designed with inclusivity in mind
+- 🔒 **Security Features**: Comprehensive security measures to protect data and admin access
 
 ## Technology Stack
 
@@ -20,12 +21,13 @@ A modern, minimal personal website for Ta Khongsap that showcases professional e
 - **Styling**: Tailwind CSS with custom theming
 - **Database**: Neon Database (Serverless PostgreSQL)
 - **ORM**: Drizzle ORM
-- **Authentication**: Passport.js
+- **Authentication**: Passport.js with bcrypt for password hashing
 - **Email Integration**: SendGrid
 - **Animations**: Framer Motion
 - **State Management**: React Query
 - **Form Handling**: React Hook Form with Zod validation
 - **UI Components**: Shadcn/UI (Radix UI)
+- **Security**: Helmet.js, CSRF protection, secure sessions
 
 ## Project Structure
 
@@ -39,6 +41,8 @@ A modern, minimal personal website for Ta Khongsap that showcases professional e
 │   │   ├── pages/         # Application routes/pages
 │   │   └── styles/        # Global styles and Tailwind config
 ├── server/                # Backend API and server logic
+│   ├── auth-middleware.ts # Authentication and authorization middleware
+│   ├── auth-utils.ts      # Authentication utilities (password hashing, etc.)
 │   ├── email-service.ts   # Email functionality using SendGrid
 │   ├── routes.ts          # API endpoints
 │   ├── storage.ts         # Data storage interface
@@ -68,10 +72,11 @@ A modern, minimal personal website for Ta Khongsap that showcases professional e
    npm install
    ```
 
-3. Create a `.env` file with the following variables
+3. Create a `.env` file with the following variables (see `.env.example` for all options)
    ```
    DATABASE_URL=your_postgres_connection_string
    SENDGRID_API_KEY=your_sendgrid_api_key
+   SESSION_SECRET=a_secure_random_string
    ```
 
 4. Start the development server
@@ -79,7 +84,17 @@ A modern, minimal personal website for Ta Khongsap that showcases professional e
    npm run dev
    ```
 
-5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result
+5. Open [http://localhost:5000](http://localhost:5000) with your browser to see the result
+
+### Admin Setup
+
+To create an admin user for accessing protected endpoints:
+
+```
+npm run setup
+```
+
+Follow the prompts to create a secure admin username and password.
 
 ### Database Setup
 
@@ -119,6 +134,19 @@ Integration with Medium articles featuring:
 - Reading time estimates
 - Categories and tags
 - Engagement metrics
+
+### Security Features
+
+The website implements comprehensive security measures:
+
+- **Secure Authentication**: Password hashing with bcrypt and protected admin routes
+- **CSRF Protection**: Protection against Cross-Site Request Forgery attacks
+- **Security Headers**: Using Helmet.js to set secure HTTP headers
+- **Input Validation**: Zod schema validation for all user inputs
+- **Secure Sessions**: HTTPOnly cookies and secure session management
+- **HTTPS Enforcement**: Automatic HTTPS redirection in production
+- **Environment Variables**: Sensitive data stored in environment variables
+- **Rate Limiting**: Protection against brute force attacks on admin endpoints
 
 ## License
 

@@ -15,6 +15,7 @@ import {
   type NewsletterTracking,
   type InsertNewsletterTracking
 } from "@shared/schema";
+import { hashPassword } from './auth-utils';
 
 // modify the interface with any CRUD methods
 // you might need
@@ -24,6 +25,7 @@ export interface IStorage {
   getUser(id: number): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
+  getAllUsers(): Promise<User[]>;
   
   // Subscriber methods
   createSubscriber(subscriber: InsertSubscriber): Promise<Subscriber>;
@@ -101,9 +103,23 @@ export class MemStorage implements IStorage {
 
   async createUser(insertUser: InsertUser): Promise<User> {
     const id = this.userCurrentId++;
-    const user: User = { ...insertUser, id };
+    
+    // Hash the password before storing it
+    const { password, ...userData } = insertUser;
+    const hashedPassword = await hashPassword(password);
+    
+    const user: User = { 
+      ...userData, 
+      id, 
+      password: hashedPassword 
+    };
+    
     this.users.set(id, user);
     return user;
+  }
+
+  async getAllUsers(): Promise<User[]> {
+    return Array.from(this.users.values());
   }
 
   // Subscriber methods
