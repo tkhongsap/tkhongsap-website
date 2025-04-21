@@ -16,7 +16,7 @@ export const projects: Project[] = [
     id: "img-story-hub",
     title: "ImgStory Hub",
     description:
-      "A TypeScript app that transforms visuals and videos into compelling stories using AI vision models. Bridges the gap between seeing and storytelling by turning silent media into narrative content.",
+      "a TypeScript app that turns your visuals & videos into compelling stories using AI vision models. What makes it cool? While most vision apps need complex prompt engineering and fine-tuning, I wanted to test a simpler approach first. This quick build bridges the gap between seeing and storytelling – your silent media suddenly has context and voice. Just a proof of concept, but already turning everything from vacation clips to design mockups into narratives! Next steps: refine prompts and model fine-tuning.",
     technologies: ["TypeScript", "AI Vision Models", "React", "Next.js"],
     category: "ai",
     demoUrl: "https://imgstory.tkhongsap.io",
