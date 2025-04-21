@@ -13,6 +13,17 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: "img-story-hub",
+    title: "ImgStory Hub",
+    description:
+      "A TypeScript app that transforms visuals and videos into compelling stories using AI vision models. Bridges the gap between seeing and storytelling by turning silent media into narrative content.",
+    technologies: ["TypeScript", "AI Vision Models", "React", "Next.js"],
+    category: "ai",
+    demoUrl: "https://imgstory.tkhongsap.io",
+    githubUrl: "https://github.com/tkhongsap/img-story-hub",
+    image: "https://i.imgur.com/5OrPoka.png",
+  },
+  {
     id: "invoice-ocr-extraction",
     title: "Invoice OCR Extraction",
     description:
