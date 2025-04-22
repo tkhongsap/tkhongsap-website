@@ -13,6 +13,16 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: "fastapi-imgstory",
+    title: "FastAPI ImgStory",
+    description:
+      "FastAPI ImgStroy transforms images and videos into stories using OpenAI Vision technology. The application handles multiple images, extracts video frames, and supports custom prompts for guided storytelling. Built with FastAPI, Python 3.8+, and FFmpeg, it offers a clean interface with full API documentation. While currently a prototype, I'm planning to fine-tune the vision models for a more specialized production version.",
+    technologies: ["FastAPI", "Python", "OpenAI Vision", "FFmpeg"],
+    category: "ai",
+    demoUrl: "https://fastapi-imgstory.tkhongsap.io",
+    image: "https://i.imgur.com/V4uZlb3.png",
+  },
+  {
     id: "img-story-hub",
     title: "ImgStory Hub",
     description:
