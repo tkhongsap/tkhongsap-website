@@ -20,6 +20,7 @@ export const projects: Project[] = [
     technologies: ["FastAPI", "Python", "OpenAI Vision", "FFmpeg"],
     category: "ai",
     demoUrl: "https://fastapi-imgstory.tkhongsap.io",
+    githubUrl: "https://github.com/tkhongsap/fastapi-imgStory",
     image: "https://i.imgur.com/V4uZlb3.png",
   },
   {
