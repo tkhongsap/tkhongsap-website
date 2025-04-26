@@ -13,31 +13,11 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: "fastapi-image-generation",
-    title: "FastAPI Image Generation",
-    description:
-      "A web application that generates images using OpenAI's GPT Image and DALL-E models through a FastAPI backend and a clean, modern web interface.",
-    technologies: ["FastAPI", "Python", "OpenAI", "DALL-E", "React"],
-    category: "ai",
-    githubUrl: "https://github.com/tkhongsap/fastapi-image-generation",
-    image: "https://i.imgur.com/6jpqGC1.png",
-  },
-  {
-    id: "fine-tune-vision",
-    title: "Fine-Tune Vision for Deposit Refund",
-    description:
-      "This project uses vision fine-tuning to create a model that can determine if a product is eligible for deposit refund. The model is trained to classify the product's images as either \"claimable\" or \"non-claimable\" based on their condition and completeness.",
-    technologies: ["Computer Vision", "Fine-Tuning", "Python", "Machine Learning", "Image Classification"],
-    category: "ai",
-    githubUrl: "https://github.com/tkhongsap/fine-tune-vision",
-    image: "https://i.imgur.com/LpXkAU5.png",
-  },
-  {
     id: "fastapi-imgstory",
-    title: "FastAPI ImgStory",
+    title: "FastAPI ArtGen",
     description:
-      "FastAPI ImgStroy transforms images and videos into stories using OpenAI Vision technology. The application handles multiple images, extracts video frames, and supports custom prompts for guided storytelling. Built with FastAPI, Python 3.8+, and FFmpeg, it offers a clean interface with full API documentation. While currently a prototype, I'm planning to fine-tune the vision models for a more specialized production version.",
-    technologies: ["FastAPI", "Python", "OpenAI Vision", "FFmpeg"],
+      "ArtGen is a weekend-built FastAPI demo that slips OpenAI’s GPT Image model behind one clean REST call and a slick UI—type a prompt, get studio-grade graphics, no GPUs or hosting fuss. Use it to whip up marketing visuals, auto-generate social or blog images, create on-the-fly product mock-ups, or inject custom illustrations into dashboards and reports in seconds.",
+    technologies: ["FastAPI", "Python", "OpenAI Vision"],
     category: "ai",
     demoUrl: "https://fastapi-imgstory.tkhongsap.io",
     githubUrl: "https://github.com/tkhongsap/fastapi-imgStory",
