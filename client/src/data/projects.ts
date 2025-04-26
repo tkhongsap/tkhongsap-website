@@ -16,7 +16,7 @@ export const projects: Project[] = [
     title: "Fine-Tuning Vision Models",
     description: "Fine-tuning vision models to improve performance on specific tasks. The project uses vision fine-tuning to create a model that can determine if a bottle is eligible for deposit refund. The model is trained to classify bottle images as either refundable or non-refundable based on their condition and completeness",
     technologies: ["Python", "FastAPI", "Computer Vision"],
-    category: "ai", "vision",
+    category: "ai",
     githubUrl: "https://github.com/tkhongsap/fine-tune-vision",
     image: "https://i.imgur.com/LpXkAU5.png"
   },
