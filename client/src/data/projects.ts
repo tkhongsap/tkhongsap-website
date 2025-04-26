@@ -14,9 +14,9 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: "fastapi-imgstory",
-    title: "FastAPI ArtGen",
+    title: "FastAPI ImgStory",
     description:
-      "ArtGen is a weekend-built FastAPI demo that slips OpenAI’s GPT Image model behind one clean REST call and a slick UI—type a prompt, get studio-grade graphics, no GPUs or hosting fuss. Use it to whip up marketing visuals, auto-generate social or blog images, create on-the-fly product mock-ups, or inject custom illustrations into dashboards and reports in seconds.",
+      "FastAPI ImgStroy is a lightweight web app that turns your images or videos into vivid narratives in both English and Thai. Upload a file, and GPT-4 Vision extracts the scene’s details, senses the mood, and spins a short story you can drop straight into social posts, travel blogs, marketing copy, or content-rich dashboards—no heavy setup, just one clean REST endpoint and a modern UI.",
     technologies: ["FastAPI", "Python", "OpenAI Vision"],
     category: "ai",
     demoUrl: "https://fastapi-imgstory.tkhongsap.io",
