@@ -13,6 +13,26 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: "fastapi-image-generation",
+    title: "FastAPI Image Generation",
+    description:
+      "A web application that generates images using OpenAI's GPT Image and DALL-E models through a FastAPI backend and a clean, modern web interface.",
+    technologies: ["FastAPI", "Python", "OpenAI", "DALL-E", "React"],
+    category: "ai",
+    githubUrl: "https://github.com/tkhongsap/fastapi-image-generation",
+    image: "https://i.imgur.com/6jpqGC1.png",
+  },
+  {
+    id: "fine-tune-vision",
+    title: "Fine-Tune Vision for Deposit Refund",
+    description:
+      "This project uses vision fine-tuning to create a model that can determine if a product is eligible for deposit refund. The model is trained to classify the product's images as either \"claimable\" or \"non-claimable\" based on their condition and completeness.",
+    technologies: ["Computer Vision", "Fine-Tuning", "Python", "Machine Learning", "Image Classification"],
+    category: "ai",
+    githubUrl: "https://github.com/tkhongsap/fine-tune-vision",
+    image: "https://i.imgur.com/LpXkAU5.png",
+  },
+  {
     id: "fastapi-imgstory",
     title: "FastAPI ImgStory",
     description:
