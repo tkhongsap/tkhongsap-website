@@ -12,13 +12,15 @@ export interface Project {
 }
 
 export const projects: Project[] = [
-  { id: "fine-tuning-vision",
+  {
+    id: "fine-tuning-vision",
     title: "Fine-Tuning Vision Models",
-    description: "Fine-tuning vision models to improve performance on specific tasks. The project uses vision fine-tuning to create a model that can determine if a bottle is eligible for deposit refund. The model is trained to classify bottle images as either refundable or non-refundable based on their condition and completeness",
+    description:
+      "Fine-tuning vision models to improve performance on specific tasks. The project uses vision fine-tuning to create a model that can determine if a bottle is eligible for deposit refund. The model is trained to classify bottle images as either refundable or non-refundable based on their condition and completeness",
     technologies: ["Python", "FastAPI", "Computer Vision"],
     category: "ai",
     githubUrl: "https://github.com/tkhongsap/fine-tune-vision",
-    image: "https://i.imgur.com/LpXkAU5.png"
+    image: "https://i.imgur.com/LpXkAU5.png",
   },
   {
     id: "fastapi-image-generation",
@@ -40,7 +42,7 @@ export const projects: Project[] = [
     category: "ai",
     demoUrl: "https://fastapi-imgstory.tkhongsap.io",
     githubUrl: "https://github.com/tkhongsap/fastapi-imgStory",
-    image: "https://i.imgur.com/V4uZlb3.png",
+    image: "https://i.imgur.com/SXV5isM.png",
   },
   {
     id: "img-story-hub",
