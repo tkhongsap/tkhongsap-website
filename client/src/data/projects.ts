@@ -13,6 +13,17 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: "fastapi-image-generation",
+    title: "FastAPI Image Generation",
+    description:
+      "A weekend-built FastAPI demo that puts OpenAI’s new GPT Image model behind a single REST endpoint and a slick UI. Fire off a text prompt, get studio-grade graphics, and drop a one-line POST into your app—no GPUs, hosting, or heavy setup. Perfect for quickly prototyping marketing tools, auto-generating design assets, or injecting dynamic visuals into any workflow",
+    technologies: ["FastAPI", "Python", "OpenAI Vision"],
+    category: "ai",
+    demoUrl: "https://fastapi-image-generation.tkhongsap.io",
+    githubUrl: "https://github.com/tkhongsap/fastapi-image-generation",
+    image: "https://i.imgur.com/6jpqGC1.png",
+  },
+  {
     id: "fastapi-imgstory",
     title: "FastAPI ImgStory",
     description:
