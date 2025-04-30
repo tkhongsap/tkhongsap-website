@@ -37,7 +37,6 @@ function Router() {
       <Route path="/portfolio" component={Portfolio} />
       <Route path="/writing" component={Writing} />
       <Route path="/my-thought" component={MyThought} />
-      <Route path="/sirisoft-cseo" component={SirisoftCSEO} />
       <Route path="/contact" component={Contact} />
       <Route path="/confirm" component={ConfirmPage} />
       <Route path="/unsubscribe" component={UnsubscribePage} />
