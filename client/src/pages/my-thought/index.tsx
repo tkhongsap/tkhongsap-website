@@ -130,10 +130,7 @@ export default function MyThought() {
       
       <main className="flex min-h-screen flex-col items-center justify-between bg-modern-background">
         <div className="w-full max-w-7xl mx-auto px-4 py-8 md:py-12">
-          <h1 className="text-3xl md:text-4xl font-bold text-center mb-8">Chief Solution Engineering Officer – Vision Brief</h1>
-          <p className="text-lg text-center text-modern-mutedForeground mb-12 max-w-3xl mx-auto">
-            A perspective on building AI-first, secure and resilient enterprise systems
-          </p>
+          <h1 className="text-3xl md:text-4xl font-bold text-center mb-8">My Thought</h1>
         </div>
         
         <Presentation>
@@ -147,7 +144,7 @@ export default function MyThought() {
             >
               <motion.div variants={itemVariants} className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-modern-accent/60 shadow-xl">
                 <img 
-                  src="/assets/profile.png" 
+                  src="/assets/profile-ta.jpg" 
                   alt="Ta Khongsap" 
                   className="w-full h-full object-cover"
                 />
