@@ -1,10 +1,24 @@
-import { ArrowRight } from "lucide-react";
+import { useState, useEffect } from "react";
+import { 
+  ArrowRight, 
+  ArrowLeft, 
+  ChevronRight, 
+  ChevronLeft, 
+  LayoutGrid, 
+  X, 
+  ArrowRightCircle, 
+  Download
+} from "lucide-react";
 import SEO from "@/components/seo";
 import SchemaMarkup from "@/components/schema-markup";
 import OptimizedImage from "@/components/optimized-image";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 export default function SirisoftCSEO() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [showAgenda, setShowAgenda] = useState(false);
+  
   // Professional service schema data
   const professionalServiceSchemaData = {
     name: 'Chief Solution Engineering Officer Vision Brief - Ta Khongsap',
@@ -12,6 +26,306 @@ export default function SirisoftCSEO() {
     provider: {
       name: 'Ta Khongsap',
       url: 'https://totrakoolkhongsap.replit.app'
+    }
+  };
+
+  // Define all slides with their titles and content
+  const slides = [
+    {
+      id: 'title',
+      title: 'Chief Solution Engineering Officer – Vision Brief',
+      type: 'cover'
+    },
+    {
+      id: 'intro',
+      title: 'Leadership Snapshot',
+      type: 'content'
+    },
+    {
+      id: 'vision',
+      title: 'My Vision – Building an AI-First Company',
+      type: 'content'
+    },
+    {
+      id: 'framework',
+      title: 'AI-Maturity Framework',
+      type: 'content'
+    },
+    {
+      id: 'relevance',
+      title: 'Why This Matters to Sirisoft',
+      type: 'content'
+    },
+    {
+      id: 'impact',
+      title: 'Let\'s Talk Impact',
+      type: 'content'
+    }
+  ];
+
+  // Handle keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        goToNextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        goToPrevSlide();
+      } else if (e.key === 'Escape') {
+        setShowAgenda(!showAgenda);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [currentSlide, showAgenda]);
+
+  const goToNextSlide = () => {
+    if (currentSlide < slides.length - 1) {
+      setCurrentSlide(currentSlide + 1);
+    }
+  };
+
+  const goToPrevSlide = () => {
+    if (currentSlide > 0) {
+      setCurrentSlide(currentSlide - 1);
+    }
+  };
+
+  const goToSlide = (index: number) => {
+    setCurrentSlide(index);
+    setShowAgenda(false);
+  };
+
+  const toggleAgenda = () => {
+    setShowAgenda(!showAgenda);
+  };
+
+  // Render the slide content based on the current slide
+  const renderSlideContent = () => {
+    const slide = slides[currentSlide];
+    
+    switch (slide.id) {
+      case 'title':
+        return (
+          <div className="flex flex-col items-center justify-center h-full text-center">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-primary">
+              Chief Solution Engineering Officer
+            </h1>
+            <h2 className="text-2xl md:text-3xl font-semibold mb-10">
+              Vision Brief
+            </h2>
+            <h3 className="text-xl md:text-2xl mb-12">Ta Khongsap</h3>
+            
+            <blockquote className="border-l-4 border-primary pl-4 py-2 bg-gray-50/80 italic text-gray-700 my-8 text-lg max-w-2xl">
+              "AI isn't an option — it's the new baseline for building secure, resilient, and revenue-generating systems."
+            </blockquote>
+            
+            <div className="absolute bottom-10 animate-bounce">
+              <ChevronRight size={36} className="text-primary" />
+            </div>
+          </div>
+        );
+      
+      case 'intro':
+        return (
+          <div className="h-full">
+            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-primary">
+              Leadership Snapshot
+            </h2>
+            <h3 className="text-xl md:text-2xl font-semibold mb-6">
+              15 Years Turning Data & AI Into $40 M+ Business Impact
+            </h3>
+            
+            <ul className="space-y-6 mb-8 text-lg">
+              <li className="flex items-start bg-gray-50/80 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                <span className="text-primary mr-3 mt-1 text-xl">•</span>
+                <span><strong className="text-primary">AI & Data Strategy Executive</strong> — led enterprise-wide AI roll-outs across <strong>finance, telecom, supply-chain, and CPG</strong> sectors.</span>
+              </li>
+              <li className="flex items-start bg-gray-50/80 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                <span className="text-primary mr-3 mt-1 text-xl">•</span>
+                <span><strong className="text-primary">Team Builder</strong> — scaled & mentored cross-functional groups of <strong>data engineers, ML scientists, infra & DevSecOps</strong> specialists.</span>
+              </li>
+              <li className="flex items-start bg-gray-50/80 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                <span className="text-primary mr-3 mt-1 text-xl">•</span>
+                <span><strong className="text-primary">Scale & Governance</strong> — designed data estates, MLOps pipelines, and governance frameworks that cut analytic cycle-time 40 % and saved over $25 M.</span>
+              </li>
+            </ul>
+          </div>
+        );
+      
+      case 'vision':
+        return (
+          <div className="h-full">
+            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-primary">
+              My Vision – Building an AI-First Company
+            </h2>
+            
+            <blockquote className="border-l-4 border-primary pl-4 py-4 bg-gray-50/80 my-6 rounded-r-lg shadow-sm">
+              <p className="italic text-lg">Becoming <strong>AI-First</strong> isn't an add-on; it's the default lens for product design, decision-making, and hiring.</p>
+            </blockquote>
+            
+            <div className="mt-10 space-y-6">
+              <div className="flex items-center bg-gray-50/80 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center mr-4">1</div>
+                <span className="text-lg"><strong>Systems that learn & adapt</strong> – continuous data loops.</span>
+              </div>
+              
+              <div className="flex items-center bg-gray-50/80 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center mr-4">2</div>
+                <span className="text-lg"><strong>Process redesign, not mere automation.</strong></span>
+              </div>
+              
+              <div className="flex items-center bg-gray-50/80 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center mr-4">3</div>
+                <span className="text-lg"><strong>Teams equipped to <em>use</em> AI, not just demo it.</strong></span>
+              </div>
+              
+              <div className="flex items-center bg-gray-50/80 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center mr-4">4</div>
+                <span className="text-lg"><strong>Experiment → learn → ship fast</strong> — pace of learning beats polish.</span>
+              </div>
+            </div>
+          </div>
+        );
+      
+      case 'framework':
+        return (
+          <div className="h-full">
+            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-primary">
+              AI-Maturity Framework
+            </h2>
+            
+            <div className="overflow-x-auto mb-8">
+              <table className="min-w-full border-collapse shadow-sm">
+                <thead>
+                  <tr className="bg-primary text-white">
+                    <th className="py-3 px-4 border border-gray-300 text-left font-medium">Readiness Dimension</th>
+                    <th className="py-3 px-4 border border-gray-300 text-left font-medium">What I Audit</th>
+                    <th className="py-3 px-4 border border-gray-300 text-left font-medium">Typical Gap I Fix</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="bg-white hover:bg-gray-50 transition-colors">
+                    <td className="py-3 px-4 border border-gray-300 font-semibold">Infrastructure</td>
+                    <td className="py-3 px-4 border border-gray-300">Latency, pipelines, GPUs</td>
+                    <td className="py-3 px-4 border border-gray-300">Cloud / edge refactor</td>
+                  </tr>
+                  <tr className="bg-gray-50 hover:bg-gray-100 transition-colors">
+                    <td className="py-3 px-4 border border-gray-300 font-semibold">Data Ecosystem</td>
+                    <td className="py-3 px-4 border border-gray-300">Lineage, access, quality</td>
+                    <td className="py-3 px-4 border border-gray-300">Central Lake + catalog</td>
+                  </tr>
+                  <tr className="bg-white hover:bg-gray-50 transition-colors">
+                    <td className="py-3 px-4 border border-gray-300 font-semibold">Talent Availability</td>
+                    <td className="py-3 px-4 border border-gray-300">SME bandwidth</td>
+                    <td className="py-3 px-4 border border-gray-300">Rotation + up-/re-skilling</td>
+                  </tr>
+                  <tr className="bg-gray-50 hover:bg-gray-100 transition-colors">
+                    <td className="py-3 px-4 border border-gray-300 font-semibold">Risk Tolerance</td>
+                    <td className="py-3 px-4 border border-gray-300">Iteration culture</td>
+                    <td className="py-3 px-4 border border-gray-300">Pilot play-book, KPIs</td>
+                  </tr>
+                  <tr className="bg-white hover:bg-gray-50 transition-colors">
+                    <td className="py-3 px-4 border border-gray-300 font-semibold">Funding Alignment</td>
+                    <td className="py-3 px-4 border border-gray-300">Opex vs Capex mix</td>
+                    <td className="py-3 px-4 border border-gray-300">Stage-gated budgets</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <div className="bg-gray-50/80 p-5 rounded-lg shadow-sm mb-6">
+              <p className="font-semibold mb-2">Execution Modes (applied once readiness known)</p>
+              <p className="italic text-gray-600">Efficiency · Effectiveness · Productivity · Growth · Expert-augmentation</p>
+            </div>
+            
+            <blockquote className="border-l-4 border-primary pl-4 py-3 bg-gray-50/80 italic text-gray-700 rounded-r-lg shadow-sm">
+              "Before you sprint, build the shoes, map the course, train the runners."
+            </blockquote>
+          </div>
+        );
+      
+      case 'relevance':
+        return (
+          <div className="h-full">
+            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-primary">
+              Why This Matters to Sirisoft
+            </h2>
+            
+            <div className="overflow-x-auto mb-6">
+              <table className="min-w-full border-collapse shadow-sm">
+                <thead>
+                  <tr className="bg-primary text-white">
+                    <th className="py-3 px-4 border border-gray-300 text-left font-medium">Sirisoft Need</th>
+                    <th className="py-3 px-4 border border-gray-300 text-left font-medium">What I Bring</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="bg-white hover:bg-gray-50 transition-colors">
+                    <td className="py-4 px-4 border border-gray-300">Scale DevOps to AI/ML <strong>(60 % role focus)</strong></td>
+                    <td className="py-4 px-4 border border-gray-300">Proven Gen-AI & MLOps roll-outs</td>
+                  </tr>
+                  <tr className="bg-gray-50 hover:bg-gray-100 transition-colors">
+                    <td className="py-4 px-4 border border-gray-300"><strong>Cyber-secure</strong> financial & energy clients</td>
+                    <td className="py-4 px-4 border border-gray-300">Active AI threat-detection POC</td>
+                  </tr>
+                  <tr className="bg-white hover:bg-gray-50 transition-colors">
+                    <td className="py-4 px-4 border border-gray-300">Grow & retain 70+ engineers</td>
+                    <td className="py-4 px-4 border border-gray-300">Track record in curriculum & culture</td>
+                  </tr>
+                  <tr className="bg-gray-50 hover:bg-gray-100 transition-colors">
+                    <td className="py-4 px-4 border border-gray-300">Visionary + hands-on peer to CTO</td>
+                    <td className="py-4 px-4 border border-gray-300">Blend of strategy & execution</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <div className="flex justify-center mt-10">
+              <ArrowRightCircle size={30} className="text-primary animate-pulse" />
+            </div>
+          </div>
+        );
+      
+      case 'impact':
+        return (
+          <div className="h-full">
+            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-primary">
+              Let's Talk Impact
+            </h2>
+            
+            <div className="bg-gray-50/80 p-6 rounded-lg shadow-md mb-10">
+              <p className="font-semibold mb-6 text-xl text-primary">I'm ready to:</p>
+              <div className="space-y-8">
+                <div className="flex items-center gap-4 pl-2 py-1 border-l-4 border-primary hover:bg-white transition-colors">
+                  <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center">1</div>
+                  <span className="text-lg">Stand up an AI-powered DevSecOps platform within 120 days</span>
+                </div>
+                <div className="flex items-center gap-4 pl-2 py-1 border-l-4 border-primary hover:bg-white transition-colors">
+                  <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center">2</div>
+                  <span className="text-lg">Cut mean-time-to-detect by 50 % using ML anomaly models</span>
+                </div>
+                <div className="flex items-center gap-4 pl-2 py-1 border-l-4 border-primary hover:bg-white transition-colors">
+                  <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center">3</div>
+                  <span className="text-lg">Upskill every engineer on Gen-AI tooling in first year</span>
+                </div>
+              </div>
+            </div>
+            
+            <div className="mt-10 text-center">
+              <Button variant="outline" className="flex items-center gap-2">
+                <Download size={16} /> Download full deck (PDF)
+              </Button>
+            </div>
+            
+            <footer className="text-sm text-gray-500 italic absolute bottom-4 left-0 right-0 text-center">
+              Confidential — prepared exclusively for Sirisoft COO interview (2 May 2025).
+            </footer>
+          </div>
+        );
+      
+      default:
+        return <div>Slide not found</div>;
     }
   };
 
@@ -25,170 +339,110 @@ export default function SirisoftCSEO() {
       />
       <SchemaMarkup type="professionalService" data={professionalServiceSchemaData} />
       
-      <div className="pt-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
-          <div className="max-w-4xl mx-auto">
-            {/* 1 · Hero + Tagline */}
-            <section className="mb-16">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-                Chief Solution Engineering Officer – Vision Brief
-              </h1>
-              <h2 className="text-xl md:text-2xl font-semibold mb-8">Ta Khongsap</h2>
-              
-              <blockquote className="border-l-4 border-primary pl-4 py-2 bg-gray-50 italic text-gray-700 my-6 text-lg">
-                "AI isn't an option — it's the new baseline for building secure, resilient, and revenue-generating systems."
-              </blockquote>
-            </section>
-            
-            {/* 2 · Who I Am — Leadership Snapshot */}
-            <section className="mb-16">
-              <h3 className="text-2xl font-bold mb-4">15 Years Turning Data & AI Into $40 M+ Business Impact</h3>
-              
-              <ul className="space-y-3 mb-6">
-                <li className="flex items-start">
-                  <span className="text-primary mr-2 mt-1">•</span>
-                  <span><strong>AI & Data Strategy Executive</strong> — led enterprise-wide AI roll-outs across <strong>finance, telecom, supply-chain, and CPG</strong> sectors.</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary mr-2 mt-1">•</span>
-                  <span><strong>Team Builder</strong> — scaled & mentored cross-functional groups of <strong>data engineers, ML scientists, infra & DevSecOps</strong> specialists.</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary mr-2 mt-1">•</span>
-                  <span><strong>Scale & Governance</strong> — designed data estates, MLOps pipelines, and governance frameworks that cut analytic cycle-time 40 % and saved over $25 M.</span>
-                </li>
-              </ul>
-            </section>
-            
-            {/* 4 · My Vision – Building an AI-First Company */}
-            <section className="mb-16">
-              <h3 className="text-2xl font-bold mb-4">My Vision – Building an AI-First Company</h3>
-              
-              <blockquote className="border-l-4 border-primary pl-4 py-2 bg-gray-50 my-6">
-                <p className="italic">Becoming <strong>AI-First</strong> isn't an add-on; it's the default lens for product design, decision-making, and hiring.</p>
-              </blockquote>
-              
-              <ol className="list-decimal pl-6 space-y-3 mb-6">
-                <li><strong>Systems that learn & adapt</strong> – continuous data loops.</li>
-                <li><strong>Process redesign, not mere automation.</strong></li>
-                <li><strong>Teams equipped to <em>use</em> AI, not just demo it.</strong></li>
-                <li><strong>Experiment → learn → ship fast</strong> — pace of learning beats polish.</li>
-              </ol>
-            </section>
-            
-            {/* 6 · AI-Maturity Framework */}
-            <section className="mb-16">
-              <h3 className="text-2xl font-bold mb-6">AI-Maturity Framework</h3>
-              
-              <div className="overflow-x-auto mb-6">
-                <table className="min-w-full border-collapse border border-gray-200">
-                  <thead>
-                    <tr className="bg-gray-100">
-                      <th className="py-3 px-4 border border-gray-200 text-left font-medium">Readiness Dimension</th>
-                      <th className="py-3 px-4 border border-gray-200 text-left font-medium">What I Audit</th>
-                      <th className="py-3 px-4 border border-gray-200 text-left font-medium">Typical Gap I Fix</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="py-3 px-4 border border-gray-200 font-semibold">Infrastructure</td>
-                      <td className="py-3 px-4 border border-gray-200">Latency, pipelines, GPUs</td>
-                      <td className="py-3 px-4 border border-gray-200">Cloud / edge refactor</td>
-                    </tr>
-                    <tr className="bg-gray-50">
-                      <td className="py-3 px-4 border border-gray-200 font-semibold">Data Ecosystem</td>
-                      <td className="py-3 px-4 border border-gray-200">Lineage, access, quality</td>
-                      <td className="py-3 px-4 border border-gray-200">Central Lake + catalog</td>
-                    </tr>
-                    <tr>
-                      <td className="py-3 px-4 border border-gray-200 font-semibold">Talent Availability</td>
-                      <td className="py-3 px-4 border border-gray-200">SME bandwidth</td>
-                      <td className="py-3 px-4 border border-gray-200">Rotation + up-/re-skilling</td>
-                    </tr>
-                    <tr className="bg-gray-50">
-                      <td className="py-3 px-4 border border-gray-200 font-semibold">Risk Tolerance</td>
-                      <td className="py-3 px-4 border border-gray-200">Iteration culture</td>
-                      <td className="py-3 px-4 border border-gray-200">Pilot play-book, KPIs</td>
-                    </tr>
-                    <tr>
-                      <td className="py-3 px-4 border border-gray-200 font-semibold">Funding Alignment</td>
-                      <td className="py-3 px-4 border border-gray-200">Opex vs Capex mix</td>
-                      <td className="py-3 px-4 border border-gray-200">Stage-gated budgets</td>
-                    </tr>
-                  </tbody>
-                </table>
+      {/* Presentation container */}
+      <div className="fixed inset-0 bg-gradient-to-br from-gray-900 to-gray-800 text-gray-100 flex flex-col">
+        {/* Presentation header */}
+        <header className="flex justify-between items-center px-4 py-2 border-b border-gray-700">
+          <div className="text-sm text-gray-300">
+            CSEO Vision Brief • Ta Khongsap
+          </div>
+          <div className="flex items-center space-x-3">
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="text-gray-300 hover:text-white"
+              onClick={toggleAgenda}
+            >
+              {showAgenda ? <X size={18} /> : <LayoutGrid size={18} />}
+              <span className="ml-1">{showAgenda ? 'Close' : 'Agenda'}</span>
+            </Button>
+          </div>
+        </header>
+        
+        {/* Main content area */}
+        <div className="flex-grow relative overflow-hidden">
+          {/* Slide content */}
+          <div className="absolute inset-0 px-6 md:px-12 py-8 overflow-auto">
+            <div className="max-w-5xl mx-auto h-full">
+              {renderSlideContent()}
+            </div>
+          </div>
+          
+          {/* Agenda overlay */}
+          <div className={cn(
+            "absolute inset-0 bg-gray-900/95 transition-all duration-300 p-8 overflow-auto",
+            showAgenda ? "opacity-100 z-10" : "opacity-0 -z-10"
+          )}>
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-3xl font-bold mb-8 text-white">Presentation Agenda</h2>
+              <div className="grid md:grid-cols-2 gap-4">
+                {slides.map((slide, index) => (
+                  <button
+                    key={slide.id}
+                    onClick={() => goToSlide(index)}
+                    className={cn(
+                      "text-left p-4 rounded-lg transition-colors",
+                      currentSlide === index 
+                        ? "bg-primary text-white" 
+                        : "bg-gray-800 hover:bg-gray-700 text-gray-100"
+                    )}
+                  >
+                    <div className="flex items-center">
+                      <span className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-600 mr-3">
+                        {index + 1}
+                      </span>
+                      <h3 className="font-medium">{slide.title}</h3>
+                    </div>
+                  </button>
+                ))}
               </div>
-              
-              <div className="mb-6">
-                <p className="font-semibold mb-2">Execution Modes (applied once readiness known)</p>
-                <p className="italic">Efficiency · Effectiveness · Productivity · Growth · Expert-augmentation</p>
-              </div>
-              
-              <blockquote className="border-l-4 border-primary pl-4 py-2 bg-gray-50 italic text-gray-700 my-6">
-                "Before you sprint, build the shoes, map the course, train the runners."
-              </blockquote>
-            </section>
-            
-            {/* 7 · Why This Matters to Sirisoft */}
-            <section className="mb-16">
-              <h3 className="text-2xl font-bold mb-6">Why This Matters to Sirisoft</h3>
-              
-              <div className="overflow-x-auto mb-6">
-                <table className="min-w-full border-collapse border border-gray-200">
-                  <thead>
-                    <tr className="bg-gray-100">
-                      <th className="py-3 px-4 border border-gray-200 text-left font-medium">Sirisoft Need</th>
-                      <th className="py-3 px-4 border border-gray-200 text-left font-medium">What I Bring</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="py-3 px-4 border border-gray-200">Scale DevOps to AI/ML <strong>(60 % role focus)</strong></td>
-                      <td className="py-3 px-4 border border-gray-200">Proven Gen-AI & MLOps roll-outs</td>
-                    </tr>
-                    <tr className="bg-gray-50">
-                      <td className="py-3 px-4 border border-gray-200"><strong>Cyber-secure</strong> financial & energy clients</td>
-                      <td className="py-3 px-4 border border-gray-200">Active AI threat-detection POC</td>
-                    </tr>
-                    <tr>
-                      <td className="py-3 px-4 border border-gray-200">Grow & retain 70+ engineers</td>
-                      <td className="py-3 px-4 border border-gray-200">Track record in curriculum & culture</td>
-                    </tr>
-                    <tr className="bg-gray-50">
-                      <td className="py-3 px-4 border border-gray-200">Visionary + hands-on peer to CTO</td>
-                      <td className="py-3 px-4 border border-gray-200">Blend of strategy & execution</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </section>
-            
-            {/* 8 · Let's Talk Impact */}
-            <section className="mb-16">
-              <h3 className="text-2xl font-bold mb-6">Let's Talk Impact</h3>
-              
-              <div className="bg-gray-50 p-6 rounded-lg">
-                <p className="font-semibold mb-4">I'm ready to:</p>
-                <ol className="list-decimal pl-6 space-y-3">
-                  <li>Stand up an AI-powered DevSecOps platform within 120 days</li>
-                  <li>Cut mean-time-to-detect by 50 % using ML anomaly models</li>
-                  <li>Upskill every engineer on Gen-AI tooling in first year</li>
-                </ol>
-              </div>
-              
-              <div className="mt-8">
-                <Button variant="outline" className="flex items-center gap-2">
-                  Download full deck (PDF) <ArrowRight size={16} />
-                </Button>
-              </div>
-            </section>
-            
-            {/* Footer */}
-            <footer className="text-sm text-gray-500 italic border-t pt-4">
-              Confidential — prepared exclusively for Sirisoft COO interview (2 May 2025).
-            </footer>
+            </div>
           </div>
         </div>
+        
+        {/* Navigation and progress bar */}
+        <footer className="border-t border-gray-700 px-4 py-2">
+          <div className="flex justify-between items-center">
+            <Button 
+              variant="ghost" 
+              size="sm"
+              onClick={goToPrevSlide}
+              disabled={currentSlide === 0}
+              className="text-gray-300 hover:text-white"
+            >
+              <ArrowLeft size={18} className="mr-1" />
+              Previous
+            </Button>
+            
+            <div className="flex space-x-1 items-center">
+              {slides.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToSlide(index)}
+                  className={cn(
+                    "w-2 h-2 rounded-full transition-all",
+                    currentSlide === index ? "bg-primary w-4" : "bg-gray-600 hover:bg-gray-400"
+                  )}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+              <span className="ml-3 text-sm text-gray-400">
+                {currentSlide + 1} / {slides.length}
+              </span>
+            </div>
+            
+            <Button 
+              variant="ghost" 
+              size="sm"
+              onClick={goToNextSlide}
+              disabled={currentSlide === slides.length - 1}
+              className="text-gray-300 hover:text-white"
+            >
+              Next
+              <ArrowRight size={18} className="ml-1" />
+            </Button>
+          </div>
+        </footer>
       </div>
     </>
   );
