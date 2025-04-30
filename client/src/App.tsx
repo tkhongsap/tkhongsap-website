@@ -13,7 +13,6 @@ import Writing from "@/pages/writing";
 import Contact from "@/pages/contact";
 import ConfirmPage from "@/pages/confirm";
 import UnsubscribePage from "@/pages/unsubscribe";
-import SirisoftCSEO from "@/pages/sirisoft-cseo";
 import GoogleAnalytics from "@/components/google-analytics";
 import SubscriptionMessage from "@/components/subscription-message";
 
@@ -39,7 +38,6 @@ function Router() {
       <Route path="/contact" component={Contact} />
       <Route path="/confirm" component={ConfirmPage} />
       <Route path="/unsubscribe" component={UnsubscribePage} />
-      <Route path="/sirisoft-cseo" component={SirisoftCSEO} />
       <Route component={NotFound} />
     </Switch>
   );
