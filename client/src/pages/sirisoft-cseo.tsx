@@ -108,7 +108,7 @@ export default function SirisoftCSEO() {
       case 'title':
         return (
           <div className="flex flex-col items-center justify-center h-full text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-primary">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-primary" style={{color: 'var(--color-primary)'}}>
               Chief Solution Engineering Officer
             </h1>
             <h2 className="text-2xl md:text-3xl font-semibold mb-10">
@@ -116,12 +116,12 @@ export default function SirisoftCSEO() {
             </h2>
             <h3 className="text-xl md:text-2xl mb-12">Ta Khongsap</h3>
             
-            <blockquote className="border-l-4 border-primary pl-4 py-2 bg-gray-50/80 italic text-gray-700 my-8 text-lg max-w-2xl">
+            <blockquote className="border-l-4 border-primary pl-4 py-2 bg-card italic text-foreground my-8 text-lg max-w-2xl" style={{borderLeftColor: 'var(--color-primary)', backgroundColor: 'var(--color-card-background)'}}>
               "AI isn't an option — it's the new baseline for building secure, resilient, and revenue-generating systems."
             </blockquote>
             
             <div className="absolute bottom-10 animate-bounce">
-              <ChevronRight size={36} className="text-primary" />
+              <ChevronRight size={36} className="text-primary" style={{color: 'var(--color-primary)'}} />
             </div>
           </div>
         );
