@@ -135,14 +135,14 @@ export default function MyThought() {
         
         <Presentation>
           {/* Slide 1: Hero + Tagline */}
-          <Slide className="bg-modern-primary text-modern-primaryForeground">
+          <Slide className="bg-modern-background text-modern-foreground">
             <motion.div
-              className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12"
+              className="flex flex-col md:flex-row items-center justify-start gap-8 md:gap-12 py-8"
               variants={containerVariants}
               initial="hidden"
               animate="visible"
             >
-              <motion.div variants={itemVariants} className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-modern-accent/60 shadow-xl">
+              <motion.div variants={itemVariants} className="w-56 h-56 md:w-72 md:h-72 overflow-hidden rounded-[64px] bg-gradient-to-br from-blue-600 to-indigo-700">
                 <img 
                   src="/assets/profile-ta.jpg" 
                   alt="Ta Khongsap" 
@@ -150,10 +150,10 @@ export default function MyThought() {
                 />
               </motion.div>
               
-              <motion.div variants={itemVariants} className="text-center md:text-left max-w-2xl">
+              <motion.div variants={itemVariants} className="md:text-left max-w-2xl">
                 <motion.blockquote
                   variants={itemVariants}
-                  className="text-2xl md:text-3xl font-medium leading-relaxed text-modern-secondary/90 border-l-4 border-modern-accent pl-4 md:pl-6 py-2"
+                  className="text-2xl md:text-3xl font-medium leading-relaxed text-gray-800 border-l-4 border-primary pl-4 md:pl-6 py-2"
                 >
                   "AI isn't an option — it's the new baseline for building secure, resilient, and revenue-generating systems."
                 </motion.blockquote>
