@@ -137,20 +137,52 @@ export default function MyThought() {
           {/* Slide 1: Hero + Tagline */}
           <Slide className="bg-modern-background text-modern-foreground">
             <motion.div
-              className="flex flex-col md:flex-row items-center justify-start gap-8 md:gap-12 py-8"
+              className="flex flex-col md:flex-row gap-8 md:gap-12 py-8 items-start"
               variants={containerVariants}
               initial="hidden"
               animate="visible"
             >
-              <motion.div variants={itemVariants} className="w-56 h-56 md:w-72 md:h-72 overflow-hidden rounded-[64px] bg-gradient-to-br from-blue-600 to-indigo-700">
-                <img 
-                  src="/assets/profile-ta.jpg" 
-                  alt="Ta Khongsap" 
-                  className="w-full h-full object-cover"
-                />
+              <motion.div variants={itemVariants} className="md:w-1/3">
+                <div className="bg-gray-100 rounded-lg p-6">
+                  <div className="mb-6 flex justify-center">
+                    <div className="w-48 h-48 rounded-full overflow-hidden flex items-center justify-center border-2 border-primary">
+                      <img 
+                        src="/assets/profile-ta.jpg" 
+                        alt="Ta Khongsap profile picture"
+                        className="rounded-full w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="text-center">
+                    <h3 className="text-xl font-bold mb-2"><span className="text-primary">Ta</span> <span className="text-gray-800">Khongsap</span></h3>
+                    <p className="text-gray-700 mb-4">AI Strategist & Data Science Leader</p>
+                    
+                    <div className="flex justify-center space-x-4">
+                      <a 
+                        href="https://www.linkedin.com/in/totrakool-k-b504a912/" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="text-gray-700 hover:text-primary transition-colors"
+                        aria-label="LinkedIn"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                      </a>
+                      <a 
+                        href="https://github.com/tkhongsap" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="text-gray-700 hover:text-primary transition-colors"
+                        aria-label="GitHub"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
               </motion.div>
               
-              <motion.div variants={itemVariants} className="md:text-left max-w-2xl">
+              <motion.div variants={itemVariants} className="md:w-2/3">
                 <motion.blockquote
                   variants={itemVariants}
                   className="text-2xl md:text-3xl font-medium leading-relaxed text-gray-800 border-l-4 border-primary pl-4 md:pl-6 py-2"
