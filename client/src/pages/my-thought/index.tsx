@@ -239,16 +239,16 @@ export default function MyThought() {
           {/* Slide 3: Leadership Snapshot */}
           <Slide>
             <motion.div variants={containerVariants} initial="hidden" animate="visible">
-              <SlideTitle>15 Years Turning Data & AI Into ฿40 M+ Business Impact</SlideTitle>
+              <SlideTitle>15 Years Driving Enterprise-Wide AI & Data Transformation</SlideTitle>
               <BulletList className="mt-8 md:mt-10 space-y-4 md:space-y-6">
                 <BulletPoint icon={Award}>
-                  <span className="font-semibold text-modern-foreground">AI & Data Strategy Executive:</span> <span className="text-modern-mutedForeground">Led enterprise-wide AI roll-outs across <strong>finance, telecom, supply-chain, and CPG</strong> sectors.</span>
+                  <span className="font-semibold text-modern-foreground">AI & Data Strategy Executive —</span> <span className="text-modern-mutedForeground">led large-scale analytics and AI programmes in <strong>finance, telecom, supply-chain, and CPG</strong>, turning data into a core competitive advantage.</span>
                 </BulletPoint>
                 <BulletPoint icon={Users}>
-                  <span className="font-semibold text-modern-foreground">Team Builder:</span> <span className="text-modern-mutedForeground">Scaled & mentored cross-functional groups of <strong>data engineers, ML scientists, infra & DevSecOps</strong> specialists.</span>
+                  <span className="font-semibold text-modern-foreground">Senior People Leader —</span> <span className="text-modern-mutedForeground">built and mentored multidisciplinary teams of <strong>data scientists and ML engineers</strong>, instilling a culture of fast iteration and responsible AI.</span>
                 </BulletPoint>
                 <BulletPoint icon={BarChartBig}>
-                  <span className="font-semibold text-modern-foreground">Scale & Governance:</span> <span className="text-modern-mutedForeground">Designed data estates, MLOps pipelines, and governance frameworks that cut analytic cycle-time 40% and saved over ฿25M logistics costs.</span>
+                  <span className="font-semibold text-modern-foreground">Transformation Catalyst —</span> <span className="text-modern-mutedForeground">delivered data, AI, and automation solutions that elevated decision-making and unlocked new revenue streams.</span>
                 </BulletPoint>
               </BulletList>
             </motion.div>
