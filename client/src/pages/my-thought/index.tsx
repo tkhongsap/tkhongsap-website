@@ -109,7 +109,7 @@ export default function MyThought() {
   // Data for tables
   const techCredentialsData = [
     [
-      "**Generative AI & Agents**",
+      "**ML, AI & Agents**",
       "Executive-level expertise with DeepLearning.AI certifications in Prompt Engineering, ChatGPT API integration, and RAG with advanced multi-agent systems",
     ],
     [
@@ -126,31 +126,26 @@ export default function MyThought() {
   const initiativesData = [
     [
       "**AI-Powered Knowledge Management**",
-      "• Turn ticket data into searchable knowledge • Auto-suggest solutions to support staff",
-      "• Vector-DB of 120k tickets • 35% faster MTTR",
+      "Converts internal case notes and resolutions into an LLM-searchable knowledge base, so support teams get consistent answers and best-practice fixes instantly.",
     ],
     [
-      "**AI-Powered Software Development**",
-      "• GitHub Copilot & LLM code-review • Predictive QA test-case generation",
-      "• 18% velocity lift • 25% defect drop",
+      "**AI-Assisted Software Development**",
+      "Uses code-assistant tooling and ML-driven code review to boost developer productivity, raise code quality and security, and upskill teams through real-time suggestions.",
     ],
     [
-      "**AI-First Mobile Application**",
-      "• Real-time OCR & doc-classification app • Sales onboarding & logistics POD",
-      "• < 3 sec latency • 99.1% accuracy",
-    ],
-    [
-      "**Vision Model for Detection**",
-      "• Custom YOLOv8 + OpenAI fine-tune model • Bottle-claim / product-defect QC",
-      "• 95% hit-rate @ 4 FPS • Saving ฿8M/yr waste",
+      "**AI-First Mobile OCR Application**",
+      "An AI-powered OCR app that captures documents in the field, applies business rules, and pushes clean data straight into core workflows—eliminating re-keying delays.",
     ],
     [
       "**Agentic Document Workflow**",
-      "• Multi-agent pipeline for contracts • Extract clauses & route approvals",
-      "• Cuts approval lead-time 50%",
+      "A multi-agent pipeline that ingests contracts, extracts key clauses, and routes approvals automatically, turning days of manual processing into near real-time flow.",
+    ],
+    [
+      "**Vision Models for Image Insight**",
+      "Computer-vision models that detect, classify, and flag anomalies in images or video—supporting use-cases from product-defect QC to field asset inspections and visual analytics.",
     ],
   ];
-  const initiativesHeaders = ["Initiative", "Key Objectives", "Deliverables"];
+  const initiativesHeaders = ["Initiative", "Enterprise Use-Case & Business Value"];
 
   const aiMaturityReadinessData = [
     ["**Infrastructure**", "Latency, pipelines, GPUs", "Cloud / edge refactor"],
@@ -429,8 +424,14 @@ export default function MyThought() {
               animate="visible"
             >
               <SlideTitle>
-                Current Enterprise-Scale AI Initiatives (2024-25)
+                Examples of Enterprise-Scale AI Initiatives
               </SlideTitle>
+              <motion.p
+                variants={itemVariants}
+                className="text-center text-modern-mutedForeground mb-4 md:mb-6"
+              >
+                (listed from quick-win to increasingly advanced)
+              </motion.p>
               <SimpleTable
                 headers={initiativesHeaders}
                 data={initiativesData}
@@ -443,14 +444,19 @@ export default function MyThought() {
               </motion.h3>
               <BulletList className="mt-2 md:mt-4 space-y-2">
                 <BulletPoint icon={ShieldCheck}>
-                  Industry-leading AI-powered systems with built-in security
+                  Consistent, knowledge-driven support with faster incident resolution
                 </BulletPoint>
                 <BulletPoint icon={Activity}>
-                  Proven autonomous operations concepts with measurable ROI
+                  Higher-quality, secure code delivered sooner through AI augmentation
                 </BulletPoint>
                 <BulletPoint icon={BookOpen}>
-                  Highly skilled, AI-fluent engineering workforce ready for
-                  next-gen projects
+                  Seamless document capture that feeds business processes with zero manual touch
+                </BulletPoint>
+                <BulletPoint icon={GitBranch}>
+                  Automated, audit-ready document approvals
+                </BulletPoint>
+                <BulletPoint icon={Zap}>
+                  Real-time visual insight that reduces risk and improves operational quality
                 </BulletPoint>
               </BulletList>
             </motion.div>
