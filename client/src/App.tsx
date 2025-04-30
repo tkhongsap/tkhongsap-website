@@ -13,6 +13,7 @@ import Writing from "@/pages/writing";
 import Contact from "@/pages/contact";
 import ConfirmPage from "@/pages/confirm";
 import UnsubscribePage from "@/pages/unsubscribe";
+import MyThought from "@/pages/my-thought";
 import GoogleAnalytics from "@/components/google-analytics";
 import SubscriptionMessage from "@/components/subscription-message";
 
@@ -35,6 +36,7 @@ function Router() {
       <Route path="/about" component={About} />
       <Route path="/portfolio" component={Portfolio} />
       <Route path="/writing" component={Writing} />
+      <Route path="/my-thought" component={MyThought} />
       <Route path="/contact" component={Contact} />
       <Route path="/confirm" component={ConfirmPage} />
       <Route path="/unsubscribe" component={UnsubscribePage} />
