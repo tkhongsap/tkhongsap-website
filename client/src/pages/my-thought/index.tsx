@@ -197,14 +197,42 @@ export default function MyThought() {
           <Slide>
             <motion.div variants={containerVariants} initial="hidden" animate="visible">
               <SlideTitle>Agenda: Vision, Strategy, Impact</SlideTitle>
-              <BulletList className="mt-8 md:mt-10 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
-                <BulletPoint icon={Briefcase}>Leadership Snapshot & Credentials</BulletPoint>
-                <BulletPoint icon={ClipboardList}>Current Initiatives & Expected Outcomes</BulletPoint>
-                <BulletPoint icon={Lightbulb}>My Vision: The AI-First Imperative</BulletPoint>
-                <BulletPoint icon={Milestone}>AI Maturity: Readiness & Execution</BulletPoint>
-                <BulletPoint icon={Handshake}>Alignment with Sirisoft's Needs</BulletPoint>
-                <BulletPoint icon={Rocket}>Commitment & Impact</BulletPoint>
-              </BulletList>
+              <div className="max-w-3xl mx-auto mt-8 md:mt-10">
+                <div className="grid grid-cols-1 gap-4">
+                  {[
+                    { icon: Briefcase, title: "Leadership Snapshot & Credentials", order: 1 },
+                    { icon: ClipboardList, title: "Current Initiatives & Expected Outcomes", order: 2 },
+                    { icon: Lightbulb, title: "My Vision: The AI-First Imperative", order: 3 },
+                    { icon: Milestone, title: "AI Maturity: Readiness & Execution", order: 4 },
+                    { icon: Handshake, title: "Alignment with Sirisoft's Needs", order: 5 },
+                    { icon: Rocket, title: "Commitment & Impact", order: 6 }
+                  ].map((item, index) => (
+                    <motion.div
+                      key={index}
+                      variants={itemVariants}
+                      className="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-md transition-shadow overflow-hidden"
+                    >
+                      <div className="p-4 md:p-6">
+                        <div className="flex items-start space-x-4">
+                          <div className="flex-shrink-0 rounded-full bg-primary/10 p-3">
+                            <item.icon className="h-6 w-6 text-primary" />
+                          </div>
+                          <div className="flex-1">
+                            <div className="flex justify-between items-center">
+                              <h3 className="text-lg font-medium leading-6">{item.title}</h3>
+                              <div className="ml-2">
+                                <span className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary">
+                                  {item.order}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
             </motion.div>
           </Slide>
 
