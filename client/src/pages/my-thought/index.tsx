@@ -140,26 +140,27 @@ export default function MyThought() {
           {/* Slide 1: Hero + Tagline */}
           <Slide className="bg-modern-primary text-modern-primaryForeground">
             <motion.div
-              className="text-center"
+              className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12"
               variants={containerVariants}
               initial="hidden"
               animate="visible"
             >
-              <motion.h1 variants={itemVariants} className="font-bold mb-4">
-                Chief Solution Engineering Officer – Vision Brief
-              </motion.h1>
-              <motion.p
-                variants={itemVariants}
-                className="text-2xl md:text-3xl text-modern-secondary mb-8"
-              >
-                Ta Khongsap
-              </motion.p>
-              <motion.blockquote
-                variants={itemVariants}
-                className="text-xl md:text-2xl italic text-modern-secondary/80 border-l-4 border-modern-accent pl-4 md:pl-6 py-2 max-w-3xl mx-auto"
-              >
-                "AI isn't an option — it's the new baseline for building secure, resilient, and revenue-generating systems."
-              </motion.blockquote>
+              <motion.div variants={itemVariants} className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-modern-accent/60 shadow-xl">
+                <img 
+                  src="/assets/profile.png" 
+                  alt="Ta Khongsap" 
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
+              
+              <motion.div variants={itemVariants} className="text-center md:text-left max-w-2xl">
+                <motion.blockquote
+                  variants={itemVariants}
+                  className="text-2xl md:text-3xl font-medium leading-relaxed text-modern-secondary/90 border-l-4 border-modern-accent pl-4 md:pl-6 py-2"
+                >
+                  "AI isn't an option — it's the new baseline for building secure, resilient, and revenue-generating systems."
+                </motion.blockquote>
+              </motion.div>
             </motion.div>
           </Slide>
 
