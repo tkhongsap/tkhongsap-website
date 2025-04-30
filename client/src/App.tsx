@@ -14,7 +14,6 @@ import Contact from "@/pages/contact";
 import ConfirmPage from "@/pages/confirm";
 import UnsubscribePage from "@/pages/unsubscribe";
 import MyThought from "@/pages/my-thought";
-import SirisoftCSEO from "@/pages/sirisoft-cseo";
 import GoogleAnalytics from "@/components/google-analytics";
 import SubscriptionMessage from "@/components/subscription-message";
 
