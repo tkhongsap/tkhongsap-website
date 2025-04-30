@@ -128,16 +128,16 @@ export default function MyThought() {
         <meta name="description" content="Chief Solution Engineering Officer vision brief - Totrakool Khongsap" />
       </Helmet>
       
-      <main className="flex min-h-screen flex-col items-center justify-between bg-modern-background">
-        <div className="w-full max-w-7xl mx-auto px-4 py-4 md:py-6">
-          <h1 className="text-3xl md:text-4xl font-bold text-center mb-4">My Thought</h1>
+      <main className="flex min-h-screen flex-col items-center justify-center bg-modern-background">
+        <div className="w-full max-w-7xl mx-auto px-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-center mb-0">My Thought</h1>
         </div>
         
         <Presentation>
           {/* Slide 1: Hero + Tagline */}
-          <Slide className="bg-modern-background text-modern-foreground pt-0 md:pt-0">
+          <Slide className="bg-modern-background text-modern-foreground pt-0 md:pt-0 flex items-center justify-center min-h-[calc(100vh-180px)]">
             <motion.div
-              className="flex flex-col md:flex-row-reverse gap-8 md:gap-12 items-start md:items-center"
+              className="flex flex-col md:flex-row-reverse gap-8 md:gap-12 items-center justify-center"
               variants={containerVariants}
               initial="hidden"
               animate="visible"
