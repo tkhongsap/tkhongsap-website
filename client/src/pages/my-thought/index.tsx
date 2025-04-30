@@ -194,7 +194,7 @@ export default function MyThought() {
           </Slide>
 
           {/* Slide 2: Agenda */}
-          <Slide>
+          <Slide className="pt-16 md:pt-20 lg:pt-24">
             <motion.div variants={containerVariants} initial="hidden" animate="visible">
               <SlideTitle>Agenda: Vision, Strategy, Impact</SlideTitle>
               <div className="max-w-3xl mx-auto mt-8 md:mt-10">
