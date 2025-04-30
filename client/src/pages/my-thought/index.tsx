@@ -426,12 +426,6 @@ export default function MyThought() {
               <SlideTitle>
                 Examples of Enterprise-Scale AI Initiatives
               </SlideTitle>
-              <motion.p
-                variants={itemVariants}
-                className="text-center text-modern-mutedForeground mb-4 md:mb-6"
-              >
-                (listed from quick-win to increasingly advanced)
-              </motion.p>
               <SimpleTable
                 headers={initiativesHeaders}
                 data={initiativesData}
