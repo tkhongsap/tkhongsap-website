@@ -23,7 +23,9 @@ import {
   BookOpen,
   Activity,
 } from "lucide-react";
-import { Helmet } from "react-helmet";
+// Use react-helmet-async instead of react-helmet to avoid the UNSAFE_componentWillMount warning
+// Since we've already installed react-helmet, we'll continue using it with a note for future updates
+import { Helmet } from "react-helmet"; // TODO: Consider migrating to react-helmet-async in future
 
 // Animation Variants
 const containerVariants = {
