@@ -412,6 +412,139 @@ export default function MyThought() {
             </motion.div>
           </Slide>
 
+          {/* Slide 4.5: GitHub Profile */}
+          <Slide>
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              <SlideTitle>Open Source Contributions</SlideTitle>
+              <motion.div variants={itemVariants} className="mt-6 md:mt-8 text-center">
+                <a 
+                  href="https://github.com/tkhongsap" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="h-5 w-5"
+                  >
+                    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+                    <path d="M9 18c-4.51 2-5-2-7-2" />
+                  </svg>
+                  github.com/tkhongsap
+                </a>
+              </motion.div>
+              
+              <motion.div variants={itemVariants} className="mt-6 mb-4 px-4 md:px-0">
+                <div className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg shadow-sm overflow-hidden">
+                  <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-full overflow-hidden bg-gray-100">
+                          <img 
+                            src="/assets/profile-ta.jpg" 
+                            alt="Ta Khongsap GitHub profile" 
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <div>
+                          <h3 className="font-semibold text-gray-900 dark:text-white">Ta Khongsap</h3>
+                          <p className="text-sm text-gray-600 dark:text-gray-400">@tkhongsap</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-3 border-b border-gray-200 dark:border-gray-700 text-center">
+                    <div className="p-3 border-r border-gray-200 dark:border-gray-700">
+                      <div className="font-medium text-gray-900 dark:text-white">12</div>
+                      <div className="text-sm text-gray-600 dark:text-gray-400">Repositories</div>
+                    </div>
+                    <div className="p-3 border-r border-gray-200 dark:border-gray-700">
+                      <div className="font-medium text-gray-900 dark:text-white">487</div>
+                      <div className="text-sm text-gray-600 dark:text-gray-400">Contributions</div>
+                    </div>
+                    <div className="p-3">
+                      <div className="font-medium text-gray-900 dark:text-white">43</div>
+                      <div className="text-sm text-gray-600 dark:text-gray-400">Stars</div>
+                    </div>
+                  </div>
+                  
+                  <div className="p-4">
+                    <div className="text-sm text-gray-800 dark:text-gray-200 mb-4">
+                      <span className="font-medium">Notable repositories:</span>
+                    </div>
+                    <div className="space-y-3">
+                      <div className="bg-gray-50 dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-3">
+                        <div className="flex justify-between items-start">
+                          <div>
+                            <h4 className="font-medium text-primary">ai-threat-detection</h4>
+                            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                              ML-based threat detection system leveraging anomaly detection and behavioral analytics
+                            </p>
+                            <div className="flex gap-2 mt-2">
+                              <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300">
+                                Python
+                              </span>
+                              <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">
+                                TensorFlow
+                              </span>
+                            </div>
+                          </div>
+                          <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                            <svg className="w-4 h-4 mr-1" viewBox="0 0 16 16" fill="currentColor">
+                              <path fillRule="evenodd" d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"></path>
+                            </svg>
+                            18
+                          </div>
+                        </div>
+                      </div>
+                      <div className="bg-gray-50 dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-3">
+                        <div className="flex justify-between items-start">
+                          <div>
+                            <h4 className="font-medium text-primary">rag-enterprise-kb</h4>
+                            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                              Retrieval-augmented generation framework for enterprise knowledge bases
+                            </p>
+                            <div className="flex gap-2 mt-2">
+                              <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300">
+                                JavaScript
+                              </span>
+                              <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300">
+                                LangChain
+                              </span>
+                            </div>
+                          </div>
+                          <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                            <svg className="w-4 h-4 mr-1" viewBox="0 0 16 16" fill="currentColor">
+                              <path fillRule="evenodd" d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"></path>
+                            </svg>
+                            13
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+              
+              <motion.div variants={itemVariants} className="text-center mb-6 text-gray-600 dark:text-gray-400 italic text-sm">
+                View more code examples and technical projects on my GitHub profile
+              </motion.div>
+            </motion.div>
+          </Slide>
+
           {/* Slide 5: Current Initiatives */}
           <Slide>
             <motion.div
