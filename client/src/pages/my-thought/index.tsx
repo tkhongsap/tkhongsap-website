@@ -459,78 +459,89 @@ export default function MyThought() {
                           />
                         </div>
                         <div>
-                          <h3 className="font-semibold text-gray-900 dark:text-white">Ta Khongsap</h3>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">@tkhongsap</p>
+                          <h3 className="font-semibold text-gray-900 dark:text-white">tkhongsap</h3>
+                          <p className="text-sm text-gray-600 dark:text-gray-400">
+                            2 followers · 15 following
+                          </p>
                         </div>
                       </div>
                     </div>
                   </div>
                   
-                  <div className="grid grid-cols-3 border-b border-gray-200 dark:border-gray-700 text-center">
-                    <div className="p-3 border-r border-gray-200 dark:border-gray-700">
-                      <div className="font-medium text-gray-900 dark:text-white">12</div>
-                      <div className="text-sm text-gray-600 dark:text-gray-400">Repositories</div>
-                    </div>
-                    <div className="p-3 border-r border-gray-200 dark:border-gray-700">
-                      <div className="font-medium text-gray-900 dark:text-white">487</div>
-                      <div className="text-sm text-gray-600 dark:text-gray-400">Contributions</div>
-                    </div>
-                    <div className="p-3">
-                      <div className="font-medium text-gray-900 dark:text-white">43</div>
-                      <div className="text-sm text-gray-600 dark:text-gray-400">Stars</div>
+                  <div className="grid grid-cols-1 border-b border-gray-200 dark:border-gray-700 text-center p-3">
+                    <div className="font-medium text-gray-900 dark:text-white">
+                      645 contributions in the last year
                     </div>
                   </div>
                   
                   <div className="p-4">
                     <div className="text-sm text-gray-800 dark:text-gray-200 mb-4">
-                      <span className="font-medium">Notable repositories:</span>
+                      <span className="font-medium">Pinned repositories:</span>
                     </div>
                     <div className="space-y-3">
                       <div className="bg-gray-50 dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-3">
                         <div className="flex justify-between items-start">
                           <div>
-                            <h4 className="font-medium text-primary">ai-threat-detection</h4>
+                            <h4 className="font-medium text-primary">anthropic-cookbook</h4>
                             <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                              ML-based threat detection system leveraging anomaly detection and behavioral analytics
+                              A collection of notebooks/recipes showcasing some fun and effective ways of using Claude.
                             </p>
                             <div className="flex gap-2 mt-2">
-                              <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300">
-                                Python
-                              </span>
-                              <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">
-                                TensorFlow
+                              <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300">
+                                Jupyter Notebook
                               </span>
                             </div>
-                          </div>
-                          <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                            <svg className="w-4 h-4 mr-1" viewBox="0 0 16 16" fill="currentColor">
-                              <path fillRule="evenodd" d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"></path>
-                            </svg>
-                            18
                           </div>
                         </div>
                       </div>
                       <div className="bg-gray-50 dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-3">
                         <div className="flex justify-between items-start">
                           <div>
-                            <h4 className="font-medium text-primary">rag-enterprise-kb</h4>
+                            <h4 className="font-medium text-primary">llama_index</h4>
                             <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                              Retrieval-augmented generation framework for enterprise knowledge bases
+                              LlamaIndex is a data framework for your LLM applications
                             </p>
                             <div className="flex gap-2 mt-2">
-                              <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300">
-                                JavaScript
+                              <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300">
+                                Python
                               </span>
-                              <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300">
-                                LangChain
+                              <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300">
+                                <svg className="w-3 h-3 mr-1" viewBox="0 0 16 16" fill="currentColor">
+                                  <path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"></path>
+                                </svg>
+                                1
                               </span>
                             </div>
                           </div>
-                          <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                            <svg className="w-4 h-4 mr-1" viewBox="0 0 16 16" fill="currentColor">
-                              <path fillRule="evenodd" d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"></path>
-                            </svg>
-                            13
+                        </div>
+                      </div>
+                      <div className="bg-gray-50 dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-3">
+                        <div className="flex justify-between items-start">
+                          <div>
+                            <h4 className="font-medium text-primary">openai-cookbook</h4>
+                            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                              Examples and guides for using the OpenAI API
+                            </p>
+                            <div className="flex gap-2 mt-2">
+                              <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300">
+                                MDX
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="bg-gray-50 dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-3">
+                        <div className="flex justify-between items-start">
+                          <div>
+                            <h4 className="font-medium text-primary">gen-ai-utils</h4>
+                            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                              A collection of utility scripts and helper functions for integrating and managing generative AI APIs, including OpenAI, Anthropic, and others.
+                            </p>
+                            <div className="flex gap-2 mt-2">
+                              <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300">
+                                Python
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -540,7 +551,7 @@ export default function MyThought() {
               </motion.div>
               
               <motion.div variants={itemVariants} className="text-center mb-6 text-gray-600 dark:text-gray-400 italic text-sm">
-                View more code examples and technical projects on my GitHub profile
+                Recent contribution: <strong>tkhongsap/gen-ai-jira</strong> - Building enterprise-grade AI tools
               </motion.div>
             </motion.div>
           </Slide>
