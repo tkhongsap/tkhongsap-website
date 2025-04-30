@@ -468,9 +468,18 @@ export default function MyThought() {
                     </div>
                   </div>
                   
-                  <div className="grid grid-cols-1 border-b border-gray-200 dark:border-gray-700 text-center p-3">
-                    <div className="font-medium text-gray-900 dark:text-white">
-                      645 contributions in the last year
+                  <div className="grid grid-cols-3 border-b border-gray-200 dark:border-gray-700 text-center">
+                    <div className="p-3 border-r border-gray-200 dark:border-gray-700">
+                      <div className="font-medium text-gray-900 dark:text-white">6</div>
+                      <div className="text-sm text-gray-600 dark:text-gray-400">Pinned Repos</div>
+                    </div>
+                    <div className="p-3 border-r border-gray-200 dark:border-gray-700">
+                      <div className="font-medium text-gray-900 dark:text-white">2</div>
+                      <div className="text-sm text-gray-600 dark:text-gray-400">Followers</div>
+                    </div>
+                    <div className="p-3">
+                      <div className="font-medium text-gray-900 dark:text-white">15</div>
+                      <div className="text-sm text-gray-600 dark:text-gray-400">Following</div>
                     </div>
                   </div>
                   
@@ -551,7 +560,7 @@ export default function MyThought() {
               </motion.div>
               
               <motion.div variants={itemVariants} className="text-center mb-6 text-gray-600 dark:text-gray-400 italic text-sm">
-                Recent contribution: <strong>tkhongsap/gen-ai-jira</strong> - Building enterprise-grade AI tools
+                Recent contributions to: <strong>gen-ai-jira</strong>, <strong>learning-ai-mockup</strong>, <strong>tkhongsap-website</strong>
               </motion.div>
             </motion.div>
           </Slide>
