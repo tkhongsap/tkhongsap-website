@@ -110,23 +110,15 @@ export default function MyThought() {
   const techCredentialsData = [
     [
       "**Generative AI & Agents**",
-      "DeepLearning.AI certs in Prompt Engineering, ChatGPT API, RAG with LlamaIndex, CrewAI multi-agent systems",
+      "Executive-level expertise with DeepLearning.AI certifications in Prompt Engineering, ChatGPT API integration, and RAG with advanced multi-agent systems",
     ],
     [
       "**Analytics & Data Engineering**",
-      "Built end-to-end ETL & BI platforms for telecom & F&B enterprises; doctorate in Mathematics strengthens ML depth",
+      "Orchestrated enterprise-wide ETL & BI platforms delivering actionable insights for C-suite decision makers; doctorate in Mathematics providing strategic depth to ML implementations",
     ],
     [
       "**Cybersecurity R&D**",
-      "Current research with **CMKL University** on AI-powered threat detection modules (prototype live)",
-    ],
-    [
-      "**Cloud & DevOps**",
-      "Kubernetes, Docker, OpenShift, CI/CD, IaC; delivered high-availability Oracle Exadata & Mongo clusters",
-    ],
-    [
-      "**Leadership**",
-      "Sr. Special-Project Expert (ThaiBev IT), former VP Data Science (dtac), +10 yrs P&L ownership",
+      "Leading strategic research partnership with **CMKL University** on AI-powered threat detection solutions driving organizational security innovation",
     ],
   ];
   const techCredentialsHeaders = ["Domain", "Proof-points"];
