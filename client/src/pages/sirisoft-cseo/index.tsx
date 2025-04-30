@@ -1,9 +1,9 @@
 "use client";
 
-import Presentation from "@/components/presentation/Presentation";
-import Slide from "@/components/presentation/Slide";
-import SlideTitle from "@/components/presentation/SlideTitle";
-import { BulletList, BulletPoint } from "@/components/presentation/BulletPoint";
+import Presentation from "../../components/presentation/Presentation";
+import Slide from "../../components/presentation/Slide";
+import SlideTitle from "../../components/presentation/SlideTitle";
+import { BulletList, BulletPoint } from "../../components/presentation/BulletPoint";
 import { motion } from "framer-motion";
 import {
   Briefcase,
