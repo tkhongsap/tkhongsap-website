@@ -132,20 +132,20 @@ export default function SirisoftCSEO() {
             <h2 className="text-3xl md:text-4xl font-bold mb-8 text-primary">
               Leadership Snapshot
             </h2>
-            <h3 className="text-xl md:text-2xl font-semibold mb-6">
+            <h3 className="text-xl md:text-2xl font-semibold mb-6 text-gray-300">
               15 Years Turning Data & AI Into $40 M+ Business Impact
             </h3>
             
             <ul className="space-y-6 mb-8 text-lg">
-              <li className="flex items-start bg-gray-50/80 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+              <li className="flex items-start bg-[#242a38] p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                 <span className="text-primary mr-3 mt-1 text-xl">•</span>
                 <span><strong className="text-primary">AI & Data Strategy Executive</strong> — led enterprise-wide AI roll-outs across <strong>finance, telecom, supply-chain, and CPG</strong> sectors.</span>
               </li>
-              <li className="flex items-start bg-gray-50/80 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+              <li className="flex items-start bg-[#242a38] p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                 <span className="text-primary mr-3 mt-1 text-xl">•</span>
                 <span><strong className="text-primary">Team Builder</strong> — scaled & mentored cross-functional groups of <strong>data engineers, ML scientists, infra & DevSecOps</strong> specialists.</span>
               </li>
-              <li className="flex items-start bg-gray-50/80 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+              <li className="flex items-start bg-[#242a38] p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                 <span className="text-primary mr-3 mt-1 text-xl">•</span>
                 <span><strong className="text-primary">Scale & Governance</strong> — designed data estates, MLOps pipelines, and governance frameworks that cut analytic cycle-time 40 % and saved over $25 M.</span>
               </li>
@@ -160,29 +160,29 @@ export default function SirisoftCSEO() {
               My Vision – Building an AI-First Company
             </h2>
             
-            <blockquote className="border-l-4 border-primary pl-4 py-4 bg-gray-50/80 my-6 rounded-r-lg shadow-sm">
+            <blockquote className="border-l-4 border-primary pl-4 py-4 bg-[#242a38] my-6 rounded-r-lg shadow-sm">
               <p className="italic text-lg">Becoming <strong>AI-First</strong> isn't an add-on; it's the default lens for product design, decision-making, and hiring.</p>
             </blockquote>
             
             <div className="mt-10 space-y-6">
-              <div className="flex items-center bg-gray-50/80 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+              <div className="flex items-center bg-[#242a38] p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                 <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center mr-4">1</div>
-                <span className="text-lg"><strong>Systems that learn & adapt</strong> – continuous data loops.</span>
+                <span className="text-lg"><strong className="text-white">Systems that learn & adapt</strong> – continuous data loops.</span>
               </div>
               
-              <div className="flex items-center bg-gray-50/80 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+              <div className="flex items-center bg-[#242a38] p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                 <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center mr-4">2</div>
-                <span className="text-lg"><strong>Process redesign, not mere automation.</strong></span>
+                <span className="text-lg"><strong className="text-white">Process redesign, not mere automation.</strong></span>
               </div>
               
-              <div className="flex items-center bg-gray-50/80 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+              <div className="flex items-center bg-[#242a38] p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                 <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center mr-4">3</div>
-                <span className="text-lg"><strong>Teams equipped to <em>use</em> AI, not just demo it.</strong></span>
+                <span className="text-lg"><strong className="text-white">Teams equipped to <em>use</em> AI, not just demo it.</strong></span>
               </div>
               
-              <div className="flex items-center bg-gray-50/80 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+              <div className="flex items-center bg-[#242a38] p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                 <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center mr-4">4</div>
-                <span className="text-lg"><strong>Experiment → learn → ship fast</strong> — pace of learning beats polish.</span>
+                <span className="text-lg"><strong className="text-white">Experiment → learn → ship fast</strong> — pace of learning beats polish.</span>
               </div>
             </div>
           </div>
@@ -199,47 +199,47 @@ export default function SirisoftCSEO() {
               <table className="min-w-full border-collapse shadow-sm">
                 <thead>
                   <tr className="bg-primary text-white">
-                    <th className="py-3 px-4 border border-gray-300 text-left font-medium">Readiness Dimension</th>
-                    <th className="py-3 px-4 border border-gray-300 text-left font-medium">What I Audit</th>
-                    <th className="py-3 px-4 border border-gray-300 text-left font-medium">Typical Gap I Fix</th>
+                    <th className="py-3 px-4 border border-gray-700 text-left font-medium">Readiness Dimension</th>
+                    <th className="py-3 px-4 border border-gray-700 text-left font-medium">What I Audit</th>
+                    <th className="py-3 px-4 border border-gray-700 text-left font-medium">Typical Gap I Fix</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="bg-white hover:bg-gray-50 transition-colors">
-                    <td className="py-3 px-4 border border-gray-300 font-semibold">Infrastructure</td>
-                    <td className="py-3 px-4 border border-gray-300">Latency, pipelines, GPUs</td>
-                    <td className="py-3 px-4 border border-gray-300">Cloud / edge refactor</td>
+                  <tr className="bg-[#242a38] hover:bg-[#2a3142] transition-colors">
+                    <td className="py-3 px-4 border border-gray-700 font-semibold">Infrastructure</td>
+                    <td className="py-3 px-4 border border-gray-700">Latency, pipelines, GPUs</td>
+                    <td className="py-3 px-4 border border-gray-700">Cloud / edge refactor</td>
                   </tr>
-                  <tr className="bg-gray-50 hover:bg-gray-100 transition-colors">
-                    <td className="py-3 px-4 border border-gray-300 font-semibold">Data Ecosystem</td>
-                    <td className="py-3 px-4 border border-gray-300">Lineage, access, quality</td>
-                    <td className="py-3 px-4 border border-gray-300">Central Lake + catalog</td>
+                  <tr className="bg-[#1e2431] hover:bg-[#2a3142] transition-colors">
+                    <td className="py-3 px-4 border border-gray-700 font-semibold">Data Ecosystem</td>
+                    <td className="py-3 px-4 border border-gray-700">Lineage, access, quality</td>
+                    <td className="py-3 px-4 border border-gray-700">Central Lake + catalog</td>
                   </tr>
-                  <tr className="bg-white hover:bg-gray-50 transition-colors">
-                    <td className="py-3 px-4 border border-gray-300 font-semibold">Talent Availability</td>
-                    <td className="py-3 px-4 border border-gray-300">SME bandwidth</td>
-                    <td className="py-3 px-4 border border-gray-300">Rotation + up-/re-skilling</td>
+                  <tr className="bg-[#242a38] hover:bg-[#2a3142] transition-colors">
+                    <td className="py-3 px-4 border border-gray-700 font-semibold">Talent Availability</td>
+                    <td className="py-3 px-4 border border-gray-700">SME bandwidth</td>
+                    <td className="py-3 px-4 border border-gray-700">Rotation + up-/re-skilling</td>
                   </tr>
-                  <tr className="bg-gray-50 hover:bg-gray-100 transition-colors">
-                    <td className="py-3 px-4 border border-gray-300 font-semibold">Risk Tolerance</td>
-                    <td className="py-3 px-4 border border-gray-300">Iteration culture</td>
-                    <td className="py-3 px-4 border border-gray-300">Pilot play-book, KPIs</td>
+                  <tr className="bg-[#1e2431] hover:bg-[#2a3142] transition-colors">
+                    <td className="py-3 px-4 border border-gray-700 font-semibold">Risk Tolerance</td>
+                    <td className="py-3 px-4 border border-gray-700">Iteration culture</td>
+                    <td className="py-3 px-4 border border-gray-700">Pilot play-book, KPIs</td>
                   </tr>
-                  <tr className="bg-white hover:bg-gray-50 transition-colors">
-                    <td className="py-3 px-4 border border-gray-300 font-semibold">Funding Alignment</td>
-                    <td className="py-3 px-4 border border-gray-300">Opex vs Capex mix</td>
-                    <td className="py-3 px-4 border border-gray-300">Stage-gated budgets</td>
+                  <tr className="bg-[#242a38] hover:bg-[#2a3142] transition-colors">
+                    <td className="py-3 px-4 border border-gray-700 font-semibold">Funding Alignment</td>
+                    <td className="py-3 px-4 border border-gray-700">Opex vs Capex mix</td>
+                    <td className="py-3 px-4 border border-gray-700">Stage-gated budgets</td>
                   </tr>
                 </tbody>
               </table>
             </div>
             
-            <div className="bg-gray-50/80 p-5 rounded-lg shadow-sm mb-6">
-              <p className="font-semibold mb-2">Execution Modes (applied once readiness known)</p>
-              <p className="italic text-gray-600">Efficiency · Effectiveness · Productivity · Growth · Expert-augmentation</p>
+            <div className="bg-[#242a38] p-5 rounded-lg shadow-sm mb-6">
+              <p className="font-semibold mb-2 text-primary">Execution Modes <span className="text-gray-400">(applied once readiness known)</span></p>
+              <p className="italic text-gray-300">Efficiency · Effectiveness · Productivity · Growth · Expert-augmentation</p>
             </div>
             
-            <blockquote className="border-l-4 border-primary pl-4 py-3 bg-gray-50/80 italic text-gray-700 rounded-r-lg shadow-sm">
+            <blockquote className="border-l-4 border-primary pl-4 py-3 bg-[#242a38] italic text-gray-300 rounded-r-lg shadow-sm">
               "Before you sprint, build the shoes, map the course, train the runners."
             </blockquote>
           </div>
@@ -256,26 +256,26 @@ export default function SirisoftCSEO() {
               <table className="min-w-full border-collapse shadow-sm">
                 <thead>
                   <tr className="bg-primary text-white">
-                    <th className="py-3 px-4 border border-gray-300 text-left font-medium">Sirisoft Need</th>
-                    <th className="py-3 px-4 border border-gray-300 text-left font-medium">What I Bring</th>
+                    <th className="py-3 px-4 border border-gray-700 text-left font-medium">Sirisoft Need</th>
+                    <th className="py-3 px-4 border border-gray-700 text-left font-medium">What I Bring</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="bg-white hover:bg-gray-50 transition-colors">
-                    <td className="py-4 px-4 border border-gray-300">Scale DevOps to AI/ML <strong>(60 % role focus)</strong></td>
-                    <td className="py-4 px-4 border border-gray-300">Proven Gen-AI & MLOps roll-outs</td>
+                  <tr className="bg-[#242a38] hover:bg-[#2a3142] transition-colors">
+                    <td className="py-4 px-4 border border-gray-700">Scale DevOps to AI/ML <strong className="text-primary">(60 % role focus)</strong></td>
+                    <td className="py-4 px-4 border border-gray-700">Proven Gen-AI & MLOps roll-outs</td>
                   </tr>
-                  <tr className="bg-gray-50 hover:bg-gray-100 transition-colors">
-                    <td className="py-4 px-4 border border-gray-300"><strong>Cyber-secure</strong> financial & energy clients</td>
-                    <td className="py-4 px-4 border border-gray-300">Active AI threat-detection POC</td>
+                  <tr className="bg-[#1e2431] hover:bg-[#2a3142] transition-colors">
+                    <td className="py-4 px-4 border border-gray-700"><strong className="text-primary">Cyber-secure</strong> financial & energy clients</td>
+                    <td className="py-4 px-4 border border-gray-700">Active AI threat-detection POC</td>
                   </tr>
-                  <tr className="bg-white hover:bg-gray-50 transition-colors">
-                    <td className="py-4 px-4 border border-gray-300">Grow & retain 70+ engineers</td>
-                    <td className="py-4 px-4 border border-gray-300">Track record in curriculum & culture</td>
+                  <tr className="bg-[#242a38] hover:bg-[#2a3142] transition-colors">
+                    <td className="py-4 px-4 border border-gray-700">Grow & retain 70+ engineers</td>
+                    <td className="py-4 px-4 border border-gray-700">Track record in curriculum & culture</td>
                   </tr>
-                  <tr className="bg-gray-50 hover:bg-gray-100 transition-colors">
-                    <td className="py-4 px-4 border border-gray-300">Visionary + hands-on peer to CTO</td>
-                    <td className="py-4 px-4 border border-gray-300">Blend of strategy & execution</td>
+                  <tr className="bg-[#1e2431] hover:bg-[#2a3142] transition-colors">
+                    <td className="py-4 px-4 border border-gray-700">Visionary + hands-on peer to CTO</td>
+                    <td className="py-4 px-4 border border-gray-700">Blend of strategy & execution</td>
                   </tr>
                 </tbody>
               </table>
@@ -294,18 +294,18 @@ export default function SirisoftCSEO() {
               Let's Talk Impact
             </h2>
             
-            <div className="bg-gray-50/80 p-6 rounded-lg shadow-md mb-10">
+            <div className="bg-[#242a38] p-6 rounded-lg shadow-md mb-10">
               <p className="font-semibold mb-6 text-xl text-primary">I'm ready to:</p>
               <div className="space-y-8">
-                <div className="flex items-center gap-4 pl-2 py-1 border-l-4 border-primary hover:bg-white transition-colors">
+                <div className="flex items-center gap-4 pl-2 py-2 border-l-4 border-primary bg-[#2a3142] hover:bg-[#313a4d] transition-colors rounded-r-lg">
                   <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center">1</div>
                   <span className="text-lg">Stand up an AI-powered DevSecOps platform within 120 days</span>
                 </div>
-                <div className="flex items-center gap-4 pl-2 py-1 border-l-4 border-primary hover:bg-white transition-colors">
+                <div className="flex items-center gap-4 pl-2 py-2 border-l-4 border-primary bg-[#2a3142] hover:bg-[#313a4d] transition-colors rounded-r-lg">
                   <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center">2</div>
                   <span className="text-lg">Cut mean-time-to-detect by 50 % using ML anomaly models</span>
                 </div>
-                <div className="flex items-center gap-4 pl-2 py-1 border-l-4 border-primary hover:bg-white transition-colors">
+                <div className="flex items-center gap-4 pl-2 py-2 border-l-4 border-primary bg-[#2a3142] hover:bg-[#313a4d] transition-colors rounded-r-lg">
                   <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center">3</div>
                   <span className="text-lg">Upskill every engineer on Gen-AI tooling in first year</span>
                 </div>
@@ -313,7 +313,7 @@ export default function SirisoftCSEO() {
             </div>
             
             <div className="mt-10 text-center">
-              <Button variant="outline" className="flex items-center gap-2">
+              <Button variant="outline" className="flex items-center gap-2 text-white border-primary hover:bg-primary/20">
                 <Download size={16} /> Download full deck (PDF)
               </Button>
             </div>
@@ -340,17 +340,17 @@ export default function SirisoftCSEO() {
       <SchemaMarkup type="professionalService" data={professionalServiceSchemaData} />
       
       {/* Presentation container */}
-      <div className="fixed inset-0 bg-gradient-to-br from-gray-900 to-gray-800 text-gray-100 flex flex-col">
+      <div className="fixed inset-0 bg-[#1a1f2c] text-gray-100 flex flex-col">
         {/* Presentation header */}
         <header className="flex justify-between items-center px-4 py-2 border-b border-gray-700">
           <div className="text-sm text-gray-300">
-            CSEO Vision Brief • Ta Khongsap
+            CSEO Vision Brief • <span className="text-primary">Ta</span> Khongsap
           </div>
           <div className="flex items-center space-x-3">
             <Button 
               variant="ghost" 
               size="sm" 
-              className="text-gray-300 hover:text-white"
+              className="text-gray-300 hover:text-primary"
               onClick={toggleAgenda}
             >
               {showAgenda ? <X size={18} /> : <LayoutGrid size={18} />}
@@ -370,11 +370,11 @@ export default function SirisoftCSEO() {
           
           {/* Agenda overlay */}
           <div className={cn(
-            "absolute inset-0 bg-gray-900/95 transition-all duration-300 p-8 overflow-auto",
+            "absolute inset-0 bg-[#1a1f2c]/98 transition-all duration-300 p-8 overflow-auto",
             showAgenda ? "opacity-100 z-10" : "opacity-0 -z-10"
           )}>
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl font-bold mb-8 text-white">Presentation Agenda</h2>
+              <h2 className="text-3xl font-bold mb-8 text-primary">Presentation Agenda</h2>
               <div className="grid md:grid-cols-2 gap-4">
                 {slides.map((slide, index) => (
                   <button
@@ -384,11 +384,16 @@ export default function SirisoftCSEO() {
                       "text-left p-4 rounded-lg transition-colors",
                       currentSlide === index 
                         ? "bg-primary text-white" 
-                        : "bg-gray-800 hover:bg-gray-700 text-gray-100"
+                        : "bg-[#242a38] hover:bg-[#2a3142] text-gray-100"
                     )}
                   >
                     <div className="flex items-center">
-                      <span className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-600 mr-3">
+                      <span className={cn(
+                        "w-8 h-8 flex items-center justify-center rounded-full mr-3",
+                        currentSlide === index 
+                          ? "border-white border" 
+                          : "border border-gray-600"
+                      )}>
                         {index + 1}
                       </span>
                       <h3 className="font-medium">{slide.title}</h3>
@@ -408,7 +413,7 @@ export default function SirisoftCSEO() {
               size="sm"
               onClick={goToPrevSlide}
               disabled={currentSlide === 0}
-              className="text-gray-300 hover:text-white"
+              className="text-gray-300 hover:text-primary disabled:opacity-50"
             >
               <ArrowLeft size={18} className="mr-1" />
               Previous
@@ -436,7 +441,7 @@ export default function SirisoftCSEO() {
               size="sm"
               onClick={goToNextSlide}
               disabled={currentSlide === slides.length - 1}
-              className="text-gray-300 hover:text-white"
+              className="text-gray-300 hover:text-primary disabled:opacity-50"
             >
               Next
               <ArrowRight size={18} className="ml-1" />
