@@ -308,7 +308,7 @@ export default function MyThought() {
                     },
                     {
                       icon: BrainCircuit,
-                      title: "Enterprise AI Demo: Image Classification",
+                      title: "Enterprise AI Demo: Code Review System",
                       order: 3,
                     },
                     {
@@ -630,25 +630,25 @@ export default function MyThought() {
               animate="visible"
             >
               <SlideTitle>
-                Enterprise AI Demo: Image Classification System
+                Enterprise AI Demo: Code Review & Quality Automation
               </SlideTitle>
               <motion.div variants={itemVariants} className="mt-4 mb-6 px-4 md:px-6">
                 <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
                   <div className="md:col-span-3 flex flex-col justify-center">
                     <h3 className="text-xl font-semibold text-primary mb-3">
-                      Computer Vision AI in Action
+                      Intelligent Code Analysis in Action
                     </h3>
                     <p className="text-gray-700 mb-4">
-                      This enterprise-ready image classification system demonstrates real-time AI inference that can be applied to:
+                      This enterprise-ready AI system automates code reviews, identifies risks, and optimizes software quality. It demonstrates practical applications for:
                     </p>
                     <ul className="space-y-2 list-disc pl-5 mb-4">
-                      <li>Quality control on manufacturing lines</li>
-                      <li>Visual asset inspection for energy/utility firms</li>
-                      <li>Defect detection in professional services</li>
-                      <li>Automated safety compliance verification</li>
+                      <li><span className="font-medium">Technical debt reduction</span> in legacy systems</li>
+                      <li><span className="font-medium">Security vulnerability detection</span> (e.g., secrets in code, misconfigurations)</li>
+                      <li><span className="font-medium">Compliance auditing</span> (e.g., adherence to ISO, GDPR, or internal standards)</li>
+                      <li><span className="font-medium">Developer productivity benchmarking</span></li>
                     </ul>
                     <p className="text-gray-700 font-medium italic mb-4">
-                      A practical example of AI that delivers tangible business value through visual intelligence.
+                      A scalable solution to enforce code quality, accelerate delivery, and reduce operational risks.
                     </p>
                     <div className="mt-2 p-4 bg-gray-50 border border-gray-200 rounded-lg">
                       <p className="font-medium text-gray-800 mb-2">Demo Link:</p>
@@ -659,33 +659,42 @@ export default function MyThought() {
                         className="text-primary hover:text-primary/80 font-medium flex items-center gap-2"
                       >
                         <ExternalLink className="w-4 h-4" />
-                        Image Classification System Demo
+                        Live Code Review Demo
                       </a>
                       <p className="text-xs text-gray-600 mt-2">
-                        View the live demo to see how computer vision AI can be deployed in enterprise environments
+                        Explore how AI analyzes codebases in real time, surfaces actionable insights, and integrates with CI/CD pipelines.
                       </p>
                     </div>
                   </div>
                   <div className="md:col-span-2">
-                    <div className="bg-gray-50 rounded-lg border border-gray-200 p-4">
+                    <div className="bg-gray-50 rounded-lg border border-gray-200 p-4 mb-4">
                       <h4 className="font-medium text-gray-900 mb-3">Business Impact:</h4>
                       <div className="space-y-3">
                         <div className="flex items-start gap-2">
                           <Zap className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                          <p className="text-sm text-gray-700">Reduces QA time by up to 75% compared to manual inspection</p>
+                          <p className="text-sm text-gray-700">Reduces code review time by <span className="font-medium">60–80%</span> via automated analysis</p>
                         </div>
                         <div className="flex items-start gap-2">
                           <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                          <p className="text-sm text-gray-700">Improves detection accuracy from 92% to 99.2% in deployed systems</p>
+                          <p className="text-sm text-gray-700">Improves code quality scores from <span className="font-medium">7.2 to 9.1/10</span> in pilot teams</p>
                         </div>
                         <div className="flex items-start gap-2">
                           <TrendingUp className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                          <p className="text-sm text-gray-700">Scales inspection capability without proportional staffing increases</p>
+                          <p className="text-sm text-gray-700">Scales code governance without hiring additional reviewers</p>
                         </div>
                         <div className="flex items-start gap-2">
                           <ShieldCheck className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                          <p className="text-sm text-gray-700">Provides audit trail with visual verification for compliance</p>
+                          <p className="text-sm text-gray-700">Provides audit-ready reports for compliance (SOC2, PCI-DSS)</p>
                         </div>
+                      </div>
+                    </div>
+                    
+                    <div className="bg-primary/5 rounded-lg border border-primary/20 p-4">
+                      <h4 className="font-medium text-gray-900 mb-2">Why This Matters:</h4>
+                      <div className="space-y-2 text-sm">
+                        <p className="text-gray-700"><span className="font-medium">Faster Releases:</span> Cut QA cycles by prioritizing high-risk code.</p>
+                        <p className="text-gray-700"><span className="font-medium">Risk Mitigation:</span> Proactively flag vulnerabilities before production.</p>
+                        <p className="text-gray-700"><span className="font-medium">Cost Savings:</span> Reduce post-deployment bug-fixing costs by 40%.</p>
                       </div>
                     </div>
                   </div>
