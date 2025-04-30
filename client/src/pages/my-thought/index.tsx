@@ -468,6 +468,17 @@ export default function MyThought() {
                     </div>
                   </div>
                   
+                  <div className="grid grid-cols-1 border-b border-gray-200 dark:border-gray-700 text-center p-3">
+                    <div className="font-medium text-gray-900 dark:text-white mb-2">
+                      645 contributions in the last year
+                    </div>
+                    <img 
+                      src="/assets/github-contributions.png" 
+                      alt="GitHub contribution activity chart showing 645 contributions" 
+                      className="w-full h-auto max-w-3xl mx-auto"
+                    />
+                  </div>
+                  
                   <div className="grid grid-cols-3 border-b border-gray-200 dark:border-gray-700 text-center">
                     <div className="p-3 border-r border-gray-200 dark:border-gray-700">
                       <div className="font-medium text-gray-900 dark:text-white">6</div>
