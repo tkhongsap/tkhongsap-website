@@ -129,15 +129,15 @@ export default function MyThought() {
       </Helmet>
       
       <main className="flex min-h-screen flex-col items-center justify-between bg-modern-background">
-        <div className="w-full max-w-7xl mx-auto px-4 py-8 md:py-12">
-          <h1 className="text-3xl md:text-4xl font-bold text-center mb-8">My Thought</h1>
+        <div className="w-full max-w-7xl mx-auto px-4 py-4 md:py-6">
+          <h1 className="text-3xl md:text-4xl font-bold text-center mb-4">My Thought</h1>
         </div>
         
         <Presentation>
           {/* Slide 1: Hero + Tagline */}
-          <Slide className="bg-modern-background text-modern-foreground">
+          <Slide className="bg-modern-background text-modern-foreground pt-0 md:pt-0">
             <motion.div
-              className="flex flex-col md:flex-row gap-8 md:gap-12 py-8 items-start"
+              className="flex flex-col md:flex-row-reverse gap-8 md:gap-12 items-start md:items-center"
               variants={containerVariants}
               initial="hidden"
               animate="visible"
