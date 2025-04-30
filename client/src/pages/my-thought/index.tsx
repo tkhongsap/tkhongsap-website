@@ -306,21 +306,26 @@ export default function MyThought() {
                       order: 2,
                     },
                     {
+                      icon: BrainCircuit,
+                      title: "Enterprise AI Demo: Image Classification",
+                      order: 3,
+                    },
+                    {
                       icon: Lightbulb,
                       title: "My Vision: The AI-First Imperative",
-                      order: 3,
+                      order: 4,
                     },
                     {
                       icon: Milestone,
                       title: "AI Maturity: Readiness & Execution",
-                      order: 4,
+                      order: 5,
                     },
                     {
                       icon: Handshake,
                       title: "Alignment with Sirisoft's Needs",
-                      order: 5,
+                      order: 6,
                     },
-                    { icon: Rocket, title: "Commitment & Impact", order: 6 },
+                    { icon: Rocket, title: "Commitment & Impact", order: 7 },
                   ].map((item, index) => (
                     <motion.div
                       key={index}
@@ -655,7 +660,50 @@ export default function MyThought() {
             </motion.div>
           </Slide>
 
-          {/* Slide 7: AI Maturity Framework - Readiness */}
+          {/* Slide 7: Enterprise AI Demo - Real Example */}
+          <Slide>
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              <SlideTitle>
+                Enterprise AI Demo: Image Classification System
+              </SlideTitle>
+              <motion.div variants={itemVariants} className="mt-4 mb-6 px-4 md:px-6">
+                <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+                  <div className="md:col-span-2 flex flex-col justify-center">
+                    <h3 className="text-xl font-semibold text-primary mb-3">
+                      Computer Vision AI in Action
+                    </h3>
+                    <p className="text-gray-700 mb-4">
+                      This enterprise-ready image classification system demonstrates real-time AI inference that can be applied to:
+                    </p>
+                    <ul className="space-y-2 list-disc pl-5 mb-4">
+                      <li>Quality control on manufacturing lines</li>
+                      <li>Visual asset inspection for energy/utility firms</li>
+                      <li>Defect detection in professional services</li>
+                      <li>Automated safety compliance verification</li>
+                    </ul>
+                    <p className="text-gray-700 font-medium italic">
+                      A practical example of AI that delivers tangible business value through visual intelligence.
+                    </p>
+                  </div>
+                  <div className="md:col-span-3 h-[500px] border border-gray-200 rounded-lg shadow-sm overflow-hidden">
+                    <iframe 
+                      src="https://kzml8wmdn62m0pm4mt86.lite.vusercontent.net/"
+                      className="w-full h-full"
+                      title="Enterprise AI Image Classification Demo"
+                      allow="camera"
+                      sandbox="allow-scripts allow-same-origin allow-forms"
+                    ></iframe>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          </Slide>
+          
+          {/* Slide 8: AI Maturity Framework - Readiness */}
           <Slide>
             <motion.div
               variants={containerVariants}
@@ -679,7 +727,7 @@ export default function MyThought() {
             </motion.div>
           </Slide>
 
-          {/* Slide 8: AI Maturity Framework - Execution Modes */}
+          {/* Slide 9: AI Maturity Framework - Execution Modes */}
           <Slide>
             <motion.div
               variants={containerVariants}
@@ -764,7 +812,7 @@ export default function MyThought() {
             </motion.div>
           </Slide>
 
-          {/* Slide 9: Why Sirisoft */}
+          {/* Slide 10: Why Sirisoft */}
           <Slide>
             <motion.div
               variants={containerVariants}
@@ -779,7 +827,7 @@ export default function MyThought() {
             </motion.div>
           </Slide>
 
-          {/* Slide 10: Commitment & Impact */}
+          {/* Slide 11: Commitment & Impact */}
           <Slide className="bg-modern-primary text-modern-primaryForeground">
             <motion.div
               variants={containerVariants}
