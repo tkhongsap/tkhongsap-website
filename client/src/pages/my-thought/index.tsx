@@ -190,11 +190,6 @@ export default function MyThought() {
       </Helmet>
       <Navbar />
       <main className="flex min-h-screen flex-col items-center bg-modern-background pt-20 md:pt-24">
-        <div className="w-full max-w-7xl mx-auto px-4 pt-10 md:pt-12">
-          <h1 className="text-3xl md:text-4xl font-bold text-center mb-4">
-            My Thought
-          </h1>
-        </div>
 
         <Presentation>
           {/* Slide 1: Hero + Tagline */}
