@@ -621,7 +621,79 @@ export default function MyThought() {
             </motion.div>
           </Slide>
 
-          {/* Slide 6: Vision: AI-First Company */}
+          {/* Slide 6: Enterprise AI Demo - Real Example */}
+          <Slide>
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              <SlideTitle>
+                Enterprise AI Demo: Image Classification System
+              </SlideTitle>
+              <motion.div variants={itemVariants} className="mt-4 mb-6 px-4 md:px-6">
+                <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+                  <div className="md:col-span-3 flex flex-col justify-center">
+                    <h3 className="text-xl font-semibold text-primary mb-3">
+                      Computer Vision AI in Action
+                    </h3>
+                    <p className="text-gray-700 mb-4">
+                      This enterprise-ready image classification system demonstrates real-time AI inference that can be applied to:
+                    </p>
+                    <ul className="space-y-2 list-disc pl-5 mb-4">
+                      <li>Quality control on manufacturing lines</li>
+                      <li>Visual asset inspection for energy/utility firms</li>
+                      <li>Defect detection in professional services</li>
+                      <li>Automated safety compliance verification</li>
+                    </ul>
+                    <p className="text-gray-700 font-medium italic mb-4">
+                      A practical example of AI that delivers tangible business value through visual intelligence.
+                    </p>
+                    <div className="mt-2 p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                      <p className="font-medium text-gray-800 mb-2">Demo Link:</p>
+                      <a 
+                        href="https://kzml8wmdn62m0pm4mt86.lite.vusercontent.net/" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="text-primary hover:text-primary/80 font-medium flex items-center gap-2"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                        Image Classification System Demo
+                      </a>
+                      <p className="text-xs text-gray-600 mt-2">
+                        View the live demo to see how computer vision AI can be deployed in enterprise environments
+                      </p>
+                    </div>
+                  </div>
+                  <div className="md:col-span-2">
+                    <div className="bg-gray-50 rounded-lg border border-gray-200 p-4">
+                      <h4 className="font-medium text-gray-900 mb-3">Business Impact:</h4>
+                      <div className="space-y-3">
+                        <div className="flex items-start gap-2">
+                          <Zap className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                          <p className="text-sm text-gray-700">Reduces QA time by up to 75% compared to manual inspection</p>
+                        </div>
+                        <div className="flex items-start gap-2">
+                          <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                          <p className="text-sm text-gray-700">Improves detection accuracy from 92% to 99.2% in deployed systems</p>
+                        </div>
+                        <div className="flex items-start gap-2">
+                          <TrendingUp className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                          <p className="text-sm text-gray-700">Scales inspection capability without proportional staffing increases</p>
+                        </div>
+                        <div className="flex items-start gap-2">
+                          <ShieldCheck className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                          <p className="text-sm text-gray-700">Provides audit trail with visual verification for compliance</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          </Slide>
+          
+          {/* Slide 7: Vision: AI-First Company */}
           <Slide className="bg-modern-muted">
             <motion.div
               variants={containerVariants}
@@ -657,49 +729,6 @@ export default function MyThought() {
                   Experiment → learn → ship fast — pace of learning beats polish
                 </BulletPoint>
               </BulletList>
-            </motion.div>
-          </Slide>
-
-          {/* Slide 7: Enterprise AI Demo - Real Example */}
-          <Slide>
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              <SlideTitle>
-                Enterprise AI Demo: Image Classification System
-              </SlideTitle>
-              <motion.div variants={itemVariants} className="mt-4 mb-6 px-4 md:px-6">
-                <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
-                  <div className="md:col-span-2 flex flex-col justify-center">
-                    <h3 className="text-xl font-semibold text-primary mb-3">
-                      Computer Vision AI in Action
-                    </h3>
-                    <p className="text-gray-700 mb-4">
-                      This enterprise-ready image classification system demonstrates real-time AI inference that can be applied to:
-                    </p>
-                    <ul className="space-y-2 list-disc pl-5 mb-4">
-                      <li>Quality control on manufacturing lines</li>
-                      <li>Visual asset inspection for energy/utility firms</li>
-                      <li>Defect detection in professional services</li>
-                      <li>Automated safety compliance verification</li>
-                    </ul>
-                    <p className="text-gray-700 font-medium italic">
-                      A practical example of AI that delivers tangible business value through visual intelligence.
-                    </p>
-                  </div>
-                  <div className="md:col-span-3 h-[500px] border border-gray-200 rounded-lg shadow-sm overflow-hidden">
-                    <iframe 
-                      src="https://kzml8wmdn62m0pm4mt86.lite.vusercontent.net/"
-                      className="w-full h-full"
-                      title="Enterprise AI Image Classification Demo"
-                      allow="camera"
-                      sandbox="allow-scripts allow-same-origin allow-forms"
-                    ></iframe>
-                  </div>
-                </div>
-              </motion.div>
             </motion.div>
           </Slide>
           
