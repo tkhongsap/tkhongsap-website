@@ -313,7 +313,7 @@ export default function MyThought() {
                     },
                     {
                       icon: Lightbulb,
-                      title: "My Vision: The AI-First Imperative",
+                      title: "My Vision: Making 'AI-First' the Default",
                       order: 4,
                     },
                     {
@@ -711,13 +711,13 @@ export default function MyThought() {
               animate="visible"
               className="text-center"
             >
-              <SlideTitle>My Vision: Building an AI-First Company</SlideTitle>
+              <SlideTitle>My Vision: Making "AI-First" the Default</SlideTitle>
               <motion.blockquote
                 variants={itemVariants}
                 className="text-xl md:text-2xl italic text-modern-foreground border-l-4 border-modern-primary pl-4 md:pl-6 py-2 max-w-3xl mx-auto mb-8 md:mb-10"
               >
-                Becoming <strong>AI-First</strong> isn't an add-on; it's a
-                default lens for product design, decision-making, and hiring.
+                <strong>AI-First</strong> isn't a feature—​it's the lens through which every decision,
+                design, and hire is made.
               </motion.blockquote>
               <motion.h3
                 variants={itemVariants}
@@ -727,16 +727,28 @@ export default function MyThought() {
               </motion.h3>
               <BulletList className="inline-block text-left space-y-3 md:space-y-4 max-w-xl">
                 <BulletPoint icon={CloudCog}>
-                  Systems that learn & adapt (continuous data loops)
+                  <span className="font-semibold text-modern-foreground">Continuous Learning Loops</span> – systems get smarter with every use.
                 </BulletPoint>
                 <BulletPoint icon={GitBranch}>
-                  Process redesign, not mere automation
+                  <span className="font-semibold text-modern-foreground">Process Re-imagination</span> – workflows designed around AI capabilities, not bolt-on automation.
                 </BulletPoint>
                 <BulletPoint icon={Users}>
-                  Teams equipped to <em>use</em> AI, not just demo it
+                  <span className="font-semibold text-modern-foreground">People-Centric Adoption</span> – every employee wields AI daily to turn insight into action.
                 </BulletPoint>
-                <BulletPoint icon={Rocket}>
-                  Experiment → learn → ship fast — pace of learning beats polish
+              </BulletList>
+              
+              <motion.h3
+                variants={itemVariants}
+                className="font-semibold text-modern-primary mb-4 mt-6"
+              >
+                Operating Norms:
+              </motion.h3>
+              <BulletList className="inline-block text-left space-y-3 md:space-y-4 max-w-xl">
+                <BulletPoint icon={CheckCircle}>
+                  Everyone is expected to use AI in their day-to-day work.
+                </BulletPoint>
+                <BulletPoint icon={Lightbulb}>
+                  Prompting isn't a bonus skill—it's becoming part of the job.
                 </BulletPoint>
               </BulletList>
             </motion.div>
