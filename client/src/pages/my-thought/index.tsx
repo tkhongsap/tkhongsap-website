@@ -490,11 +490,26 @@ export default function MyThought() {
                         <span>645 contributions in the last year</span>
                         <span className="text-sm text-modern-primary font-semibold px-2 py-1 bg-modern-primary/10 rounded-full">Top 10% Active</span>
                       </div>
-                      <img
-                        src="/assets/github-contributions.png"
-                        alt="GitHub contribution activity chart showing 645 contributions"
-                        className="w-full h-auto max-w-3xl mx-auto rounded-md border border-modern-border/50 shadow-sm"
-                      />
+                      <div className="relative">
+                        <img
+                          src="https://ghchart.rshah.org/tkhongsap"
+                          alt="GitHub contribution activity chart showing contributions"
+                          onError={(e) => {
+                            // Fallback to a placeholder if the dynamic chart fails
+                            e.currentTarget.src = "https://placehold.co/800x200/0969DA/ffffff?text=GitHub+Contributions";
+                            e.currentTarget.alt = "GitHub contributions placeholder";
+                          }}
+                          className="w-full h-auto max-w-3xl mx-auto rounded-md border border-modern-border/50 shadow-sm bg-[#ebedf0]"
+                        />
+                        {/* Secondary option with static URL as fallback */}
+                        <div className="hidden">
+                          <img
+                            src="/assets/github-contributions.png"
+                            alt="GitHub contribution chart (local)"
+                            className="w-full h-auto"
+                          />
+                        </div>
+                      </div>
                       <p className="text-sm text-modern-mutedForeground mt-3 text-center italic">
                         Consistent code contributions across multiple AI and ML open-source projects
                       </p>
