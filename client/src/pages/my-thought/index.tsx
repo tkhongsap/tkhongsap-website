@@ -321,12 +321,7 @@ export default function MyThought() {
                       title: "AI Maturity: Readiness & Execution",
                       order: 5,
                     },
-                    {
-                      icon: Handshake,
-                      title: "Alignment with Sirisoft's Needs",
-                      order: 6,
-                    },
-                    { icon: Rocket, title: "Commitment & Impact", order: 7 },
+                    { icon: Rocket, title: "Key Takeaways", order: 6 },
                   ].map((item, index) => (
                     <motion.div
                       key={index}
@@ -778,14 +773,14 @@ export default function MyThought() {
             </motion.div>
           </Slide>
 
-          {/* Slide 11: Commitment & Impact */}
+          {/* Slide 11: Key Takeaways */}
           <Slide className="bg-modern-primary text-modern-primaryForeground">
             <motion.div
               variants={containerVariants}
               initial="hidden"
               animate="visible"
             >
-              <SlideTitle>Commitment & Future Impact</SlideTitle>
+              <SlideTitle>Key Takeaways</SlideTitle>
               <motion.div
                 variants={itemVariants}
                 className="max-w-3xl mx-auto pt-6 md:pt-8"
