@@ -778,106 +778,6 @@ export default function MyThought() {
             </motion.div>
           </Slide>
 
-          {/* Slide 9: AI Maturity Framework - Execution Modes */}
-          <Slide>
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              <SlideTitle>
-                AI-Maturity Framework: Strategic Execution Modes
-              </SlideTitle>
-              <motion.p
-                variants={itemVariants}
-                className="text-center text-modern-mutedForeground mb-6 md:mb-8"
-              >
-                (Applied once readiness is known)
-              </motion.p>
-              {/* Using Grid for Execution Modes */}
-              <motion.div
-                variants={containerVariants}
-                className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 mt-8 md:mt-12 text-center"
-              >
-                <motion.div
-                  variants={itemVariants}
-                  className="p-3 md:p-4 border border-modern-border rounded-lg shadow-sm bg-modern-secondary h-full"
-                >
-                  <Zap className="w-7 h-7 md:w-8 md:h-8 mb-2 text-modern-primary mx-auto" />
-                  <h3 className="text-sm md:text-base font-semibold text-modern-secondaryForeground">
-                    Efficiency
-                  </h3>
-                  <p className="text-xs md:text-sm text-modern-secondaryForeground/80">
-                    Automate repetitive tasks
-                  </p>
-                </motion.div>
-                <motion.div
-                  variants={itemVariants}
-                  className="p-3 md:p-4 border border-modern-border rounded-lg shadow-sm bg-modern-secondary h-full"
-                >
-                  <CheckCircle className="w-7 h-7 md:w-8 md:h-8 mb-2 text-modern-primary mx-auto" />
-                  <h3 className="text-sm md:text-base font-semibold text-modern-secondaryForeground">
-                    Effectiveness
-                  </h3>
-                  <p className="text-xs md:text-sm text-modern-secondaryForeground/80">
-                    Improve decisions
-                  </p>
-                </motion.div>
-                <motion.div
-                  variants={itemVariants}
-                  className="p-3 md:p-4 border border-modern-border rounded-lg shadow-sm bg-modern-secondary h-full"
-                >
-                  <TrendingUp className="w-7 h-7 md:w-8 md:h-8 mb-2 text-modern-primary mx-auto" />
-                  <h3 className="text-sm md:text-base font-semibold text-modern-secondaryForeground">
-                    Productivity
-                  </h3>
-                  <p className="text-xs md:text-sm text-modern-secondaryForeground/80">
-                    Augment internal teams
-                  </p>
-                </motion.div>
-                <motion.div
-                  variants={itemVariants}
-                  className="p-3 md:p-4 border border-modern-border rounded-lg shadow-sm bg-modern-secondary h-full"
-                >
-                  <Rocket className="w-7 h-7 md:w-8 md:h-8 mb-2 text-modern-primary mx-auto" />
-                  <h3 className="text-sm md:text-base font-semibold text-modern-secondaryForeground">
-                    Growth
-                  </h3>
-                  <p className="text-xs md:text-sm text-modern-secondaryForeground/80">
-                    Create new capabilities
-                  </p>
-                </motion.div>
-                <motion.div
-                  variants={itemVariants}
-                  className="p-3 md:p-4 border border-modern-border rounded-lg shadow-sm bg-modern-secondary h-full col-span-2 md:col-span-1 lg:col-span-1"
-                >
-                  <BrainCircuit className="w-7 h-7 md:w-8 md:h-8 mb-2 text-modern-primary mx-auto" />
-                  <h3 className="text-sm md:text-base font-semibold text-modern-secondaryForeground">
-                    Expert
-                  </h3>
-                  <p className="text-xs md:text-sm text-modern-secondaryForeground/80">
-                    Augment complex expertise
-                  </p>
-                </motion.div>
-              </motion.div>
-            </motion.div>
-          </Slide>
-
-          {/* Slide 10: Why Sirisoft */}
-          <Slide>
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              <SlideTitle>Why This Matters to Sirisoft</SlideTitle>
-              <SimpleTable
-                headers={whySirisoftHeaders}
-                data={whySirisoftData}
-              />
-            </motion.div>
-          </Slide>
-
           {/* Slide 11: Commitment & Impact */}
           <Slide className="bg-modern-primary text-modern-primaryForeground">
             <motion.div
@@ -885,28 +785,53 @@ export default function MyThought() {
               initial="hidden"
               animate="visible"
             >
-              <SlideTitle>Let's Talk Impact</SlideTitle>
               <motion.div
                 variants={itemVariants}
-                className="max-w-3xl mx-auto text-center"
+                className="max-w-3xl mx-auto pt-12 md:pt-16"
               >
-                <div className="text-xl md:text-2xl font-medium mb-8">
-                  I'm ready to:
-                </div>
-                <div className="space-y-4 md:space-y-6 text-lg md:text-xl">
-                  <div className="p-4 md:p-6 border border-modern-primaryForeground/20 rounded-lg bg-modern-primaryForeground/5">
-                    <span className="font-bold">1.</span> Stand up AI-powered
-                    DevSecOps in 120 days.
+                {/* Quote section */}
+                <motion.blockquote 
+                  variants={itemVariants} 
+                  className="text-xl md:text-2xl font-medium text-center mb-8 md:mb-10 border-l-4 border-modern-primaryForeground/30 pl-4 md:pl-6 py-2 mx-auto"
+                >
+                  "The competitive edge isn't the algorithm; it's how fast we learn from it."
+                </motion.blockquote>
+                
+                <motion.hr variants={itemVariants} className="border-t border-modern-primaryForeground/20 my-6 md:my-8" />
+                
+                {/* Key Take-aways section */}
+                <motion.div variants={itemVariants} className="mb-6 md:mb-8">
+                  <h3 className="text-xl md:text-2xl font-semibold mb-4 text-center">Key Take-aways</h3>
+                  <div className="space-y-3 md:space-y-4">
+                    <div className="p-3 md:p-4 border border-modern-primaryForeground/20 rounded-lg bg-modern-primaryForeground/5">
+                      <span className="font-bold">AI-First Mindset</span> – It's the default lens for design, decisions, and hiring.
+                    </div>
+                    <div className="p-3 md:p-4 border border-modern-primaryForeground/20 rounded-lg bg-modern-primaryForeground/5">
+                      <span className="font-bold">AI for Everyone</span> – Using and prompting AI is the new baseline skill, not a bonus.
+                    </div>
+                    <div className="p-3 md:p-4 border border-modern-primaryForeground/20 rounded-lg bg-modern-primaryForeground/5">
+                      <span className="font-bold">Continuous Learning Loops</span> – Secure, self-improving systems and an empowered talent pool.
+                    </div>
                   </div>
-                  <div className="p-4 md:p-6 border border-modern-primaryForeground/20 rounded-lg bg-modern-primaryForeground/5">
-                    <span className="font-bold">2.</span> Halve
-                    mean-time-to-detect with anomaly models.
+                </motion.div>
+                
+                <motion.hr variants={itemVariants} className="border-t border-modern-primaryForeground/20 my-6 md:my-8" />
+                
+                {/* Next Steps section */}
+                <motion.div variants={itemVariants}>
+                  <h3 className="text-xl md:text-2xl font-semibold mb-4 text-center">Next Steps</h3>
+                  <div className="space-y-3 md:space-y-4">
+                    <div className="p-3 md:p-4 border border-modern-primaryForeground/20 rounded-lg bg-modern-primaryForeground/5">
+                      <span className="font-bold">1.</span> Prioritise 90-day quick-win use cases / POCs.
+                    </div>
+                    <div className="p-3 md:p-4 border border-modern-primaryForeground/20 rounded-lg bg-modern-primaryForeground/5">
+                      <span className="font-bold">2.</span> Define success metrics for each AI-enabled solution.
+                    </div>
+                    <div className="p-3 md:p-4 border border-modern-primaryForeground/20 rounded-lg bg-modern-primaryForeground/5">
+                      <span className="font-bold">3.</span> Map the talent upskilling path to embed AI fluency across teams.
+                    </div>
                   </div>
-                  <div className="p-4 md:p-6 border border-modern-primaryForeground/20 rounded-lg bg-modern-primaryForeground/5">
-                    <span className="font-bold">3.</span> Upskill every engineer
-                    on Gen-AI tooling in Year 1.
-                  </div>
-                </div>
+                </motion.div>
               </motion.div>
             </motion.div>
           </Slide>
