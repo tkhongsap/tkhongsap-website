@@ -472,22 +472,33 @@ export default function MyThought() {
                             tkhongsap
                           </h3>
                           <p className="text-sm text-modern-mutedForeground dark:text-gray-400">
-                            2 followers · 15 following
                           </p>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 border-b border-modern-border dark:border-gray-700 text-center p-3">
-                    <div className="font-medium text-modern-foreground dark:text-white mb-2">
-                      645 contributions in the last year
+                  <div className="border-b border-modern-border dark:border-gray-700 p-4 md:p-6">
+                    <div className="flex items-center justify-center gap-2 mb-3">
+                      <svg viewBox="0 0 24 24" className="h-5 w-5 text-modern-primary" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="m5.67 7.95-3.17-.71L3.2 4l2.47 1.24m.22 6.76-2.47 1.54 1.24 1.54 1.23-2.47m5.95-3.08L9.07 5.53 6.6 7.07l1.24 2.46m4.92 6.77-1.23-3.7-2.47.72.72 2.47"/>
+                      </svg>
+                      <h3 className="font-bold text-lg text-modern-primary">Active Code Contributions</h3>
                     </div>
-                    <img
-                      src="/assets/github-contributions.png"
-                      alt="GitHub contribution activity chart showing 645 contributions"
-                      className="w-full h-auto max-w-3xl mx-auto"
-                    />
+                    <div className="bg-modern-background p-4 rounded-lg border border-modern-border mb-2">
+                      <div className="font-medium text-modern-foreground dark:text-white mb-3 flex justify-between items-center">
+                        <span>645 contributions in the last year</span>
+                        <span className="text-sm text-modern-primary font-semibold px-2 py-1 bg-modern-primary/10 rounded-full">Top 10% Active</span>
+                      </div>
+                      <img
+                        src="/assets/github-contributions.png"
+                        alt="GitHub contribution activity chart showing 645 contributions"
+                        className="w-full h-auto max-w-3xl mx-auto rounded-md border border-modern-border/50 shadow-sm"
+                      />
+                      <p className="text-sm text-modern-mutedForeground mt-3 text-center italic">
+                        Consistent code contributions across multiple AI and ML open-source projects
+                      </p>
+                    </div>
                   </div>
 
                   <div className="grid grid-cols-3 border-b border-modern-border dark:border-gray-700 text-center">
