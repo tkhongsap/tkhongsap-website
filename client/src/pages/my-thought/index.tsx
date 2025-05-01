@@ -431,7 +431,7 @@ export default function MyThought() {
                   href="https://github.com/tkhongsap" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
+                  className="inline-flex items-center gap-2 text-modern-primary hover:text-modern-primary/80 transition-colors"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -785,9 +785,10 @@ export default function MyThought() {
               initial="hidden"
               animate="visible"
             >
+              <SlideTitle>Commitment & Future Impact</SlideTitle>
               <motion.div
                 variants={itemVariants}
-                className="max-w-3xl mx-auto pt-12 md:pt-16"
+                className="max-w-3xl mx-auto pt-6 md:pt-8"
               >
                 {/* Quote section */}
                 <motion.blockquote 
