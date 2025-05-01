@@ -158,11 +158,13 @@ const IconGrid = ({ icons, title }: { icons: any[], title: string }) => (
 );
 
 // Simple Table Component for Credentials/Initiatives/Why
+type TableData = (string | React.ComponentType<any>)[][];
+
 const SimpleTable = ({
   data,
   headers,
 }: {
-  data: string[][];
+  data: TableData;
   headers: string[];
 }) => {
   return (
@@ -191,19 +193,37 @@ const SimpleTable = ({
               variants={itemVariants}
               className="hover:bg-modern-muted/30"
             >
-              {row.map((cell, cellIndex) => (
-                <td
-                  key={cellIndex}
-                  className="p-2 md:p-3 border-b border-modern-border text-sm md:text-base text-modern-mutedForeground align-top"
-                  // Use dangerouslySetInnerHTML for basic markdown like bold
-                  dangerouslySetInnerHTML={{
-                    __html: cell.replace(
-                      /\*\*(.*?)\*\*/g,
-                      "<strong>$1</strong>",
-                    ),
-                  }}
-                />
-              ))}
+              {row.map((cell, cellIndex) => {
+                // If cell is a React component (icon), render it
+                if (typeof cell === 'function') {
+                  const IconComponent = cell as React.ComponentType<any>;
+                  return (
+                    <td
+                      key={cellIndex}
+                      className="p-2 md:p-3 border-b border-modern-border text-sm md:text-base text-modern-mutedForeground align-middle text-center"
+                    >
+                      <div className="flex items-center justify-center">
+                        <IconComponent className="h-6 w-6 text-modern-primary" />
+                      </div>
+                    </td>
+                  );
+                }
+                
+                // Otherwise, render as text with markdown
+                return (
+                  <td
+                    key={cellIndex}
+                    className="p-2 md:p-3 border-b border-modern-border text-sm md:text-base text-modern-mutedForeground align-top"
+                    // Use dangerouslySetInnerHTML for basic markdown like bold
+                    dangerouslySetInnerHTML={{
+                      __html: (cell as string).replace(
+                        /\*\*(.*?)\*\*/g,
+                        "<strong>$1</strong>",
+                      ),
+                    }}
+                  />
+                );
+              })}
             </motion.tr>
           ))}
         </tbody>
