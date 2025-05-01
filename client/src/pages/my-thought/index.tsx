@@ -230,29 +230,44 @@ export default function MyThought() {
   ];
   const techCredentialsHeaders = ["Domain", "Proof-points"];
 
+  // Icons for each initiative
+  const initiativeIcons = {
+    knowledgeManagement: BookOpen,
+    softwareDev: Code,
+    mobileOcr: Cpu,
+    documentWorkflow: ClipboardList,
+    visionModels: BrainCircuit
+  };
+
   const initiativesData = [
     [
+      initiativeIcons.knowledgeManagement,
       "**AI-Powered Knowledge Management**",
       "Converts internal case notes and resolutions into an LLM-searchable knowledge base, so support teams get consistent answers and best-practice fixes instantly.",
     ],
     [
+      initiativeIcons.softwareDev,
       "**AI-Assisted Software Development**",
       "Uses code-assistant tooling and ML-driven code review to boost developer productivity, raise code quality and security, and upskill teams through real-time suggestions.",
     ],
     [
+      initiativeIcons.mobileOcr,
       "**AI-First Mobile OCR Application**",
       "An AI-powered OCR app that captures documents in the field, applies business rules, and pushes clean data straight into core workflows—eliminating re-keying delays.",
     ],
     [
+      initiativeIcons.documentWorkflow,
       "**Agentic Document Workflow**",
       "A multi-agent pipeline that ingests contracts, extracts key clauses, and routes approvals automatically, turning days of manual processing into near real-time flow.",
     ],
     [
+      initiativeIcons.visionModels,
       "**Vision Models for Image Insight**",
       "Computer-vision models that detect, classify, and flag anomalies in images or video—supporting use-cases from product-defect QC to field asset inspections and visual analytics.",
     ],
   ];
   const initiativesHeaders = [
+    "",  // For the icon column
     "Initiative",
     "Enterprise Use-Case & Business Value",
   ];
