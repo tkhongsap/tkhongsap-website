@@ -932,12 +932,8 @@ export default function MyThought() {
                   </motion.blockquote>
                 </motion.div>
 
-                {/* Key Take-aways section with icons */}
+                {/* Key points section with icons */}
                 <motion.div variants={itemVariants} className="mb-8 md:mb-10">
-                  <h3 className="text-xl md:text-2xl font-semibold mb-5 text-center flex items-center justify-center gap-2">
-                    <Lightbulb className="h-6 w-6" />
-                    <span>Key Take-aways</span>
-                  </h3>
                   <div className="space-y-4 md:space-y-5">
                     <div className="p-4 md:p-5 border border-modern-primaryForeground/20 rounded-lg bg-modern-primaryForeground/10 flex items-start gap-3">
                       <div className="flex-shrink-0 rounded-full bg-modern-primaryForeground/20 p-2">
