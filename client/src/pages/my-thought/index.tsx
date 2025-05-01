@@ -158,7 +158,9 @@ const IconGrid = ({ icons, title }: { icons: any[], title: string }) => (
 );
 
 // Simple Table Component for Credentials/Initiatives/Why
-type TableData = (string | React.ComponentType<any>)[][];
+// Allow any type as cell content
+type TableCellContent = string | JSX.Element | React.ReactNode;
+type TableData = TableCellContent[][];
 
 const SimpleTable = ({
   data,
@@ -194,23 +196,21 @@ const SimpleTable = ({
               className="hover:bg-modern-muted/30"
             >
               {row.map((cell, cellIndex) => {
-                // If cell is a React component (icon), render it
-                if (typeof cell === 'function') {
-                  const IconComponent = cell as React.ComponentType<any>;
+                // If cell is a React JSX element (icon), render it directly
+                if (React.isValidElement(cell)) {
                   return (
                     <td
                       key={cellIndex}
-                      className="p-2 md:p-3 border-b border-modern-border text-sm md:text-base text-modern-mutedForeground align-middle text-center"
+                      className="p-2 md:p-3 border-b border-modern-border text-modern-mutedForeground align-middle"
                     >
                       <div className="flex items-center justify-center">
-                        <IconComponent className="h-6 w-6 text-modern-primary" />
+                        {cell}
                       </div>
                     </td>
                   );
                 }
                 
-                // Otherwise, render as text with markdown
-                // Make sure cell is a string before using replace
+                // Handle string content with markdown
                 if (typeof cell === 'string') {
                   return (
                     <td
@@ -263,38 +263,30 @@ export default function MyThought() {
   ];
   const techCredentialsHeaders = ["Domain", "Proof-points"];
 
-  // Icons for each initiative
-  const initiativeIcons = {
-    knowledgeManagement: BookOpen,
-    softwareDev: Code,
-    mobileOcr: Cpu,
-    documentWorkflow: ClipboardList,
-    visionModels: BrainCircuit
-  };
-
+  // Create Initiative Icons directly as JSX elements to avoid [object Object] issues
   const initiativesData = [
     [
-      initiativeIcons.knowledgeManagement,
+      <BookOpen key="icon1" className="h-6 w-6 text-modern-primary" />,
       "**AI-Powered Knowledge Management**",
       "Converts internal case notes and resolutions into an LLM-searchable knowledge base, so support teams get consistent answers and best-practice fixes instantly.",
     ],
     [
-      initiativeIcons.softwareDev,
+      <Code key="icon2" className="h-6 w-6 text-modern-primary" />,
       "**AI-Assisted Software Development**",
       "Uses code-assistant tooling and ML-driven code review to boost developer productivity, raise code quality and security, and upskill teams through real-time suggestions.",
     ],
     [
-      initiativeIcons.mobileOcr,
+      <Cpu key="icon3" className="h-6 w-6 text-modern-primary" />,
       "**AI-First Mobile OCR Application**",
       "An AI-powered OCR app that captures documents in the field, applies business rules, and pushes clean data straight into core workflows—eliminating re-keying delays.",
     ],
     [
-      initiativeIcons.documentWorkflow,
+      <ClipboardList key="icon4" className="h-6 w-6 text-modern-primary" />,
       "**Agentic Document Workflow**",
       "A multi-agent pipeline that ingests contracts, extracts key clauses, and routes approvals automatically, turning days of manual processing into near real-time flow.",
     ],
     [
-      initiativeIcons.visionModels,
+      <BrainCircuit key="icon5" className="h-6 w-6 text-modern-primary" />,
       "**Vision Models for Image Insight**",
       "Computer-vision models that detect, classify, and flag anomalies in images or video—supporting use-cases from product-defect QC to field asset inspections and visual analytics.",
     ],
