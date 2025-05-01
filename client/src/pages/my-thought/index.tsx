@@ -202,9 +202,9 @@ export default function MyThought() {
               animate="visible"
             >
               <motion.div variants={itemVariants} className="md:w-1/3">
-                <div className="bg-gray-100 rounded-lg p-6">
+                <div className="bg-modern-muted rounded-lg p-6">
                   <div className="mb-6 flex justify-center">
-                    <div className="w-48 h-48 rounded-full overflow-hidden flex items-center justify-center border-2 border-primary">
+                    <div className="w-48 h-48 rounded-full overflow-hidden flex items-center justify-center border-2 border-modern-primary">
                       <img
                         src="/assets/profile-ta.jpg"
                         alt="Ta Khongsap profile picture"
@@ -215,10 +215,10 @@ export default function MyThought() {
 
                   <div className="text-center">
                     <h3 className="text-xl font-bold mb-2">
-                      <span className="text-primary">Ta</span>{" "}
-                      <span className="text-gray-800">Khongsap</span>
+                      <span className="text-modern-primary">Ta</span>{" "}
+                      <span className="text-modern-foreground">Khongsap</span>
                     </h3>
-                    <p className="text-gray-700 mb-4">
+                    <p className="text-modern-mutedForeground mb-4">
                       AI Strategist & Data Science Leader
                     </p>
 
@@ -227,7 +227,7 @@ export default function MyThought() {
                         href="https://www.linkedin.com/in/totrakool-k-b504a912/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-gray-700 hover:text-primary transition-colors"
+                        className="text-modern-mutedForeground hover:text-modern-primary transition-colors"
                         aria-label="LinkedIn"
                       >
                         <svg
@@ -250,7 +250,7 @@ export default function MyThought() {
                         href="https://github.com/tkhongsap"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-gray-700 hover:text-primary transition-colors"
+                        className="text-modern-mutedForeground hover:text-modern-primary transition-colors"
                         aria-label="GitHub"
                       >
                         <svg
@@ -276,7 +276,7 @@ export default function MyThought() {
               <motion.div variants={itemVariants} className="md:w-2/3">
                 <motion.blockquote
                   variants={itemVariants}
-                  className="text-2xl md:text-3xl font-medium leading-relaxed text-gray-800 border-l-4 border-primary pl-4 md:pl-6 py-2"
+                  className="text-2xl md:text-3xl font-medium leading-relaxed text-modern-foreground border-l-4 border-modern-primary pl-4 md:pl-6 py-2"
                 >
                   "AI isn't an option — it's the new baseline for building
                   secure, resilient, and revenue-generating systems."
@@ -331,20 +331,20 @@ export default function MyThought() {
                     <motion.div
                       key={index}
                       variants={itemVariants}
-                      className="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-md transition-shadow overflow-hidden"
+                      className="rounded-lg border border-modern-border bg-modern-background text-modern-foreground shadow-sm hover:shadow-md transition-shadow overflow-hidden"
                     >
                       <div className="p-4 md:p-6">
                         <div className="flex items-start space-x-4">
-                          <div className="flex-shrink-0 rounded-full bg-primary/10 p-3">
-                            <item.icon className="h-6 w-6 text-primary" />
+                          <div className="flex-shrink-0 rounded-full bg-modern-primary/10 p-3">
+                            <item.icon className="h-6 w-6 text-modern-primary" />
                           </div>
                           <div className="flex-1">
                             <div className="flex justify-between items-center">
-                              <h3 className="text-lg font-medium leading-6">
+                              <h3 className="text-lg font-medium leading-6 text-modern-foreground">
                                 {item.title}
                               </h3>
                               <div className="ml-2">
-                                <span className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary">
+                                <span className="inline-flex items-center rounded-full bg-modern-primary/10 px-2.5 py-0.5 text-xs font-semibold text-modern-primary">
                                   {item.order}
                                 </span>
                               </div>
@@ -453,11 +453,11 @@ export default function MyThought() {
               </motion.div>
               
               <motion.div variants={itemVariants} className="mt-6 mb-4 px-4 md:px-0">
-                <div className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg shadow-sm overflow-hidden">
-                  <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-4">
+                <div className="bg-modern-muted dark:bg-gray-900 border border-modern-border dark:border-gray-800 rounded-lg shadow-sm overflow-hidden">
+                  <div className="bg-modern-background dark:bg-gray-800 border-b border-modern-border dark:border-gray-700 p-4">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 rounded-full overflow-hidden bg-gray-100">
+                        <div className="w-12 h-12 rounded-full overflow-hidden bg-modern-muted">
                           <img 
                             src="/assets/profile-ta.jpg" 
                             alt="Ta Khongsap GitHub profile" 
@@ -465,8 +465,8 @@ export default function MyThought() {
                           />
                         </div>
                         <div>
-                          <h3 className="font-semibold text-gray-900 dark:text-white">tkhongsap</h3>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">
+                          <h3 className="font-semibold text-modern-foreground dark:text-white">tkhongsap</h3>
+                          <p className="text-sm text-modern-mutedForeground dark:text-gray-400">
                             2 followers · 15 following
                           </p>
                         </div>
@@ -474,8 +474,8 @@ export default function MyThought() {
                     </div>
                   </div>
                   
-                  <div className="grid grid-cols-1 border-b border-gray-200 dark:border-gray-700 text-center p-3">
-                    <div className="font-medium text-gray-900 dark:text-white mb-2">
+                  <div className="grid grid-cols-1 border-b border-modern-border dark:border-gray-700 text-center p-3">
+                    <div className="font-medium text-modern-foreground dark:text-white mb-2">
                       645 contributions in the last year
                     </div>
                     <img 
@@ -485,31 +485,31 @@ export default function MyThought() {
                     />
                   </div>
                   
-                  <div className="grid grid-cols-3 border-b border-gray-200 dark:border-gray-700 text-center">
-                    <div className="p-3 border-r border-gray-200 dark:border-gray-700">
-                      <div className="font-medium text-gray-900 dark:text-white">6</div>
-                      <div className="text-sm text-gray-600 dark:text-gray-400">Pinned Repos</div>
+                  <div className="grid grid-cols-3 border-b border-modern-border dark:border-gray-700 text-center">
+                    <div className="p-3 border-r border-modern-border dark:border-gray-700">
+                      <div className="font-medium text-modern-foreground dark:text-white">6</div>
+                      <div className="text-sm text-modern-mutedForeground dark:text-gray-400">Pinned Repos</div>
                     </div>
-                    <div className="p-3 border-r border-gray-200 dark:border-gray-700">
-                      <div className="font-medium text-gray-900 dark:text-white">2</div>
-                      <div className="text-sm text-gray-600 dark:text-gray-400">Followers</div>
+                    <div className="p-3 border-r border-modern-border dark:border-gray-700">
+                      <div className="font-medium text-modern-foreground dark:text-white">2</div>
+                      <div className="text-sm text-modern-mutedForeground dark:text-gray-400">Followers</div>
                     </div>
                     <div className="p-3">
-                      <div className="font-medium text-gray-900 dark:text-white">15</div>
-                      <div className="text-sm text-gray-600 dark:text-gray-400">Following</div>
+                      <div className="font-medium text-modern-foreground dark:text-white">15</div>
+                      <div className="text-sm text-modern-mutedForeground dark:text-gray-400">Following</div>
                     </div>
                   </div>
                   
                   <div className="p-4">
-                    <div className="text-sm text-gray-800 dark:text-gray-200 mb-4">
+                    <div className="text-sm text-modern-foreground dark:text-gray-200 mb-4">
                       <span className="font-medium">Pinned repositories:</span>
                     </div>
                     <div className="space-y-3">
-                      <div className="bg-gray-50 dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-3">
+                      <div className="bg-modern-muted dark:bg-gray-800 rounded border border-modern-border dark:border-gray-700 p-3">
                         <div className="flex justify-between items-start">
                           <div>
-                            <h4 className="font-medium text-primary">anthropic-cookbook</h4>
-                            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                            <h4 className="font-medium text-modern-primary">anthropic-cookbook</h4>
+                            <p className="text-sm text-modern-mutedForeground dark:text-gray-400 mt-1">
                               A collection of notebooks/recipes showcasing some fun and effective ways of using Claude.
                             </p>
                             <div className="flex gap-2 mt-2">
@@ -520,11 +520,11 @@ export default function MyThought() {
                           </div>
                         </div>
                       </div>
-                      <div className="bg-gray-50 dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-3">
+                      <div className="bg-modern-muted dark:bg-gray-800 rounded border border-modern-border dark:border-gray-700 p-3">
                         <div className="flex justify-between items-start">
                           <div>
-                            <h4 className="font-medium text-primary">llama_index</h4>
-                            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                            <h4 className="font-medium text-modern-primary">llama_index</h4>
+                            <p className="text-sm text-modern-mutedForeground dark:text-gray-400 mt-1">
                               LlamaIndex is a data framework for your LLM applications
                             </p>
                             <div className="flex gap-2 mt-2">
@@ -541,11 +541,11 @@ export default function MyThought() {
                           </div>
                         </div>
                       </div>
-                      <div className="bg-gray-50 dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-3">
+                      <div className="bg-modern-muted dark:bg-gray-800 rounded border border-modern-border dark:border-gray-700 p-3">
                         <div className="flex justify-between items-start">
                           <div>
-                            <h4 className="font-medium text-primary">openai-cookbook</h4>
-                            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                            <h4 className="font-medium text-modern-primary">openai-cookbook</h4>
+                            <p className="text-sm text-modern-mutedForeground dark:text-gray-400 mt-1">
                               Examples and guides for using the OpenAI API
                             </p>
                             <div className="flex gap-2 mt-2">
@@ -556,11 +556,11 @@ export default function MyThought() {
                           </div>
                         </div>
                       </div>
-                      <div className="bg-gray-50 dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-3">
+                      <div className="bg-modern-muted dark:bg-gray-800 rounded border border-modern-border dark:border-gray-700 p-3">
                         <div className="flex justify-between items-start">
                           <div>
-                            <h4 className="font-medium text-primary">gen-ai-utils</h4>
-                            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                            <h4 className="font-medium text-modern-primary">gen-ai-utils</h4>
+                            <p className="text-sm text-modern-mutedForeground dark:text-gray-400 mt-1">
                               A collection of utility scripts and helper functions for integrating and managing generative AI APIs, including OpenAI, Anthropic, and others.
                             </p>
                             <div className="flex gap-2 mt-2">
@@ -576,7 +576,7 @@ export default function MyThought() {
                 </div>
               </motion.div>
               
-              <motion.div variants={itemVariants} className="text-center mb-6 text-gray-600 dark:text-gray-400 italic text-sm">
+              <motion.div variants={itemVariants} className="text-center mb-6 text-modern-mutedForeground italic text-sm">
                 Recent contributions to: <strong>gen-ai-jira</strong>, <strong>learning-ai-mockup</strong>, <strong>tkhongsap-website</strong>
               </motion.div>
             </motion.div>
@@ -635,66 +635,66 @@ export default function MyThought() {
               <motion.div variants={itemVariants} className="mt-4 mb-6 px-4 md:px-6">
                 <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
                   <div className="md:col-span-3 flex flex-col justify-center">
-                    <h3 className="text-xl font-semibold text-primary mb-3">
+                    <h3 className="text-xl font-semibold text-modern-primary mb-3">
                       Intelligent Code Analysis in Action
                     </h3>
-                    <p className="text-gray-700 mb-4">
+                    <p className="text-modern-mutedForeground mb-4">
                       This enterprise-ready AI system automates code reviews, identifies risks, and optimizes software quality. It demonstrates practical applications for:
                     </p>
                     <ul className="space-y-2 list-disc pl-5 mb-4">
-                      <li><span className="font-medium">Technical debt reduction</span> in legacy systems</li>
-                      <li><span className="font-medium">Security vulnerability detection</span> (e.g., secrets in code, misconfigurations)</li>
-                      <li><span className="font-medium">Compliance auditing</span> (e.g., adherence to ISO, GDPR, or internal standards)</li>
-                      <li><span className="font-medium">Developer productivity benchmarking</span></li>
+                      <li><span className="font-medium text-modern-foreground">Technical debt reduction</span> <span className="text-modern-mutedForeground">in legacy systems</span></li>
+                      <li><span className="font-medium text-modern-foreground">Security vulnerability detection</span> <span className="text-modern-mutedForeground">(e.g., secrets in code, misconfigurations)</span></li>
+                      <li><span className="font-medium text-modern-foreground">Compliance auditing</span> <span className="text-modern-mutedForeground">(e.g., adherence to ISO, GDPR, or internal standards)</span></li>
+                      <li><span className="font-medium text-modern-foreground">Developer productivity benchmarking</span></li>
                     </ul>
-                    <p className="text-gray-700 font-medium italic mb-4">
+                    <p className="text-modern-mutedForeground font-medium italic mb-4">
                       A scalable solution to enforce code quality, accelerate delivery, and reduce operational risks.
                     </p>
-                    <div className="mt-2 p-4 bg-gray-50 border border-gray-200 rounded-lg">
-                      <p className="font-medium text-gray-800 mb-2">Demo Link:</p>
+                    <div className="mt-2 p-4 bg-modern-muted border border-modern-border rounded-lg">
+                      <p className="font-medium text-modern-foreground mb-2">Demo Link:</p>
                       <a 
                         href="https://kzml8wmdn62m0pm4mt86.lite.vusercontent.net/" 
                         target="_blank" 
                         rel="noopener noreferrer" 
-                        className="text-primary hover:text-primary/80 font-medium flex items-center gap-2"
+                        className="text-modern-primary hover:text-modern-primary/80 font-medium flex items-center gap-2"
                       >
                         <ExternalLink className="w-4 h-4" />
                         Live Code Review Demo
                       </a>
-                      <p className="text-xs text-gray-600 mt-2">
+                      <p className="text-xs text-modern-mutedForeground mt-2">
                         Explore how AI analyzes codebases in real time, surfaces actionable insights, and integrates with CI/CD pipelines.
                       </p>
                     </div>
                   </div>
                   <div className="md:col-span-2">
-                    <div className="bg-gray-50 rounded-lg border border-gray-200 p-4 mb-4">
-                      <h4 className="font-medium text-gray-900 mb-3">Business Impact:</h4>
+                    <div className="bg-modern-muted rounded-lg border border-modern-border p-4 mb-4">
+                      <h4 className="font-medium text-modern-foreground mb-3">Business Impact:</h4>
                       <div className="space-y-3">
                         <div className="flex items-start gap-2">
-                          <Zap className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                          <p className="text-sm text-gray-700">Reduces code review time by <span className="font-medium">60–80%</span> via automated analysis</p>
+                          <Zap className="w-5 h-5 text-modern-primary flex-shrink-0 mt-0.5" />
+                          <p className="text-sm text-modern-mutedForeground">Reduces code review time by <span className="font-medium">60–80%</span> via automated analysis</p>
                         </div>
                         <div className="flex items-start gap-2">
-                          <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                          <p className="text-sm text-gray-700">Improves code quality scores from <span className="font-medium">7.2 to 9.1/10</span> in pilot teams</p>
+                          <CheckCircle className="w-5 h-5 text-modern-primary flex-shrink-0 mt-0.5" />
+                          <p className="text-sm text-modern-mutedForeground">Improves code quality scores from <span className="font-medium">7.2 to 9.1/10</span> in pilot teams</p>
                         </div>
                         <div className="flex items-start gap-2">
-                          <TrendingUp className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                          <p className="text-sm text-gray-700">Scales code governance without hiring additional reviewers</p>
+                          <TrendingUp className="w-5 h-5 text-modern-primary flex-shrink-0 mt-0.5" />
+                          <p className="text-sm text-modern-mutedForeground">Scales code governance without hiring additional reviewers</p>
                         </div>
                         <div className="flex items-start gap-2">
-                          <ShieldCheck className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                          <p className="text-sm text-gray-700">Provides audit-ready reports for compliance (SOC2, PCI-DSS)</p>
+                          <ShieldCheck className="w-5 h-5 text-modern-primary flex-shrink-0 mt-0.5" />
+                          <p className="text-sm text-modern-mutedForeground">Provides audit-ready reports for compliance (SOC2, PCI-DSS)</p>
                         </div>
                       </div>
                     </div>
                     
-                    <div className="bg-primary/5 rounded-lg border border-primary/20 p-4">
-                      <h4 className="font-medium text-gray-900 mb-2">Why This Matters:</h4>
+                    <div className="bg-modern-primary/5 rounded-lg border border-modern-primary/20 p-4">
+                      <h4 className="font-medium text-modern-foreground mb-2">Why This Matters:</h4>
                       <div className="space-y-2 text-sm">
-                        <p className="text-gray-700"><span className="font-medium">Faster Releases:</span> Cut QA cycles by prioritizing high-risk code.</p>
-                        <p className="text-gray-700"><span className="font-medium">Risk Mitigation:</span> Proactively flag vulnerabilities before production.</p>
-                        <p className="text-gray-700"><span className="font-medium">Cost Savings:</span> Reduce post-deployment bug-fixing costs by 40%.</p>
+                        <p className="text-modern-mutedForeground"><span className="font-medium text-modern-foreground">Faster Releases:</span> Cut QA cycles by prioritizing high-risk code.</p>
+                        <p className="text-modern-mutedForeground"><span className="font-medium text-modern-foreground">Risk Mitigation:</span> Proactively flag vulnerabilities before production.</p>
+                        <p className="text-modern-mutedForeground"><span className="font-medium text-modern-foreground">Cost Savings:</span> Reduce post-deployment bug-fixing costs by 40%.</p>
                       </div>
                     </div>
                   </div>
