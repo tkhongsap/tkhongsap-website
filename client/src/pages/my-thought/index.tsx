@@ -422,7 +422,7 @@ export default function MyThought() {
               initial="hidden"
               animate="visible"
             >
-              <SlideTitle>Open Source Contributions</SlideTitle>
+              <SlideTitle>Still an Active AI Engineer</SlideTitle>
               <motion.div
                 variants={itemVariants}
                 className="mt-6 md:mt-8 text-center"
@@ -698,7 +698,7 @@ export default function MyThought() {
               animate="visible"
             >
               <SlideTitle>
-                Enterprise AI Demo: Code Review & Quality Automation
+                Enterprise AI Example: Code Review & Quality Automation
               </SlideTitle>
               <motion.div
                 variants={itemVariants}
@@ -729,14 +729,6 @@ export default function MyThought() {
                         </span>{" "}
                         <span className="text-modern-mutedForeground">
                           (e.g., secrets in code, misconfigurations)
-                        </span>
-                      </li>
-                      <li>
-                        <span className="font-medium text-modern-foreground">
-                          Compliance auditing
-                        </span>{" "}
-                        <span className="text-modern-mutedForeground">
-                          (e.g., adherence to ISO, GDPR, or internal standards)
                         </span>
                       </li>
                       <li>
