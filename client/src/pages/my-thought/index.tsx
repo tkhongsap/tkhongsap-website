@@ -210,18 +210,31 @@ const SimpleTable = ({
                 }
                 
                 // Otherwise, render as text with markdown
+                // Make sure cell is a string before using replace
+                if (typeof cell === 'string') {
+                  return (
+                    <td
+                      key={cellIndex}
+                      className="p-2 md:p-3 border-b border-modern-border text-sm md:text-base text-modern-mutedForeground align-top"
+                      // Use dangerouslySetInnerHTML for basic markdown like bold
+                      dangerouslySetInnerHTML={{
+                        __html: cell.replace(
+                          /\*\*(.*?)\*\*/g,
+                          "<strong>$1</strong>",
+                        ),
+                      }}
+                    />
+                  );
+                }
+                
+                // Fallback for any other type
                 return (
                   <td
                     key={cellIndex}
                     className="p-2 md:p-3 border-b border-modern-border text-sm md:text-base text-modern-mutedForeground align-top"
-                    // Use dangerouslySetInnerHTML for basic markdown like bold
-                    dangerouslySetInnerHTML={{
-                      __html: (cell as string).replace(
-                        /\*\*(.*?)\*\*/g,
-                        "<strong>$1</strong>",
-                      ),
-                    }}
-                  />
+                  >
+                    {String(cell)}
+                  </td>
                 );
               })}
             </motion.tr>
