@@ -25,7 +25,7 @@ const SlideTitle: React.FC<SlideTitleProps> = ({ children, className = "" }) => 
       variants={titleVariants}
       initial="hidden"
       animate="visible"
-      className={`text-2xl md:text-3xl lg:text-4xl font-bold mb-6 md:mb-8 text-modern-foreground ${className}`}
+      className={`text-2xl md:text-3xl lg:text-4xl font-bold mb-6 md:mb-8 text-modern-foreground text-center ${className}`}
     >
       {children}
     </motion.h2>
