@@ -399,12 +399,13 @@ export default function MyThought() {
                     </div>
                   </motion.blockquote>
                   
-                  {/* Add small data visualization */}
+                  {/* Removing data visualizations
                   <div className="grid grid-cols-3 gap-4 mt-6">
                     <DataChart type="bar" className="h-auto" />
                     <DataChart type="line" className="h-auto" />
                     <DataChart type="pie" className="h-auto" />
                   </div>
+                  */}
                 </motion.div>
               </motion.div>
             </GradientBg>
@@ -541,14 +542,13 @@ export default function MyThought() {
                   </BulletPoint>
                 </BulletList>
                 
-                {/* Add visual timeline */}
+                {/* Removing timeline visualization
                 <motion.div 
                   variants={itemVariants}
                   className="mt-10 relative max-w-3xl mx-auto pt-8"
                 >
                   <div className="absolute top-0 left-1/2 w-1 h-full bg-modern-primary/20 transform -translate-x-1/2"></div>
                   
-                  {/* Timeline nodes */}
                   {[
                     { year: "2008", role: "Data Analyst", company: "Morgan Stanley" },
                     { year: "2012", role: "Head of Analytics", company: "Telecoms Inc." },
@@ -584,6 +584,7 @@ export default function MyThought() {
                     </motion.div>
                   ))}
                 </motion.div>
+                */}
               </motion.div>
             </GradientBg>
           </Slide>
@@ -602,19 +603,17 @@ export default function MyThought() {
                   data={techCredentialsData}
                 />
                 
-                {/* Add skills visualization */}
+                {/* Removing skills visualization
                 <motion.div 
                   variants={itemVariants}
                   className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto"
                 >
-                  {/* ML/AI Skills */}
                   <div className="bg-modern-muted/60 backdrop-blur-sm rounded-lg p-5 border border-modern-border shadow-md">
                     <div className="flex items-center gap-2 mb-4">
                       <BrainCircuit className="text-modern-primary h-5 w-5" />
                       <h3 className="font-semibold text-modern-foreground">ML/AI Skills</h3>
                     </div>
                     
-                    {/* Skill bars */}
                     {[
                       { name: "Prompt Engineering", level: 95 },
                       { name: "RAG Systems", level: 90 },
@@ -639,14 +638,12 @@ export default function MyThought() {
                     ))}
                   </div>
                   
-                  {/* Analytics Skills */}
                   <div className="bg-modern-muted/60 backdrop-blur-sm rounded-lg p-5 border border-modern-border shadow-md">
                     <div className="flex items-center gap-2 mb-4">
                       <BarChartBig className="text-modern-primary h-5 w-5" />
                       <h3 className="font-semibold text-modern-foreground">Analytics Skills</h3>
                     </div>
                     
-                    {/* Skill bars */}
                     {[
                       { name: "Data Pipeline Engineering", level: 90 },
                       { name: "Enterprise BI", level: 95 },
@@ -671,14 +668,12 @@ export default function MyThought() {
                     ))}
                   </div>
                   
-                  {/* Security Skills */}
                   <div className="bg-modern-muted/60 backdrop-blur-sm rounded-lg p-5 border border-modern-border shadow-md">
                     <div className="flex items-center gap-2 mb-4">
                       <ShieldCheck className="text-modern-primary h-5 w-5" />
                       <h3 className="font-semibold text-modern-foreground">Security Skills</h3>
                     </div>
                     
-                    {/* Skill bars */}
                     {[
                       { name: "AI-Powered Threat Detection", level: 88 },
                       { name: "Secure AI Deployment", level: 85 },
@@ -703,6 +698,7 @@ export default function MyThought() {
                     ))}
                   </div>
                 </motion.div>
+                */}
               </motion.div>
             </GradientBg>
           </Slide>
@@ -749,44 +745,7 @@ export default function MyThought() {
                   variants={itemVariants}
                   className="mt-6 mb-4 px-4 md:px-0"
                 >
-                  <div className="bg-modern-muted dark:bg-gray-900 border border-modern-border dark:border-gray-800 rounded-lg shadow-lg overflow-hidden relative backdrop-blur-sm">
-                    {/* Background code pattern */}
-                    <div className="absolute inset-0 opacity-5 overflow-hidden">
-                      <pre className="text-[0.5rem] leading-tight text-modern-primary font-mono">
-                        {`function aiEngineer() {
-  const skills = ['prompting', 'rag', 'agents', 'ml'];
-  return skills.map(skill => optimizeAIWorkflow(skill));
-}
-
-async function optimizeAIWorkflow(domain) {
-  const data = await fetchTrainingData(domain);
-  const model = trainModel(data);
-  return deployModel(model, {
-    monitoring: true,
-    feedback: true,
-    continuous_learning: true
-  });
-}
-
-// AI systems designed with security in mind
-class SecureAISystem {
-  constructor(config) {
-    this.auth = new AuthSystem(config);
-    this.encryption = new EndToEndEncryption();
-    this.monitoring = new RealTimeMonitoring();
-  }
-
-  protect(data) {
-    return this.encryption.apply(data);
-  }
-
-  validateInput(prompt) {
-    return this.auth.sanitize(prompt);
-  }
-}`.repeat(3)}
-                      </pre>
-                    </div>
-                    
+                  <div className="bg-modern-muted/90 backdrop-blur-sm border border-modern-border dark:border-gray-800 rounded-lg shadow-lg overflow-hidden relative">
                     <div className="bg-modern-background/90 backdrop-blur-sm dark:bg-gray-800 border-b border-modern-border dark:border-gray-700 p-4 relative z-10">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
@@ -823,34 +782,9 @@ class SecureAISystem {
                           <span>645 contributions in the last year</span>
                           <span className="text-sm text-modern-primary font-semibold px-2 py-1 bg-modern-primary/10 rounded-full">Top 10% Active</span>
                         </div>
+                        
+                        {/* Removing custom activity heatmap */}
                         <div className="relative">
-                          {/* Activity heat map - stylized version */}
-                          <div className="w-full grid grid-cols-52 gap-1 h-24 mb-4">
-                            {[...Array(52)].map((_, weekIndex) => (
-                              <div key={weekIndex} className="grid grid-rows-7 gap-1">
-                                {[...Array(7)].map((_, dayIndex) => {
-                                  // Generate random activity levels but more active toward the right (recent)
-                                  const activity = Math.random() * (weekIndex > 40 ? 1 : 0.7);
-                                  let bgClass = 'bg-gray-100';
-                                  
-                                  if (activity > 0.8) bgClass = 'bg-modern-primary';
-                                  else if (activity > 0.6) bgClass = 'bg-modern-primary/70';
-                                  else if (activity > 0.4) bgClass = 'bg-modern-primary/50';
-                                  else if (activity > 0.2) bgClass = 'bg-modern-primary/30';
-                                  
-                                  return (
-                                    <div 
-                                      key={dayIndex} 
-                                      className={`w-full h-full rounded-sm ${bgClass} transform transition-all hover:scale-125`}
-                                      title={`${Math.floor(activity * 10)} contributions`}
-                                    ></div>
-                                  );
-                                })}
-                              </div>
-                            ))}
-                          </div>
-
-                          {/* Fallback option */}
                           <img
                             src="https://ghchart.rshah.org/tkhongsap"
                             alt="GitHub contribution activity chart showing contributions"
@@ -859,7 +793,7 @@ class SecureAISystem {
                               e.currentTarget.src = "https://placehold.co/800x200/0969DA/ffffff?text=GitHub+Contributions";
                               e.currentTarget.alt = "GitHub contributions placeholder";
                             }}
-                            className="w-full h-auto max-w-3xl mx-auto rounded-md border border-modern-border/50 shadow-sm bg-[#ebedf0] hidden"
+                            className="w-full h-auto max-w-3xl mx-auto rounded-md border border-modern-border/50 shadow-sm bg-[#ebedf0]"
                           />
                         </div>
                         <p className="text-sm text-modern-mutedForeground mt-3 text-center italic">
@@ -895,11 +829,12 @@ class SecureAISystem {
                       </div>
                     </div>
 
+                    {/* Simplify repository section */}
                     <div className="p-4 relative z-10">
                       <div className="text-sm text-modern-foreground dark:text-gray-200 mb-4">
-                        <span className="font-medium">Pinned repositories:</span>
+                        <span className="font-medium">Notable repositories:</span>
                       </div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      <div className="space-y-3">
                         <div className="bg-modern-muted/80 backdrop-blur-sm dark:bg-gray-800 rounded border border-modern-border dark:border-gray-700 p-3 hover:shadow-md transition-shadow">
                           <div className="flex justify-between items-start">
                             <div>
@@ -913,11 +848,6 @@ class SecureAISystem {
                                 A collection of notebooks/recipes showcasing some
                                 fun and effective ways of using Claude.
                               </p>
-                              <div className="flex gap-2 mt-2">
-                                <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300">
-                                  Jupyter Notebook
-                                </span>
-                              </div>
                             </div>
                           </div>
                         </div>
@@ -931,66 +861,8 @@ class SecureAISystem {
                                 llama_index
                               </h4>
                               <p className="text-sm text-modern-mutedForeground dark:text-gray-400 mt-1">
-                                LlamaIndex is a data framework for your LLM
-                                applications
+                                LlamaIndex is a data framework for your LLM applications
                               </p>
-                              <div className="flex gap-2 mt-2">
-                                <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300">
-                                  Python
-                                </span>
-                                <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300">
-                                  <svg
-                                    className="w-3 h-3 mr-1"
-                                    viewBox="0 0 16 16"
-                                    fill="currentColor"
-                                  >
-                                    <path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"></path>
-                                  </svg>
-                                  1
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="bg-modern-muted/80 backdrop-blur-sm dark:bg-gray-800 rounded border border-modern-border dark:border-gray-700 p-3 hover:shadow-md transition-shadow">
-                          <div className="flex justify-between items-start">
-                            <div>
-                              <h4 className="font-medium text-modern-primary flex items-center gap-1">
-                                <svg className="h-4 w-4" viewBox="0 0 16 16" fill="currentColor">
-                                  <path d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z"></path>
-                                </svg>
-                                openai-cookbook
-                              </h4>
-                              <p className="text-sm text-modern-mutedForeground dark:text-gray-400 mt-1">
-                                Examples and guides for using the OpenAI API
-                              </p>
-                              <div className="flex gap-2 mt-2">
-                                <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300">
-                                  MDX
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="bg-modern-muted/80 backdrop-blur-sm dark:bg-gray-800 rounded border border-modern-border dark:border-gray-700 p-3 hover:shadow-md transition-shadow">
-                          <div className="flex justify-between items-start">
-                            <div>
-                              <h4 className="font-medium text-modern-primary flex items-center gap-1">
-                                <svg className="h-4 w-4" viewBox="0 0 16 16" fill="currentColor">
-                                  <path d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z"></path>
-                                </svg>
-                                gen-ai-utils
-                              </h4>
-                              <p className="text-sm text-modern-mutedForeground dark:text-gray-400 mt-1">
-                                A collection of utility scripts and helper
-                                functions for integrating and managing generative
-                                AI APIs, including OpenAI, Anthropic, and others.
-                              </p>
-                              <div className="flex gap-2 mt-2">
-                                <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300">
-                                  Python
-                                </span>
-                              </div>
                             </div>
                           </div>
                         </div>
@@ -1054,12 +926,11 @@ class SecureAISystem {
                   </BulletPoint>
                 </BulletList>
                 
-                {/* Add visual metrics */}
+                {/* Removing visual metrics 
                 <motion.div 
                   variants={itemVariants}
                   className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto"
                 >
-                  {/* Metric cards with radial progress */}
                   {[
                     { label: "Productivity Gain", value: 68, icon: Zap, color: "from-green-500 to-emerald-700" },
                     { label: "Cost Reduction", value: 42, icon: TrendingUp, color: "from-blue-500 to-indigo-700" },
@@ -1072,7 +943,6 @@ class SecureAISystem {
                     >
                       <div className="flex flex-col items-center">
                         <div className="relative w-24 h-24 mb-3">
-                          {/* Background circle */}
                           <svg className="w-full h-full" viewBox="0 0 100 100">
                             <circle 
                               cx="50" cy="50" r="45" 
@@ -1081,7 +951,6 @@ class SecureAISystem {
                             />
                           </svg>
                           
-                          {/* Progress circle with gradient */}
                           <svg className="w-full h-full absolute top-0 left-0" viewBox="0 0 100 100">
                             <defs>
                               <linearGradient id={`gradient-${i}`} x1="0%" y1="0%" x2="100%" y2="100%">
@@ -1100,7 +969,6 @@ class SecureAISystem {
                             />
                           </svg>
                           
-                          {/* Center content */}
                           <div className="absolute inset-0 flex items-center justify-center">
                             <div className="text-center">
                               <span className="text-xl font-bold text-modern-foreground">{metric.value}%</span>
@@ -1119,6 +987,7 @@ class SecureAISystem {
                     </motion.div>
                   ))}
                 </motion.div>
+                */}
               </motion.div>
             </GradientBg>
           </Slide>
@@ -1195,7 +1064,7 @@ class SecureAISystem {
                         </p>
                       </div>
                       
-                      {/* Add code review animation */}
+                      {/* Removing code review animation 
                       <motion.div 
                         className="mt-6 relative p-4 bg-modern-muted/40 rounded-lg border border-modern-border"
                         initial={{ opacity: 0, y: 20 }}
@@ -1208,7 +1077,6 @@ class SecureAISystem {
                             <span>Code Review Analysis</span>
                           </div>
                           
-                          {/* Typing animation */}
                           <motion.div
                             initial={{ opacity: 1 }}
                             animate={{ 
@@ -1231,6 +1099,7 @@ class SecureAISystem {
                           </motion.div>
                         </div>
                       </motion.div>
+                      */}
                     </div>
                     <div className="md:col-span-2">
                       <div className="bg-modern-muted/70 backdrop-blur-sm rounded-lg border border-modern-border p-4 mb-4 shadow-md">
@@ -1297,13 +1166,14 @@ class SecureAISystem {
                         </div>
                       </div>
                       
-                      {/* Add a visual data chart */}
+                      {/* Removing data visualization
                       <div className="mt-4">
                         <DataChart type="line" className="mb-2" />
                         <p className="text-xs text-modern-mutedForeground text-center">
                           Code quality improvements over time with AI-assisted reviews
                         </p>
                       </div>
+                      */}
                     </div>
                   </div>
                 </motion.div>
@@ -1372,7 +1242,7 @@ class SecureAISystem {
                   </BulletPoint>
                 </BulletList>
                 
-                {/* Add visual representation of AI-first organization */}
+                {/* Removing AI-first organization diagram
                 <motion.div 
                   variants={itemVariants}
                   className="mt-10 max-w-3xl mx-auto"
@@ -1380,16 +1250,12 @@ class SecureAISystem {
                   <div className="bg-modern-background/80 backdrop-blur-sm rounded-lg shadow-md p-6 border border-modern-border">
                     <h4 className="text-lg font-medium text-modern-foreground mb-4 text-center">AI-First Organization Model</h4>
                     
-                    {/* Organization diagram */}
                     <div className="relative h-64 mb-6">
-                      {/* Central hub */}
                       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-modern-primary/80 rounded-full flex items-center justify-center shadow-lg z-20">
                         <BrainCircuit className="h-10 w-10 text-white" />
                       </div>
                       
-                      {/* Connection lines */}
                       <div className="absolute top-0 left-0 w-full h-full">
-                        {/* Generate lines connecting from center to nodes */}
                         {[...Array(5)].map((_, i) => {
                           const angle = (i * (360 / 5) * Math.PI) / 180;
                           const lineLength = "40%";
@@ -1410,7 +1276,6 @@ class SecureAISystem {
                         })}
                       </div>
                       
-                      {/* Surrounding nodes */}
                       {[
                         { icon: Users, label: "Workforce", position: "top-0 left-1/4" },
                         { icon: Code, label: "Development", position: "top-0 right-1/4" },
@@ -1437,6 +1302,7 @@ class SecureAISystem {
                     </div>
                   </div>
                 </motion.div>
+                */}
               </motion.div>
             </GradientBg>
           </Slide>
@@ -1464,7 +1330,7 @@ class SecureAISystem {
                   runners."
                 </motion.blockquote>
                 
-                {/* Add maturity visualization */}
+                {/* Removing maturity visualization
                 <motion.div 
                   variants={itemVariants}
                   className="mt-8 max-w-4xl mx-auto"
@@ -1485,7 +1351,6 @@ class SecureAISystem {
                             <h5 className="font-medium text-modern-foreground text-sm">{dim.name}</h5>
                           </div>
                           
-                          {/* Maturity level bars */}
                           <div className="flex flex-col gap-1">
                             {[...Array(dim.maxLevel)].map((_, levelIndex) => (
                               <motion.div 
@@ -1519,6 +1384,7 @@ class SecureAISystem {
                     </div>
                   </div>
                 </motion.div>
+                */}
               </motion.div>
             </GradientBg>
           </Slide>
@@ -1650,7 +1516,7 @@ class SecureAISystem {
                     </motion.div>
                   </div>
                   
-                  {/* Add floating particles effect */}
+                  {/* Removing floating particles
                   <div className="relative h-20 mt-10">
                     {[...Array(15)].map((_, i) => (
                       <motion.div
@@ -1674,6 +1540,7 @@ class SecureAISystem {
                       />
                     ))}
                   </div>
+                  */}
                 </motion.div>
               </motion.div>
             </motion.div>
