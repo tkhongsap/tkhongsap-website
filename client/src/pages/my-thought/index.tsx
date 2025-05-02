@@ -1221,6 +1221,85 @@ export default function MyThought() {
             </GradientBg>
           </Slide>
 
+          {/* Slide 6.5: Developer Productivity with AI Code Generation */}
+          <Slide>
+            <GradientBg>
+              <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+              >
+                <SlideTitle>
+                  Developer Productivity: AI-Powered Code Generation
+                </SlideTitle>
+                <motion.div
+                  variants={itemVariants}
+                  className="mt-4 mb-6 px-4 md:px-6"
+                >
+                  <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+                    <div className="md:col-span-3 flex flex-col justify-center">
+                      <h3 className="text-xl font-semibold text-modern-primary mb-3">
+                        Accelerating Development with AI
+                      </h3>
+                      <p className="text-modern-mutedForeground mb-4">
+                        AI-powered code generation is revolutionizing how development teams work, boosting productivity while maintaining quality standards:
+                      </p>
+                      <ul className="space-y-2 list-disc pl-5 mb-4">
+                        <li>
+                          <span className="font-medium text-modern-foreground">
+                            Faster time-to-market
+                          </span>{" "}
+                          <span className="text-modern-mutedForeground">
+                            with automated boilerplate generation
+                          </span>
+                        </li>
+                        <li>
+                          <span className="font-medium text-modern-foreground">
+                            Developer focus on high-value work
+                          </span>{" "}
+                          <span className="text-modern-mutedForeground">
+                            rather than repetitive coding tasks
+                          </span>
+                        </li>
+                        <li>
+                          <span className="font-medium text-modern-foreground">
+                            Knowledge democratization
+                          </span>{" "}
+                          <span className="text-modern-mutedForeground">
+                            as AI bridges experience gaps between junior and senior devs
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div className="md:col-span-2">
+                      <div className="bg-modern-muted/70 backdrop-blur-sm rounded-lg border border-modern-border p-4 mb-4 shadow-md">
+                        <h4 className="font-medium text-modern-foreground mb-3 flex items-center">
+                          <BarChart4 className="h-5 w-5 mr-2 text-modern-primary" />
+                          Productivity Metrics
+                        </h4>
+                        
+                        <div className="bg-black/80 rounded-md p-4 mb-4">
+                          <img 
+                            src="/assets/chart-code-generation.png" 
+                            alt="Code generation metrics showing lines suggested vs accepted"
+                            className="w-full rounded-md"
+                          />
+                        </div>
+                        
+                        <div className="text-sm text-modern-mutedForeground">
+                          <p className="mb-2">• <strong>30,000+</strong> lines of code generated in peak periods</p>
+                          <p className="mb-2">• <strong>76%</strong> average acceptance rate of AI suggestions</p>
+                          <p className="mb-2">• <strong>160+</strong> completed features accelerated by AI</p>
+                          <p>• <strong>43%</strong> reduction in time spent on routine coding tasks</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </motion.div>
+            </GradientBg>
+          </Slide>
+
           {/* Slide 7: Vision: AI-First Company */}
           <Slide className="bg-modern-muted">
             <GradientBg>
