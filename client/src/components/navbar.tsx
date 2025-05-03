@@ -9,7 +9,8 @@ const navLinks = [
   { name: "About", path: "/about" },
   { name: "Weekend Projects", path: "/portfolio" },
   { name: "Writing", path: "/writing" },
-  { name: "My Thought", path: "/my-thought" },
+  // My Thought page removed from navigation but code is preserved
+  // { name: "My Thought", path: "/my-thought" },
   // Contact hidden temporarily during initial launch
   // { name: "Contact", path: "/contact" },
 ];
