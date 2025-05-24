@@ -4,62 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Direct Confirmation</title>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            color: #333;
-        }
-        h1 {
-            color: #FF4D4D;
-        }
-        .card {
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            margin-bottom: 20px;
-            background-color: #fff;
-        }
-        .button {
-            background-color: #FF4D4D;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 10px;
-        }
-        .button:hover {
-            background-color: #E43535;
-        }
-        .result {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 5px;
-            display: none;
-        }
-        .success {
-            background-color: #E8F5E9;
-            border: 1px solid #66BB6A;
-            color: #2E7D32;
-        }
-        .error {
-            background-color: #FFEBEE;
-            border: 1px solid #EF5350;
-            color: #C62828;
-        }
-        pre {
-            background-color: #f5f5f5;
-            padding: 10px;
-            border-radius: 5px;
-            overflow-x: auto;
-            margin-top: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="/direct-confirm.css">
 </head>
 <body>
     <div class="card">
@@ -68,8 +13,7 @@
         
         <div>
             <label for="token">Confirmation Token:</label>
-            <input type="text" id="token" style="width: 100%; padding: 8px; margin-top: 5px; border-radius: 4px; border: 1px solid #ddd;" 
-                   placeholder="Paste your token here">
+            <input type="text" id="token" placeholder="Paste your token here">
         </div>
         
         <button id="confirm-btn" class="button">Confirm Subscription</button>
@@ -87,64 +31,6 @@
         </div>
     </div>
     
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Try to get token from URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const tokenFromUrl = urlParams.get('token');
-            
-            if (tokenFromUrl) {
-                document.getElementById('token').value = tokenFromUrl;
-            }
-            
-            document.getElementById('confirm-btn').addEventListener('click', async function() {
-                const token = document.getElementById('token').value.trim();
-                const resultDiv = document.getElementById('result');
-                
-                if (!token) {
-                    resultDiv.className = 'result error';
-                    resultDiv.style.display = 'block';
-                    resultDiv.innerHTML = '<strong>Error:</strong> Please enter a confirmation token.';
-                    return;
-                }
-                
-                try {
-                    const apiUrl = `/api/newsletter/confirm?token=${encodeURIComponent(token)}`;
-                    console.log('Calling API:', apiUrl);
-                    
-                    const response = await fetch(apiUrl);
-                    const data = await response.json();
-                    
-                    resultDiv.style.display = 'block';
-                    
-                    if (data.success) {
-                        resultDiv.className = 'result success';
-                        resultDiv.innerHTML = `
-                            <strong>Success!</strong> 
-                            <p>${data.message || 'Your subscription has been confirmed successfully!'}</p>
-                        `;
-                    } else {
-                        resultDiv.className = 'result error';
-                        resultDiv.innerHTML = `
-                            <strong>Error:</strong> 
-                            <p>${data.message || 'Failed to confirm your subscription.'}</p>
-                        `;
-                    }
-                    
-                    console.log('API Response:', data);
-                    
-                } catch (error) {
-                    console.error('Error confirming subscription:', error);
-                    resultDiv.className = 'result error';
-                    resultDiv.style.display = 'block';
-                    resultDiv.innerHTML = `
-                        <strong>Error:</strong> 
-                        <p>An error occurred while trying to confirm your subscription.</p>
-                        <pre>${error.message}</pre>
-                    `;
-                }
-            });
-        });
-    </script>
+    <script src="/direct-confirm.js"></script>
 </body>
 </html>
