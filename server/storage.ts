@@ -425,6 +425,7 @@ export class MemStorage implements IStorage {
 
 // Import the PgStorage class when available
 import { PgStorage } from './pg-storage';
+import { debugLog } from './logger';
 
 // Use PostgreSQL storage when DATABASE_URL is available, otherwise use MemStorage
 export const storage: IStorage = process.env.DATABASE_URL
@@ -433,7 +434,7 @@ export const storage: IStorage = process.env.DATABASE_URL
 
 // Log which storage implementation is being used
 if (process.env.DATABASE_URL) {
-  console.log("Using PgStorage (PostgreSQL)");
+  debugLog("Using PgStorage (PostgreSQL)");
 } else {
-  console.log("DATABASE_URL not found. Using MemStorage (In-Memory)");
+  debugLog("DATABASE_URL not found. Using MemStorage (In-Memory)");
 }
