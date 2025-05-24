@@ -110,7 +110,9 @@
                 
                 try {
                     const apiUrl = `/api/newsletter/confirm?token=${encodeURIComponent(token)}`;
-                    console.log('Calling API:', apiUrl);
+                    if (window.DEBUG_LOGS) {
+                        console.log('Calling API:', apiUrl);
+                    }
                     
                     const response = await fetch(apiUrl);
                     const data = await response.json();
@@ -131,7 +133,9 @@
                         `;
                     }
                     
-                    console.log('API Response:', data);
+                    if (window.DEBUG_LOGS) {
+                        console.log('API Response:', data);
+                    }
                     
                 } catch (error) {
                     console.error('Error confirming subscription:', error);

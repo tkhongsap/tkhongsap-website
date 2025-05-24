@@ -19,10 +19,12 @@ const rl = readline.createInterface({
 
 const BASE_URL = process.env.SITE_URL || 'http://localhost:5000';
 
-console.log('===== Admin User Setup =====');
-console.log('This script will help you create an initial admin user.');
-console.log('The user will have full access to the admin functionalities.');
-console.log('');
+if (process.env.DEBUG_LOGS === 'true') {
+  console.log('===== Admin User Setup =====');
+  console.log('This script will help you create an initial admin user.');
+  console.log('The user will have full access to the admin functionalities.');
+  console.log('');
+}
 
 function validateUsername(username) {
   if (!username || username.length < 3) {
@@ -59,7 +61,9 @@ function askUsername() {
     rl.question('Username (min 3 characters): ', (username) => {
       const error = validateUsername(username);
       if (error) {
-        console.log(`Error: ${error}`);
+        if (process.env.DEBUG_LOGS === 'true') {
+          console.log(`Error: ${error}`);
+        }
         return resolve(askUsername());
       }
       resolve(username);
@@ -72,13 +76,17 @@ function askPassword() {
     rl.question('Password (min 10 characters, with mixed case, numbers and special chars): ', (password) => {
       const error = validatePassword(password);
       if (error) {
-        console.log(`Error: ${error}`);
+        if (process.env.DEBUG_LOGS === 'true') {
+          console.log(`Error: ${error}`);
+        }
         return resolve(askPassword());
       }
       
       rl.question('Confirm password: ', (confirmPassword) => {
         if (password !== confirmPassword) {
-          console.log('Error: Passwords do not match');
+          if (process.env.DEBUG_LOGS === 'true') {
+            console.log('Error: Passwords do not match');
+          }
           return resolve(askPassword());
         }
         resolve(password);
@@ -138,7 +146,9 @@ async function createAdminUser() {
     const username = await askUsername();
     const password = await askPassword();
     
-    console.log('\nCreating admin user...');
+    if (process.env.DEBUG_LOGS === 'true') {
+      console.log('\nCreating admin user...');
+    }
     
     const response = await makeRequest(
       `${BASE_URL}/api/setup/admin`,
@@ -147,19 +157,27 @@ async function createAdminUser() {
     );
     
     if (response.statusCode === 201) {
-      console.log('\n✅ Success! Admin user created successfully.');
-      console.log(`Username: ${username}`);
-      console.log('\nYou can now log in to the admin interface using these credentials.');
+      if (process.env.DEBUG_LOGS === 'true') {
+        console.log('\n✅ Success! Admin user created successfully.');
+        console.log(`Username: ${username}`);
+        console.log('\nYou can now log in to the admin interface using these credentials.');
+      }
     } else if (response.statusCode === 403) {
-      console.log('\n⚠️ Admin user already exists.');
-      console.log('If you need to reset your password, please contact your system administrator.');
+      if (process.env.DEBUG_LOGS === 'true') {
+        console.log('\n⚠️ Admin user already exists.');
+        console.log('If you need to reset your password, please contact your system administrator.');
+      }
     } else {
-      console.log('\n❌ Error creating admin user:');
-      console.log(response.data);
+      if (process.env.DEBUG_LOGS === 'true') {
+        console.log('\n❌ Error creating admin user:');
+        console.log(response.data);
+      }
     }
   } catch (error) {
     console.error('\n❌ Error:', error.message);
-    console.log('Make sure the server is running and accessible.');
+    if (process.env.DEBUG_LOGS === 'true') {
+      console.log('Make sure the server is running and accessible.');
+    }
   } finally {
     rl.close();
   }

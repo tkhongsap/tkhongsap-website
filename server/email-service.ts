@@ -9,6 +9,7 @@
 
 import { Subscriber, Newsletter } from "@shared/schema";
 import sgMail from '@sendgrid/mail';
+import { debugLog } from './logger';
 
 export interface EmailOptions {
   to: string;
@@ -49,19 +50,19 @@ export interface IEmailService {
  */
 export class MockEmailService implements IEmailService {
   constructor() {
-    console.log("MockEmailService initialized - emails will be logged but not sent");
+    debugLog("MockEmailService initialized - emails will be logged but not sent");
   }
   
   async sendEmail(options: EmailOptions): Promise<boolean> {
-    console.log("MOCK EMAIL:", {
+    debugLog("MOCK EMAIL:", {
       to: options.to,
       subject: options.subject,
       from: options.from || process.env.EMAIL_FROM || "newsletter@example.com",
       replyTo: options.replyTo || process.env.EMAIL_REPLY_TO || "contact@example.com"
     });
-    console.log("EMAIL CONTENT HTML:", options.html.substring(0, 200) + "...");
+    debugLog("EMAIL CONTENT HTML:", options.html.substring(0, 200) + "...");
     if (options.text) {
-      console.log("EMAIL CONTENT TEXT:", options.text.substring(0, 200) + "...");
+      debugLog("EMAIL CONTENT TEXT:", options.text.substring(0, 200) + "...");
     }
     return true;
   }
@@ -208,7 +209,7 @@ export class MockEmailService implements IEmailService {
       details: [] as { email: string; success: boolean; error?: string }[]
     };
     
-    console.log(`MOCK: Preparing to send newsletter "${newsletter.subject}" to ${subscribers.length} subscribers`);
+    debugLog(`MOCK: Preparing to send newsletter "${newsletter.subject}" to ${subscribers.length} subscribers`);
     
     for (const subscriber of subscribers) {
       try {
@@ -235,7 +236,7 @@ export class MockEmailService implements IEmailService {
       }
     }
     
-    console.log(`MOCK: Newsletter send complete. Success: ${results.success}, Failed: ${results.failed}`);
+    debugLog(`MOCK: Newsletter send complete. Success: ${results.success}, Failed: ${results.failed}`);
     return results;
   }
 }
@@ -253,7 +254,7 @@ export class SendGridEmailService implements IEmailService {
     }
     
     sgMail.setApiKey(apiKey);
-    console.log("SendGridEmailService initialized");
+    debugLog("SendGridEmailService initialized");
   }
   
   async sendEmail(options: EmailOptions): Promise<boolean> {
@@ -277,7 +278,7 @@ export class SendGridEmailService implements IEmailService {
       };
       
       await sgMail.send(msg);
-      console.log(`Email sent to ${options.to}`);
+      debugLog(`Email sent to ${options.to}`);
       return true;
     } catch (error) {
       console.error('Error sending email with SendGrid:', error);
@@ -430,7 +431,7 @@ export class SendGridEmailService implements IEmailService {
       details: [] as { email: string; success: boolean; error?: string }[]
     };
     
-    console.log(`Preparing to send newsletter "${newsletter.subject}" to ${subscribers.length} subscribers`);
+    debugLog(`Preparing to send newsletter "${newsletter.subject}" to ${subscribers.length} subscribers`);
     
     for (const subscriber of subscribers) {
       try {
@@ -457,7 +458,7 @@ export class SendGridEmailService implements IEmailService {
       }
     }
     
-    console.log(`Newsletter send complete. Success: ${results.success}, Failed: ${results.failed}`);
+    debugLog(`Newsletter send complete. Success: ${results.success}, Failed: ${results.failed}`);
     return results;
   }
 }
@@ -479,7 +480,7 @@ function createEmailService(): IEmailService {
       console.error('Failed to initialize SendGrid email service:', error);
       
       if (isDevelopment) {
-        console.log('Falling back to mock email service in development environment');
+        debugLog('Falling back to mock email service in development environment');
         return new MockEmailService();
       } else {
         // In production, we should fail if email service configuration is invalid
@@ -489,7 +490,7 @@ function createEmailService(): IEmailService {
   }
   
   if (isDevelopment) {
-    console.log("Using mock email service for development environment");
+    debugLog("Using mock email service for development environment");
     return new MockEmailService();
   } else {
     // In production, we require a properly configured email service

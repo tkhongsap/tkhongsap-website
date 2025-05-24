@@ -77,6 +77,9 @@ A modern, minimal personal website for Ta Khongsap that showcases professional e
    DATABASE_URL=your_postgres_connection_string
    SENDGRID_API_KEY=your_sendgrid_api_key
    SESSION_SECRET=a_secure_random_string
+   # Enable verbose logging during development
+   DEBUG_LOGS=true
+   VITE_DEBUG_LOGS=true
    ```
 
 4. Start the development server

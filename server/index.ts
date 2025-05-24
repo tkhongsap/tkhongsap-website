@@ -6,6 +6,7 @@ import session from "express-session";
 import MemoryStore from "memorystore";
 import csurf from "csurf";
 import { db } from "./db";
+import { debugLog } from "./logger";
 
 const MemoryStoreSession = MemoryStore(session);
 const app = express();
@@ -122,13 +123,13 @@ app.get('/api/csrf-token', csrfProtection, (req: Request, res: Response) => {
 
 (async () => {
   // Log environment configuration at startup
-  console.log("\n===== Server Environment Configuration =====");
-  console.log(`NODE_ENV: ${process.env.NODE_ENV || 'not set'}`);
-  console.log(`DATABASE_URL: ${process.env.DATABASE_URL ? 'set (length: ' + process.env.DATABASE_URL.length + ')' : '*** NOT SET - USING IN-MEMORY STORAGE ***'}`);
-  console.log(`SITE_URL: ${process.env.SITE_URL || 'not set'}`);
-  console.log(`SMTP Configuration: ${process.env.SMTP_HOST ? 'set' : 'not set'}`);
-  console.log(`Session Secret: ${SESSION_SECRET === 'please-change-this-secret-in-production' ? '*** DEFAULT *** (please change in production)' : 'custom secret set'}`);
-  console.log("============================================\n");
+  debugLog("\n===== Server Environment Configuration =====");
+  debugLog(`NODE_ENV: ${process.env.NODE_ENV || 'not set'}`);
+  debugLog(`DATABASE_URL: ${process.env.DATABASE_URL ? 'set (length: ' + process.env.DATABASE_URL.length + ')' : '*** NOT SET - USING IN-MEMORY STORAGE ***'}`);
+  debugLog(`SITE_URL: ${process.env.SITE_URL || 'not set'}`);
+  debugLog(`SMTP Configuration: ${process.env.SMTP_HOST ? 'set' : 'not set'}`);
+  debugLog(`Session Secret: ${SESSION_SECRET === 'please-change-this-secret-in-production' ? '*** DEFAULT *** (please change in production)' : 'custom secret set'}`);
+  debugLog("============================================\n");
 
   const server = await registerRoutes(app);
 

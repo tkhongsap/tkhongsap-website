@@ -26,7 +26,9 @@ sharp(sourcePath)
   })
   .toFile(outputPath)
   .then(() => {
-    console.log(`Successfully resized image to ${outputPath}`);
+    if (process.env.DEBUG_LOGS === 'true') {
+      console.log(`Successfully resized image to ${outputPath}`);
+    }
   })
   .catch(err => {
     console.error('Error resizing image:', err);

@@ -12,6 +12,7 @@ import { fromZodError } from "zod-validation-error";
 import crypto from "crypto";
 import { emailService } from "./email-service";
 import { basicAuthMiddleware, adminOnlyMiddleware } from "./auth-middleware";
+import { debugLog } from "./logger";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Create initial admin user
@@ -111,19 +112,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Newsletter subscription endpoint
   app.post("/api/subscribe", async (req, res) => {
     try {
-      console.log("Subscription request received:", req.body);
+      debugLog("Subscription request received:", req.body);
       
       const subscriberData = insertSubscriberSchema.parse(req.body);
-      console.log("Parsed subscription data:", subscriberData);
+      debugLog("Parsed subscription data:", subscriberData);
       
       // Check if subscriber already exists
-      console.log("Checking if email already exists:", subscriberData.email);
+      debugLog("Checking if email already exists:", subscriberData.email);
       const existingSubscriber = await storage.getSubscriberByEmail(subscriberData.email);
       
       if (existingSubscriber) {
         // If the subscriber exists but is unsubscribed, we can resubscribe them
         if (existingSubscriber.status === "unsubscribed") {
-          console.log("Resubscribing previously unsubscribed user:", existingSubscriber.email);
+          debugLog("Resubscribing previously unsubscribed user:", existingSubscriber.email);
           const updatedSubscriber = await storage.updateSubscriberStatus(existingSubscriber.id, "pending");
           
           // Generate a new confirmation token
@@ -145,7 +146,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
             // In development, use localhost with the frontend confirmation page
             confirmationUrl = `${req.protocol || 'http'}://${req.headers.host}/confirm?token=${token}`;
           }
-          console.log("Generated confirmation URL:", confirmationUrl);
+          debugLog("Generated confirmation URL:", confirmationUrl);
           await emailService.sendConfirmationEmail(updatedSubscriber!, confirmationUrl);
           
           return res.status(200).json({ 
@@ -155,7 +156,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }
         
         // Otherwise, they're already subscribed
-        console.log("Subscriber already exists:", existingSubscriber);
+        debugLog("Subscriber already exists:", existingSubscriber);
         
         // If pending, remind them to confirm
         if (existingSubscriber.status === "pending") {
@@ -173,9 +174,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       
       // Create new subscriber
-      console.log("Creating new subscriber with data:", subscriberData);
+      debugLog("Creating new subscriber with data:", subscriberData);
       const newSubscriber = await storage.createSubscriber(subscriberData);
-      console.log("Subscriber created successfully:", newSubscriber);
+      debugLog("Subscriber created successfully:", newSubscriber);
       
       // Generate a confirmation token
       const token = crypto.randomBytes(32).toString('hex');
@@ -196,7 +197,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         // In development, use localhost with direct-confirm.html
         confirmationUrl = `${req.protocol || 'http'}://${req.headers.host}/direct-confirm.html?token=${token}`;
       }
-      console.log("Generated confirmation URL:", confirmationUrl);
+      debugLog("Generated confirmation URL:", confirmationUrl);
       await emailService.sendConfirmationEmail(newSubscriber, confirmationUrl);
       
       res.status(201).json({ 
@@ -208,7 +209,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       if (error instanceof z.ZodError) {
         const validationError = fromZodError(error);
-        console.log("Validation error:", validationError.message);
+        debugLog("Validation error:", validationError.message);
         return res.status(400).json({ 
           success: false, 
           message: validationError.message 
@@ -279,34 +280,34 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Confirm subscription endpoint
   app.get("/api/newsletter/confirm", async (req, res) => {
     try {
-      console.log("📧 Confirm subscription request received");
+      debugLog("📧 Confirm subscription request received");
       const token = req.query.token as string;
       
       if (!token) {
-        console.log("❌ No token provided in confirmation request");
+        debugLog("❌ No token provided in confirmation request");
         return res.status(400).json({
           success: false,
           message: "Invalid token"
         });
       }
       
-      console.log(`🔍 Looking for subscriber with confirmation token: ${token.substring(0, 8)}...`);
+      debugLog(`🔍 Looking for subscriber with confirmation token: ${token.substring(0, 8)}...`);
       // Find subscriber by token
       const subscriber = await storage.getSubscriberByConfirmationToken(token);
       
       if (!subscriber) {
-        console.log("❌ No subscriber found with the provided token");
+        debugLog("❌ No subscriber found with the provided token");
         return res.status(404).json({
           success: false,
           message: "Invalid or expired token"
         });
       }
       
-      console.log(`✅ Found subscriber: ${subscriber.email} with status: ${subscriber.status}`);
+      debugLog(`✅ Found subscriber: ${subscriber.email} with status: ${subscriber.status}`);
       
       // Check if token is expired
       if (subscriber.tokenExpiration && new Date(subscriber.tokenExpiration) < new Date()) {
-        console.log("❌ Token has expired");
+        debugLog("❌ Token has expired");
         return res.status(400).json({
           success: false,
           message: "Confirmation link has expired. Please request a new one."
@@ -315,30 +316,30 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Update subscriber status to confirmed
       const now = new Date();
-      console.log(`🔄 Updating status to confirmed for subscriber ID: ${subscriber.id}`);
+      debugLog(`🔄 Updating status to confirmed for subscriber ID: ${subscriber.id}`);
       const confirmedSubscriber = await storage.updateSubscriberConfirmation(subscriber.id, now);
       
       if (!confirmedSubscriber) {
-        console.log("❌ Failed to update subscriber confirmation status");
+        debugLog("❌ Failed to update subscriber confirmation status");
         return res.status(500).json({
           success: false,
           message: "Failed to update subscription status"
         });
       }
       
-      console.log(`✅ Subscriber status updated to: ${confirmedSubscriber.status}`);
+      debugLog(`✅ Subscriber status updated to: ${confirmedSubscriber.status}`);
       
       // Clear confirmation token (empty string and past date to prevent reuse)
       const pastDate = new Date();
       pastDate.setDate(pastDate.getDate() - 1); // 1 day in the past
-      console.log(`🔄 Invalidating confirmation token for subscriber ID: ${subscriber.id}`);
+      debugLog(`🔄 Invalidating confirmation token for subscriber ID: ${subscriber.id}`);
       await storage.createConfirmationToken(subscriber.id, "", pastDate);
       
       // Send welcome email
-      console.log(`📤 Sending welcome email to: ${confirmedSubscriber.email}`);
+      debugLog(`📤 Sending welcome email to: ${confirmedSubscriber.email}`);
       try {
         await emailService.sendWelcomeEmail(confirmedSubscriber);
-        console.log("✅ Welcome email sent successfully");
+        debugLog("✅ Welcome email sent successfully");
       } catch (emailError) {
         // Don't fail if welcome email fails - just log it
         console.error("⚠️ Error sending welcome email:", emailError);
@@ -347,7 +348,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Return success JSON instead of redirecting
       // The frontend confirmation page will handle the response
-      console.log("✅ Confirmation successful - returning success response");
+      debugLog("✅ Confirmation successful - returning success response");
       res.status(200).json({
         success: true,
         message: "Your subscription has been confirmed successfully!"
@@ -411,7 +412,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         // In development, use localhost with direct-confirm.html
         confirmationUrl = `${req.protocol || 'http'}://${req.headers.host}/direct-confirm.html?token=${token}`;
       }
-      console.log("Generated confirmation URL:", confirmationUrl);
+      debugLog("Generated confirmation URL:", confirmationUrl);
       await emailService.sendConfirmationEmail(subscriber, confirmationUrl);
       
       res.status(200).json({

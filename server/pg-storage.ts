@@ -1,5 +1,5 @@
 import { db } from './db';
-import { 
+import {
   users, 
   subscriberTable, 
   contactMessages,
@@ -19,10 +19,11 @@ import {
 import { eq, and, count, sql, gte, lte } from 'drizzle-orm';
 import { IStorage } from './storage';
 import { hashPassword } from './auth-utils';
+import { debugLog } from './logger';
 
 export class PgStorage implements IStorage {
   constructor() {
-    console.log("PgStorage initialized with PostgreSQL database");
+    debugLog("PgStorage initialized with PostgreSQL database");
   }
 
   // User methods
@@ -76,7 +77,7 @@ export class PgStorage implements IStorage {
   // Subscriber methods
   async createSubscriber(insertSubscriber: InsertSubscriber): Promise<Subscriber> {
     try {
-      console.log("Creating subscriber in PostgreSQL:", insertSubscriber);
+      debugLog("Creating subscriber in PostgreSQL:", insertSubscriber);
       const now = new Date();
       // Generate unsubscribe token
       const unsubscribeToken = this.generateToken();
@@ -84,7 +85,7 @@ export class PgStorage implements IStorage {
       // Ensure name is either string or null, not undefined
       const name = insertSubscriber.name || null;
       
-      console.log("Prepared subscriber data:", { 
+      debugLog("Prepared subscriber data:", {
         email: insertSubscriber.email, 
         name, 
         status: "pending", 
@@ -104,7 +105,7 @@ export class PgStorage implements IStorage {
         })
         .returning();
       
-      console.log("Subscriber created successfully:", result[0]);
+      debugLog("Subscriber created successfully:", result[0]);
       return result[0];
     } catch (error) {
       console.error("Error in createSubscriber:", error);
@@ -114,13 +115,13 @@ export class PgStorage implements IStorage {
 
   async getSubscriberByEmail(email: string): Promise<Subscriber | undefined> {
     try {
-      console.log("Looking up subscriber by email in PostgreSQL:", email);
+      debugLog("Looking up subscriber by email in PostgreSQL:", email);
       const result = await db
         .select()
         .from(subscriberTable)
         .where(eq(subscriberTable.email, email));
       
-      console.log("Subscriber lookup result:", result[0] || "Not found");
+      debugLog("Subscriber lookup result:", result[0] || "Not found");
       return result[0];
     } catch (error) {
       console.error("Error in getSubscriberByEmail:", error);
@@ -145,7 +146,7 @@ export class PgStorage implements IStorage {
   async getAllSubscribers(): Promise<Subscriber[]> {
     try {
       const subscribers = await db.select().from(subscriberTable);
-      console.log(`Retrieved ${subscribers.length} subscribers from database`);
+      debugLog(`Retrieved ${subscribers.length} subscribers from database`);
       return subscribers;
     } catch (error) {
       console.error("Error in getAllSubscribers:", error);
