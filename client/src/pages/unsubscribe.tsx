@@ -21,7 +21,8 @@ export default function UnsubscribePage() {
   const [token, setToken] = useState<string | null>(null);
   const [debugInfo, setDebugInfo] = useState<string>('');
   const { toast } = useToast();
-  const isDevelopment = process.env.NODE_ENV !== 'production';
+  const debugLogs = import.meta.env.VITE_DEBUG_LOGS === 'true';
+  const isDevelopment = process.env.NODE_ENV !== 'production' || debugLogs;
   
   // SEO data for unsubscribe page
   const unsubscribeSchemaData = {
