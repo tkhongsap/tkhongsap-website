@@ -28,12 +28,12 @@ A cutting-edge personal portfolio website showcasing Totrakool Khongsap's profes
 
 ## Recent Changes
 
-### December 17, 2025
-✓ Fixed deployment build errors by installing missing dependencies
-✓ Installed `react-fast-compare` dependency required by react-helmet-async
-✓ Installed `shallowequal` dependency to resolve Rollup bundling issues
-✓ Verified successful build process (npm run build)
-✓ Confirmed application starts correctly in development mode
+### July 17, 2025
+✓ Resolved Vite build deployment error 
+✓ Confirmed `react-fast-compare` dependency is properly installed (v3.2.2)
+✓ Verified successful build process completes without errors
+✓ Build generates proper dist/ output with all assets
+✓ Application ready for deployment
 
 ### Build Process Fixes
 - Resolved Vite build failure with missing react-fast-compare dependency
