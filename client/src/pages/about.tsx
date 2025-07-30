@@ -29,59 +29,102 @@ export default function About() {
         <section id="about" className="py-20">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold mb-10">Why This Matters</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-10">The Game Has Changed</h2>
               
               <div className="flex flex-col md:flex-row gap-10">
                 <div className="md:w-2/3">
                   
-                  {/* Section 1: The 10X Multiplier */}
+                  {/* Section 1: The Leverage Revolution */}
                   <div className="mb-8">
                     <div className="mb-4">
-                      <h3 className="text-2xl font-bold">The 10X Multiplier</h3>
+                      <h3 className="text-2xl font-bold">AI Is the New Leverage</h3>
                     </div>
                     
                     <p className="text-lg mb-4">
-                      Here's the fascinating reality of AI today: we're witnessing a profound shift where our tools themselves have become <strong>10X multipliers</strong>. Think about the most productive individuals you know—their ability to consistently exceed expectations. Now, imagine empowering those same people with AI tools that <em>exponentially amplify their impact</em>.
+                      The internet gave us <strong>access</strong>. AI gives us <strong>leverage</strong>.
+                    </p>
+                    
+                    <p className="text-lg mb-4">
+                      One person with the right AI tools now outproduces entire teams from five years ago.
                     </p>
                     
                     <blockquote className="border-l-4 border-primary pl-4 py-2 bg-gray-50 italic text-gray-700 my-4">
-                      Projects we might've laughed off as impossible a year ago are now tackled effortlessly.
+                      What seemed impossible yesterday is Tuesday's work today.
                     </blockquote>
                     
                     <p className="text-lg">
-                      Mastering AI has rapidly become an essential skill, no longer a niche expertise but as fundamental as using email. Whether you're in marketing, analytics, or leadership, competence in AI isn't optional—it's <strong>crucial for staying competitive</strong>.
+                      This isn't about being <em>tech-savvy</em>. It's about understanding <strong>systems of leverage</strong>.
                     </p>
                   </div>
                   
-                  {/* Section 2: Why AI Mastery Isn't Obvious */}
+                  {/* Section 2: The Hidden Truth */}
                   <div className="mb-8">
                     <div className="mb-4">
-                      <h3 className="text-2xl font-bold">Why AI Mastery Isn't Obvious</h3>
+                      <h3 className="text-2xl font-bold">Most People Use AI Wrong</h3>
                     </div>
                     
                     <p className="text-lg mb-4">
-                      Yet, truly effective AI usage isn't immediately obvious. People often abandon AI after initial disappointing results, missing out on its immense potential.
+                      They treat AI like Google. Ask once, get disappointed, quit.
                     </p>
                     
-                    <p className="text-lg">
-                      The real magic emerges when we:
+                    <p className="text-lg mb-4">
+                      Real AI mastery is a conversation, not a transaction.
                     </p>
-                    <ul className="list-disc pl-6 mb-4 space-y-2">
-                      <li>Refine our questions for clarity and specificity</li>
-                      <li>Provide richer context to guide the AI</li>
-                      <li>Iterate our approaches through experimentation</li>
-                      <li>Learn from each interaction, similar to becoming fluent in a new language</li>
+                    
+                    <p className="text-lg mb-2">
+                      The breakthrough happens when you:
+                    </p>
+                    <ul className="list-none pl-0 mb-4 space-y-2">
+                      <li className="flex items-start">
+                        <span className="text-primary mr-2">•</span>
+                        <span>Ask better questions (specificity beats generality)</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-primary mr-2">•</span>
+                        <span>Provide context (AI needs to understand your world)</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-primary mr-2">•</span>
+                        <span>Iterate relentlessly (every conversation teaches both of you)</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-primary mr-2">•</span>
+                        <span>Think in systems (not just tasks)</span>
+                      </li>
                     </ul>
                   </div>
                   
-                  {/* Section 3: AI as a Shared Resource */}
+                  {/* Section 3: Network Effects */}
                   <div className="mb-8">
                     <div className="mb-4">
-                      <h3 className="text-2xl font-bold">AI as a Shared Resource</h3>
+                      <h3 className="text-2xl font-bold">Knowledge Compounds</h3>
                     </div>
                     
                     <p className="text-lg mb-4">
-                      The best teams treat AI insights as <strong>shared knowledge</strong>. When someone discovers an impactful technique, openly sharing it propels everyone forward, sparking a cycle of continuous improvement.
+                      The best teams don't hoard AI insights. They <strong>share them</strong>.
+                    </p>
+                    
+                    <p className="text-lg mb-4">
+                      When you discover a powerful technique and teach it to others, you create a network effect that benefits everyone—including you.
+                    </p>
+                    
+                    <p className="text-lg">
+                      Abundance mindset wins in the AI era. <em>Scarcity thinking loses</em>.
+                    </p>
+                  </div>
+
+                  {/* Section 4: The Bottom Line */}
+                  <div className="mb-8">
+                    <div className="mb-4">
+                      <h3 className="text-2xl font-bold">The Real Opportunity</h3>
+                    </div>
+                    
+                    <p className="text-lg mb-4">
+                      Most people are still figuring out email while others are building AI-powered empires.
+                    </p>
+                    
+                    <p className="text-lg">
+                      The question isn't whether AI will change everything. It's whether <strong>you'll be ahead of the curve or behind it</strong>.
                     </p>
                   </div>
 
