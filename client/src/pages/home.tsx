@@ -45,7 +45,8 @@ export default function Home() {
                 </p>
               </div>
               
-              {/* Newsletter Signup */}
+              {/* Newsletter Signup - Temporarily commented out */}
+              {/*
               <div id="newsletter" className="bg-white p-8 rounded-lg shadow-md mb-12 border-l-4 border-primary">
                 <h2 className="mb-3 text-2xl font-bold flex items-center">
                   <span className="text-primary mr-2">→</span> Join my newsletter
@@ -55,6 +56,7 @@ export default function Home() {
                 </p>
                 <NewsletterForm />
               </div>
+              */}
               
               {/* Value Propositions */}
               <div className="grid md:grid-cols-3 gap-10">
