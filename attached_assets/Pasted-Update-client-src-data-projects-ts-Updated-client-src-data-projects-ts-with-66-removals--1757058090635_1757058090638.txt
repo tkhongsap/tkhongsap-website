@@ -1,0 +1,92 @@
+Update(client/src/data/projects.ts)
+  ⎿  Updated client/src/data/projects.ts with 66 removals                                                 
+       23        image: "https://i.imgur.com/LpXkAU5.png",
+       24      },
+       25      {
+       26 -      id: "fastapi-image-generation",
+       27 -      title: "FastAPI Image Generation",
+       28 -      description:
+       29 -        "A weekend-built FastAPI demo that puts OpenAI’s new GPT Image model behind a single 
+          - REST endpoint and a slick UI. Fire off a text prompt, get studio-grade graphics, and drop a 
+          - one-line POST into your app—no GPUs, hosting, or heavy setup. Perfect for quickly prototyping 
+          - marketing tools, auto-generating design assets, or injecting dynamic visuals into any 
+          - workflow",
+       30 -      technologies: ["FastAPI", "Python", "OpenAI Vision"],
+       31 -      category: "ai",
+       32 -      demoUrl: "https://fastapi-image-generation.tkhongsap.io",
+       33 -      githubUrl: "https://github.com/tkhongsap/fastapi-image-generation",
+       34 -      image: "https://i.imgur.com/6jpqGC1.png",
+       35 -    },
+       36 -    {
+       37 -      id: "fastapi-imgstory",
+       38 -      title: "FastAPI ImgStory",
+       39 -      description:
+       40 -        "FastAPI ImgStroy is a lightweight web app that turns your images or videos into vivid 
+          - narratives in both English and Thai. Upload a file, and GPT-4 Vision extracts the scene’s 
+          - details, senses the mood, and spins a short story you can drop straight into social posts, 
+          - travel blogs, marketing copy, or content-rich dashboards—no heavy setup, just one clean REST 
+          - endpoint and a modern UI.",
+       41 -      technologies: ["FastAPI", "Python", "OpenAI Vision"],
+       42 -      category: "ai",
+       43 -      demoUrl: "https://fastapi-imgstory.tkhongsap.io",
+       44 -      githubUrl: "https://github.com/tkhongsap/fastapi-imgStory",
+       45 -      image: "https://i.imgur.com/SXV5isM.png",
+       46 -    },
+       47 -    {
+       26        id: "img-story-hub",
+       27        title: "ImgStory Hub",
+       28        description:
+     ...
+        55        githubUrl: "https://github.com/tkhongsap/img-story-hub",
+        56        image: "https://i.imgur.com/5OrPoka.png",
+        57      },
+        58 -    {
+        59 -      id: "invoice-ocr-extraction",
+        60 -      title: "Invoice OCR Extraction",
+        61 -      description:
+        62 -        "An automated invoice processing system that uses OCR technology to extract key data 
+           - from invoices, enabling and streamlining workflows and reducing manual data entry.",
+        63 -      technologies: ["OCR", "JavaScript", "React", "Node.js", "Computer Vision"],
+        64 -      category: "ai",
+        65 -      demoUrl: "https://invoice-ocr-extraction.tkhongsap.io/",
+        66 -      githubUrl: "https://github.com/tkhongsap/docs-ai-extraction",
+        67 -      image: "https://i.imgur.com/v9Zqp1p.png",
+        68 -    },
+        69 -    {
+        70 -      id: "enterprise-rag",
+        71 -      title: "Enterprise RAG Framework",
+        72 -      description:
+        73 -        "A secure Retrieval-Augmented Generation (RAG) framework designed for enterprise 
+           - environments with on-premise deployment capabilities.",
+        74 -      technologies: ["Python", "FastAPI", "LangChain", "Vector DB"],
+        75 -      category: "ai",
+        76 -      demoUrl: "https://enterprise-rag-diagram-project.tkhongsap.io/",
+        77 -      githubUrl: "https://github.com/tkhongsap/Enterprise-RAG-Framework",
+        78 -      image: "https://i.imgur.com/fZciXlt.png",
+        79 -    },
+        80 -    {
+        81 -      id: "tower-of-hanoi",
+        82 -      title: "Tower of Hanoi Visualization",
+        83 -      description:
+        84 -        "A visual demonstration of the Tower of Hanoi puzzle, showcasing recursive algorithm 
+           - solving.",
+        85 -      technologies: ["JavaScript", "HTML", "CSS"],
+        86 -      category: "ai",
+        87 -      demoUrl: "https://tower-hanoi-project.tkhongsap.io/",
+        88 -      githubUrl: "https://github.com/tkhongsap/tower-of-hanoi-visual",
+        89 -      image: "https://i.imgur.com/w3AmuDI.png",
+        90 -    },
+        91 -    {
+        92 -      id: "rubik-cube-simulation",
+        93 -      title: "3D Rubik's Cube Simulator",
+        94 -      description:
+        95 -        "A modern, interactive 3D Rubik's Cube simulator supporting 3x3x3 up to 7x7x7 cubes, 
+           - built with Three.js and Tailwind CSS. Scramble and solve cubes of various sizes with smooth 
+           - animations and a clean UI.",
+        96 -      technologies: ["Three.js", "JavaScript", "Tailwind CSS", "HTML5"],
+        97 -      category: "creative",
+        98 -      demoUrl: "https://rubik-cube-simulation.tkhongsap.io/",
+        99 -      githubUrl: "https://github.com/tkhongsap/rubik-cube-master",
+       100 -      image: "https://i.imgur.com/ewePKQd.png",
+       101 -    },
+        58    ];
