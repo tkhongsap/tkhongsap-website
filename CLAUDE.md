@@ -18,6 +18,9 @@ npm run start        # Start production server
 npm run db:push      # Push database schema changes via Drizzle
 npm run setup        # Create admin user for protected endpoints
 
+# Testing
+npm test             # Run Jest tests (limited coverage)
+
 # Initial Setup
 cp .env.example .env # Configure environment variables
 npm run db:push      # Setup database schema
@@ -32,7 +35,7 @@ npm run setup        # Create admin user
 - **Database**: PostgreSQL with Drizzle ORM (Neon Database)
 - **Styling**: Tailwind CSS + Radix UI (shadcn/ui components)
 - **State**: TanStack Query for API state management
-- **Authentication**: Express sessions + Passport.js (local strategy)
+- **Authentication**: Express sessions + Basic auth with bcrypt
 - **Email**: SendGrid integration for newsletter system
 
 ### Project Structure
@@ -43,7 +46,7 @@ npm run setup        # Create admin user
 │   ├── src/data/    # Static content (articles, projects)
 │   └── src/hooks/   # Custom React hooks
 ├── server/          # Backend Express.js API
-│   ├── routes.ts    # API endpoints and handlers
+│   ├── routes.ts    # API endpoints and handlers (~800 lines)
 │   ├── storage.ts   # Database abstraction layer
 │   └── email-service.ts  # SendGrid email functionality
 ├── shared/          # Shared TypeScript schemas and types
