@@ -2,32 +2,36 @@
 
 ![Ta Khongsap](public/Ta%20Khongsap%20OPEN-TEC.jpg)
 
-A modern, minimal personal website for Ta Khongsap that showcases professional expertise through a sleek, performance-driven portfolio with enhanced user interaction and creative coding projects.
+A modern, minimal personal website for Ta Khongsap that showcases professional expertise in Mathematics, Programming, and Finance through a sleek, performance-driven portfolio with enhanced user interaction, creative coding projects, and AI-powered solutions.
 
 ## Features
 
 - 📱 **Responsive Design**: Optimized for all devices with a clean, intuitive interface
-- 🚀 **Performance-Focused**: Built with Next.js for optimal loading speeds and user experience
-- 📊 **Project Showcase**: Displaying creative coding and AI projects
-- 📝 **Articles & Writing**: Integration with Medium content
-- 📨 **Newsletter System**: Email subscription service with tracking capabilities
-- 🔍 **SEO Optimized**: Structured data and meta tags for better search engine visibility
+- 🚀 **Performance-Focused**: Built with Vite and React for optimal loading speeds and user experience
+- 📊 **Project Showcase**: Displaying AI, data science, and creative coding projects
+- 📝 **Articles & Writing**: Integration with Medium content featuring reading time estimates and categories
+- 📨 **Newsletter System**: Full-featured email subscription service with confirmation flow and tracking capabilities
+- 🔍 **SEO Optimized**: Structured data and meta tags for better search engine visibility, highlighting expertise in Data Science, AI, and Supply Chain
 - ♿ **Accessibility**: Designed with inclusivity in mind
 - 🔒 **Security Features**: Comprehensive security measures to protect data and admin access
+- 🧪 **Testing**: Jest test suite for critical functionality
 
 ## Technology Stack
 
-- **Frontend**: React with TypeScript
-- **Styling**: Tailwind CSS with custom theming
-- **Database**: Neon Database (Serverless PostgreSQL)
-- **ORM**: Drizzle ORM
-- **Authentication**: Passport.js with bcrypt for password hashing
-- **Email Integration**: SendGrid
+- **Frontend**: React 18 + TypeScript with Vite bundling
+- **Backend**: Express.js + TypeScript server
+- **Build Tools**: Vite for frontend, esbuild for backend bundling
+- **Database**: PostgreSQL (Neon Database - Serverless)
+- **ORM**: Drizzle ORM with type-safe schema
+- **Authentication**: Express sessions + Basic auth with bcrypt password hashing
+- **Email Integration**: SendGrid for newsletter and contact forms
 - **Animations**: Framer Motion
-- **State Management**: React Query
+- **State Management**: TanStack Query (React Query) for API state management
 - **Form Handling**: React Hook Form with Zod validation
-- **UI Components**: Shadcn/UI (Radix UI)
-- **Security**: Helmet.js, CSRF protection, secure sessions
+- **UI Components**: Shadcn/UI (40+ Radix UI components)
+- **Styling**: Tailwind CSS with custom theming
+- **Security**: Helmet.js, CSRF protection, secure HTTPOnly sessions
+- **Testing**: Jest with supertest for API testing
 
 ## Project Structure
 
@@ -63,93 +67,183 @@ A modern, minimal personal website for Ta Khongsap that showcases professional e
 ### Installation
 
 1. Clone the repository
-   ```
+   ```bash
    git clone [repository-url]
+   cd tkhongsap-website
    ```
 
 2. Install dependencies
-   ```
+   ```bash
    npm install
    ```
 
 3. Create a `.env` file with the following variables (see `.env.example` for all options)
-   ```
+   ```env
+   NODE_ENV=development
    DATABASE_URL=your_postgres_connection_string
-   SENDGRID_API_KEY=your_sendgrid_api_key
+   SITE_URL=http://localhost:5000
    SESSION_SECRET=a_secure_random_string
-   # Enable verbose logging during development
+   SENDGRID_API_KEY=your_sendgrid_api_key
+   SENDGRID_FROM_EMAIL=your_verified_email
+   # Enable verbose logging during development (optional)
    DEBUG_LOGS=true
    VITE_DEBUG_LOGS=true
    ```
 
-4. Start the development server
+4. Set up the database schema
+   ```bash
+   npm run db:push
    ```
+
+5. Create an admin user for protected endpoints
+   ```bash
+   npm run setup
+   ```
+
+6. Start the development server
+   ```bash
    npm run dev
    ```
 
-5. Open [http://localhost:5000](http://localhost:5000) with your browser to see the result
+7. Open [http://localhost:5000](http://localhost:5000) with your browser to see the result
 
-### Admin Setup
+### Development Commands
 
-To create an admin user for accessing protected endpoints:
+```bash
+# Development
+npm run dev          # Start development server with hot reload
+npm run check        # Run TypeScript type checking
 
-```
-npm run setup
-```
+# Production
+npm run build        # Build frontend and backend for production
+npm run start        # Start production server
 
-Follow the prompts to create a secure admin username and password.
+# Database
+npm run db:push      # Push database schema changes via Drizzle
 
-### Database Setup
+# Admin Setup
+npm run setup        # Create admin user for protected endpoints
 
-The project uses Drizzle ORM with PostgreSQL. To set up or update your database schema:
-
-```
-npm run db:push
+# Testing
+npm test            # Run Jest test suite
 ```
 
 ## Deployment
 
-This project is configured for deployment on Replit, Netlify, and Vercel platforms.
+This project is configured for deployment on multiple platforms:
+- **Replit** (primary) - Node.js 20 with PostgreSQL 16
+- **Netlify** - SPA routing with API proxying
+- **Vercel** - API rewrites and SPA fallback
 
-## Features
+## Core Features
 
 ### Newsletter System
 
-The website includes a full-featured newsletter subscription system with:
+Full-featured email subscription system with:
 
-- Email confirmation flow
-- Subscriber management
-- Email open/click tracking
-- Unsubscribe functionality
+- **Email Confirmation Flow**: Double opt-in subscription process
+- **Subscriber Management**: Admin dashboard for managing subscribers
+- **Email Tracking**: Open and click tracking for newsletters
+- **Unsubscribe Functionality**: One-click unsubscribe with token validation
+- **SendGrid Integration**: Reliable email delivery service
 
-### Project Showcase
+### Project Portfolio
 
-Displays professional projects with:
+Professional project showcase featuring:
 
-- Project descriptions and screenshots
-- Technologies used
-- Links to live demos and GitHub repositories
+- **AI & Machine Learning Projects**: Fine-tuning vision models, AI-powered applications
+- **Data Science Work**: Analytics and visualization projects
+- **Creative Coding**: Interactive web experiences
+- **Project Details**: Descriptions, screenshots, technologies, and live demos
+- **GitHub Integration**: Direct links to source code repositories
 
 ### Writing & Articles
 
-Integration with Medium articles featuring:
+Medium article integration with:
 
-- Reading time estimates
-- Categories and tags
-- Engagement metrics
+- **Reading Time Estimates**: Calculated reading duration for each article
+- **Categories and Tags**: Organized content by topics
+- **Article Previews**: Summary cards with featured images
+- **External Link Tracking**: Click tracking for Medium articles
+
+### Contact System
+
+Contact form with:
+
+- **Form Validation**: Client and server-side validation using Zod
+- **Email Notifications**: Automatic notifications for new messages
+- **Message Storage**: Database storage of all contact submissions
+- **Spam Protection**: CSRF token validation
 
 ### Security Features
 
-The website implements comprehensive security measures:
+Comprehensive security implementation:
 
-- **Secure Authentication**: Password hashing with bcrypt and protected admin routes
-- **CSRF Protection**: Protection against Cross-Site Request Forgery attacks
-- **Security Headers**: Using Helmet.js to set secure HTTP headers
+- **Secure Authentication**: Bcrypt password hashing with salt rounds
+- **Protected Routes**: Session-based authentication for admin endpoints
+- **CSRF Protection**: Cross-Site Request Forgery prevention on all forms
+- **Security Headers**: Helmet.js configuration for secure HTTP headers
 - **Input Validation**: Zod schema validation for all user inputs
-- **Secure Sessions**: HTTPOnly cookies and secure session management
+- **Secure Sessions**: HTTPOnly cookies with PostgreSQL session store
 - **HTTPS Enforcement**: Automatic HTTPS redirection in production
-- **Environment Variables**: Sensitive data stored in environment variables
-- **Rate Limiting**: Protection against brute force attacks on admin endpoints
+- **Environment Variables**: Sensitive configuration stored securely
+- **Rate Limiting**: Protection against brute force attacks
+
+## API Endpoints
+
+### Public Routes
+- `POST /api/subscribe` - Newsletter subscription
+- `POST /api/contact` - Contact form submission
+- `GET /api/newsletter/confirm` - Email confirmation
+- `GET /api/newsletter/unsubscribe` - Unsubscribe from newsletter
+- `POST /api/newsletter/track/:type/:id` - Track email opens/clicks
+
+### Protected Admin Routes
+(Require authentication via session)
+- `GET /api/subscribers` - Get all subscribers
+- `GET /api/newsletters` - Get all newsletters
+- `POST /api/newsletters` - Create new newsletter
+- `POST /api/newsletters/:id/send` - Send newsletter to subscribers
+- `GET /api/contact-messages` - Get all contact messages
+
+## Database Schema
+
+The application uses PostgreSQL with Drizzle ORM for type-safe database operations. Main tables:
+
+- **users** - Admin authentication and credentials
+- **subscribers** - Newsletter subscribers with confirmation status
+- **newsletters** - Newsletter content and metadata
+- **newsletter_tracking** - Email open and click tracking
+- **contact_messages** - Contact form submissions
+
+Schema is defined in `/shared/schema.ts` with full TypeScript type inference.
+
+## Path Aliases
+
+The project uses TypeScript path aliases for cleaner imports:
+
+- `@/*` - Points to `client/src/`
+- `@shared/*` - Points to `shared/`
+
+Example usage:
+```typescript
+import { Button } from '@/components/ui/button';
+import { insertSubscriberSchema } from '@shared/schema';
+```
+
+## Development Guidelines
+
+When contributing or making changes:
+
+- **Always run `npm run check`** before committing to ensure TypeScript compliance
+- **Restart the server** after making changes for proper testing
+- **Keep files under 200-300 lines** - refactor when exceeding this limit
+- **Iterate on existing code** instead of creating new patterns
+- **No mocking data** for dev/prod environments (tests only)
+- **Check for existing functionality** before duplicating code
+- **Be environment-aware** - consider dev/test/prod differences
+
+For more detailed development guidance, see [`CLAUDE.md`](./CLAUDE.md).
 
 ## License
 
