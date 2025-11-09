@@ -8,9 +8,9 @@ export default function About() {
   // Person schema data
   const personSchemaData = {
     name: 'Ta Khongsap',
-    jobTitle: 'AI Strategist & Data Science Leader',
-    description: 'AI Strategist with over 15 years of experience in data science, finance, and leadership, specializing in leveraging AI to optimize business operations and drive strategic growth.',
-    url: 'https://totrakoolkhongsap.replit.app/about',
+    jobTitle: 'Mathematician & Software Developer',
+    description: 'Mathematician and Software Developer with expertise in finance, leveraging mathematical rigor and programming skills to build AI solutions that solve complex business problems.',
+    url: 'https://tkhongsap.io/about',
     sameAs: [
       'https://www.linkedin.com/in/totrakool-k-b504a912/',
       'https://github.com/tkhongsap'
@@ -19,10 +19,11 @@ export default function About() {
 
   return (
     <>
-      <SEO 
-        title="About | Ta Khongsap - AI Strategist"
-        description="Learn about Ta Khongsap's professional journey, expertise in AI strategy, and leadership experience in data science and business transformation."
+      <SEO
+        title="About Ta Khongsap | Mathematician & Software Developer"
+        description="Learn about Ta Khongsap's expertise in mathematics, software development, and finance. Discover how mathematical rigor meets programming excellence to solve complex problems."
         canonicalUrl="/about"
+        keywords="mathematician, software developer, finance expert, quantitative analysis, AI, machine learning, data science, domain expertise"
       />
       <SchemaMarkup type="person" data={personSchemaData} />
       <div className="pt-20">
@@ -155,7 +156,7 @@ export default function About() {
                     
                     <div className="text-center">
                       <h3 className="text-xl font-bold mb-2"><span className="text-primary">Ta</span> <span className="text-gray-800">Khongsap</span></h3>
-                      <p className="text-gray-700 mb-4">AI Strategist & Data Science Leader</p>
+                      <p className="text-gray-700 mb-4">Mathematician & Software Developer</p>
                       
                       <div className="flex justify-center space-x-4">
                         <a 

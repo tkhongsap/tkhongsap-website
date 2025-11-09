@@ -23,16 +23,17 @@ export default function Portfolio() {
     name: 'Ta Khongsap - Weekend Projects',
     description: 'The best way to learn is by doing. These projects are my playground for tinkering and testing ideas—built during free time with no pressure.',
     serviceType: ['Creative Coding', 'Algorithm Visualization', 'Interactive Tools'],
-    url: 'https://totrakoolkhongsap.replit.app/portfolio'
+    url: 'https://tkhongsap.io/portfolio'
   };
 
   return (
     <div>
-      <SEO 
+      <SEO
         title="Weekend Projects | Ta Khongsap"
         description="The best way to learn is by doing. Explore Ta Khongsap's playground for tinkering and testing ideas—each project represents a question answered through building."
         canonicalUrl="/portfolio"
         type="website"
+        keywords="creative projects, algorithm visualization, interactive tools, software development, coding projects, mathematics"
       />
       <SchemaMarkup type="professionalService" data={pageSchemaData} />
       
