@@ -34,9 +34,9 @@ export default function Contact() {
   
   // Schema data for the Contact page
   const contactSchemaData = {
-    name: 'Contact Ta Khongsap - AI Strategist',
-    description: 'Get in touch with Ta Khongsap for AI strategy consulting, speaking engagements, or collaborative projects.',
-    url: 'https://totrakoolkhongsap.replit.app/contact',
+    name: 'Contact Ta Khongsap - Math, Data Science, AI & Supply Chain Expert',
+    description: 'Get in touch with Ta Khongsap for consulting, speaking engagements, or collaborative projects in mathematics, data science, software development, AI, and supply chain optimization.',
+    url: 'https://tkhongsap.io/contact',
     contactPoint: {
       email: 'ta.khongsap@gmail.com',
       telephone: '+66822334499'
@@ -57,12 +57,12 @@ export default function Contact() {
     try {
       const response = await apiRequest("POST", "/api/contact", data);
       const result = await response.json();
-      
+
       toast({
         title: "Success!",
         description: result.message || "Message sent successfully! I'll get back to you soon.",
       });
-      
+
       form.reset();
     } catch (error) {
       toast({
@@ -77,11 +77,12 @@ export default function Contact() {
 
   return (
     <>
-      <SEO 
-        title="Contact | Ta Khongsap - AI Strategist"
-        description="Get in touch with Ta Khongsap for AI strategy consulting, speaking engagements, or collaboration opportunities. Reach out today via phone, email, or message form."
+      <SEO
+        title="Contact | Ta Khongsap"
+        description="Get in touch with Ta Khongsap for consulting, speaking engagements, or collaboration opportunities in mathematics, data science, software development, AI, and supply chain optimization."
         canonicalUrl="/contact"
         type="website"
+        keywords="contact, consulting, mathematics consulting, software development services, data science, AI expertise, supply chain optimization, collaboration"
       />
       <SchemaMarkup type="website" data={contactSchemaData} />
       

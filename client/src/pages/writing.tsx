@@ -115,16 +115,17 @@ export default function Writing() {
   const writingSchemaData = {
     name: 'Ta Khongsap | AI Insights & Analysis',
     description: 'AI is moving fast. The way we build, lead, and think is changing with it. Distilled takeaways from my experiments across tech, strategy, and the future of work.',
-    url: 'https://totrakoolkhongsap.replit.app/writing'
+    url: 'https://tkhongsap.io/writing'
   };
 
   return (
     <div>
-      <SEO 
-        title="AI Insights | Ta Khongsap - AI Strategist"
+      <SEO
+        title="AI Insights & Analysis | Ta Khongsap"
         description="AI is moving fast. The way we build, lead, and think is changing with it. Distilled takeaways from my experiments across tech, strategy, and the future of work."
         canonicalUrl="/writing"
         type="website"
+        keywords="AI insights, technology analysis, software development, machine learning, data science, AI strategy, tech trends, supply chain optimization, operations research"
         imageUrl={articles[0]?.imageUrl} // Use first article image for social sharing
         imageAlt="Ta Khongsap's Featured Article"
       />

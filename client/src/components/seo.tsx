@@ -11,14 +11,14 @@ interface SEOProps {
 }
 
 export default function SEO({
-  title = 'Totrakool Khongsap | AI Strategist & Data Scientist',
-  description = 'Totrakool Khongsap - AI Strategist blending data science, finance, and leadership to transform business with AI-driven innovation and ROI.',
+  title = 'Ta Khongsap | Math • Data Science • Code • AI • Supply Chain',
+  description = 'Ta Khongsap - Domain expert in Mathematics, Data Science, Software Development, AI, and Supply Chain. Leveraging mathematical rigor, data-driven insights, and programming expertise to solve complex problems across finance, operations, and logistics.',
   canonicalUrl,
   type = 'website',
   imageUrl,
-  imageAlt = 'Totrakool Khongsap - AI Strategist',
+  imageAlt = 'Ta Khongsap - Math, Data Science, AI & Supply Chain Expert',
   noindex = false,
-  keywords = 'AI strategy, data science, machine learning, business intelligence, AI transformation, finance AI, enterprise AI',
+  keywords = 'mathematics, data science, software development, AI, supply chain, machine learning, operations research, logistics optimization, quantitative analysis, algorithmic trading, financial modeling, inventory management, domain expertise',
   pageUrl,
 }: SEOProps) {
   const baseUrl = 'https://tkhongsap.io'; // Updated with the actual domain from SEO report
@@ -28,7 +28,7 @@ export default function SEO({
   const currentUrl = pageUrl ? `${baseUrl}${pageUrl}` : baseUrl;
   
   // Ensure title ends with site name
-  const fullTitle = title.includes('Totrakool Khongsap') ? title : `${title} | Totrakool Khongsap`;
+  const fullTitle = title.includes('Ta Khongsap') ? title : `${title} | Ta Khongsap`;
   
   // Create document title - this will update the browser tab title
   document.title = fullTitle;

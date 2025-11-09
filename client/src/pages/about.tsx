@@ -8,9 +8,9 @@ export default function About() {
   // Person schema data
   const personSchemaData = {
     name: 'Ta Khongsap',
-    jobTitle: 'AI Strategist & Data Science Leader',
-    description: 'AI Strategist with over 15 years of experience in data science, finance, and leadership, specializing in leveraging AI to optimize business operations and drive strategic growth.',
-    url: 'https://totrakoolkhongsap.replit.app/about',
+    jobTitle: 'Domain Expert: Math, Data Science, AI & Supply Chain',
+    description: 'Domain expert in Mathematics, Data Science, Software Development, AI, and Supply Chain. Leveraging mathematical rigor, data-driven insights, and programming skills to solve complex problems in finance, operations, and logistics.',
+    url: 'https://tkhongsap.io/about',
     sameAs: [
       'https://www.linkedin.com/in/totrakool-k-b504a912/',
       'https://github.com/tkhongsap'
@@ -19,10 +19,11 @@ export default function About() {
 
   return (
     <>
-      <SEO 
-        title="About | Ta Khongsap - AI Strategist"
-        description="Learn about Ta Khongsap's professional journey, expertise in AI strategy, and leadership experience in data science and business transformation."
+      <SEO
+        title="About Ta Khongsap | Math, Data Science, AI & Supply Chain Expert"
+        description="Learn about Ta Khongsap's expertise in mathematics, data science, software development, AI, and supply chain. Discover how mathematical rigor, data-driven insights, and domain knowledge solve complex problems in finance, operations, and logistics."
         canonicalUrl="/about"
+        keywords="mathematician, data scientist, software developer, AI expert, supply chain optimization, operations research, logistics, quantitative analysis, machine learning, domain expertise"
       />
       <SchemaMarkup type="person" data={personSchemaData} />
       <div className="pt-20">
@@ -155,7 +156,7 @@ export default function About() {
                     
                     <div className="text-center">
                       <h3 className="text-xl font-bold mb-2"><span className="text-primary">Ta</span> <span className="text-gray-800">Khongsap</span></h3>
-                      <p className="text-gray-700 mb-4">AI Strategist & Data Science Leader</p>
+                      <p className="text-gray-700 mb-4">Math • Data Science • AI • Supply Chain</p>
                       
                       <div className="flex justify-center space-x-4">
                         <a 
