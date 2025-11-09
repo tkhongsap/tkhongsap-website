@@ -8,8 +8,8 @@ export default function About() {
   // Person schema data
   const personSchemaData = {
     name: 'Ta Khongsap',
-    jobTitle: 'Mathematician & Software Developer',
-    description: 'Mathematician and Software Developer with expertise in finance, leveraging mathematical rigor and programming skills to build AI solutions that solve complex business problems.',
+    jobTitle: 'Domain Expert: Math, Data Science, AI & Supply Chain',
+    description: 'Domain expert in Mathematics, Data Science, Software Development, AI, and Supply Chain. Leveraging mathematical rigor, data-driven insights, and programming skills to solve complex problems in finance, operations, and logistics.',
     url: 'https://tkhongsap.io/about',
     sameAs: [
       'https://www.linkedin.com/in/totrakool-k-b504a912/',
@@ -20,10 +20,10 @@ export default function About() {
   return (
     <>
       <SEO
-        title="About Ta Khongsap | Mathematician & Software Developer"
-        description="Learn about Ta Khongsap's expertise in mathematics, software development, and finance. Discover how mathematical rigor meets programming excellence to solve complex problems."
+        title="About Ta Khongsap | Math, Data Science, AI & Supply Chain Expert"
+        description="Learn about Ta Khongsap's expertise in mathematics, data science, software development, AI, and supply chain. Discover how mathematical rigor, data-driven insights, and domain knowledge solve complex problems in finance, operations, and logistics."
         canonicalUrl="/about"
-        keywords="mathematician, software developer, finance expert, quantitative analysis, AI, machine learning, data science, domain expertise"
+        keywords="mathematician, data scientist, software developer, AI expert, supply chain optimization, operations research, logistics, quantitative analysis, machine learning, domain expertise"
       />
       <SchemaMarkup type="person" data={personSchemaData} />
       <div className="pt-20">
@@ -156,7 +156,7 @@ export default function About() {
                     
                     <div className="text-center">
                       <h3 className="text-xl font-bold mb-2"><span className="text-primary">Ta</span> <span className="text-gray-800">Khongsap</span></h3>
-                      <p className="text-gray-700 mb-4">Mathematician & Software Developer</p>
+                      <p className="text-gray-700 mb-4">Math • Data Science • AI • Supply Chain</p>
                       
                       <div className="flex justify-center space-x-4">
                         <a 

@@ -34,8 +34,8 @@ export default function Contact() {
   
   // Schema data for the Contact page
   const contactSchemaData = {
-    name: 'Contact Ta Khongsap - Mathematician & Software Developer',
-    description: 'Get in touch with Ta Khongsap for consulting, speaking engagements, or collaborative projects in mathematics, software development, and finance.',
+    name: 'Contact Ta Khongsap - Math, Data Science, AI & Supply Chain Expert',
+    description: 'Get in touch with Ta Khongsap for consulting, speaking engagements, or collaborative projects in mathematics, data science, software development, AI, and supply chain optimization.',
     url: 'https://tkhongsap.io/contact',
     contactPoint: {
       email: 'ta.khongsap@gmail.com',
@@ -79,10 +79,10 @@ export default function Contact() {
     <>
       <SEO
         title="Contact | Ta Khongsap"
-        description="Get in touch with Ta Khongsap for consulting, speaking engagements, or collaboration opportunities in mathematics, software development, and finance."
+        description="Get in touch with Ta Khongsap for consulting, speaking engagements, or collaboration opportunities in mathematics, data science, software development, AI, and supply chain optimization."
         canonicalUrl="/contact"
         type="website"
-        keywords="contact, consulting, mathematics consulting, software development services, finance expertise, collaboration"
+        keywords="contact, consulting, mathematics consulting, software development services, data science, AI expertise, supply chain optimization, collaboration"
       />
       <SchemaMarkup type="website" data={contactSchemaData} />
       

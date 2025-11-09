@@ -13,17 +13,17 @@ export default function Home() {
   // SEO data for Home page with enhanced structured data
   const homeSchemaData = {
     url: 'https://tkhongsap.io/',
-    name: 'Ta Khongsap | Math • Code • Finance',
-    description: 'Ta Khongsap - Mathematician and Software Developer combining mathematical rigor, programming expertise, and finance domain knowledge to solve complex problems with AI and data science.'
+    name: 'Ta Khongsap | Math • Data Science • Code • AI • Supply Chain',
+    description: 'Ta Khongsap - Domain expert combining mathematical rigor, data science insights, programming expertise, AI innovation, and supply chain optimization to solve complex business problems.'
   };
 
   return (
     <div>
       <SEO
-        title="Ta Khongsap | Math • Code • Finance"
-        description="Mathematician and Software Developer leveraging AI to transform finance and business. Combining mathematical rigor, programming expertise, and domain knowledge to solve complex problems."
+        title="Ta Khongsap | Math • Data Science • Code • AI • Supply Chain"
+        description="Domain expert in Mathematics, Data Science, Software Development, AI, and Supply Chain. Leveraging mathematical rigor and data-driven insights to solve complex problems in finance, operations, and logistics."
         canonicalUrl="/"
-        keywords="mathematics, software development, finance, quantitative analysis, AI, data science, machine learning, financial modeling, algorithmic trading, domain expertise"
+        keywords="mathematics, data science, software development, AI, supply chain, machine learning, operations research, logistics optimization, quantitative analysis, financial modeling, inventory management, domain expertise"
         pageUrl="/"
       />
       <SchemaMarkup type="website" data={homeSchemaData} />

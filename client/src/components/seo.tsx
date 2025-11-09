@@ -11,14 +11,14 @@ interface SEOProps {
 }
 
 export default function SEO({
-  title = 'Ta Khongsap | Math • Code • Finance',
-  description = 'Ta Khongsap - Mathematician and Software Developer leveraging mathematical rigor, programming expertise, and finance domain knowledge to solve complex problems with AI and data science.',
+  title = 'Ta Khongsap | Math • Data Science • Code • AI • Supply Chain',
+  description = 'Ta Khongsap - Domain expert in Mathematics, Data Science, Software Development, AI, and Supply Chain. Leveraging mathematical rigor, data-driven insights, and programming expertise to solve complex problems across finance, operations, and logistics.',
   canonicalUrl,
   type = 'website',
   imageUrl,
-  imageAlt = 'Ta Khongsap - Mathematician & Software Developer',
+  imageAlt = 'Ta Khongsap - Math, Data Science, AI & Supply Chain Expert',
   noindex = false,
-  keywords = 'mathematics, software development, finance, AI, data science, machine learning, quantitative analysis, algorithmic trading, financial modeling, domain expertise',
+  keywords = 'mathematics, data science, software development, AI, supply chain, machine learning, operations research, logistics optimization, quantitative analysis, algorithmic trading, financial modeling, inventory management, domain expertise',
   pageUrl,
 }: SEOProps) {
   const baseUrl = 'https://tkhongsap.io'; // Updated with the actual domain from SEO report

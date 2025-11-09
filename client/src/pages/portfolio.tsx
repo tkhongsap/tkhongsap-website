@@ -33,7 +33,7 @@ export default function Portfolio() {
         description="The best way to learn is by doing. Explore Ta Khongsap's playground for tinkering and testing ideas—each project represents a question answered through building."
         canonicalUrl="/portfolio"
         type="website"
-        keywords="creative projects, algorithm visualization, interactive tools, software development, coding projects, mathematics"
+        keywords="creative projects, algorithm visualization, interactive tools, software development, coding projects, mathematics, data science, AI projects, supply chain optimization"
       />
       <SchemaMarkup type="professionalService" data={pageSchemaData} />
       

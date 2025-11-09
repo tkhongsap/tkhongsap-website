@@ -125,7 +125,7 @@ export default function Writing() {
         description="AI is moving fast. The way we build, lead, and think is changing with it. Distilled takeaways from my experiments across tech, strategy, and the future of work."
         canonicalUrl="/writing"
         type="website"
-        keywords="AI insights, technology analysis, software development, machine learning, data science, AI strategy, tech trends"
+        keywords="AI insights, technology analysis, software development, machine learning, data science, AI strategy, tech trends, supply chain optimization, operations research"
         imageUrl={articles[0]?.imageUrl} // Use first article image for social sharing
         imageAlt="Ta Khongsap's Featured Article"
       />
