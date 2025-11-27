@@ -142,33 +142,35 @@ export default function ConfirmPage() {
   // If no token is provided, show an error
   if (token === null) {
     return (
-      <div className="container max-w-md py-16">
-        <SEO 
-          title="Invalid Confirmation Link | Newsletter Subscription"
-          description="Unable to confirm your newsletter subscription due to an invalid or missing token. Please check your email for the correct confirmation link."
-          canonicalUrl="/confirm"
-          keywords="newsletter confirmation, subscription error, invalid token"
-          pageUrl="/confirm"
-        />
-        <SchemaMarkup type="website" data={confirmSchemaData} />
-        <Card>
-          <CardHeader>
-            <CardTitle>Invalid Confirmation</CardTitle>
-            <CardDescription>No confirmation token was provided.</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Alert variant="destructive">
-              <XCircle className="h-4 w-4" />
-              <AlertTitle>Error</AlertTitle>
-              <AlertDescription>
-                The confirmation link you used is invalid. Please check your email for the correct link or request a new confirmation email.
-              </AlertDescription>
-            </Alert>
-          </CardContent>
-          <CardFooter>
-            <Button onClick={() => setLocation('/')}>Return to Home</Button>
-          </CardFooter>
-        </Card>
+      <div className="bg-[#FAF9F6] min-h-screen pt-32 pb-20">
+        <div className="container max-w-md mx-auto px-4">
+          <SEO
+            title="Invalid Confirmation Link | Newsletter Subscription"
+            description="Unable to confirm your newsletter subscription due to an invalid or missing token. Please check your email for the correct confirmation link."
+            canonicalUrl="/confirm"
+            keywords="newsletter confirmation, subscription error, invalid token"
+            pageUrl="/confirm"
+          />
+          <SchemaMarkup type="website" data={confirmSchemaData} />
+          <Card className="editorial-card">
+            <CardHeader>
+              <CardTitle className="font-serif text-2xl text-[#1A1A1A]">Invalid Confirmation</CardTitle>
+              <CardDescription className="text-[#5C5C5C]">No confirmation token was provided.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Alert variant="destructive" className="border-red-200 bg-red-50">
+                <XCircle className="h-4 w-4" />
+                <AlertTitle>Error</AlertTitle>
+                <AlertDescription>
+                  The confirmation link you used is invalid. Please check your email for the correct link or request a new confirmation email.
+                </AlertDescription>
+              </Alert>
+            </CardContent>
+            <CardFooter>
+              <Button onClick={() => setLocation('/')} className="bg-[#C45B3E] hover:bg-[#A84832] text-white">Return to Home</Button>
+            </CardFooter>
+          </Card>
+        </div>
       </div>
     );
   }
@@ -218,147 +220,153 @@ export default function ConfirmPage() {
   // Show loading state with debug button
   if (isLoading) {
     return (
-      <div className="container max-w-md py-16">
-        <SEO 
-          title="Confirming Your Subscription | Newsletter"
-          description="Please wait while we confirm your newsletter subscription to receive updates on AI trends and insights."
-          canonicalUrl="/confirm"
-          keywords="newsletter confirmation, subscription confirmation, confirm email"
-          pageUrl="/confirm"
-        />
-        <SchemaMarkup type="website" data={confirmSchemaData} />
-        <Card>
-          <CardHeader>
-            <CardTitle>Confirming Subscription</CardTitle>
-            <CardDescription>Please wait while we confirm your subscription...</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="flex justify-center py-6">
-              <Loader2 className="h-12 w-12 animate-spin text-primary" />
-            </div>
-            
-            <div className="mt-4">
-              <Alert>
-                <AlertTitle>Is the page stuck loading?</AlertTitle>
-                <AlertDescription>
-                  Try the manual confirmation button below:
-                </AlertDescription>
-              </Alert>
-              
-              <div className="flex justify-center mt-4">
-                <Button onClick={manuallyConfirm} className="flex items-center gap-2">
-                  <ExternalLink className="h-4 w-4" />
-                  Manually Confirm Subscription
-                </Button>
+      <div className="bg-[#FAF9F6] min-h-screen pt-32 pb-20">
+        <div className="container max-w-md mx-auto px-4">
+          <SEO
+            title="Confirming Your Subscription | Newsletter"
+            description="Please wait while we confirm your newsletter subscription to receive updates on AI trends and insights."
+            canonicalUrl="/confirm"
+            keywords="newsletter confirmation, subscription confirmation, confirm email"
+            pageUrl="/confirm"
+          />
+          <SchemaMarkup type="website" data={confirmSchemaData} />
+          <Card className="editorial-card">
+            <CardHeader>
+              <CardTitle className="font-serif text-2xl text-[#1A1A1A]">Confirming Subscription</CardTitle>
+              <CardDescription className="text-[#5C5C5C]">Please wait while we confirm your subscription...</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex justify-center py-6">
+                <Loader2 className="h-12 w-12 animate-spin text-[#C45B3E]" />
               </div>
-            </div>
-            
-            {isDevelopment && (
-              <div className="mt-6 p-4 bg-gray-100 dark:bg-gray-800 rounded-md text-xs overflow-auto max-h-48">
-                <p className="font-semibold mb-2">Debug Information:</p>
-                <pre className="whitespace-pre-wrap">{debugInfo}</pre>
+
+              <div className="mt-4">
+                <Alert className="border-[#E8E4DF] bg-[#F5F0EB]">
+                  <AlertTitle className="text-[#1A1A1A]">Is the page stuck loading?</AlertTitle>
+                  <AlertDescription className="text-[#5C5C5C]">
+                    Try the manual confirmation button below:
+                  </AlertDescription>
+                </Alert>
+
+                <div className="flex justify-center mt-4">
+                  <Button onClick={manuallyConfirm} className="flex items-center gap-2 bg-[#C45B3E] hover:bg-[#A84832] text-white">
+                    <ExternalLink className="h-4 w-4" />
+                    Manually Confirm Subscription
+                  </Button>
+                </div>
               </div>
-            )}
-          </CardContent>
-        </Card>
+
+              {isDevelopment && (
+                <div className="mt-6 p-4 bg-[#F5F0EB] rounded-md text-xs overflow-auto max-h-48">
+                  <p className="font-semibold mb-2 text-[#1A1A1A]">Debug Information:</p>
+                  <pre className="whitespace-pre-wrap text-[#5C5C5C]">{debugInfo}</pre>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </div>
       </div>
     );
   }
   
   // Show error state with debug button
   if (isError) {
-    const errorMessage = error instanceof Error 
-      ? error.message 
+    const errorMessage = error instanceof Error
+      ? error.message
       : 'An error occurred while confirming your subscription.';
-      
+
     return (
-      <div className="container max-w-md py-16">
-        <SEO 
-          title="Confirmation Failed | Newsletter Subscription"
-          description="We encountered an error while trying to confirm your newsletter subscription. Please try again or contact support."
-          canonicalUrl="/confirm"
-          keywords="newsletter error, subscription failed, confirmation problem"
-          pageUrl="/confirm"
-        />
-        <SchemaMarkup type="website" data={confirmSchemaData} />
-        <Card>
-          <CardHeader>
-            <CardTitle>Confirmation Failed</CardTitle>
-            <CardDescription>We couldn't confirm your subscription.</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Alert variant="destructive">
-              <XCircle className="h-4 w-4" />
-              <AlertTitle>Error</AlertTitle>
-              <AlertDescription>{errorMessage}</AlertDescription>
-            </Alert>
-            
-            <div className="mt-4">
-              <Alert>
-                <AlertTitle>Try Manual Confirmation</AlertTitle>
-                <AlertDescription>
-                  The automatic confirmation failed. Try the manual confirmation button:
-                </AlertDescription>
+      <div className="bg-[#FAF9F6] min-h-screen pt-32 pb-20">
+        <div className="container max-w-md mx-auto px-4">
+          <SEO
+            title="Confirmation Failed | Newsletter Subscription"
+            description="We encountered an error while trying to confirm your newsletter subscription. Please try again or contact support."
+            canonicalUrl="/confirm"
+            keywords="newsletter error, subscription failed, confirmation problem"
+            pageUrl="/confirm"
+          />
+          <SchemaMarkup type="website" data={confirmSchemaData} />
+          <Card className="editorial-card">
+            <CardHeader>
+              <CardTitle className="font-serif text-2xl text-[#1A1A1A]">Confirmation Failed</CardTitle>
+              <CardDescription className="text-[#5C5C5C]">We couldn't confirm your subscription.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Alert variant="destructive" className="border-red-200 bg-red-50">
+                <XCircle className="h-4 w-4" />
+                <AlertTitle>Error</AlertTitle>
+                <AlertDescription>{errorMessage}</AlertDescription>
               </Alert>
-              
-              <div className="flex justify-center mt-4">
-                <Button onClick={manuallyConfirm} className="flex items-center gap-2">
-                  <ExternalLink className="h-4 w-4" />
-                  Manually Confirm Subscription
-                </Button>
+
+              <div className="mt-4">
+                <Alert className="border-[#E8E4DF] bg-[#F5F0EB]">
+                  <AlertTitle className="text-[#1A1A1A]">Try Manual Confirmation</AlertTitle>
+                  <AlertDescription className="text-[#5C5C5C]">
+                    The automatic confirmation failed. Try the manual confirmation button:
+                  </AlertDescription>
+                </Alert>
+
+                <div className="flex justify-center mt-4">
+                  <Button onClick={manuallyConfirm} className="flex items-center gap-2 bg-[#C45B3E] hover:bg-[#A84832] text-white">
+                    <ExternalLink className="h-4 w-4" />
+                    Manually Confirm Subscription
+                  </Button>
+                </div>
               </div>
-            </div>
-            
-            {isDevelopment && (
-              <div className="mt-6 p-4 bg-gray-100 dark:bg-gray-800 rounded-md text-xs overflow-auto max-h-48">
-                <p className="font-semibold mb-2">Debug Information:</p>
-                <pre className="whitespace-pre-wrap">{debugInfo}</pre>
-              </div>
-            )}
-          </CardContent>
-          <CardFooter>
-            <Button onClick={() => setLocation('/')}>Return to Home</Button>
-          </CardFooter>
-        </Card>
+
+              {isDevelopment && (
+                <div className="mt-6 p-4 bg-[#F5F0EB] rounded-md text-xs overflow-auto max-h-48">
+                  <p className="font-semibold mb-2 text-[#1A1A1A]">Debug Information:</p>
+                  <pre className="whitespace-pre-wrap text-[#5C5C5C]">{debugInfo}</pre>
+                </div>
+              )}
+            </CardContent>
+            <CardFooter>
+              <Button onClick={() => setLocation('/')} className="bg-[#C45B3E] hover:bg-[#A84832] text-white">Return to Home</Button>
+            </CardFooter>
+          </Card>
+        </div>
       </div>
     );
   }
   
   // Show success state
   return (
-    <div className="container max-w-md py-16">
-      <SEO 
-        title="Subscription Confirmed | Newsletter Success"
-        description="Your newsletter subscription has been successfully confirmed. You'll now receive updates on AI trends, productivity tips, and coding insights."
-        canonicalUrl="/confirm"
-        keywords="newsletter confirmed, subscription success, email updates"
-        pageUrl="/confirm"
-      />
-      <SchemaMarkup type="website" data={confirmSchemaData} />
-      <Card>
-        <CardHeader>
-          <CardTitle>Subscription Confirmed!</CardTitle>
-          <CardDescription>You're now subscribed to my newsletter.</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="flex flex-col items-center py-6">
-            <CheckCircle2 className="h-16 w-16 text-primary mb-4" />
-            <p className="text-center mb-4">
-              Thank you for confirming your subscription! You'll now receive updates and insights straight to your inbox.
-            </p>
-          </div>
-          
-          {isDevelopment && (
-            <div className="mt-6 p-4 bg-gray-100 dark:bg-gray-800 rounded-md text-xs overflow-auto max-h-48">
-              <p className="font-semibold mb-2">Debug Information:</p>
-              <pre className="whitespace-pre-wrap">{debugInfo}</pre>
+    <div className="bg-[#FAF9F6] min-h-screen pt-32 pb-20">
+      <div className="container max-w-md mx-auto px-4">
+        <SEO
+          title="Subscription Confirmed | Newsletter Success"
+          description="Your newsletter subscription has been successfully confirmed. You'll now receive updates on AI trends, productivity tips, and coding insights."
+          canonicalUrl="/confirm"
+          keywords="newsletter confirmed, subscription success, email updates"
+          pageUrl="/confirm"
+        />
+        <SchemaMarkup type="website" data={confirmSchemaData} />
+        <Card className="editorial-card">
+          <CardHeader>
+            <CardTitle className="font-serif text-2xl text-[#1A1A1A]">Subscription Confirmed!</CardTitle>
+            <CardDescription className="text-[#5C5C5C]">You're now subscribed to my newsletter.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-col items-center py-6">
+              <CheckCircle2 className="h-16 w-16 text-[#C45B3E] mb-4" />
+              <p className="text-center mb-4 text-[#1A1A1A]">
+                Thank you for confirming your subscription! You'll now receive updates and insights straight to your inbox.
+              </p>
             </div>
-          )}
-        </CardContent>
-        <CardFooter>
-          <Button onClick={() => setLocation('/')}>Return to Home</Button>
-        </CardFooter>
-      </Card>
+
+            {isDevelopment && (
+              <div className="mt-6 p-4 bg-[#F5F0EB] rounded-md text-xs overflow-auto max-h-48">
+                <p className="font-semibold mb-2 text-[#1A1A1A]">Debug Information:</p>
+                <pre className="whitespace-pre-wrap text-[#5C5C5C]">{debugInfo}</pre>
+              </div>
+            )}
+          </CardContent>
+          <CardFooter>
+            <Button onClick={() => setLocation('/')} className="bg-[#C45B3E] hover:bg-[#A84832] text-white">Return to Home</Button>
+          </CardFooter>
+        </Card>
+      </div>
     </div>
   );
 }

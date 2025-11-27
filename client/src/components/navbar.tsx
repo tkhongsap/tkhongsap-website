@@ -55,66 +55,63 @@ export default function Navbar() {
       <div className="container">
         <div className="flex justify-between items-center py-6">
           <Link href="/" className="text-2xl font-bold">
-            <span className="text-primary">Ta</span> <span className="text-[#333333]">Khongsap</span>
+            <span className="font-serif text-[#C45B3E]">Ta</span> <span className="text-[#1A1A1A]">Khongsap</span>
           </Link>
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-10">
             {navLinks.map((link) => (
-              <Link 
+              <Link
                 key={link.name}
                 href={link.path}
                 className={cn(
-                  "font-medium text-[#444444] hover:text-primary transition-colors",
-                  location === link.path && "text-primary"
+                  "font-medium text-[#5C5C5C] hover:text-[#C45B3E] transition-colors",
+                  location === link.path && "text-[#C45B3E]"
                 )}
                 onClick={() => handleLinkClick(link.path)}
               >
                 {link.name}
               </Link>
             ))}
-            <Button asChild variant="default" className="bg-primary hover:bg-primary/90 text-white rounded-md px-6">
-              <Link href="/#newsletter" onClick={() => handleLinkClick("/#newsletter")}>
-                Subscribe
+            <Button asChild variant="default" className="bg-[#C45B3E] hover:bg-[#A84832] text-white rounded-md px-6">
+              <Link href="/writing">
+                Read Essays
               </Link>
             </Button>
           </nav>
           
           {/* Mobile Navigation Button */}
-          <button 
-            type="button" 
-            className="md:hidden text-[#333333] focus:outline-none" 
+          <button
+            type="button"
+            className="md:hidden text-[#1A1A1A] focus:outline-none"
             onClick={toggleMenu}
             aria-label="Toggle menu"
           >
             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
-        
+
         {/* Mobile Navigation Menu */}
-        <div className={cn("md:hidden overflow-hidden transition-all duration-300", 
+        <div className={cn("md:hidden overflow-hidden transition-all duration-300",
           isOpen ? "max-h-96" : "max-h-0"
         )}>
           <div className="flex flex-col space-y-5 pb-6">
             {navLinks.map((link) => (
-              <Link 
+              <Link
                 key={link.name}
                 href={link.path}
                 className={cn(
-                  "font-medium text-lg text-[#444444] hover:text-primary transition-colors",
-                  location === link.path && "text-primary"
+                  "font-medium text-lg text-[#5C5C5C] hover:text-[#C45B3E] transition-colors",
+                  location === link.path && "text-[#C45B3E]"
                 )}
                 onClick={() => handleLinkClick(link.path)}
               >
                 {link.name}
               </Link>
             ))}
-            <Button asChild variant="default" className="bg-primary hover:bg-primary/90 text-white rounded-md w-full py-3 mt-4">
-              <Link 
-                href="/#newsletter"
-                onClick={() => handleLinkClick("/#newsletter")}
-              >
-                Subscribe
+            <Button asChild variant="default" className="bg-[#C45B3E] hover:bg-[#A84832] text-white rounded-md w-full py-3 mt-4">
+              <Link href="/writing">
+                Read Essays
               </Link>
             </Button>
           </div>
