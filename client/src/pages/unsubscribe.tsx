@@ -105,33 +105,35 @@ export default function UnsubscribePage() {
   // If no token is provided, show an error
   if (token === null) {
     return (
-      <div className="container max-w-md py-16">
-        <SEO 
-          title="Invalid Unsubscribe Link | Newsletter Management"
-          description="Unable to process your unsubscribe request due to an invalid or missing token. Please check your email for the correct unsubscribe link."
-          canonicalUrl="/unsubscribe"
-          keywords="newsletter unsubscribe, manage subscription, invalid unsubscribe link"
-          pageUrl="/unsubscribe"
-        />
-        <SchemaMarkup type="website" data={unsubscribeSchemaData} />
-        <Card>
-          <CardHeader>
-            <CardTitle>Invalid Unsubscribe Link</CardTitle>
-            <CardDescription>No unsubscribe token was provided.</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Alert variant="destructive">
-              <XCircle className="h-4 w-4" />
-              <AlertTitle>Error</AlertTitle>
-              <AlertDescription>
-                The unsubscribe link you used is invalid. Please try clicking the link from your email again.
-              </AlertDescription>
-            </Alert>
-          </CardContent>
-          <CardFooter>
-            <Button onClick={() => setLocation('/')}>Return to Home</Button>
-          </CardFooter>
-        </Card>
+      <div className="bg-[#FAF9F6] min-h-screen pt-32 pb-20">
+        <div className="container max-w-md mx-auto px-4">
+          <SEO
+            title="Invalid Unsubscribe Link | Newsletter Management"
+            description="Unable to process your unsubscribe request due to an invalid or missing token. Please check your email for the correct unsubscribe link."
+            canonicalUrl="/unsubscribe"
+            keywords="newsletter unsubscribe, manage subscription, invalid unsubscribe link"
+            pageUrl="/unsubscribe"
+          />
+          <SchemaMarkup type="website" data={unsubscribeSchemaData} />
+          <Card className="editorial-card">
+            <CardHeader>
+              <CardTitle className="font-serif text-2xl text-[#1A1A1A]">Invalid Unsubscribe Link</CardTitle>
+              <CardDescription className="text-[#5C5C5C]">No unsubscribe token was provided.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Alert variant="destructive" className="border-red-200 bg-red-50">
+                <XCircle className="h-4 w-4" />
+                <AlertTitle>Error</AlertTitle>
+                <AlertDescription>
+                  The unsubscribe link you used is invalid. Please try clicking the link from your email again.
+                </AlertDescription>
+              </Alert>
+            </CardContent>
+            <CardFooter>
+              <Button onClick={() => setLocation('/')} className="bg-[#C45B3E] hover:bg-[#A84832] text-white">Return to Home</Button>
+            </CardFooter>
+          </Card>
+        </div>
       </div>
     );
   }
@@ -173,150 +175,156 @@ export default function UnsubscribePage() {
   // Show loading state
   if (isLoading) {
     return (
-      <div className="container max-w-md py-16">
-        <SEO 
-          title="Processing Unsubscribe Request | Newsletter Management"
-          description="Please wait while we process your request to unsubscribe from the newsletter."
-          canonicalUrl="/unsubscribe"
-          keywords="newsletter unsubscribe, cancel subscription, email preferences"
-          pageUrl="/unsubscribe"
-        />
-        <SchemaMarkup type="website" data={unsubscribeSchemaData} />
-        <Card>
-          <CardHeader>
-            <CardTitle>Processing Unsubscribe Request</CardTitle>
-            <CardDescription>Please wait while we process your request...</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="flex justify-center py-6">
-              <Loader2 className="h-12 w-12 animate-spin text-primary" />
-            </div>
-            
-            <div className="mt-4">
-              <Alert>
-                <AlertTitle>Is the page stuck loading?</AlertTitle>
-                <AlertDescription>
-                  Try the manual unsubscribe button below:
-                </AlertDescription>
-              </Alert>
-              
-              <div className="flex justify-center mt-4">
-                <Button onClick={manuallyUnsubscribe}>
-                  Manually Unsubscribe
-                </Button>
+      <div className="bg-[#FAF9F6] min-h-screen pt-32 pb-20">
+        <div className="container max-w-md mx-auto px-4">
+          <SEO
+            title="Processing Unsubscribe Request | Newsletter Management"
+            description="Please wait while we process your request to unsubscribe from the newsletter."
+            canonicalUrl="/unsubscribe"
+            keywords="newsletter unsubscribe, cancel subscription, email preferences"
+            pageUrl="/unsubscribe"
+          />
+          <SchemaMarkup type="website" data={unsubscribeSchemaData} />
+          <Card className="editorial-card">
+            <CardHeader>
+              <CardTitle className="font-serif text-2xl text-[#1A1A1A]">Processing Unsubscribe Request</CardTitle>
+              <CardDescription className="text-[#5C5C5C]">Please wait while we process your request...</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex justify-center py-6">
+                <Loader2 className="h-12 w-12 animate-spin text-[#C45B3E]" />
               </div>
-            </div>
-            
-            {isDevelopment && (
-              <div className="mt-6 p-4 bg-gray-100 dark:bg-gray-800 rounded-md text-xs overflow-auto max-h-48">
-                <p className="font-semibold mb-2">Debug Information:</p>
-                <pre className="whitespace-pre-wrap">{debugInfo}</pre>
+
+              <div className="mt-4">
+                <Alert className="border-[#E8E4DF] bg-[#F5F0EB]">
+                  <AlertTitle className="text-[#1A1A1A]">Is the page stuck loading?</AlertTitle>
+                  <AlertDescription className="text-[#5C5C5C]">
+                    Try the manual unsubscribe button below:
+                  </AlertDescription>
+                </Alert>
+
+                <div className="flex justify-center mt-4">
+                  <Button onClick={manuallyUnsubscribe} className="bg-[#C45B3E] hover:bg-[#A84832] text-white">
+                    Manually Unsubscribe
+                  </Button>
+                </div>
               </div>
-            )}
-          </CardContent>
-        </Card>
+
+              {isDevelopment && (
+                <div className="mt-6 p-4 bg-[#F5F0EB] rounded-md text-xs overflow-auto max-h-48">
+                  <p className="font-semibold mb-2 text-[#1A1A1A]">Debug Information:</p>
+                  <pre className="whitespace-pre-wrap text-[#5C5C5C]">{debugInfo}</pre>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </div>
       </div>
     );
   }
   
   // Show error state
   if (isError) {
-    const errorMessage = error instanceof Error 
-      ? error.message 
+    const errorMessage = error instanceof Error
+      ? error.message
       : 'An error occurred while processing your unsubscribe request.';
-      
+
     return (
-      <div className="container max-w-md py-16">
-        <SEO 
-          title="Unsubscribe Failed | Newsletter Management"
-          description="We encountered an error while processing your unsubscribe request. Please try again or contact support."
-          canonicalUrl="/unsubscribe"
-          keywords="unsubscribe error, newsletter problem, subscription management"
-          pageUrl="/unsubscribe"
-        />
-        <SchemaMarkup type="website" data={unsubscribeSchemaData} />
-        <Card>
-          <CardHeader>
-            <CardTitle>Unsubscribe Failed</CardTitle>
-            <CardDescription>We couldn't process your unsubscribe request.</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Alert variant="destructive">
-              <XCircle className="h-4 w-4" />
-              <AlertTitle>Error</AlertTitle>
-              <AlertDescription>{errorMessage}</AlertDescription>
-            </Alert>
-            
-            <div className="mt-4">
-              <Alert>
-                <AlertTitle>Try Manual Unsubscribe</AlertTitle>
-                <AlertDescription>
-                  The automatic unsubscribe failed. Try the manual unsubscribe button:
-                </AlertDescription>
+      <div className="bg-[#FAF9F6] min-h-screen pt-32 pb-20">
+        <div className="container max-w-md mx-auto px-4">
+          <SEO
+            title="Unsubscribe Failed | Newsletter Management"
+            description="We encountered an error while processing your unsubscribe request. Please try again or contact support."
+            canonicalUrl="/unsubscribe"
+            keywords="unsubscribe error, newsletter problem, subscription management"
+            pageUrl="/unsubscribe"
+          />
+          <SchemaMarkup type="website" data={unsubscribeSchemaData} />
+          <Card className="editorial-card">
+            <CardHeader>
+              <CardTitle className="font-serif text-2xl text-[#1A1A1A]">Unsubscribe Failed</CardTitle>
+              <CardDescription className="text-[#5C5C5C]">We couldn't process your unsubscribe request.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Alert variant="destructive" className="border-red-200 bg-red-50">
+                <XCircle className="h-4 w-4" />
+                <AlertTitle>Error</AlertTitle>
+                <AlertDescription>{errorMessage}</AlertDescription>
               </Alert>
-              
-              <div className="flex justify-center mt-4">
-                <Button onClick={manuallyUnsubscribe}>
-                  Manually Unsubscribe
-                </Button>
+
+              <div className="mt-4">
+                <Alert className="border-[#E8E4DF] bg-[#F5F0EB]">
+                  <AlertTitle className="text-[#1A1A1A]">Try Manual Unsubscribe</AlertTitle>
+                  <AlertDescription className="text-[#5C5C5C]">
+                    The automatic unsubscribe failed. Try the manual unsubscribe button:
+                  </AlertDescription>
+                </Alert>
+
+                <div className="flex justify-center mt-4">
+                  <Button onClick={manuallyUnsubscribe} className="bg-[#C45B3E] hover:bg-[#A84832] text-white">
+                    Manually Unsubscribe
+                  </Button>
+                </div>
               </div>
-            </div>
-            
-            {isDevelopment && (
-              <div className="mt-6 p-4 bg-gray-100 dark:bg-gray-800 rounded-md text-xs overflow-auto max-h-48">
-                <p className="font-semibold mb-2">Debug Information:</p>
-                <pre className="whitespace-pre-wrap">{debugInfo}</pre>
-              </div>
-            )}
-          </CardContent>
-          <CardFooter>
-            <Button onClick={() => setLocation('/')}>Return to Home</Button>
-          </CardFooter>
-        </Card>
+
+              {isDevelopment && (
+                <div className="mt-6 p-4 bg-[#F5F0EB] rounded-md text-xs overflow-auto max-h-48">
+                  <p className="font-semibold mb-2 text-[#1A1A1A]">Debug Information:</p>
+                  <pre className="whitespace-pre-wrap text-[#5C5C5C]">{debugInfo}</pre>
+                </div>
+              )}
+            </CardContent>
+            <CardFooter>
+              <Button onClick={() => setLocation('/')} className="bg-[#C45B3E] hover:bg-[#A84832] text-white">Return to Home</Button>
+            </CardFooter>
+          </Card>
+        </div>
       </div>
     );
   }
   
   // Show success state
   return (
-    <div className="container max-w-md py-16">
-      <SEO 
-        title="Successfully Unsubscribed | Newsletter Management"
-        description="You have been successfully unsubscribed from the newsletter. You will no longer receive updates from us."
-        canonicalUrl="/unsubscribe"
-        keywords="unsubscribe successful, newsletter cancelled, email preferences updated"
-        pageUrl="/unsubscribe"
-      />
-      <SchemaMarkup type="website" data={unsubscribeSchemaData} />
-      <Card>
-        <CardHeader>
-          <CardTitle>Successfully Unsubscribed</CardTitle>
-          <CardDescription>You have been removed from the newsletter.</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="flex flex-col items-center py-6">
-            <CheckCircle2 className="h-16 w-16 text-primary mb-4" />
-            <p className="text-center mb-4">
-              You have successfully unsubscribed from the newsletter. 
-              You will no longer receive any emails from us.
-            </p>
-            <p className="text-center text-muted-foreground text-sm">
-              We're sorry to see you go. If you have any feedback on how we could improve,
-              please feel free to reach out.
-            </p>
-          </div>
-          
-          {isDevelopment && (
-            <div className="mt-6 p-4 bg-gray-100 dark:bg-gray-800 rounded-md text-xs overflow-auto max-h-48">
-              <p className="font-semibold mb-2">Debug Information:</p>
-              <pre className="whitespace-pre-wrap">{debugInfo}</pre>
+    <div className="bg-[#FAF9F6] min-h-screen pt-32 pb-20">
+      <div className="container max-w-md mx-auto px-4">
+        <SEO
+          title="Successfully Unsubscribed | Newsletter Management"
+          description="You have been successfully unsubscribed from the newsletter. You will no longer receive updates from us."
+          canonicalUrl="/unsubscribe"
+          keywords="unsubscribe successful, newsletter cancelled, email preferences updated"
+          pageUrl="/unsubscribe"
+        />
+        <SchemaMarkup type="website" data={unsubscribeSchemaData} />
+        <Card className="editorial-card">
+          <CardHeader>
+            <CardTitle className="font-serif text-2xl text-[#1A1A1A]">Successfully Unsubscribed</CardTitle>
+            <CardDescription className="text-[#5C5C5C]">You have been removed from the newsletter.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-col items-center py-6">
+              <CheckCircle2 className="h-16 w-16 text-[#C45B3E] mb-4" />
+              <p className="text-center mb-4 text-[#1A1A1A]">
+                You have successfully unsubscribed from the newsletter.
+                You will no longer receive any emails from us.
+              </p>
+              <p className="text-center text-[#5C5C5C] text-sm">
+                We're sorry to see you go. If you have any feedback on how we could improve,
+                please feel free to reach out.
+              </p>
             </div>
-          )}
-        </CardContent>
-        <CardFooter>
-          <Button onClick={() => setLocation('/')}>Return to Home</Button>
-        </CardFooter>
-      </Card>
+
+            {isDevelopment && (
+              <div className="mt-6 p-4 bg-[#F5F0EB] rounded-md text-xs overflow-auto max-h-48">
+                <p className="font-semibold mb-2 text-[#1A1A1A]">Debug Information:</p>
+                <pre className="whitespace-pre-wrap text-[#5C5C5C]">{debugInfo}</pre>
+              </div>
+            )}
+          </CardContent>
+          <CardFooter>
+            <Button onClick={() => setLocation('/')} className="bg-[#C45B3E] hover:bg-[#A84832] text-white">Return to Home</Button>
+          </CardFooter>
+        </Card>
+      </div>
     </div>
   );
 }

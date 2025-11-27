@@ -1,101 +1,99 @@
 import { Link } from "wouter";
-import { ArrowRight, Code, BarChart, Lightbulb } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import NewsletterForm from "@/components/newsletter-form";
-import { projects } from "@/data/projects";
+import { ArrowRight } from "lucide-react";
+import { articles } from "@/data/articles";
+import { FeaturedArticle } from "@/components/featured-article";
 import SEO from "@/components/seo";
 import SchemaMarkup from "@/components/schema-markup";
 
 export default function Home() {
-  // Get the featured project (Enterprise AI Optimization Engine)
-  const featuredProject = projects.find(p => p.id === "enterprise-ai");
+  // Get featured articles (newest 3)
+  const featuredArticles = articles.slice(0, 3);
+  const heroArticle = featuredArticles[0];
+  const secondaryArticles = featuredArticles.slice(1, 3);
 
-  // SEO data for Home page with enhanced structured data
+  // SEO data for Home page
   const homeSchemaData = {
-    url: 'https://tkhongsap.io/',
-    name: 'Ta Khongsap | Math • Data Science • Code • AI • Supply Chain',
-    description: 'Ta Khongsap - Domain expert combining mathematical rigor, data science insights, programming expertise, AI innovation, and supply chain optimization to solve complex business problems.'
+    url: "https://tkhongsap.io/",
+    name: "Ta Khongsap | Math • Data Science • Code • AI • Supply Chain",
+    description:
+      "Essays and insights on AI, software craftsmanship, and the evolving nature of knowledge work.",
   };
 
   return (
-    <div>
+    <div className="bg-[#FAF9F6]">
       <SEO
         title="Ta Khongsap | Math • Data Science • Code • AI • Supply Chain"
-        description="Domain expert in Mathematics, Data Science, Software Development, AI, and Supply Chain. Leveraging mathematical rigor and data-driven insights to solve complex problems in finance, operations, and logistics."
+        description="Essays and insights on AI, software craftsmanship, and the evolving nature of knowledge work. Domain expertise in Mathematics, Data Science, and Supply Chain."
         canonicalUrl="/"
-        keywords="mathematics, data science, software development, AI, supply chain, machine learning, operations research, logistics optimization, quantitative analysis, financial modeling, inventory management, domain expertise"
+        keywords="AI, software development, data science, machine learning, tech thought leadership, essays, supply chain, mathematics"
         pageUrl="/"
       />
       <SchemaMarkup type="website" data={homeSchemaData} />
-      
-      <div className="pt-20">
-        {/* Hero Section */}
-        <section id="home" className="section bg-[#F8F8F8]">
-          <div className="container">
-            <div className="max-w-4xl mx-auto">
-              <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-8 text-[#333333]">
-                AI Isn't an Option<span className="text-primary">—</span>It's the <span className="text-primary">New Baseline</span>
-              </h1>
-              <div className="space-y-4 mb-10">
-                <p className="text-lg md:text-xl leading-relaxed text-[#444444]">
-                  We're entering an extraordinary era—one where we can create more than ever before.
-                </p>
-                <p className="text-lg md:text-xl leading-relaxed text-[#444444]">
-                  At every step, progress demands skill, judgment, and knowledge. Now, by embracing AI as an active collaborator rather than a mere consultant, we're revolutionizing the very notion of what's possible.
-                </p>
-              </div>
-              
-              {/* Newsletter Signup - Temporarily commented out */}
-              {/*
-              <div id="newsletter" className="bg-white p-8 rounded-lg shadow-md mb-12 border-l-4 border-primary">
-                <h2 className="mb-3 text-2xl font-bold flex items-center">
-                  <span className="text-primary mr-2">→</span> Join my newsletter
-                </h2>
-                <p className="mb-6 text-[#444444] leading-relaxed">
-                  Get exclusive insights on AI trends, productivity tips, and coding breakthroughs delivered straight to your inbox.
-                </p>
-                <NewsletterForm />
-              </div>
-              */}
-              
-              {/* Value Propositions */}
-              <div className="grid md:grid-cols-3 gap-10">
-                <div className="group hover:shadow-md hover:bg-white p-5 rounded-lg transition-all duration-300 text-center">
-                  <div className="flex flex-col items-center mb-4">
-                    <div className="bg-primary/10 p-3 rounded-full mb-3">
-                      <BarChart className="h-6 w-6 text-primary" />
-                    </div>
-                    <h3 className="font-semibold text-lg group-hover:text-primary transition-colors">AI Tools & Technologies</h3>
-                  </div>
-                  <p className="text-[#444444] leading-relaxed">Discover how cutting-edge solutions like Google NotebookLM, Cursor AI, and LLMs supercharge workflows and amplify creativity.</p>
-                </div>
-                
-                <div className="group hover:shadow-md hover:bg-white p-5 rounded-lg transition-all duration-300 text-center">
-                  <div className="flex flex-col items-center mb-4">
-                    <div className="bg-primary/10 p-3 rounded-full mb-3">
-                      <Lightbulb className="h-6 w-6 text-primary" />
-                    </div>
-                    <h3 className="font-semibold text-lg group-hover:text-primary transition-colors">Productivity & Efficiency</h3>
-                  </div>
-                  <p className="text-[#444444] leading-relaxed">Explore powerful tips—from the "90% Rule" to AI-boosted prompts—to beat perfectionism, sharpen focus, and get more done.</p>
-                </div>
-                
-                <div className="group hover:shadow-md hover:bg-white p-5 rounded-lg transition-all duration-300 text-center">
-                  <div className="flex flex-col items-center mb-4">
-                    <div className="bg-primary/10 p-3 rounded-full mb-3">
-                      <Code className="h-6 w-6 text-primary" />
-                    </div>
-                    <h3 className="font-semibold text-lg group-hover:text-primary transition-colors">The Future of Software Development</h3>
-                  </div>
-                  <p className="text-[#444444] leading-relaxed">Learn how AI is reshaping coding by empowering both newcomers and pros, potentially signaling the end of "traditional" development.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        
 
+      {/* Hero Section */}
+      <section className="pt-32 pb-16 md:pt-40 md:pb-24">
+        <div className="editorial-container text-center">
+          <h1 className="editorial-headline mb-6">
+            The Questions That
+            <br />
+            Shape Our Thinking
+          </h1>
+          <p className="editorial-prose max-w-xl mx-auto">
+            Essays on AI, software craftsmanship, and the evolving nature of
+            knowledge work.
+          </p>
+        </div>
+      </section>
+
+      {/* Subtle Divider */}
+      <div className="container max-w-5xl mx-auto px-4">
+        <div className="divider-subtle" style={{ margin: "0 0 4rem 0" }} />
       </div>
+
+      {/* Featured Writing Section */}
+      <section className="pb-16 md:pb-24">
+        <div className="container max-w-5xl mx-auto px-4 sm:px-6">
+          {/* Section Header */}
+          <div className="mb-10">
+            <h2 className="font-serif text-sm uppercase tracking-widest text-[#5C5C5C] mb-2">
+              Featured Writing
+            </h2>
+          </div>
+
+          {/* Hero Article */}
+          {heroArticle && (
+            <div className="mb-10">
+              <FeaturedArticle article={heroArticle} variant="hero" />
+            </div>
+          )}
+
+          {/* Secondary Articles Grid */}
+          {secondaryArticles.length > 0 && (
+            <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+              {secondaryArticles.map((article) => (
+                <FeaturedArticle
+                  key={article.id}
+                  article={article}
+                  variant="secondary"
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Explore More Section */}
+      <section className="pb-20 md:pb-32">
+        <div className="container max-w-5xl mx-auto px-4 sm:px-6 text-center">
+          <div className="divider-subtle" style={{ margin: "0 0 4rem 0" }} />
+          <Link href="/writing">
+            <a className="inline-flex items-center text-[#C45B3E] font-medium text-lg hover:underline group">
+              <span>Explore all essays</span>
+              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+            </a>
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }
