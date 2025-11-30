@@ -1,15 +1,11 @@
 import { Link } from "wouter";
-import { ArrowRight } from "lucide-react";
-import { articles } from "@/data/articles";
-import { FeaturedArticle } from "@/components/featured-article";
+import { ArrowRight, Clock, Calendar } from "lucide-react";
+import { getFeaturedEssay } from "@/data/essays";
 import SEO from "@/components/seo";
 import SchemaMarkup from "@/components/schema-markup";
 
 export default function Home() {
-  // Get featured articles (newest 3)
-  const featuredArticles = articles.slice(0, 3);
-  const heroArticle = featuredArticles[0];
-  const secondaryArticles = featuredArticles.slice(1, 3);
+  const featuredEssay = getFeaturedEssay();
 
   // SEO data for Home page
   const homeSchemaData = {
@@ -20,7 +16,7 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-[#FAF9F6]">
+    <div className="bg-[#FAF9F6] min-h-screen">
       <SEO
         title="Ta Khongsap | Math • Data Science • Code • AI • Supply Chain"
         description="Essays and insights on AI, software craftsmanship, and the evolving nature of knowledge work. Domain expertise in Mathematics, Data Science, and Supply Chain."
@@ -30,68 +26,103 @@ export default function Home() {
       />
       <SchemaMarkup type="website" data={homeSchemaData} />
 
-      {/* Hero Section */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-24">
+      {/* Hero Section - Minimalist intro */}
+      <section className="pt-32 pb-12 md:pt-40 md:pb-16">
         <div className="editorial-container text-center">
           <h1 className="editorial-headline mb-6">
-            The Questions That
-            <br />
-            Shape Our Thinking
+            Thinking Out Loud
           </h1>
           <p className="editorial-prose max-w-xl mx-auto">
-            Essays on AI, software craftsmanship, and the evolving nature of
-            knowledge work.
+            Essays on AI, technology, and the questions that shape how we build and think.
           </p>
         </div>
       </section>
 
-      {/* Subtle Divider */}
-      <div className="container max-w-5xl mx-auto px-4">
-        <div className="divider-subtle" style={{ margin: "0 0 4rem 0" }} />
-      </div>
+      {/* Featured Essay Section */}
+      {featuredEssay && (
+        <section className="pb-16 md:pb-24">
+          <div className="container max-w-4xl mx-auto px-4 sm:px-6">
+            {/* Section Label */}
+            <div className="mb-8">
+              <span className="inline-block px-3 py-1 text-xs font-medium uppercase tracking-widest text-[#C45B3E] bg-[#C45B3E]/10 rounded-full">
+                Latest Essay
+              </span>
+            </div>
 
-      {/* Featured Writing Section */}
-      <section className="pb-16 md:pb-24">
-        <div className="container max-w-5xl mx-auto px-4 sm:px-6">
-          {/* Section Header */}
-          <div className="mb-10">
-            <h2 className="font-serif text-sm uppercase tracking-widest text-[#5C5C5C] mb-2">
-              Featured Writing
-            </h2>
+            {/* Featured Essay Card */}
+            <article className="group">
+              <Link href={`/essay/${featuredEssay.id}`}>
+                <a className="block">
+                  <div className="bg-white rounded-2xl p-8 md:p-12 shadow-sm hover:shadow-md transition-shadow duration-300 border border-[#E8E4DF]">
+                    {/* Meta info */}
+                    <div className="flex flex-wrap items-center gap-4 text-sm text-[#5C5C5C] mb-6">
+                      <span className="flex items-center gap-1.5">
+                        <Calendar className="h-4 w-4" />
+                        {featuredEssay.date}
+                      </span>
+                      <span className="flex items-center gap-1.5">
+                        <Clock className="h-4 w-4" />
+                        {featuredEssay.readingTime}
+                      </span>
+                    </div>
+
+                    {/* Title */}
+                    <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl font-semibold text-[#1A1A1A] leading-tight mb-4 group-hover:text-[#C45B3E] transition-colors duration-300">
+                      {featuredEssay.title}
+                    </h2>
+
+                    {/* Subtitle */}
+                    {featuredEssay.subtitle && (
+                      <p className="text-lg text-[#5C5C5C] mb-6 italic">
+                        {featuredEssay.subtitle}
+                      </p>
+                    )}
+
+                    {/* Excerpt */}
+                    <p className="text-[#5C5C5C] text-lg leading-relaxed mb-8 max-w-3xl">
+                      {featuredEssay.excerpt}
+                    </p>
+
+                    {/* Read more link */}
+                    <div className="flex items-center text-[#C45B3E] font-medium">
+                      <span>Read the full essay</span>
+                      <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-2" />
+                    </div>
+
+                    {/* Accent line */}
+                    <div className="mt-8 h-1 bg-gradient-to-r from-[#C45B3E] to-[#C45B3E]/30 rounded-full w-24 group-hover:w-32 transition-all duration-300" />
+                  </div>
+                </a>
+              </Link>
+            </article>
           </div>
+        </section>
+      )}
 
-          {/* Hero Article */}
-          {heroArticle && (
-            <div className="mb-10">
-              <FeaturedArticle article={heroArticle} variant="hero" />
-            </div>
-          )}
-
-          {/* Secondary Articles Grid */}
-          {secondaryArticles.length > 0 && (
-            <div className="grid md:grid-cols-2 gap-6 md:gap-8">
-              {secondaryArticles.map((article) => (
-                <FeaturedArticle
-                  key={article.id}
-                  article={article}
-                  variant="secondary"
-                />
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* Explore More Section */}
+      {/* About Teaser Section */}
       <section className="pb-20 md:pb-32">
-        <div className="container max-w-5xl mx-auto px-4 sm:px-6 text-center">
-          <div className="divider-subtle" style={{ margin: "0 0 4rem 0" }} />
-          <Link href="/writing">
-            <a className="inline-flex items-center text-[#C45B3E] font-medium text-lg hover:underline group">
-              <span>Explore all essays</span>
-              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-            </a>
-          </Link>
+        <div className="container max-w-4xl mx-auto px-4 sm:px-6">
+          <div className="divider-subtle" style={{ margin: "0 0 3rem 0" }} />
+
+          <div className="text-center">
+            <p className="text-[#5C5C5C] text-lg mb-6">
+              I write about technology, AI, and the evolving landscape of knowledge work.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link href="/about">
+                <a className="inline-flex items-center px-6 py-3 text-[#1A1A1A] font-medium border border-[#E8E4DF] rounded-lg hover:border-[#C45B3E] hover:text-[#C45B3E] transition-colors">
+                  <span>About me</span>
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </a>
+              </Link>
+              <Link href="/writing">
+                <a className="inline-flex items-center px-6 py-3 text-white font-medium bg-[#C45B3E] rounded-lg hover:bg-[#A84832] transition-colors">
+                  <span>All essays</span>
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </a>
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
     </div>
