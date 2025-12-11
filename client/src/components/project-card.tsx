@@ -1,7 +1,13 @@
-import { ArrowRight, Github, ExternalLink } from "lucide-react";
+import { ArrowRight, Github, ExternalLink, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Project } from "@/data/projects";
 import OptimizedImage from "./optimized-image";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 interface ProjectCardProps {
   project: Project;
@@ -55,6 +61,15 @@ export default function ProjectCard({
               {categoryLabels[project.category] || "Project"}
             </span>
           </div>
+
+          {/* Impact badge overlay */}
+          {project.impactBadge && (
+            <div className="absolute bottom-4 right-4">
+              <span className="inline-block px-3 py-1.5 bg-[#C45B3E] text-white text-xs font-semibold tracking-wide rounded-sm shadow-md">
+                {project.impactBadge}
+              </span>
+            </div>
+          )}
         </div>
       )}
 
@@ -135,6 +150,68 @@ export default function ProjectCard({
             </a>
           )}
         </div>
+
+        {/* Technical Details Accordion */}
+        {project.technicalDetails && (
+          <Accordion type="single" collapsible className="mt-4">
+            <AccordionItem value="details" className="border-[#E8E4DF]">
+              <AccordionTrigger className="text-sm text-[#5C5C5C] hover:text-[#C45B3E] hover:no-underline py-3">
+                View Technical Details
+              </AccordionTrigger>
+              <AccordionContent className="text-sm">
+                <div className="space-y-4 pt-2">
+                  {project.technicalDetails.approach && (
+                    <div>
+                      <h4 className="font-semibold text-[#1A1A1A] mb-1">Approach</h4>
+                      <p className="text-[#5C5C5C] leading-relaxed">
+                        {project.technicalDetails.approach}
+                      </p>
+                    </div>
+                  )}
+
+                  {project.technicalDetails.architecture && (
+                    <div>
+                      <h4 className="font-semibold text-[#1A1A1A] mb-1">Architecture</h4>
+                      <p className="text-[#5C5C5C] leading-relaxed">
+                        {project.technicalDetails.architecture}
+                      </p>
+                    </div>
+                  )}
+
+                  {project.technicalDetails.metrics && project.technicalDetails.metrics.length > 0 && (
+                    <div>
+                      <h4 className="font-semibold text-[#1A1A1A] mb-2">Key Metrics</h4>
+                      <ul className="space-y-1">
+                        {project.technicalDetails.metrics.map((metric, idx) => (
+                          <li key={idx} className="flex items-start gap-2 text-[#5C5C5C]">
+                            <span className="text-[#C45B3E] mt-1">•</span>
+                            <span>{metric}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {project.technicalDetails.techStack && project.technicalDetails.techStack.length > 0 && (
+                    <div>
+                      <h4 className="font-semibold text-[#1A1A1A] mb-2">Tech Stack</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {project.technicalDetails.techStack.map((tech, idx) => (
+                          <span
+                            key={idx}
+                            className="px-2 py-1 bg-[#F5F0EB] text-[#5C5C5C] text-xs font-medium border border-[#E8E4DF] rounded"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        )}
       </div>
     </article>
   );
