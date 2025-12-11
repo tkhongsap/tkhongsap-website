@@ -237,13 +237,27 @@ When contributing or making changes:
 
 - **Always run `npm run check`** before committing to ensure TypeScript compliance
 - **Restart the server** after making changes for proper testing
+- **Kill existing servers** before starting new ones to avoid port conflicts
 - **Keep files under 200-300 lines** - refactor when exceeding this limit
 - **Iterate on existing code** instead of creating new patterns
 - **No mocking data** for dev/prod environments (tests only)
 - **Check for existing functionality** before duplicating code
 - **Be environment-aware** - consider dev/test/prod differences
+- **Prefer simple solutions** - avoid over-engineering
+- **Focus on relevant code** - do not touch unrelated areas
+- **Never overwrite .env** without confirming first
 
 For more detailed development guidance, see [`CLAUDE.md`](./CLAUDE.md).
+
+## Frontend Design Guidelines
+
+This project uses distinctive, production-grade interfaces:
+
+- **Typography**: Avoid generic fonts (Inter, Roboto, Arial). Use distinctive, characterful font choices.
+- **Color**: Use CSS variables. Dominant colors with sharp accents over evenly-distributed palettes.
+- **Motion**: Prefer CSS-only animations. Use Framer Motion for React. Focus on high-impact moments.
+- **Layout**: Embrace asymmetry, overlap, and grid-breaking elements.
+- **Avoid**: Generic AI aesthetics, purple gradients on white, predictable layouts, cookie-cutter design.
 
 ## License
 

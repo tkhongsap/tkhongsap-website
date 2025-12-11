@@ -77,8 +77,13 @@ Schema defined in `/shared/schema.ts` with TypeScript inference.
 - **Keep files under 200-300 lines** - refactor when exceeding this
 - **No mocking data** for dev/prod environments (tests only)
 - **Always restart server** after making changes for testing
+- **Kill existing servers** before starting new ones to avoid port conflicts
 - **Check for existing functionality** before duplicating code
 - **Environment-aware code** - consider dev/test/prod differences
+- **Prefer simple solutions** - avoid over-engineering
+- **Focus on relevant code** - do not touch unrelated areas
+- **Never overwrite .env** without confirming first
+- **Exhaust existing patterns** before introducing new ones when fixing bugs
 
 ### Path Aliases
 - `@/*` - Points to client/src/
@@ -116,11 +121,17 @@ Configured for multiple platforms:
 - **Netlify** - SPA routing with API proxying  
 - **Vercel** - API rewrites and SPA fallback
 
+## Frontend Design Guidelines
+
+This project uses the `frontend-design` skill for distinctive, production-grade interfaces:
+
+- **Typography**: Avoid generic fonts (Inter, Roboto, Arial). Use distinctive, characterful font choices.
+- **Color**: Use CSS variables. Dominant colors with sharp accents over evenly-distributed palettes.
+- **Motion**: Prefer CSS-only animations. Use Framer Motion for React. Focus on high-impact moments like page load reveals.
+- **Layout**: Embrace asymmetry, overlap, and grid-breaking elements.
+- **Avoid**: Generic AI aesthetics, purple gradients on white, predictable layouts, cookie-cutter design.
+
 ## Testing & Quality
 
-**Note**: No testing framework currently configured. Consider adding:
-- Jest/Vitest for unit testing
-- ESLint/Prettier for code quality
-- Pre-commit hooks for type checking
-
-Always run `npm run check` for TypeScript validation before committing changes.
+- **Jest + Supertest** configured for API testing (`npm test`)
+- Always run `npm run check` for TypeScript validation before committing changes
