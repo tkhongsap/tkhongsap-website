@@ -199,33 +199,22 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* Project Grid - Asymmetric Masonry-like Layout */}
+      {/* Project Grid - Clean Responsive Layout */}
       <section className="pb-24 md:pb-40 relative z-10">
         <div className="container max-w-6xl mx-auto px-6 md:px-8">
-          {/* Grid with varied card sizes */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 md:gap-8">
-            {filteredProjects.map((project, index) => {
-              // Create asymmetric layout pattern
-              const isLarge = index === 0;
-              const isOffset = index % 3 === 1;
-              
-              return (
-                <div
-                  key={project.id}
-                  className={`
-                    animate-fade-in-up
-                    ${isLarge ? "lg:col-span-7" : "lg:col-span-5"}
-                    ${isOffset ? "lg:mt-12" : ""}
-                  `}
-                  style={{ animationDelay: `${(index + 1) * 150}ms` }}
-                >
-                  <ProjectCard 
-                    project={project} 
-                    variant={isLarge ? "featured" : "default"}
-                  />
-                </div>
-              );
-            })}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {filteredProjects.map((project, index) => (
+              <div
+                key={project.id}
+                className="animate-fade-in-up h-full"
+                style={{ animationDelay: `${(index + 1) * 100}ms` }}
+              >
+                <ProjectCard
+                  project={project}
+                  variant="default"
+                />
+              </div>
+            ))}
           </div>
 
           {filteredProjects.length === 0 && (

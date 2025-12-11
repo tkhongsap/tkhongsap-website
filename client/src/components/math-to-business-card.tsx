@@ -18,7 +18,7 @@ export default function MathToBusinessCard({
 }: MathToBusinessCardProps) {
   return (
     <div
-      className="editorial-card group p-6 md:p-8 bg-white/80 backdrop-blur-sm rounded-xl border border-[#E8E4DF] hover:border-[#C45B3E]/30 transition-all duration-300 animate-fade-in-up"
+      className="editorial-card group p-6 md:p-8 bg-white/80 backdrop-blur-sm rounded-xl border border-[#E8E4DF] hover:border-[#C45B3E]/30 transition-all duration-300 animate-fade-in-up h-full flex flex-col"
       style={{ animationDelay: `${(index + 1) * 100}ms` }}
     >
       {/* Icon */}

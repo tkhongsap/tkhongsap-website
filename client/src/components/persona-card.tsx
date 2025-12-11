@@ -17,7 +17,7 @@ export default function PersonaCard({
 }: PersonaCardProps) {
   return (
     <div
-      className="group p-6 md:p-8 bg-white rounded-xl border border-[#E8E4DF] hover:border-[#C45B3E]/40 hover:shadow-lg transition-all duration-300 animate-fade-in-up"
+      className="group p-6 md:p-8 bg-white rounded-xl border border-[#E8E4DF] hover:border-[#C45B3E]/40 hover:shadow-lg transition-all duration-300 animate-fade-in-up h-full flex flex-col"
       style={{ animationDelay: `${(index + 1) * 100}ms` }}
     >
       {/* Icon */}
