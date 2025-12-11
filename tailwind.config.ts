@@ -7,7 +7,8 @@ export default {
     extend: {
       fontFamily: {
         'serif': ['"Source Serif 4"', 'Georgia', 'Cambria', 'serif'],
-        'sans': ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        'display': ['"Cormorant Garamond"', 'Georgia', 'serif'],
+        'sans': ['Sora', 'system-ui', '-apple-system', 'sans-serif'],
       },
       borderRadius: {
         lg: "var(--radius)",
