@@ -1,7 +1,5 @@
 # Ta Khongsap's Personal Website
 
-![Ta Khongsap](public/Ta%20Khongsap%20OPEN-TEC.jpg)
-
 A modern, minimal personal website for Ta Khongsap that showcases professional expertise in Mathematics, Programming, and Finance through a sleek, performance-driven portfolio with enhanced user interaction, creative coding projects, and AI-powered solutions.
 
 ## Features
