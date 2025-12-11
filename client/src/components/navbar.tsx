@@ -7,7 +7,7 @@ import { cn, scrollToElement } from "@/lib/utils";
 const navLinks = [
   { name: "Home", path: "/" },
   { name: "About", path: "/about" },
-  { name: "Weekend Projects", path: "/portfolio" },
+  { name: "After Hours", path: "/portfolio" },
   { name: "Writing", path: "/writing" },
   // My Thought page removed from navigation but code is preserved
   // { name: "My Thought", path: "/my-thought" },
