@@ -23,9 +23,9 @@ export default function Portfolio() {
       : projects.filter((project) => project.category === activeFilter);
 
   const pageSchemaData = {
-    name: "Ta Khongsap - R&D Lab",
+    name: "Ta Khongsap - After Hours",
     description:
-      "Weekend projects, enterprise-grade thinking. I prototype the systems I want in real life: agents that review code, optimizers that route trucks, tools that evaluate AI outputs.",
+      "Passion projects built on my own time. I prototype the systems I want in real life: agents that review code, optimizers that route trucks, tools that evaluate AI outputs.",
     serviceType: [
       "AI & Automation",
       "Analytics & Optimization",
@@ -103,8 +103,8 @@ export default function Portfolio() {
   return (
     <div className="min-h-screen gradient-mesh-warm grain-overlay relative overflow-hidden">
       <SEO
-        title="R&D Lab | Ta Khongsap"
-        description="Weekend projects, enterprise-grade thinking. Prototyping AI agents, routing optimizers, and evaluation tools—experiments that grow into production systems."
+        title="After Hours | Ta Khongsap"
+        description="Passion projects built on my own time. Prototyping AI agents, routing optimizers, and evaluation tools—experiments that grow into production systems."
         canonicalUrl="/portfolio"
         type="website"
         keywords="AI agents, routing optimization, RAG systems, code review automation, data pipelines, machine learning, enterprise AI, software development"
@@ -123,19 +123,19 @@ export default function Portfolio() {
             {/* Main headline - takes up most space */}
             <div className="lg:col-span-8">
               <span className="inline-block text-[#C45B3E] font-sans text-sm font-medium tracking-widest uppercase mb-6 animate-fade-in-up">
-                Weekend Projects, Enterprise-Grade Thinking
+                Passion Projects, Real-World Thinking
               </span>
               <h1 className="maximalist-headline decorative-line animate-fade-in-up delay-100">
-                R&D
+                After
                 <br />
-                <span className="italic text-[#C45B3E]">Lab</span>
+                <span className="italic text-[#C45B3E]">Hours</span>
               </h1>
             </div>
 
             {/* Subtext - offset to the right */}
             <div className="lg:col-span-4 lg:pb-4">
               <p className="maximalist-subhead animate-fade-in-up delay-300">
-                I prototype the systems I want in real life: agents that review code,
+                What I build on my own time: agents that review code,
                 optimizers that route trucks, tools that evaluate AI outputs.
                 Some stay as demos. Some grow into production systems.
               </p>
