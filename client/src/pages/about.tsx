@@ -53,7 +53,7 @@ export default function About() {
 
               <blockquote className="border-l-4 border-[#C45B3E] pl-6 py-4 my-8 bg-[#F5F0EB] rounded-r-lg">
                 <p className="font-serif text-xl md:text-2xl italic text-[#1A1A1A] leading-relaxed">
-                  What seemed impossible yesterday is Tuesday's work today.
+                  What seemed impossible yesterday is routine today.
                 </p>
               </blockquote>
 
