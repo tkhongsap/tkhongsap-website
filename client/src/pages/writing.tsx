@@ -1,293 +1,210 @@
-import { useState, useEffect, useCallback } from "react";
-import { articles } from "@/data/articles";
-import { FeaturedArticle } from "@/components/featured-article";
+import { Link } from "wouter";
+import { publications } from "@/data/publications";
+import { getFeaturedEssay } from "@/data/essays";
 import SEO from "@/components/seo";
 import SchemaMarkup from "@/components/schema-markup";
-import {
-  Search,
-  X,
-  ChevronLeft,
-  ChevronRight,
-  ArrowUp,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { scrollToElement } from "@/lib/utils";
+import { ArrowRight, BookOpen, Newspaper } from "lucide-react";
+import { FaLinkedin, FaMedium } from "react-icons/fa";
 
 export default function Writing() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const [filteredArticles, setFilteredArticles] = useState(articles);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [showScrollTop, setShowScrollTop] = useState(false);
-
-  const ARTICLES_PER_PAGE = 8;
-
-  const uniqueCategories = Array.from(
-    new Set(articles.flatMap((article) => article.categories))
-  ).sort();
-
-  const filterArticles = useCallback(() => {
-    let result = [...articles];
-
-    if (searchQuery.trim()) {
-      const query = searchQuery.toLowerCase();
-      result = result.filter(
-        (article) =>
-          article.title.toLowerCase().includes(query) ||
-          article.summary.toLowerCase().includes(query)
-      );
-    }
-
-    if (selectedCategory !== "All") {
-      result = result.filter((article) =>
-        article.categories.includes(selectedCategory)
-      );
-    }
-
-    setFilteredArticles(result);
-    setCurrentPage(1);
-  }, [searchQuery, selectedCategory]);
-
-  useEffect(() => {
-    filterArticles();
-  }, [filterArticles]);
-
-  const totalArticles = filteredArticles.length;
-  const totalPages = Math.ceil(totalArticles / ARTICLES_PER_PAGE);
-  const startIndex = (currentPage - 1) * ARTICLES_PER_PAGE;
-  const endIndex = Math.min(startIndex + ARTICLES_PER_PAGE, totalArticles);
-  const displayedArticles = filteredArticles.slice(startIndex, endIndex);
-
-  const goToPage = (page: number) => {
-    setCurrentPage(page);
-    scrollToElement("articles");
-  };
-
-  const clearSearch = () => {
-    setSearchQuery("");
-  };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 500);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  const featuredEssay = getFeaturedEssay();
 
   const writingSchemaData = {
-    name: "Ta Khongsap | Essays & Insights",
+    name: "Ta Khongsap | Writing",
     description:
-      "Essays on AI, software craftsmanship, and the evolving nature of knowledge work.",
+      "Essays and insights on AI, software craftsmanship, and the evolving nature of knowledge work.",
     url: "https://tkhongsap.io/writing",
+  };
+
+  const getPlatformIcon = (platform: string) => {
+    switch (platform) {
+      case "Medium":
+        return <FaMedium className="h-5 w-5" />;
+      case "LinkedIn":
+        return <FaLinkedin className="h-5 w-5" />;
+      default:
+        return <Newspaper className="h-5 w-5" />;
+    }
   };
 
   return (
     <div className="bg-[#FAF9F6] min-h-screen">
       <SEO
-        title="Essays & Insights | Ta Khongsap"
-        description="Essays on AI, software craftsmanship, and the evolving nature of knowledge work. Distilled takeaways from experiments across tech, strategy, and the future of work."
+        title="Writing | Ta Khongsap"
+        description="Essays and insights on AI, software craftsmanship, and the evolving nature of knowledge work. Published on Medium and LinkedIn."
         canonicalUrl="/writing"
         type="website"
-        keywords="AI insights, technology analysis, software development, machine learning, data science, AI strategy, tech trends"
-        imageUrl={articles[0]?.imageUrl}
-        imageAlt="Ta Khongsap's Featured Article"
+        keywords="AI insights, technology analysis, software development, machine learning, data science, AI strategy"
       />
       <SchemaMarkup type="website" data={writingSchemaData} />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-12 md:pt-40 md:pb-16">
+      <section className="pt-32 pb-16 md:pt-40 md:pb-20">
         <div className="editorial-container text-center">
-          <h1 className="editorial-headline mb-6">Essays & Insights</h1>
-          <p className="editorial-prose max-w-xl mx-auto">
-            Distilled takeaways from experiments across tech, strategy, and the
-            future of knowledge work.
+          <h1 className="editorial-headline mb-6">Writing</h1>
+          <p className="editorial-prose max-w-2xl mx-auto text-[#5C5C5C]">
+            Thoughts on AI, technology, and the future of work—published across
+            platforms where ideas find their audience.
           </p>
         </div>
       </section>
 
-      {/* Search and Filtering Section */}
-      <section id="filters" className="pb-8">
-        <div className="container max-w-5xl mx-auto px-4 sm:px-6">
-          <div className="flex flex-col md:flex-row gap-4 items-stretch md:items-center">
-            {/* Search Input */}
-            <div className="flex-grow relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[#5C5C5C] h-4 w-4" />
-              <input
-                type="text"
-                placeholder="Search essays..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-11 pr-10 py-3 bg-white border border-[#E8E4DF] rounded-lg text-[#1A1A1A] placeholder-[#5C5C5C] focus:outline-none focus:ring-2 focus:ring-[#C45B3E]/30 focus:border-[#C45B3E] transition-colors"
-                aria-label="Search essays"
-              />
-              {searchQuery && (
-                <button
-                  onClick={clearSearch}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-[#5C5C5C] hover:text-[#C45B3E] transition-colors"
-                  aria-label="Clear search"
-                >
-                  <X className="h-4 w-4" />
-                </button>
-              )}
+      {/* Featured Essay Section */}
+      {featuredEssay && (
+        <section className="pb-16 md:pb-20">
+          <div className="container max-w-4xl mx-auto px-4 sm:px-6">
+            <div className="text-center mb-8">
+              <span className="inline-flex items-center gap-2 text-sm font-medium text-[#C45B3E] uppercase tracking-wider">
+                <BookOpen className="h-4 w-4" />
+                Featured Essay
+              </span>
             </div>
-
-            {/* Category Filter Pills */}
-            <div className="flex flex-wrap gap-2">
-              <button
-                onClick={() => setSelectedCategory("All")}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                  selectedCategory === "All"
-                    ? "bg-[#C45B3E] text-white"
-                    : "bg-white border border-[#E8E4DF] text-[#5C5C5C] hover:border-[#C45B3E] hover:text-[#C45B3E]"
-                }`}
-              >
-                All
-              </button>
-              {uniqueCategories.slice(0, 4).map((category) => (
-                <button
-                  key={category}
-                  onClick={() => setSelectedCategory(category)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                    selectedCategory === category
-                      ? "bg-[#C45B3E] text-white"
-                      : "bg-white border border-[#E8E4DF] text-[#5C5C5C] hover:border-[#C45B3E] hover:text-[#C45B3E]"
-                  }`}
-                >
-                  {category}
-                </button>
-              ))}
-            </div>
+            <Link href={`/essay/${featuredEssay.id}`}>
+              <article className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer border border-[#E8E4DF]">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#C45B3E]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="relative p-8 md:p-12">
+                  <div className="flex items-center gap-3 text-sm text-[#5C5C5C] mb-4">
+                    <span>{featuredEssay.date}</span>
+                    <span className="w-1 h-1 rounded-full bg-[#5C5C5C]" />
+                    <span>{featuredEssay.readingTime}</span>
+                  </div>
+                  <h2 className="font-serif text-2xl md:text-3xl font-semibold text-[#1A1A1A] mb-4 group-hover:text-[#C45B3E] transition-colors duration-300 leading-tight">
+                    {featuredEssay.title}
+                  </h2>
+                  <p className="text-[#5C5C5C] text-lg leading-relaxed mb-6 max-w-3xl">
+                    {featuredEssay.excerpt}
+                  </p>
+                  <span className="inline-flex items-center gap-2 text-[#C45B3E] font-medium group-hover:gap-3 transition-all duration-300">
+                    Read essay
+                    <ArrowRight className="h-4 w-4" />
+                  </span>
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#C45B3E] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+              </article>
+            </Link>
           </div>
+        </section>
+      )}
 
-          {/* Results Summary */}
-          <div className="mt-4 text-sm text-[#5C5C5C]">
-            {totalArticles} {totalArticles === 1 ? "essay" : "essays"}
-            {searchQuery && ` matching "${searchQuery}"`}
-            {selectedCategory !== "All" && ` in ${selectedCategory}`}
-          </div>
-        </div>
-      </section>
-
-      <div className="container max-w-5xl mx-auto px-4 sm:px-6">
-        <div className="divider-subtle" style={{ margin: "0 0 2rem 0" }} />
+      {/* Divider */}
+      <div className="container max-w-4xl mx-auto px-4 sm:px-6">
+        <div className="divider-subtle" />
       </div>
 
-      {/* Article Grid Section */}
-      <section id="articles" className="pb-16 md:pb-24">
+      {/* Publications Section */}
+      <section className="py-16 md:py-20">
         <div className="container max-w-5xl mx-auto px-4 sm:px-6">
-          {displayedArticles.length > 0 ? (
-            <>
-              {/* 2-column grid on desktop */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-                {displayedArticles.map((article) => (
-                  <FeaturedArticle
-                    key={article.id}
-                    article={article}
-                    variant="secondary"
-                  />
-                ))}
-              </div>
+          <div className="text-center mb-12">
+            <h2 className="font-serif text-2xl md:text-3xl font-semibold text-[#1A1A1A] mb-4">
+              Where I Publish
+            </h2>
+            <p className="text-[#5C5C5C] max-w-xl mx-auto">
+              Follow along on the platforms where I share insights regularly.
+            </p>
+          </div>
 
-              {/* Pagination Controls */}
-              {totalPages > 1 && (
-                <div className="mt-16 flex flex-col items-center">
-                  <div className="text-sm text-[#5C5C5C] mb-4">
-                    Page {currentPage} of {totalPages}
+          <div className="grid md:grid-cols-2 gap-8">
+            {publications.map((pub) => (
+              <a
+                key={pub.id}
+                href={pub.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group"
+              >
+                <article className="relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-[#E8E4DF] h-full flex flex-col">
+                  {/* Cover/Header Area */}
+                  <div
+                    className="relative h-48 md:h-56 overflow-hidden"
+                    style={{
+                      background: `linear-gradient(135deg, ${pub.accentColor}15 0%, ${pub.accentColor}05 100%)`,
+                    }}
+                  >
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div
+                        className="text-6xl md:text-7xl opacity-20 group-hover:opacity-30 group-hover:scale-110 transition-all duration-500"
+                        style={{ color: pub.accentColor }}
+                      >
+                        {getPlatformIcon(pub.platform)}
+                      </div>
+                    </div>
+                    {/* Decorative elements */}
+                    <div
+                      className="absolute top-4 right-4 w-24 h-24 rounded-full opacity-10"
+                      style={{ backgroundColor: pub.accentColor }}
+                    />
+                    <div
+                      className="absolute bottom-4 left-4 w-16 h-16 rounded-full opacity-5"
+                      style={{ backgroundColor: pub.accentColor }}
+                    />
+                    {/* Platform badge */}
+                    <div className="absolute top-4 left-4">
+                      <span
+                        className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium text-white"
+                        style={{ backgroundColor: pub.accentColor }}
+                      >
+                        {getPlatformIcon(pub.platform)}
+                        {pub.platform}
+                      </span>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => goToPage(currentPage - 1)}
-                      disabled={currentPage === 1}
-                      aria-label="Previous page"
-                      className="border-[#E8E4DF] text-[#5C5C5C] hover:border-[#C45B3E] hover:text-[#C45B3E] disabled:opacity-50"
-                    >
-                      <ChevronLeft className="h-4 w-4" />
-                    </Button>
 
-                    <div className="flex items-center gap-1">
-                      {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-                        let pageNum;
-                        if (totalPages <= 5) {
-                          pageNum = i + 1;
-                        } else if (currentPage <= 3) {
-                          pageNum = i + 1;
-                        } else if (currentPage >= totalPages - 2) {
-                          pageNum = totalPages - 4 + i;
-                        } else {
-                          pageNum = currentPage - 2 + i;
-                        }
+                  {/* Content */}
+                  <div className="p-6 md:p-8 flex-1 flex flex-col">
+                    <h3 className="font-serif text-xl md:text-2xl font-semibold text-[#1A1A1A] mb-3 group-hover:text-[#C45B3E] transition-colors duration-300">
+                      {pub.title}
+                    </h3>
+                    <p className="text-[#5C5C5C] leading-relaxed mb-6 flex-1">
+                      {pub.synopsis}
+                    </p>
 
-                        return (
-                          <Button
-                            key={pageNum}
-                            variant={currentPage === pageNum ? "default" : "outline"}
-                            size="sm"
-                            onClick={() => goToPage(pageNum)}
-                            className={`w-9 h-9 ${
-                              currentPage === pageNum
-                                ? "bg-[#C45B3E] hover:bg-[#A84832] text-white"
-                                : "border-[#E8E4DF] text-[#5C5C5C] hover:border-[#C45B3E] hover:text-[#C45B3E]"
-                            }`}
-                            aria-label={`Page ${pageNum}`}
-                            aria-current={currentPage === pageNum ? "page" : undefined}
-                          >
-                            {pageNum}
-                          </Button>
-                        );
-                      })}
+                    {/* Topic Tags */}
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {pub.topics.map((topic) => (
+                        <span
+                          key={topic}
+                          className="px-3 py-1 text-xs font-medium rounded-full bg-[#FAF9F6] text-[#5C5C5C] border border-[#E8E4DF] group-hover:border-[#C45B3E]/30 group-hover:text-[#C45B3E] transition-colors duration-300"
+                        >
+                          {topic}
+                        </span>
+                      ))}
                     </div>
 
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => goToPage(currentPage + 1)}
-                      disabled={currentPage === totalPages}
-                      aria-label="Next page"
-                      className="border-[#E8E4DF] text-[#5C5C5C] hover:border-[#C45B3E] hover:text-[#C45B3E] disabled:opacity-50"
-                    >
-                      <ChevronRight className="h-4 w-4" />
-                    </Button>
+                    {/* CTA */}
+                    <div className="flex items-center justify-between">
+                      <span
+                        className="inline-flex items-center gap-2 font-medium group-hover:gap-3 transition-all duration-300"
+                        style={{ color: pub.accentColor }}
+                      >
+                        {pub.platform === "LinkedIn"
+                          ? "Subscribe on LinkedIn"
+                          : "Read on Medium"}
+                        <ArrowRight className="h-4 w-4" />
+                      </span>
+                    </div>
                   </div>
-                </div>
-              )}
-            </>
-          ) : (
-            <div className="text-center py-16">
-              <p className="text-lg text-[#5C5C5C] mb-4">
-                No essays found matching your criteria.
-              </p>
-              <Button
-                onClick={() => {
-                  setSearchQuery("");
-                  setSelectedCategory("All");
-                }}
-                className="bg-[#C45B3E] hover:bg-[#A84832] text-white"
-              >
-                Clear filters
-              </Button>
-            </div>
-          )}
+
+                  {/* Bottom accent bar */}
+                  <div
+                    className="h-1 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"
+                    style={{ backgroundColor: pub.accentColor }}
+                  />
+                </article>
+              </a>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Scroll to Top Button */}
-      {showScrollTop && (
-        <button
-          onClick={scrollToTop}
-          className="fixed bottom-8 right-8 bg-[#C45B3E] text-white rounded-full p-3 shadow-lg hover:bg-[#A84832] transition-all z-50"
-          aria-label="Scroll to top"
-        >
-          <ArrowUp className="h-5 w-5" />
-        </button>
-      )}
+      {/* Closing Note */}
+      <section className="pb-20 md:pb-28">
+        <div className="container max-w-2xl mx-auto px-4 sm:px-6 text-center">
+          <p className="text-[#5C5C5C] italic">
+            New essays and insights published regularly. Follow on your
+            preferred platform to stay updated.
+          </p>
+        </div>
+      </section>
     </div>
   );
 }
