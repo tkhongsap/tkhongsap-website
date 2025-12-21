@@ -77,8 +77,29 @@ export function serveStatic(app: Express) {
     );
   }
 
-  // Serve static files from the dist directory
-  app.use(express.static(distPath));
+  // Serve static files with optimized caching
+  app.use(express.static(distPath, {
+    maxAge: '1y',
+    immutable: true,
+    setHeaders: (res, filePath) => {
+      // JS and CSS files have content hashes, cache aggressively
+      if (filePath.match(/\.(js|css)$/)) {
+        res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+      }
+      // Fonts can be cached long-term
+      else if (filePath.match(/\.(woff2?|ttf|otf|eot)$/)) {
+        res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+      }
+      // Images cached for 1 week
+      else if (filePath.match(/\.(png|jpe?g|gif|svg|webp|ico)$/)) {
+        res.setHeader('Cache-Control', 'public, max-age=604800');
+      }
+      // HTML should not be cached (or very short cache)
+      else if (filePath.match(/\.html$/)) {
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+      }
+    }
+  }));
 
   // Fall through to index.html for all routes (SPA client-side routing)
   app.get("*", (req, res) => {
@@ -86,9 +107,11 @@ export function serveStatic(app: Express) {
     if (req.path.startsWith('/api')) {
       return res.status(404).send('API endpoint not found');
     }
-    
+
     const indexPath = path.resolve(distPath, "index.html");
     log(`Serving index.html for path: ${req.path}`);
+    // Don't cache HTML for SPA routes
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
     res.sendFile(indexPath);
   });
 }

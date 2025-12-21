@@ -1,4 +1,5 @@
 import express, { type Request, Response, NextFunction } from "express";
+import compression from "compression";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import helmet from "helmet";
@@ -10,6 +11,10 @@ import { debugLog } from "./logger";
 
 const MemoryStoreSession = MemoryStore(session);
 const app = express();
+
+// Enable gzip/deflate compression for all responses
+app.use(compression());
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 

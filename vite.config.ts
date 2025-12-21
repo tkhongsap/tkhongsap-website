@@ -29,5 +29,29 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
+    // Enable minification
+    minify: 'esbuild',
+    // Optimize chunk splitting
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // Separate React core into its own chunk
+          'vendor-react': ['react', 'react-dom'],
+          // Separate UI libraries
+          'vendor-ui': [
+            '@radix-ui/react-dialog',
+            '@radix-ui/react-dropdown-menu',
+            '@radix-ui/react-toast',
+            '@radix-ui/react-tabs',
+          ],
+          // Separate routing and state management
+          'vendor-router': ['wouter', '@tanstack/react-query'],
+        },
+      },
+    },
+    // Target modern browsers for smaller output
+    target: 'es2020',
+    // Disable sourcemaps in production for smaller files
+    sourcemap: false,
   },
 });
