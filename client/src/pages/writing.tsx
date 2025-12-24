@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { publications } from "@/data/publications";
-import { getFeaturedEssay } from "@/data/essays";
+import { getFeaturedEssay, essays } from "@/data/essays";
 import SEO from "@/components/seo";
 import SchemaMarkup from "@/components/schema-markup";
 import { ArrowRight, BookOpen, Linkedin, Newspaper } from "lucide-react";
@@ -95,6 +95,49 @@ export default function Writing() {
                 <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#C45B3E] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
               </article>
             </Link>
+          </div>
+        </section>
+      )}
+
+      {/* More Essays Section */}
+      {essays.filter(essay => !essay.featured).length > 0 && (
+        <section className="pb-16 md:pb-20">
+          <div className="container max-w-4xl mx-auto px-4 sm:px-6">
+            <div className="text-center mb-8">
+              <h2 className="font-serif text-2xl md:text-3xl font-semibold text-[#1A1A1A] mb-4">
+                More Essays
+              </h2>
+              <p className="text-[#5C5C5C] max-w-xl mx-auto">
+                Previous writings on technology, AI, and the future of work.
+              </p>
+            </div>
+            <div className="space-y-6">
+              {essays.filter(essay => !essay.featured).map((essay) => (
+                <Link key={essay.id} href={`/essay/${essay.id}`}>
+                  <article className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer border border-[#E8E4DF]">
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#C45B3E]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="relative p-6 md:p-8">
+                      <div className="flex items-center gap-3 text-sm text-[#5C5C5C] mb-3">
+                        <span>{essay.date}</span>
+                        <span className="w-1 h-1 rounded-full bg-[#5C5C5C]" />
+                        <span>{essay.readingTime}</span>
+                      </div>
+                      <h3 className="font-serif text-xl md:text-2xl font-semibold text-[#1A1A1A] mb-3 group-hover:text-[#C45B3E] transition-colors duration-300 leading-tight">
+                        {essay.title}
+                      </h3>
+                      <p className="text-[#5C5C5C] leading-relaxed mb-4 line-clamp-2">
+                        {essay.excerpt}
+                      </p>
+                      <span className="inline-flex items-center gap-2 text-[#C45B3E] font-medium group-hover:gap-3 transition-all duration-300">
+                        Read essay
+                        <ArrowRight className="h-4 w-4" />
+                      </span>
+                    </div>
+                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#C45B3E] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                  </article>
+                </Link>
+              ))}
+            </div>
           </div>
         </section>
       )}
