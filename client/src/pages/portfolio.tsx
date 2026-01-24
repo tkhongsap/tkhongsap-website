@@ -8,7 +8,7 @@ import PersonaCard from "@/components/persona-card";
 import ServicesSection from "@/components/services-section";
 import { TrendingUp, Activity, Network, BarChart3, Truck, Brain, LineChart } from "lucide-react";
 
-type ProjectCategory = "all" | "ai" | "data" | "finance" | "creative";
+type ProjectCategory = "all" | "apps" | "tools" | "experiments";
 
 export default function Portfolio() {
   const [activeFilter, setActiveFilter] = useState<ProjectCategory>("all");
@@ -23,9 +23,9 @@ export default function Portfolio() {
       : projects.filter((project) => project.category === activeFilter);
 
   const pageSchemaData = {
-    name: "Ta Khongsap - After Hours",
+    name: "Ta Khongsap - Built After Hours",
     description:
-      "Passion projects built on my own time. I prototype the systems I want in real life: agents that review code, optimizers that route trucks, tools that evaluate AI outputs.",
+      "Full-stack applications and AI experiments. Some stay as prototypes. Some become products.",
     serviceType: [
       "AI & Automation",
       "Analytics & Optimization",
@@ -35,11 +35,10 @@ export default function Portfolio() {
   };
 
   const filters: { id: ProjectCategory; label: string }[] = [
-    { id: "all", label: "All" },
-    { id: "ai", label: "AI Solutions" },
-    { id: "data", label: "Data Analysis" },
-    { id: "finance", label: "Finance" },
-    { id: "creative", label: "Creative" },
+    { id: "all", label: "Everything" },
+    { id: "apps", label: "Applications" },
+    { id: "tools", label: "Tools & Utilities" },
+    { id: "experiments", label: "Experiments" },
   ];
 
   const mathToBusinessData = [
@@ -103,11 +102,11 @@ export default function Portfolio() {
   return (
     <div className="min-h-screen gradient-mesh-warm grain-overlay relative overflow-hidden">
       <SEO
-        title="After Hours | Ta Khongsap"
-        description="Passion projects built on my own time. Prototyping AI agents, routing optimizers, and evaluation tools—experiments that grow into production systems."
+        title="Built After Hours | Ta Khongsap"
+        description="Full-stack applications and AI experiments. Some stay as prototypes. Some become products."
         canonicalUrl="/portfolio"
         type="website"
-        keywords="AI agents, routing optimization, RAG systems, code review automation, data pipelines, machine learning, enterprise AI, software development"
+        keywords="AI agents, web applications, React, TypeScript, full-stack development, machine learning, enterprise AI, software development"
       />
       <SchemaMarkup type="professionalService" data={pageSchemaData} />
 
@@ -123,10 +122,10 @@ export default function Portfolio() {
             {/* Main headline - takes up most space */}
             <div className="lg:col-span-8">
               <span className="inline-block text-[#C45B3E] font-sans text-sm font-medium tracking-widest uppercase mb-6 animate-fade-in-up">
-                Passion Projects, Real-World Thinking
+                The Workshop
               </span>
               <h1 className="maximalist-headline decorative-line animate-fade-in-up delay-100">
-                After
+                Built After
                 <br />
                 <span className="italic text-[#C45B3E]">Hours</span>
               </h1>
@@ -135,9 +134,8 @@ export default function Portfolio() {
             {/* Subtext - offset to the right */}
             <div className="lg:col-span-4 lg:pb-4">
               <p className="maximalist-subhead animate-fade-in-up delay-300">
-                What I build on my own time: agents that review code,
-                optimizers that route trucks, tools that evaluate AI outputs.
-                Some stay as demos. Some grow into production systems.
+                Full-stack applications and AI experiments.
+                Some stay as prototypes. Some become products.
               </p>
             </div>
           </div>
@@ -211,7 +209,7 @@ export default function Portfolio() {
               >
                 <ProjectCard
                   project={project}
-                  variant="default"
+                  variant="visual"
                 />
               </div>
             ))}
