@@ -9,9 +9,10 @@ export interface Project {
   id: string;
   title: string;
   description: string;
+  shortDescription?: string;
   image?: string | any; // Allow both string paths and imported image assets
   technologies: string[];
-  category: "ai" | "data" | "finance" | "creative";
+  category: "apps" | "tools" | "experiments";
   githubUrl?: string;
   caseStudyUrl?: string;
   caseStudyLabel?: string;
@@ -21,36 +22,51 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+  // New projects first
   {
-    id: "fine-tuning-vision",
-    title: "Fine-Tuning Vision Models",
+    id: "talentmatch-ai",
+    title: "TalentMatch AI",
     description:
-      "Fine-tuning vision models to improve performance on specific tasks. The project uses vision fine-tuning to create a model that can determine if a bottle is eligible for deposit refund.",
-    technologies: ["Python", "FastAPI", "Computer Vision"],
-    category: "ai",
-    githubUrl: "https://github.com/tkhongsap/fine-tune-vision",
-    image: "https://i.imgur.com/LpXkAU5.png",
-    impactBadge: "95% accuracy",
-    technicalDetails: {
-      approach:
-        "Transfer learning approach using pre-trained vision models, fine-tuned on custom dataset of bottle images with various conditions.",
-      architecture:
-        "FastAPI backend serving the model, with image preprocessing pipeline and confidence scoring.",
-      metrics: [
-        "95% classification accuracy on test set",
-        "Sub-100ms inference time",
-        "Handles varying lighting conditions",
-      ],
-      techStack: ["PyTorch", "FastAPI", "OpenCV", "Docker"],
-    },
+      "AI-powered recruitment platform that automates candidate screening. Analyzes resumes and matches candidates to job requirements using intelligent algorithms.",
+    shortDescription:
+      "AI recruitment platform for automated candidate screening and matching.",
+    technologies: ["React", "TypeScript", "AI/ML", "Node.js"],
+    category: "apps",
+    demoUrl: "https://talentum.tkhongsap.io",
+    impactBadge: "Live App",
   },
+  {
+    id: "doc-extract",
+    title: "Doc Extract",
+    description:
+      "AI-powered document extraction tool that pulls text and structured data from PDFs, images, and other documents. Streamlines data entry and document processing workflows.",
+    shortDescription: "Extract text and data from documents using AI.",
+    technologies: ["React", "TypeScript", "OCR", "AI"],
+    category: "apps",
+    demoUrl: "https://doc-extract.tkhongsap.io",
+    impactBadge: "Live App",
+  },
+  {
+    id: "airmood",
+    title: "AirMood",
+    description:
+      "Weather and mood application that combines atmospheric data with wellness insights. Track how weather affects your mood and get personalized recommendations.",
+    shortDescription: "Weather meets wellness - track mood with atmospheric data.",
+    technologies: ["React", "TypeScript", "Weather API"],
+    category: "apps",
+    demoUrl: "https://airmood.tkhongsap.io",
+    impactBadge: "Live App",
+  },
+  // Existing projects with updated categories
   {
     id: "img-story-hub",
     title: "ImgStory Hub",
     description:
       "A TypeScript app that turns your visuals & videos into compelling stories using AI vision models. Bridges the gap between seeing and storytelling—your silent media suddenly has context and voice.",
+    shortDescription:
+      "Turn images and videos into compelling AI-generated stories.",
     technologies: ["TypeScript", "AI Vision Models", "React", "Next.js"],
-    category: "ai",
+    category: "apps",
     demoUrl: "https://imgstory.tkhongsap.io",
     githubUrl: "https://github.com/tkhongsap/img-story-hub",
     image: "https://i.imgur.com/5OrPoka.png",
@@ -69,12 +85,39 @@ export const projects: Project[] = [
     },
   },
   {
+    id: "fine-tuning-vision",
+    title: "Fine-Tuning Vision Models",
+    description:
+      "Fine-tuning vision models to improve performance on specific tasks. The project uses vision fine-tuning to create a model that can determine if a bottle is eligible for deposit refund.",
+    shortDescription:
+      "Fine-tuned vision model for bottle deposit classification.",
+    technologies: ["Python", "FastAPI", "Computer Vision"],
+    category: "experiments",
+    githubUrl: "https://github.com/tkhongsap/fine-tune-vision",
+    image: "https://i.imgur.com/LpXkAU5.png",
+    impactBadge: "95% accuracy",
+    technicalDetails: {
+      approach:
+        "Transfer learning approach using pre-trained vision models, fine-tuned on custom dataset of bottle images with various conditions.",
+      architecture:
+        "FastAPI backend serving the model, with image preprocessing pipeline and confidence scoring.",
+      metrics: [
+        "95% classification accuracy on test set",
+        "Sub-100ms inference time",
+        "Handles varying lighting conditions",
+      ],
+      techStack: ["PyTorch", "FastAPI", "OpenCV", "Docker"],
+    },
+  },
+  {
     id: "ai-dev-workflow",
     title: "Self-Correcting Coder",
     description:
       "A multi-agent workflow where one AI writes code and another tries to break it before a human sees it. Automated code review, test generation, and iterative improvement.",
+    shortDescription:
+      "Multi-agent workflow for automated code review and testing.",
     technologies: ["Python", "CrewAI", "LangChain", "OpenAI"],
-    category: "ai",
+    category: "tools",
     githubUrl: "https://github.com/tkhongsap/ai-dev-tasks",
     impactBadge: "Multi-agent",
     technicalDetails: {
@@ -95,8 +138,10 @@ export const projects: Project[] = [
     title: "RAG Document Q&A",
     description:
       "Production-ready RAG system for document question-answering. Combines semantic search with LLM generation to provide accurate, cited answers from large document collections.",
+    shortDescription:
+      "Production-ready RAG system for document question-answering.",
     technologies: ["Python", "LlamaIndex", "OpenAI", "Pinecone"],
-    category: "ai",
+    category: "tools",
     githubUrl: "https://github.com/tkhongsap/implementing-rag",
     impactBadge: "Enterprise RAG",
     technicalDetails: {
@@ -117,8 +162,10 @@ export const projects: Project[] = [
     title: "Master Prompt Library",
     description:
       "Curated collection of production-tested prompts for various AI tasks. Includes templates for code generation, analysis, writing, and specialized domain tasks.",
+    shortDescription:
+      "Curated collection of production-tested prompts for AI tasks.",
     technologies: ["Markdown", "YAML", "Prompt Engineering"],
-    category: "ai",
+    category: "experiments",
     githubUrl: "https://github.com/tkhongsap/master-prompt-library",
     impactBadge: "Open source",
     technicalDetails: {

@@ -574,4 +574,68 @@
     height: 100%;
     background: linear-gradient(135deg, transparent 49.5%, var(--color-border) 49.5%, var(--color-border) 50.5%, transparent 50.5%);
   }
+
+  /* ============================================
+     VISUAL PROJECT CARD STYLES
+     Larger images with hover overlay
+     ============================================ */
+
+  /* Visual project card - clickable with larger image */
+  .project-card-visual {
+    position: relative;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .project-card-visual:hover {
+    text-decoration: none;
+  }
+
+  /* Hover overlay with gradient */
+  .project-card-visual-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(26, 26, 26, 0.85) 0%, rgba(26, 26, 26, 0.4) 40%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.5rem;
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  .project-card-visual:hover .project-card-visual-overlay {
+    opacity: 1;
+  }
+
+  /* CTA text animation */
+  .project-card-visual-overlay .cta-text {
+    color: white;
+    font-family: 'Sora', sans-serif;
+    font-weight: 500;
+    font-size: 0.875rem;
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transform: translateY(10px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .project-card-visual:hover .project-card-visual-overlay .cta-text {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  /* Ensure image zoom works on visual cards */
+  .project-card-visual img {
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .project-card-visual:hover img {
+    transform: scale(1.05);
+  }
 }

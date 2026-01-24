@@ -1,4 +1,4 @@
-import { ArrowRight, Github, ExternalLink, ChevronDown } from "lucide-react";
+import { ArrowRight, Github, ExternalLink } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Project } from "@/data/projects";
 import OptimizedImage from "./optimized-image";
@@ -12,23 +12,113 @@ import {
 interface ProjectCardProps {
   project: Project;
   className?: string;
-  variant?: "default" | "featured";
+  variant?: "default" | "featured" | "visual";
 }
 
-export default function ProjectCard({ 
-  project, 
+export default function ProjectCard({
+  project,
   className,
-  variant = "default" 
+  variant = "default"
 }: ProjectCardProps) {
   const categoryLabels: Record<string, string> = {
-    ai: "AI & Algorithms",
-    data: "Data Visualization",
-    finance: "Finance Tools",
-    creative: "Creative Coding",
+    apps: "Applications",
+    tools: "Tools & Utilities",
+    experiments: "Experiments",
   };
 
   const isFeatured = variant === "featured";
+  const isVisual = variant === "visual";
 
+  // For visual variant, get the primary URL (demo first, then github)
+  const primaryUrl = project.demoUrl || project.githubUrl;
+
+  // Visual variant card - entire card is clickable
+  if (isVisual) {
+    return (
+      <a
+        href={primaryUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={cn(
+          "group project-card-visual maximalist-card overflow-hidden flex flex-col h-full block",
+          className
+        )}
+        aria-label={`View ${project.title}`}
+      >
+        {/* Project Image with Hover Overlay */}
+        <div className="relative overflow-hidden aspect-[4/3]">
+          {project.image ? (
+            <OptimizedImage
+              src={project.image}
+              alt={`Project thumbnail for ${project.title}`}
+              height={300}
+              width={400}
+              className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
+              loading="lazy"
+              objectFit="cover"
+            />
+          ) : (
+            <div className="w-full h-full bg-gradient-to-br from-[#F5F0EB] to-[#E8E4DF] flex items-center justify-center">
+              <span className="text-[#5C5C5C] text-4xl font-display">
+                {project.title.charAt(0)}
+              </span>
+            </div>
+          )}
+
+          {/* Category badge overlay */}
+          <div className="absolute top-4 left-4 z-10">
+            <span className="inline-block px-3 py-1.5 bg-white/90 backdrop-blur-sm text-[#1A1A1A] text-xs font-medium tracking-wider uppercase rounded-sm shadow-sm">
+              {categoryLabels[project.category] || "Project"}
+            </span>
+          </div>
+
+          {/* Impact badge overlay */}
+          {project.impactBadge && (
+            <div className="absolute bottom-4 right-4 z-10">
+              <span className="inline-block px-3 py-1.5 bg-[#C45B3E] text-white text-xs font-semibold tracking-wide rounded-sm shadow-md">
+                {project.impactBadge}
+              </span>
+            </div>
+          )}
+
+          {/* Hover overlay with CTA */}
+          <div className="project-card-visual-overlay">
+            <span className="cta-text">
+              View Project
+              <ArrowRight className="h-4 w-4" />
+            </span>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="flex flex-col flex-grow p-6">
+          {/* Title */}
+          <h3 className="font-display text-xl md:text-2xl font-medium leading-tight mb-3 group-hover:text-[#C45B3E] transition-colors duration-300">
+            {project.title}
+          </h3>
+
+          {/* Short Description */}
+          <p className="text-[#5C5C5C] text-sm md:text-base leading-relaxed mb-4 line-clamp-2">
+            {project.shortDescription || project.description}
+          </p>
+
+          {/* Technologies - limited to 3 */}
+          <div className="flex flex-wrap gap-2 mt-auto">
+            {project.technologies.slice(0, 3).map((tech, index) => (
+              <span
+                key={index}
+                className="px-2 py-1 bg-[#F5F0EB] text-[#5C5C5C] text-xs font-medium tracking-wide border border-[#E8E4DF]"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
+      </a>
+    );
+  }
+
+  // Default and Featured variant
   return (
     <article
       className={cn(
@@ -54,7 +144,7 @@ export default function ProjectCard({
           />
           {/* Overlay gradient on hover */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          
+
           {/* Category badge overlay */}
           <div className="absolute top-4 left-4">
             <span className="inline-block px-3 py-1.5 bg-white/90 backdrop-blur-sm text-[#1A1A1A] text-xs font-medium tracking-wider uppercase rounded-sm shadow-sm">
@@ -81,8 +171,8 @@ export default function ProjectCard({
         {/* Title */}
         <h3 className={cn(
           "font-display leading-tight mb-4 group-hover:text-[#C45B3E] transition-colors duration-300",
-          isFeatured 
-            ? "text-2xl md:text-3xl font-medium" 
+          isFeatured
+            ? "text-2xl md:text-3xl font-medium"
             : "text-xl md:text-2xl font-medium"
         )}>
           {project.title}
