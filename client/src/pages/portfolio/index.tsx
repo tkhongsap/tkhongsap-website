@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "wouter";
 import { Github, ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { projects, type Project } from "@/data/projects";
@@ -104,6 +105,7 @@ function ProjectCard({ project }: { project: Project }) {
             target="_blank"
             rel="noopener noreferrer"
             className="text-[#C45B3E] hover:underline flex items-center"
+            data-track="demo-link"
           >
             <ExternalLink className="h-3.5 w-3.5 mr-1" /> Demo
           </a>
@@ -114,9 +116,18 @@ function ProjectCard({ project }: { project: Project }) {
             target="_blank"
             rel="noopener noreferrer"
             className="text-[#5C5C5C] hover:text-[#C45B3E] flex items-center"
+            data-track="social-link"
           >
             <Github className="h-3.5 w-3.5 mr-1" /> GitHub
           </a>
+        )}
+        {project.caseStudyUrl && (
+          <Link
+            href={project.caseStudyUrl}
+            className="text-[#5C5C5C] hover:text-[#C45B3E] flex items-center"
+          >
+            <ExternalLink className="h-3.5 w-3.5 mr-1" /> Case Study
+          </Link>
         )}
       </div>
     </div>
