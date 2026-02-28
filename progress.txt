@@ -1,16 +1,32 @@
-# Ralph Progress Log — Website Phase 1
-Started: 2026-02-28
----
+## 2026-02-28 21:52 UTC+7 - US-001 through US-009 (All Stories)
+- Implemented all 9 user stories in Phase 1 Foundation
+- All typechecks pass
 
-## Codebase Patterns
-- Routing: uses wouter (not react-router)
-- Pages: client/src/pages/
-- Components: client/src/components/
-- Data: client/src/data/ (projects.ts, essays.ts)
-- Styling: Tailwind CSS with editorial design system (bg-[#FAF9F6], text colors)
-- UI components: Shadcn in client/src/components/ui/
-- SEO: custom SEO component + SchemaMarkup component per page
-- Icons: lucide-react
-- Build: Vite
-- Backend: Express (server/ directory) — don't touch for Phase 1
+### Changes by story:
+- US-001: navbar.tsx — navLinks updated to Home, Projects, Writing, About
+- US-002: footer.tsx — tagline "Building AI systems that work while I sleep", added X social link
+- US-003: home.tsx — hero rewritten with "Building AI Systems That Actually Ship"
+- US-004: home.tsx — featured projects section (4 cards from projects.ts)
+- US-005: home.tsx — latest writing section (3 essays from essays.ts)
+- US-006: projects.ts — added AI Agent System and Ava HQ entries
+- US-007: portfolio/index.tsx — full rewrite using projects.ts data, category filters, removed dummy data
+- US-008: about.tsx — full rewrite with builder story, personal intro, what I build, beliefs, connect links
+- US-009: seo.tsx + schema-markup.tsx — updated defaults, titles, descriptions, keywords, Person schema
+
+### Files changed:
+- client/src/components/navbar.tsx
+- client/src/components/footer.tsx
+- client/src/components/seo.tsx
+- client/src/components/schema-markup.tsx
+- client/src/pages/home.tsx
+- client/src/pages/about.tsx
+- client/src/pages/portfolio/index.tsx
+- client/src/data/projects.ts
+- prd.json
+
+### Learnings:
+- Portfolio page had completely separate hardcoded dummy projects — needed full rewrite, not just edits
+- essays.ts exports both `essays` array and `getFeaturedEssay` function
+- Site uses editorial-container, editorial-headline, editorial-prose CSS classes for consistent typography
+- Twitter icon from lucide-react works for X branding
 ---
