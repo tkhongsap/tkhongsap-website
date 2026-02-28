@@ -91,6 +91,14 @@ export default function Footer() {
               >
                 About
               </Link>
+              <a
+                href="/api/rss"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-[#C45B3E] transition-colors"
+              >
+                RSS
+              </a>
             </nav>
           </div>
         </div>
