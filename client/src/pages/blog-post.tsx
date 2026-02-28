@@ -7,6 +7,7 @@ import { getPost, categoryLabels, type BlogPost } from "@/lib/posts";
 import SEO from "@/components/seo";
 import SchemaMarkup from "@/components/schema-markup";
 import NotFound from "@/pages/not-found";
+import NewsletterForm from "@/components/newsletter-form";
 
 export default function BlogPostPage() {
   const params = useParams<{ slug: string }>();
@@ -143,12 +144,29 @@ export default function BlogPostPage() {
         </div>
       )}
 
+      {/* Newsletter Inline CTA */}
+      <section className="pb-12">
+        <div className="container max-w-3xl mx-auto px-4 sm:px-6">
+          <div className="bg-[#FAF9F6] dark:bg-zinc-900 rounded-xl border border-[#E8E4DF] dark:border-zinc-800 p-8 text-center">
+            <h3 className="font-serif text-xl font-semibold text-[#1A1A1A] dark:text-zinc-100 mb-2">
+              Enjoyed this post?
+            </h3>
+            <p className="text-[#5C5C5C] dark:text-zinc-400 mb-4 text-sm">
+              Weekly insights on building with AI agents — what works, what breaks, and what I'm shipping next.
+            </p>
+            <div className="max-w-sm mx-auto">
+              <NewsletterForm />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Footer CTA */}
       <section className="pb-20 md:pb-32">
         <div className="container max-w-3xl mx-auto px-4 sm:px-6">
-          <div className="h-px bg-gradient-to-r from-transparent via-[#E8E4DF] to-transparent mb-12" />
+          <div className="h-px bg-gradient-to-r from-transparent via-[#E8E4DF] dark:via-zinc-800 to-transparent mb-12" />
           <div className="text-center">
-            <p className="text-[#5C5C5C] text-lg mb-6">
+            <p className="text-[#5C5C5C] dark:text-zinc-400 text-lg mb-6">
               Thanks for reading. Want to explore more?
             </p>
             <div className="flex flex-wrap justify-center gap-4">
@@ -158,7 +176,7 @@ export default function BlogPostPage() {
                 </a>
               </Link>
               <Link href="/about">
-                <a className="inline-flex items-center px-6 py-3 text-[#1A1A1A] font-medium border border-[#E8E4DF] rounded-lg hover:border-[#C45B3E] hover:text-[#C45B3E] transition-colors">
+                <a className="inline-flex items-center px-6 py-3 text-[#1A1A1A] dark:text-zinc-100 font-medium border border-[#E8E4DF] dark:border-zinc-800 rounded-lg hover:border-[#C45B3E] hover:text-[#C45B3E] transition-colors">
                   About me
                 </a>
               </Link>

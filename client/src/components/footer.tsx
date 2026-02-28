@@ -15,7 +15,7 @@ export default function Footer() {
               <span className="text-white">Khongsap</span>
             </h2>
             <p className="text-gray-400 text-sm mt-1">
-              Building AI systems that work while I sleep
+              Weekly insights on building with AI agents — what works, what breaks, and what I'm shipping next.
             </p>
           </div>
 

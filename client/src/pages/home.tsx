@@ -1,7 +1,8 @@
 import { Link } from "wouter";
 import { useState, useEffect } from "react";
 import { ArrowRight, Clock, Calendar, ExternalLink, Github } from "lucide-react";
-import { getFeaturedEssay, essays } from "@/data/essays";
+import { essays } from "@/data/essays";
+import NewsletterForm from "@/components/newsletter-form";
 import { projects } from "@/data/projects";
 import { getPosts, categoryLabels, type BlogPost } from "@/lib/posts";
 import SEO from "@/components/seo";
@@ -165,7 +166,7 @@ export default function Home() {
       </section>
 
       {/* Latest Content Section */}
-      <section className="pb-20 md:pb-32">
+      <section className="pb-16 md:pb-20">
         <div className="container max-w-5xl mx-auto px-4 sm:px-6">
           <div className="divider-subtle" style={{ margin: "0 0 2rem 0" }} />
           <div className="flex items-center justify-between mb-8">
@@ -234,6 +235,23 @@ export default function Home() {
                 </Link>
               ))
             )}
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter CTA */}
+      <section className="pb-20 md:pb-32">
+        <div className="container max-w-3xl mx-auto px-4 sm:px-6">
+          <div className="bg-white dark:bg-zinc-900 rounded-xl border border-[#E8E4DF] dark:border-zinc-800 p-8 md:p-12 text-center">
+            <h2 className="font-serif text-2xl md:text-3xl font-semibold text-[#1A1A1A] dark:text-zinc-100 mb-3">
+              Stay in the loop
+            </h2>
+            <p className="text-[#5C5C5C] dark:text-zinc-400 mb-6 max-w-xl mx-auto">
+              Weekly insights on building with AI agents — what works, what breaks, and what I'm shipping next.
+            </p>
+            <div className="max-w-md mx-auto">
+              <NewsletterForm />
+            </div>
           </div>
         </div>
       </section>
