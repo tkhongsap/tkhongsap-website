@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Linkedin, Github, Mail } from "lucide-react";
+import { Linkedin, Github, Mail, Twitter } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -15,14 +15,23 @@ export default function Footer() {
               <span className="text-white">Khongsap</span>
             </h2>
             <p className="text-gray-400 text-sm mt-1">
-              Essays on AI and knowledge work
+              Building AI systems that work while I sleep
             </p>
           </div>
 
           {/* Social Links */}
           <div className="flex items-center gap-5">
             <a
-              href="https://linkedin.com/in/totrakool-k-b504a912"
+              href="https://x.com/tkhongsap"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-[#C45B3E] transition-colors"
+              aria-label="X (Twitter)"
+            >
+              <Twitter size={20} />
+            </a>
+            <a
+              href="https://linkedin.com/in/totrakool-khongsap"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-[#C45B3E] transition-colors"
@@ -65,10 +74,10 @@ export default function Footer() {
                 Home
               </Link>
               <Link
-                href="/about"
+                href="/portfolio"
                 className="text-gray-400 hover:text-[#C45B3E] transition-colors"
               >
-                About
+                Projects
               </Link>
               <Link
                 href="/writing"
@@ -77,10 +86,10 @@ export default function Footer() {
                 Writing
               </Link>
               <Link
-                href="/portfolio"
+                href="/about"
                 className="text-gray-400 hover:text-[#C45B3E] transition-colors"
               >
-                Projects
+                About
               </Link>
             </nav>
           </div>
