@@ -1,127 +1,173 @@
 import { Link } from "wouter";
-import { ArrowRight, Clock, Calendar } from "lucide-react";
-import { getFeaturedEssay } from "@/data/essays";
+import { ArrowRight, Clock, Calendar, ExternalLink, Github } from "lucide-react";
+import { getFeaturedEssay, essays } from "@/data/essays";
+import { projects } from "@/data/projects";
 import SEO from "@/components/seo";
 import SchemaMarkup from "@/components/schema-markup";
 
 export default function Home() {
-  const featuredEssay = getFeaturedEssay();
+  const featuredProjects = projects.filter(p =>
+    ["talentmatch-ai", "doc-extract", "airmood", "ai-agent-system"].includes(p.id)
+  ).slice(0, 4);
 
-  // SEO data for Home page
+  const latestEssays = essays.slice(0, 3);
+
   const homeSchemaData = {
     url: "https://tkhongsap.io/",
-    name: "Ta Khongsap | Math • Data Science • Code • AI • Supply Chain",
+    name: "Ta Khongsap | Building AI Systems That Ship",
     description:
-      "Essays and insights on AI, software craftsmanship, and the evolving nature of knowledge work.",
+      "Builder based in Bangkok. AI agent systems, products, and building in public.",
   };
 
   return (
     <div className="bg-[#FAF9F6] min-h-screen">
       <SEO
-        title="Ta Khongsap | Math • Data Science • Code • AI • Supply Chain"
-        description="Essays and insights on AI, software craftsmanship, and the evolving nature of knowledge work. Domain expertise in Mathematics, Data Science, and Supply Chain."
+        title="Ta Khongsap | Building AI Systems That Ship"
+        description="Builder based in Bangkok. Running AI agent systems that ship code, draft content, and manage workflows autonomously. Products, essays, and building in public."
         canonicalUrl="/"
-        keywords="AI, software development, data science, machine learning, tech thought leadership, essays, supply chain, mathematics"
+        keywords="AI agents, OpenClaw, building in public, solopreneur, AI systems, Bangkok"
         pageUrl="/"
       />
       <SchemaMarkup type="website" data={homeSchemaData} />
 
-      {/* Hero Section - Minimalist intro */}
+      {/* Hero Section */}
       <section className="pt-32 pb-12 md:pt-40 md:pb-16">
         <div className="editorial-container text-center">
           <h1 className="editorial-headline mb-6">
-            Thinking Out Loud
+            Building AI Systems That Actually Ship
           </h1>
-          <p className="editorial-prose max-w-xl mx-auto">
-            Essays on AI, technology, and the questions that shape how we build and think.
+          <p className="editorial-prose max-w-2xl mx-auto mb-8">
+            I build AI agents, ship products, and share the process publicly.
+            4 agents, 20+ skills, running 24/7 on a single VPS.
           </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link href="/portfolio">
+              <a className="inline-flex items-center px-6 py-3 text-white font-medium bg-[#C45B3E] rounded-lg hover:bg-[#A84832] transition-colors">
+                <span>View Projects</span>
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </a>
+            </Link>
+            <Link href="/about">
+              <a className="inline-flex items-center px-6 py-3 text-[#1A1A1A] font-medium border border-[#E8E4DF] rounded-lg hover:border-[#C45B3E] hover:text-[#C45B3E] transition-colors">
+                <span>About me</span>
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </a>
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* Featured Essay Section */}
-      {featuredEssay && (
-        <section className="pb-16 md:pb-24">
-          <div className="container max-w-4xl mx-auto px-4 sm:px-6">
-            {/* Section Label */}
-            <div className="mb-8">
-              <span className="inline-block px-3 py-1 text-xs font-medium uppercase tracking-widest text-[#C45B3E] bg-[#C45B3E]/10 rounded-full">
-                Latest Essay
-              </span>
-            </div>
-
-            {/* Featured Essay Card */}
-            <article className="group">
-              <Link href={`/essay/${featuredEssay.id}`}>
-                <a className="block">
-                  <div className="bg-white rounded-2xl p-8 md:p-12 shadow-sm hover:shadow-md transition-shadow duration-300 border border-[#E8E4DF]">
-                    {/* Meta info */}
-                    <div className="flex flex-wrap items-center gap-4 text-sm text-[#5C5C5C] mb-6">
-                      <span className="flex items-center gap-1.5">
-                        <Calendar className="h-4 w-4" />
-                        {featuredEssay.date}
-                      </span>
-                      <span className="flex items-center gap-1.5">
-                        <Clock className="h-4 w-4" />
-                        {featuredEssay.readingTime}
-                      </span>
-                    </div>
-
-                    {/* Title */}
-                    <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl font-semibold text-[#1A1A1A] leading-tight mb-4 group-hover:text-[#C45B3E] transition-colors duration-300">
-                      {featuredEssay.title}
-                    </h2>
-
-                    {/* Subtitle */}
-                    {featuredEssay.subtitle && (
-                      <p className="text-lg text-[#5C5C5C] mb-6 italic">
-                        {featuredEssay.subtitle}
-                      </p>
-                    )}
-
-                    {/* Excerpt */}
-                    <p className="text-[#5C5C5C] text-lg leading-relaxed mb-8 max-w-3xl">
-                      {featuredEssay.excerpt}
-                    </p>
-
-                    {/* Read more link */}
-                    <div className="flex items-center text-[#C45B3E] font-medium">
-                      <span>Read the full essay</span>
-                      <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-2" />
-                    </div>
-
-                    {/* Accent line */}
-                    <div className="mt-8 h-1 bg-gradient-to-r from-[#C45B3E] to-[#C45B3E]/30 rounded-full w-24 group-hover:w-32 transition-all duration-300" />
-                  </div>
-                </a>
-              </Link>
-            </article>
+      {/* Featured Projects Section */}
+      <section className="pb-16 md:pb-24">
+        <div className="container max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="font-serif text-2xl md:text-3xl font-semibold text-[#1A1A1A]">
+              Featured Projects
+            </h2>
+            <Link href="/portfolio">
+              <a className="text-[#C45B3E] font-medium text-sm flex items-center hover:underline">
+                View all <ArrowRight className="ml-1 h-4 w-4" />
+              </a>
+            </Link>
           </div>
-        </section>
-      )}
 
-      {/* About Teaser Section */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {featuredProjects.map((project) => (
+              <div
+                key={project.id}
+                className="bg-white rounded-xl p-6 border border-[#E8E4DF] hover:shadow-md transition-shadow"
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <h3 className="font-serif text-xl font-semibold text-[#1A1A1A]">
+                    {project.title}
+                  </h3>
+                  {project.impactBadge && (
+                    <span className="text-xs font-medium px-2 py-1 bg-[#C45B3E]/10 text-[#C45B3E] rounded-full whitespace-nowrap ml-2">
+                      {project.impactBadge}
+                    </span>
+                  )}
+                </div>
+                <p className="text-[#5C5C5C] text-sm mb-4 leading-relaxed">
+                  {project.shortDescription || project.description}
+                </p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.technologies.slice(0, 4).map((tech) => (
+                    <span
+                      key={tech}
+                      className="text-xs px-2 py-1 bg-[#FAF9F6] text-[#5C5C5C] rounded border border-[#E8E4DF]"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+                <div className="flex items-center gap-3 text-sm">
+                  {project.demoUrl && (
+                    <a
+                      href={project.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#C45B3E] hover:underline flex items-center"
+                    >
+                      <ExternalLink className="h-3.5 w-3.5 mr-1" /> Demo
+                    </a>
+                  )}
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#5C5C5C] hover:text-[#C45B3E] flex items-center"
+                    >
+                      <Github className="h-3.5 w-3.5 mr-1" /> GitHub
+                    </a>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Latest Content Section */}
       <section className="pb-20 md:pb-32">
-        <div className="container max-w-4xl mx-auto px-4 sm:px-6">
-          <div className="divider-subtle" style={{ margin: "0 0 3rem 0" }} />
+        <div className="container max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="divider-subtle" style={{ margin: "0 0 2rem 0" }} />
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="font-serif text-2xl md:text-3xl font-semibold text-[#1A1A1A]">
+              Latest Writing
+            </h2>
+            <Link href="/writing">
+              <a className="text-[#C45B3E] font-medium text-sm flex items-center hover:underline">
+                All essays <ArrowRight className="ml-1 h-4 w-4" />
+              </a>
+            </Link>
+          </div>
 
-          <div className="text-center">
-            <p className="text-[#5C5C5C] text-lg mb-6">
-              I write about technology, AI, and the evolving landscape of knowledge work.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Link href="/about">
-                <a className="inline-flex items-center px-6 py-3 text-[#1A1A1A] font-medium border border-[#E8E4DF] rounded-lg hover:border-[#C45B3E] hover:text-[#C45B3E] transition-colors">
-                  <span>About me</span>
-                  <ArrowRight className="ml-2 h-4 w-4" />
+          <div className="space-y-6">
+            {latestEssays.map((essay) => (
+              <Link key={essay.id} href={`/essay/${essay.id}`}>
+                <a className="block group">
+                  <article className="bg-white rounded-xl p-6 border border-[#E8E4DF] hover:shadow-md transition-shadow">
+                    <div className="flex flex-wrap items-center gap-3 text-sm text-[#5C5C5C] mb-3">
+                      <span className="flex items-center gap-1">
+                        <Calendar className="h-3.5 w-3.5" />
+                        {essay.date}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <Clock className="h-3.5 w-3.5" />
+                        {essay.readingTime}
+                      </span>
+                    </div>
+                    <h3 className="font-serif text-lg md:text-xl font-semibold text-[#1A1A1A] mb-2 group-hover:text-[#C45B3E] transition-colors">
+                      {essay.title}
+                    </h3>
+                    <p className="text-[#5C5C5C] text-sm leading-relaxed line-clamp-2">
+                      {essay.excerpt}
+                    </p>
+                  </article>
                 </a>
               </Link>
-              <Link href="/writing">
-                <a className="inline-flex items-center px-6 py-3 text-white font-medium bg-[#C45B3E] rounded-lg hover:bg-[#A84832] transition-colors">
-                  <span>All essays</span>
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </a>
-              </Link>
-            </div>
+            ))}
           </div>
         </div>
       </section>
