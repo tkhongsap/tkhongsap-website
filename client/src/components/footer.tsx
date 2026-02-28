@@ -26,6 +26,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-[#C45B3E] transition-colors"
+              data-track="social-link"
               aria-label="X (Twitter)"
             >
               <Twitter size={20} />
@@ -35,6 +36,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-[#C45B3E] transition-colors"
+              data-track="social-link"
               aria-label="LinkedIn"
             >
               <Linkedin size={20} />
@@ -44,6 +46,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-[#C45B3E] transition-colors"
+              data-track="social-link"
               aria-label="GitHub"
             >
               <Github size={20} />
@@ -51,6 +54,7 @@ export default function Footer() {
             <a
               href="mailto:ta.khongsap@gmail.com"
               className="text-gray-400 hover:text-[#C45B3E] transition-colors"
+              data-track="social-link"
               aria-label="Email"
             >
               <Mail size={20} />
