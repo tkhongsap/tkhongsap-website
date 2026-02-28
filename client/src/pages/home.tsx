@@ -1,7 +1,9 @@
 import { Link } from "wouter";
+import { useState, useEffect } from "react";
 import { ArrowRight, Clock, Calendar, ExternalLink, Github } from "lucide-react";
 import { getFeaturedEssay, essays } from "@/data/essays";
 import { projects } from "@/data/projects";
+import { getPosts, categoryLabels, type BlogPost } from "@/lib/posts";
 import SEO from "@/components/seo";
 import SchemaMarkup from "@/components/schema-markup";
 
@@ -11,6 +13,11 @@ export default function Home() {
   ).slice(0, 4);
 
   const latestEssays = essays.slice(0, 3);
+  const [latestPosts, setLatestPosts] = useState<BlogPost[]>([]);
+
+  useEffect(() => {
+    getPosts().then(posts => setLatestPosts(posts.slice(0, 3)));
+  }, []);
 
   const homeSchemaData = {
     url: "https://tkhongsap.io/",
@@ -144,30 +151,60 @@ export default function Home() {
           </div>
 
           <div className="space-y-6">
-            {latestEssays.map((essay) => (
-              <Link key={essay.id} href={`/essay/${essay.id}`}>
-                <a className="block group">
-                  <article className="bg-white rounded-xl p-6 border border-[#E8E4DF] hover:shadow-md transition-shadow">
-                    <div className="flex flex-wrap items-center gap-3 text-sm text-[#5C5C5C] mb-3">
-                      <span className="flex items-center gap-1">
-                        <Calendar className="h-3.5 w-3.5" />
-                        {essay.date}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Clock className="h-3.5 w-3.5" />
-                        {essay.readingTime}
-                      </span>
-                    </div>
-                    <h3 className="font-serif text-lg md:text-xl font-semibold text-[#1A1A1A] mb-2 group-hover:text-[#C45B3E] transition-colors">
-                      {essay.title}
-                    </h3>
-                    <p className="text-[#5C5C5C] text-sm leading-relaxed line-clamp-2">
-                      {essay.excerpt}
-                    </p>
-                  </article>
-                </a>
-              </Link>
-            ))}
+            {latestPosts.length > 0 ? (
+              latestPosts.map((post) => (
+                <Link key={post.slug} href={`/blog/${post.slug}`}>
+                  <a className="block group">
+                    <article className="bg-white rounded-xl p-6 border border-[#E8E4DF] hover:shadow-md transition-shadow">
+                      <div className="flex flex-wrap items-center gap-3 text-sm text-[#5C5C5C] mb-3">
+                        <span className="inline-block px-2.5 py-0.5 text-xs font-medium rounded-full bg-[#C45B3E]/10 text-[#C45B3E]">
+                          {categoryLabels[post.category]}
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <Calendar className="h-3.5 w-3.5" />
+                          {new Date(post.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <Clock className="h-3.5 w-3.5" />
+                          {post.readingTime}
+                        </span>
+                      </div>
+                      <h3 className="font-serif text-lg md:text-xl font-semibold text-[#1A1A1A] mb-2 group-hover:text-[#C45B3E] transition-colors">
+                        {post.title}
+                      </h3>
+                      <p className="text-[#5C5C5C] text-sm leading-relaxed line-clamp-2">
+                        {post.excerpt}
+                      </p>
+                    </article>
+                  </a>
+                </Link>
+              ))
+            ) : (
+              latestEssays.map((essay) => (
+                <Link key={essay.id} href={`/essay/${essay.id}`}>
+                  <a className="block group">
+                    <article className="bg-white rounded-xl p-6 border border-[#E8E4DF] hover:shadow-md transition-shadow">
+                      <div className="flex flex-wrap items-center gap-3 text-sm text-[#5C5C5C] mb-3">
+                        <span className="flex items-center gap-1">
+                          <Calendar className="h-3.5 w-3.5" />
+                          {essay.date}
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <Clock className="h-3.5 w-3.5" />
+                          {essay.readingTime}
+                        </span>
+                      </div>
+                      <h3 className="font-serif text-lg md:text-xl font-semibold text-[#1A1A1A] mb-2 group-hover:text-[#C45B3E] transition-colors">
+                        {essay.title}
+                      </h3>
+                      <p className="text-[#5C5C5C] text-sm leading-relaxed line-clamp-2">
+                        {essay.excerpt}
+                      </p>
+                    </article>
+                  </a>
+                </Link>
+              ))
+            )}
           </div>
         </div>
       </section>

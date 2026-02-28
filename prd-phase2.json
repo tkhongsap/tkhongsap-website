@@ -1,0 +1,119 @@
+{
+  "project": "tkhongsap-website",
+  "branchName": "ralph/phase2-content",
+  "description": "Phase 2 — Content pipeline: markdown blog, categories, initial posts, RSS feed",
+  "userStories": [
+    {
+      "id": "US-010",
+      "title": "Create markdown content directory and parser",
+      "description": "Create content/posts/ directory, frontmatter schema, gray-matter + react-markdown setup, utility functions getPosts() and getPost(slug)",
+      "acceptanceCriteria": [
+        "content/posts/ directory exists",
+        "gray-matter and react-markdown with remark-gfm installed",
+        "getPosts() returns sorted array of posts from markdown files",
+        "getPost(slug) returns single post",
+        "Frontmatter schema: title, date, category, tags, excerpt, readingTime, featured",
+        "Categories: ai-agents, building-in-public, industry-takes, tutorials",
+        "Typecheck passes"
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": "This is a Vite/React app — markdown loading needs to work client-side or via import. Consider using import.meta.glob for loading .md files."
+    },
+    {
+      "id": "US-011",
+      "title": "Migrate existing essay to markdown",
+      "description": "Convert The Unraveling of a Promise from essays.ts to content/posts/ markdown file",
+      "acceptanceCriteria": [
+        "content/posts/the-unraveling-of-a-promise.md exists with proper frontmatter",
+        "Essay renders identically",
+        "Existing route /essay/the-unraveling-of-a-promise still works",
+        "Typecheck passes"
+      ],
+      "priority": 2,
+      "passes": true,
+      "notes": "Keep essays.ts working alongside new markdown system during migration"
+    },
+    {
+      "id": "US-012",
+      "title": "Blog listing page with categories",
+      "description": "Update Writing page to show all posts with category filtering",
+      "acceptanceCriteria": [
+        "Writing page shows all posts from markdown",
+        "Category filter tabs: All, AI Agents, Building in Public, Industry Takes, Tutorials",
+        "Post cards: title, date, reading time, category badge, excerpt",
+        "Click opens full post",
+        "Sorted newest first",
+        "Responsive layout",
+        "Typecheck passes"
+      ],
+      "priority": 3,
+      "passes": true,
+      "notes": "File: client/src/pages/writing.tsx — may need significant refactor"
+    },
+    {
+      "id": "US-013",
+      "title": "Blog post detail page",
+      "description": "Create /blog/:slug route that renders markdown post with proper typography",
+      "acceptanceCriteria": [
+        "Route /blog/:slug renders markdown post",
+        "Proper typography: headings, paragraphs, code blocks, lists, links",
+        "Code syntax highlighting",
+        "Reading time and date at top",
+        "Category badge displayed",
+        "Back to Writing link",
+        "SEO metadata from frontmatter",
+        "Typecheck passes"
+      ],
+      "priority": 4,
+      "passes": true,
+      "notes": "New page: client/src/pages/blog.tsx or client/src/pages/blog/[slug].tsx"
+    },
+    {
+      "id": "US-014",
+      "title": "Create initial blog posts from social content",
+      "description": "Write 3 blog posts expanding top social media content",
+      "acceptanceCriteria": [
+        "Post: block-workforce-ai.md — industry-takes, Block/Dorsey layoffs expanded, 800-1500 words",
+        "Post: agents-without-skills.md — ai-agents, 4 agents 20+ skills expanded, 800-1500 words",
+        "Post: lessons-running-ai-agents.md — building-in-public, month of lessons, 800-1500 words",
+        "All have proper frontmatter",
+        "All render correctly on blog detail page",
+        "Typecheck passes"
+      ],
+      "priority": 5,
+      "passes": true,
+      "notes": "Content voice: Post 1 = Calm Observer, Post 2 = Teacher, Post 3 = Teacher/Builder mix. Fact-check all numbers."
+    },
+    {
+      "id": "US-015",
+      "title": "Add RSS feed",
+      "description": "Generate RSS 2.0 feed from blog posts",
+      "acceptanceCriteria": [
+        "Endpoint or static file generates RSS XML",
+        "Feed includes title, date, excerpt, link per post",
+        "RSS link in footer",
+        "link rel alternate in HTML head",
+        "Typecheck passes"
+      ],
+      "priority": 6,
+      "passes": true,
+      "notes": "For Vite/React SPA, may need to generate RSS at build time or via Express API route"
+    },
+    {
+      "id": "US-016",
+      "title": "Update homepage to pull from markdown posts",
+      "description": "Homepage Latest Writing section reads from markdown instead of essays.ts",
+      "acceptanceCriteria": [
+        "Homepage shows 3 most recent markdown posts",
+        "Each: title, date, reading time, excerpt",
+        "Links to /blog/:slug",
+        "Falls back gracefully if no posts",
+        "Typecheck passes"
+      ],
+      "priority": 7,
+      "passes": true,
+      "notes": "File: client/src/pages/home.tsx — update latest writing section"
+    }
+  ]
+}
