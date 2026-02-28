@@ -57,7 +57,32 @@ export const projects: Project[] = [
     demoUrl: "https://airmood.tkhongsap.io",
     impactBadge: "Live App",
   },
-  // Existing projects with updated categories
+  {
+    id: "ai-agent-system",
+    title: "AI Agent System",
+    description:
+      "Multi-agent AI system running on OpenClaw. 4 specialized agents (orchestrator, code, content, document parsing) with 20+ skills including GitHub, Notion, Postiz, and more. Ships PRs, drafts content, and extracts documents autonomously.",
+    shortDescription:
+      "4 AI agents with 20+ skills running 24/7 on a single VPS.",
+    technologies: ["OpenClaw", "TypeScript", "AI Agents", "GitHub Actions"],
+    category: "tools",
+    githubUrl: "https://github.com/tkhongsap",
+    impactBadge: "24/7 Autonomous",
+  },
+  {
+    id: "ava-hq",
+    title: "Ava HQ",
+    description:
+      "Real-time operations dashboard for monitoring AI agent activity, work pipelines, content scheduling, and system health across OpenClaw instances.",
+    shortDescription:
+      "Operations dashboard for AI agent monitoring and scheduling.",
+    technologies: ["React", "TypeScript", "WebSocket", "Node.js"],
+    category: "tools",
+    demoUrl: "https://hq.tkhongsap.io",
+    githubUrl: "https://github.com/tkhongsap/ava-hq",
+    impactBadge: "Live Dashboard",
+  },
+  // Existing projects
   {
     id: "img-story-hub",
     title: "ImgStory Hub",
