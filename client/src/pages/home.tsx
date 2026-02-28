@@ -135,6 +135,35 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Social Proof */}
+      <section className="pb-16 md:pb-24">
+        <div className="container max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[
+              { number: "4", label: "AI Agents", sublabel: "Running 24/7" },
+              { number: "20+", label: "Skills", sublabel: "And growing" },
+              { number: "10+", label: "Projects", sublabel: "Shipped" },
+              { number: "∞", label: "Built in Public", sublabel: "Always" },
+            ].map((stat) => (
+              <div
+                key={stat.label}
+                className="text-center p-6 bg-white dark:bg-zinc-900 rounded-xl border border-[#E8E4DF] dark:border-zinc-800"
+              >
+                <div className="font-serif text-3xl md:text-4xl font-bold text-[#C45B3E] mb-1">
+                  {stat.number}
+                </div>
+                <div className="text-[#1A1A1A] dark:text-zinc-100 font-medium text-sm">
+                  {stat.label}
+                </div>
+                <div className="text-[#5C5C5C] dark:text-zinc-500 text-xs mt-0.5">
+                  {stat.sublabel}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Latest Content Section */}
       <section className="pb-20 md:pb-32">
         <div className="container max-w-5xl mx-auto px-4 sm:px-6">
