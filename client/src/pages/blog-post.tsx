@@ -26,7 +26,7 @@ export default function BlogPostPage() {
   if (loading) {
     return (
       <div className="min-h-[60vh] flex items-center justify-center bg-[#FAF9F6]">
-        <div className="animate-pulse text-[#5C5C5C]">Loading...</div>
+        <div className="animate-pulse text-[#5C5C5C] dark:text-zinc-400">Loading...</div>
       </div>
     );
   }
@@ -56,7 +56,7 @@ export default function BlogPostPage() {
   };
 
   return (
-    <div className="bg-[#FAF9F6] min-h-screen">
+    <div className="bg-[#FAF9F6] dark:bg-zinc-950 min-h-screen">
       <SEO
         title={`${post.title} | Ta Khongsap`}
         description={post.excerpt}
@@ -114,7 +114,7 @@ export default function BlogPostPage() {
 
       {/* Divider */}
       <div className="container max-w-3xl mx-auto px-4 sm:px-6">
-        <div className="h-px bg-gradient-to-r from-transparent via-[#E8E4DF] to-transparent" />
+        <div className="h-px bg-gradient-to-r from-transparent via-[#E8E4DF] dark:via-zinc-800 to-transparent" />
       </div>
 
       {/* Article Content */}
@@ -135,7 +135,7 @@ export default function BlogPostPage() {
             {post.tags.map((tag) => (
               <span
                 key={tag}
-                className="px-3 py-1 text-xs font-medium rounded-full bg-[#FAF9F6] text-[#5C5C5C] border border-[#E8E4DF]"
+                className="px-3 py-1 text-xs font-medium rounded-full bg-[#FAF9F6] text-[#5C5C5C] border border-[#E8E4DF] dark:border-zinc-800"
               >
                 {tag}
               </span>

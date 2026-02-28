@@ -22,7 +22,7 @@ export default function Portfolio() {
     : projects.filter((p) => p.category === activeFilter);
 
   return (
-    <div className="bg-[#FAF9F6] min-h-screen">
+    <div className="bg-[#FAF9F6] dark:bg-zinc-950 min-h-screen">
       <SEO
         title="Projects | Ta Khongsap"
         description="AI agents, products, and experiments. Things I've built and shipped."
@@ -36,7 +36,7 @@ export default function Portfolio() {
           <h1 className="font-serif text-3xl md:text-4xl font-bold text-[#1A1A1A] mb-4">
             Projects
           </h1>
-          <p className="text-[#5C5C5C] text-lg max-w-2xl mx-auto">
+          <p className="text-[#5C5C5C] dark:text-zinc-400 text-lg max-w-2xl mx-auto">
             Things I've built — from production apps to agent systems to weekend experiments.
           </p>
         </div>
@@ -71,9 +71,9 @@ export default function Portfolio() {
 
 function ProjectCard({ project }: { project: Project }) {
   return (
-    <div className="bg-white rounded-xl p-6 border border-[#E8E4DF] hover:shadow-md transition-shadow">
+    <div className="bg-white dark:bg-zinc-900 rounded-xl p-6 border border-[#E8E4DF] dark:border-zinc-800 hover:shadow-md transition-shadow">
       <div className="flex items-start justify-between mb-3">
-        <h3 className="font-serif text-xl font-semibold text-[#1A1A1A]">
+        <h3 className="font-serif text-xl font-semibold text-[#1A1A1A] dark:text-zinc-100">
           {project.title}
         </h3>
         {project.impactBadge && (
@@ -83,7 +83,7 @@ function ProjectCard({ project }: { project: Project }) {
         )}
       </div>
 
-      <p className="text-[#5C5C5C] text-sm mb-4 leading-relaxed">
+      <p className="text-[#5C5C5C] dark:text-zinc-400 text-sm mb-4 leading-relaxed">
         {project.shortDescription || project.description}
       </p>
 
@@ -91,7 +91,7 @@ function ProjectCard({ project }: { project: Project }) {
         {project.technologies.map((tech) => (
           <span
             key={tech}
-            className="text-xs px-2 py-1 bg-[#FAF9F6] text-[#5C5C5C] rounded border border-[#E8E4DF]"
+            className="text-xs px-2 py-1 bg-[#FAF9F6] text-[#5C5C5C] rounded border border-[#E8E4DF] dark:border-zinc-800"
           >
             {tech}
           </span>

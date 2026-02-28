@@ -52,7 +52,7 @@ export default function Writing() {
   };
 
   return (
-    <div className="bg-[#FAF9F6] min-h-screen">
+    <div className="bg-[#FAF9F6] dark:bg-zinc-950 min-h-screen">
       <SEO
         title="Writing | Ta Khongsap"
         description="Essays and insights on AI, software craftsmanship, and the evolving nature of knowledge work."
@@ -66,7 +66,7 @@ export default function Writing() {
       <section className="pt-32 pb-16 md:pt-40 md:pb-20">
         <div className="editorial-container text-center">
           <h1 className="editorial-headline mb-6">Writing</h1>
-          <p className="editorial-prose max-w-2xl mx-auto text-[#5C5C5C]">
+          <p className="editorial-prose max-w-2xl mx-auto text-[#5C5C5C] dark:text-zinc-400">
             Thoughts on AI, technology, and the future of work—published across platforms where ideas find their audience.
           </p>
         </div>
@@ -100,7 +100,7 @@ export default function Writing() {
             <div className="space-y-6">
               {filteredPosts.map((post) => (
                 <Link key={post.slug} href={`/blog/${post.slug}`}>
-                  <article className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer border border-[#E8E4DF]">
+                  <article className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer border border-[#E8E4DF] dark:border-zinc-800">
                     <div className="absolute inset-0 bg-gradient-to-br from-[#C45B3E]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <div className="relative p-6 md:p-8">
                       <div className="flex flex-wrap items-center gap-3 text-sm text-[#5C5C5C] mb-3">
@@ -146,7 +146,7 @@ export default function Writing() {
               </span>
             </div>
             <Link href={`/essay/${featuredEssay.id}`}>
-              <article className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer border border-[#E8E4DF]">
+              <article className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer border border-[#E8E4DF] dark:border-zinc-800">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#C45B3E]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="relative p-8 md:p-12">
                   <div className="flex items-center gap-3 text-sm text-[#5C5C5C] mb-4">
@@ -157,7 +157,7 @@ export default function Writing() {
                   <h2 className="font-serif text-2xl md:text-3xl font-semibold text-[#1A1A1A] mb-4 group-hover:text-[#C45B3E] transition-colors duration-300 leading-tight">
                     {featuredEssay.title}
                   </h2>
-                  <p className="text-[#5C5C5C] text-lg leading-relaxed mb-6 max-w-3xl">
+                  <p className="text-[#5C5C5C] dark:text-zinc-400 text-lg leading-relaxed mb-6 max-w-3xl">
                     {featuredEssay.excerpt}
                   </p>
                   <span className="inline-flex items-center gap-2 text-[#C45B3E] font-medium group-hover:gap-3 transition-all duration-300">
@@ -178,7 +178,7 @@ export default function Writing() {
             <div className="space-y-6">
               {essays.filter(essay => !essay.featured).map((essay) => (
                 <Link key={essay.id} href={`/essay/${essay.id}`}>
-                  <article className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer border border-[#E8E4DF]">
+                  <article className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer border border-[#E8E4DF] dark:border-zinc-800">
                     <div className="absolute inset-0 bg-gradient-to-br from-[#C45B3E]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <div className="relative p-6 md:p-8">
                       <div className="flex items-center gap-3 text-sm text-[#5C5C5C] mb-3">

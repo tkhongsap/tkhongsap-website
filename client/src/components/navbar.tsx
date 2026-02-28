@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn, scrollToElement } from "@/lib/utils";
+import { ThemeContext } from "@/App";
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -17,6 +18,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [location] = useLocation();
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,13 +49,13 @@ export default function Navbar() {
 
   return (
     <header className={cn(
-      "fixed w-full bg-white z-50 transition-all duration-200",
-      isScrolled ? "shadow-sm" : ""
+      "fixed w-full bg-white dark:bg-zinc-950 z-50 transition-all duration-200",
+      isScrolled ? "shadow-sm dark:shadow-zinc-900/50" : ""
     )}>
       <div className="container">
         <div className="flex justify-between items-center py-6">
           <Link href="/" className="text-2xl font-bold">
-            <span className="font-serif text-[#C45B3E]">Ta</span> <span className="text-[#1A1A1A]">Khongsap</span>
+            <span className="font-serif text-[#C45B3E]">Ta</span> <span className="text-[#1A1A1A] dark:text-zinc-100">Khongsap</span>
           </Link>
           
           {/* Desktop Navigation */}
@@ -63,7 +65,7 @@ export default function Navbar() {
                 key={link.name}
                 href={link.path}
                 className={cn(
-                  "font-medium text-[#5C5C5C] hover:text-[#C45B3E] transition-colors",
+                  "font-medium text-[#5C5C5C] dark:text-zinc-400 hover:text-[#C45B3E] transition-colors",
                   location === link.path && "text-[#C45B3E]"
                 )}
                 onClick={() => handleLinkClick(link.path)}
@@ -71,6 +73,13 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-md text-[#5C5C5C] dark:text-zinc-400 hover:text-[#C45B3E] transition-colors"
+              aria-label="Toggle dark mode"
+            >
+              {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+            </button>
             <Button asChild variant="default" className="bg-[#C45B3E] hover:bg-[#A84832] text-white rounded-md px-6">
               <Link href="/writing">
                 Read Essays
@@ -81,7 +90,7 @@ export default function Navbar() {
           {/* Mobile Navigation Button */}
           <button
             type="button"
-            className="md:hidden text-[#1A1A1A] focus:outline-none"
+            className="md:hidden text-[#1A1A1A] dark:text-zinc-100 focus:outline-none"
             onClick={toggleMenu}
             aria-label="Toggle menu"
           >
@@ -99,7 +108,7 @@ export default function Navbar() {
                 key={link.name}
                 href={link.path}
                 className={cn(
-                  "font-medium text-lg text-[#5C5C5C] hover:text-[#C45B3E] transition-colors",
+                  "font-medium text-lg text-[#5C5C5C] dark:text-zinc-400 hover:text-[#C45B3E] transition-colors",
                   location === link.path && "text-[#C45B3E]"
                 )}
                 onClick={() => handleLinkClick(link.path)}
@@ -107,6 +116,13 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
+            <button
+              onClick={toggleTheme}
+              className="flex items-center gap-2 font-medium text-lg text-[#5C5C5C] dark:text-zinc-400 hover:text-[#C45B3E] transition-colors"
+            >
+              {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+              {theme === "dark" ? "Light Mode" : "Dark Mode"}
+            </button>
             <Button asChild variant="default" className="bg-[#C45B3E] hover:bg-[#A84832] text-white rounded-md w-full py-3 mt-4">
               <Link href="/writing">
                 Read Essays

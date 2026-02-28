@@ -28,7 +28,7 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-[#FAF9F6] min-h-screen">
+    <div className="bg-[#FAF9F6] dark:bg-zinc-950 min-h-screen">
       <SEO
         title="Ta Khongsap | Building AI Systems That Ship"
         description="Builder based in Bangkok. Running AI agent systems that ship code, draft content, and manage workflows autonomously. Products, essays, and building in public."
@@ -69,7 +69,7 @@ export default function Home() {
       <section className="pb-16 md:pb-24">
         <div className="container max-w-5xl mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="font-serif text-2xl md:text-3xl font-semibold text-[#1A1A1A]">
+            <h2 className="font-serif text-2xl md:text-3xl font-semibold text-[#1A1A1A] dark:text-zinc-100">
               Featured Projects
             </h2>
             <Link href="/portfolio">
@@ -83,10 +83,10 @@ export default function Home() {
             {featuredProjects.map((project) => (
               <div
                 key={project.id}
-                className="bg-white rounded-xl p-6 border border-[#E8E4DF] hover:shadow-md transition-shadow"
+                className="bg-white dark:bg-zinc-900 rounded-xl p-6 border border-[#E8E4DF] dark:border-zinc-800 hover:shadow-md transition-shadow"
               >
                 <div className="flex items-start justify-between mb-3">
-                  <h3 className="font-serif text-xl font-semibold text-[#1A1A1A]">
+                  <h3 className="font-serif text-xl font-semibold text-[#1A1A1A] dark:text-zinc-100">
                     {project.title}
                   </h3>
                   {project.impactBadge && (
@@ -95,14 +95,14 @@ export default function Home() {
                     </span>
                   )}
                 </div>
-                <p className="text-[#5C5C5C] text-sm mb-4 leading-relaxed">
+                <p className="text-[#5C5C5C] dark:text-zinc-400 text-sm mb-4 leading-relaxed">
                   {project.shortDescription || project.description}
                 </p>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.technologies.slice(0, 4).map((tech) => (
                     <span
                       key={tech}
-                      className="text-xs px-2 py-1 bg-[#FAF9F6] text-[#5C5C5C] rounded border border-[#E8E4DF]"
+                      className="text-xs px-2 py-1 bg-[#FAF9F6] dark:bg-zinc-800 text-[#5C5C5C] dark:text-zinc-400 rounded border border-[#E8E4DF] dark:border-zinc-800"
                     >
                       {tech}
                     </span>
@@ -170,7 +170,7 @@ export default function Home() {
         <div className="container max-w-5xl mx-auto px-4 sm:px-6">
           <div className="divider-subtle" style={{ margin: "0 0 2rem 0" }} />
           <div className="flex items-center justify-between mb-8">
-            <h2 className="font-serif text-2xl md:text-3xl font-semibold text-[#1A1A1A]">
+            <h2 className="font-serif text-2xl md:text-3xl font-semibold text-[#1A1A1A] dark:text-zinc-100">
               Latest Writing
             </h2>
             <Link href="/writing">
@@ -185,7 +185,7 @@ export default function Home() {
               latestPosts.map((post) => (
                 <Link key={post.slug} href={`/blog/${post.slug}`}>
                   <a className="block group">
-                    <article className="bg-white rounded-xl p-6 border border-[#E8E4DF] hover:shadow-md transition-shadow">
+                    <article className="bg-white dark:bg-zinc-900 rounded-xl p-6 border border-[#E8E4DF] dark:border-zinc-800 hover:shadow-md transition-shadow">
                       <div className="flex flex-wrap items-center gap-3 text-sm text-[#5C5C5C] mb-3">
                         <span className="inline-block px-2.5 py-0.5 text-xs font-medium rounded-full bg-[#C45B3E]/10 text-[#C45B3E]">
                           {categoryLabels[post.category]}
@@ -202,7 +202,7 @@ export default function Home() {
                       <h3 className="font-serif text-lg md:text-xl font-semibold text-[#1A1A1A] mb-2 group-hover:text-[#C45B3E] transition-colors">
                         {post.title}
                       </h3>
-                      <p className="text-[#5C5C5C] text-sm leading-relaxed line-clamp-2">
+                      <p className="text-[#5C5C5C] dark:text-zinc-400 text-sm leading-relaxed line-clamp-2">
                         {post.excerpt}
                       </p>
                     </article>
@@ -213,7 +213,7 @@ export default function Home() {
               latestEssays.map((essay) => (
                 <Link key={essay.id} href={`/essay/${essay.id}`}>
                   <a className="block group">
-                    <article className="bg-white rounded-xl p-6 border border-[#E8E4DF] hover:shadow-md transition-shadow">
+                    <article className="bg-white dark:bg-zinc-900 rounded-xl p-6 border border-[#E8E4DF] dark:border-zinc-800 hover:shadow-md transition-shadow">
                       <div className="flex flex-wrap items-center gap-3 text-sm text-[#5C5C5C] mb-3">
                         <span className="flex items-center gap-1">
                           <Calendar className="h-3.5 w-3.5" />
@@ -227,7 +227,7 @@ export default function Home() {
                       <h3 className="font-serif text-lg md:text-xl font-semibold text-[#1A1A1A] mb-2 group-hover:text-[#C45B3E] transition-colors">
                         {essay.title}
                       </h3>
-                      <p className="text-[#5C5C5C] text-sm leading-relaxed line-clamp-2">
+                      <p className="text-[#5C5C5C] dark:text-zinc-400 text-sm leading-relaxed line-clamp-2">
                         {essay.excerpt}
                       </p>
                     </article>

@@ -1,8 +1,10 @@
 import { Switch, Route, useLocation } from "wouter";
-import { useEffect, lazy, Suspense } from "react";
+import { useEffect, lazy, Suspense, createContext } from "react";
+import { useTheme } from "@/hooks/use-theme";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
+export const ThemeContext = createContext<{ theme: string; toggleTheme: () => void }>({ theme: "light", toggleTheme: () => {} });
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import GoogleAnalytics from "@/components/google-analytics";
@@ -67,9 +69,12 @@ function Router() {
 }
 
 function App() {
+  const themeValue = useTheme();
+
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="flex flex-col min-h-screen">
+      <ThemeContext.Provider value={themeValue}>
+      <div className="flex flex-col min-h-screen bg-[#FAF9F6] dark:bg-zinc-950 transition-colors duration-300">
         <Navbar />
         <main className="flex-grow">
           <Router />
@@ -80,6 +85,7 @@ function App() {
       <GoogleAnalytics />
       <SubscriptionMessage />
       <Toaster />
+      </ThemeContext.Provider>
     </QueryClientProvider>
   );
 }
