@@ -1,0 +1,151 @@
+{
+  "project": "tkhongsap-website",
+  "branchName": "ralph/phase1-foundation",
+  "description": "Website redesign Phase 1 — Update identity, homepage, about, projects, SEO, navigation",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Update navbar links and structure",
+      "description": "As a visitor, I want clear navigation that reflects the site's new structure.",
+      "acceptanceCriteria": [
+        "Nav links updated to: Home, Projects, Writing, About",
+        "Portfolio renamed to Projects in navLinks array",
+        "After Hours label changed to Projects",
+        "Contact page removed from nav (keep code, just hide)",
+        "Mobile nav works correctly with new links",
+        "Typecheck passes"
+      ],
+      "priority": 1,
+      "passes": false,
+      "notes": "File: client/src/components/navbar.tsx — update navLinks array"
+    },
+    {
+      "id": "US-002",
+      "title": "Update footer with social links and new tagline",
+      "description": "As a visitor, I want to find social links and understand who Ta is from the footer.",
+      "acceptanceCriteria": [
+        "Footer tagline updated to: Building AI systems that work while I sleep",
+        "Social links added: X (@tkhongsap), LinkedIn (totrakool-khongsap), GitHub (tkhongsap)",
+        "Social icons use lucide-react icons",
+        "Newsletter signup CTA remains",
+        "Typecheck passes"
+      ],
+      "priority": 2,
+      "passes": false,
+      "notes": "File: client/src/components/footer.tsx"
+    },
+    {
+      "id": "US-003",
+      "title": "Rewrite homepage hero section",
+      "description": "As a visitor, I want to immediately understand who Ta is and what he builds.",
+      "acceptanceCriteria": [
+        "Hero headline changed from Thinking Out Loud to builder-focused (e.g. Building AI Systems That Actually Ship)",
+        "Subtitle: short punchy description of building AI agents, products, in public",
+        "Remove Latest Essay featured section from hero area",
+        "Background remains clean (#FAF9F6 or similar)",
+        "Responsive on mobile and desktop",
+        "Typecheck passes"
+      ],
+      "priority": 3,
+      "passes": false,
+      "notes": "File: client/src/pages/home.tsx — rewrite hero section"
+    },
+    {
+      "id": "US-004",
+      "title": "Add featured projects section to homepage",
+      "description": "As a visitor, I want to see Ta's best work on the homepage.",
+      "acceptanceCriteria": [
+        "Section below hero showing 3-4 featured projects as cards",
+        "Each card: title, short description, tech stack tags, demo link",
+        "Featured projects: TalentMatch AI, Doc Extract, AirMood, AI Agent System",
+        "View all projects link to /portfolio page",
+        "Responsive grid (2 cols desktop, 1 col mobile)",
+        "Typecheck passes"
+      ],
+      "priority": 4,
+      "passes": false,
+      "notes": "File: client/src/pages/home.tsx — add section using data from projects.ts"
+    },
+    {
+      "id": "US-005",
+      "title": "Add latest content section to homepage",
+      "description": "As a visitor, I want to see recent writing on the homepage.",
+      "acceptanceCriteria": [
+        "Section below featured projects showing latest 2-3 essays",
+        "Each entry: title, date, reading time, excerpt",
+        "Links to full essay page",
+        "Read more link to /writing page",
+        "Reuses existing essay data from essays.ts",
+        "Typecheck passes"
+      ],
+      "priority": 5,
+      "passes": false,
+      "notes": "File: client/src/pages/home.tsx — add section using getFeaturedEssay and getEssays from essays.ts"
+    },
+    {
+      "id": "US-006",
+      "title": "Update project data with real projects",
+      "description": "As a developer, I need accurate project data reflecting real, current work.",
+      "acceptanceCriteria": [
+        "Update projects.ts descriptions for TalentMatch AI, Doc Extract, AirMood",
+        "Add new project: AI Agent System — 4 agents, 20+ skills, OpenClaw setup, category tools",
+        "Add new project: Ava HQ — operations dashboard, category tools, demo URL https://hq.tkhongsap.io",
+        "Remove or archive old placeholder projects from portfolio page hardcoded data",
+        "Verify all demo URLs in project data",
+        "Typecheck passes"
+      ],
+      "priority": 6,
+      "passes": false,
+      "notes": "Files: client/src/data/projects.ts AND client/src/pages/portfolio/index.tsx (has hardcoded dummy projects that must be removed)"
+    },
+    {
+      "id": "US-007",
+      "title": "Update portfolio page to Projects page",
+      "description": "As a visitor, I want to browse all projects with proper categories.",
+      "acceptanceCriteria": [
+        "Page title changed to Projects",
+        "Remove ALL hardcoded dummy projects from portfolio/index.tsx",
+        "Display only projects from projects.ts data",
+        "Category filters work: All, Apps, Tools, Experiments",
+        "Each card: title, description, tech tags, demo link, impact badge",
+        "Typecheck passes"
+      ],
+      "priority": 7,
+      "passes": false,
+      "notes": "File: client/src/pages/portfolio/index.tsx — remove hardcoded dummyProjects array, use projects from data"
+    },
+    {
+      "id": "US-008",
+      "title": "Rewrite About page",
+      "description": "As a visitor, I want to learn Ta's story — corporate career to building with AI.",
+      "acceptanceCriteria": [
+        "Remove current essay-style content (The Game Has Changed)",
+        "New structure: Personal intro, What I'm building, What I believe in, Connect",
+        "Job title: Builder | AI Agent Systems | Solopreneur",
+        "Social links: X (@tkhongsap), LinkedIn, GitHub",
+        "Calm reflective voice, not a resume",
+        "Typecheck passes"
+      ],
+      "priority": 8,
+      "passes": false,
+      "notes": "File: client/src/pages/about.tsx — full rewrite of content"
+    },
+    {
+      "id": "US-009",
+      "title": "Update SEO metadata across all pages",
+      "description": "As the owner, I want search engines to reflect the new identity.",
+      "acceptanceCriteria": [
+        "Homepage SEO title: Ta Khongsap | Building AI Systems That Ship",
+        "Homepage meta description reflects builder identity",
+        "About page SEO title: About Ta Khongsap | Builder, AI Agent Systems",
+        "Projects page SEO title: Projects | Ta Khongsap",
+        "Schema markup Person type updated: jobTitle, description, sameAs links",
+        "Keywords updated: AI agents, OpenClaw, building in public, solopreneur",
+        "Typecheck passes"
+      ],
+      "priority": 9,
+      "passes": false,
+      "notes": "Files: all page files (home.tsx, about.tsx, portfolio.tsx, writing.tsx) — update SEO components and schema-markup.tsx"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+# Ralph Progress Log — Website Phase 1
+Started: 2026-02-28
+---
+
+## Codebase Patterns
+- Routing: uses wouter (not react-router)
+- Pages: client/src/pages/
+- Components: client/src/components/
+- Data: client/src/data/ (projects.ts, essays.ts)
+- Styling: Tailwind CSS with editorial design system (bg-[#FAF9F6], text colors)
+- UI components: Shadcn in client/src/components/ui/
+- SEO: custom SEO component + SchemaMarkup component per page
+- Icons: lucide-react
+- Build: Vite
+- Backend: Express (server/ directory) — don't touch for Phase 1
+---
