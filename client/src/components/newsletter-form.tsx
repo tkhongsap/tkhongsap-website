@@ -149,6 +149,7 @@ export default function NewsletterForm({
             type="submit" 
             className={`bg-primary hover:bg-primary/90 text-white font-medium ${showNameField ? 'w-full py-3' : 'py-3 px-6'}`}
             disabled={isSubmitting}
+            data-track="newsletter-signup"
           >
             {isSubmitting ? "Subscribing..." : "Subscribe"}
           </Button>

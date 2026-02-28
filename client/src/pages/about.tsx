@@ -27,7 +27,7 @@ export default function About() {
       />
       <SchemaMarkup type="person" data={personSchemaData} />
 
-      <div className="bg-[#FAF9F6] min-h-screen">
+      <div className="bg-[#FAF9F6] dark:bg-zinc-950 min-h-screen">
         {/* Header */}
         <section className="pt-32 pb-8 md:pt-40 md:pb-12">
           <div className="editorial-container">
@@ -47,7 +47,7 @@ export default function About() {
                 <h1 className="font-serif text-3xl md:text-4xl font-bold text-[#1A1A1A] mb-2">
                   <span className="text-[#C45B3E]">Ta</span> Khongsap
                 </h1>
-                <p className="text-[#5C5C5C] text-lg">
+                <p className="text-[#5C5C5C] dark:text-zinc-400 text-lg">
                   Builder · AI Agent Systems · Solopreneur
                 </p>
               </div>

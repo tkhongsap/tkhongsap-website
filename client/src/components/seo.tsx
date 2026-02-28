@@ -202,6 +202,16 @@ export default function SEO({
     document.head.appendChild(robotsTag);
   }
   
+  // Add RSS alternate link
+  if (!document.querySelector('link[type="application/rss+xml"]')) {
+    const rssLink = document.createElement('link');
+    rssLink.setAttribute('rel', 'alternate');
+    rssLink.setAttribute('type', 'application/rss+xml');
+    rssLink.setAttribute('title', 'Ta Khongsap RSS Feed');
+    rssLink.setAttribute('href', '/api/rss');
+    document.head.appendChild(rssLink);
+  }
+
   // Return null as this component doesn't render anything visible
   return null;
 }

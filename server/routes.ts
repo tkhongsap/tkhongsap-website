@@ -790,6 +790,82 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // RSS Feed endpoint
+  app.get("/api/rss", async (_req: Request, res: Response) => {
+    try {
+      const fs = await import("fs");
+      const path = await import("path");
+      const postsDir = path.resolve(process.cwd(), "content/posts");
+
+      if (!fs.existsSync(postsDir)) {
+        return res.status(404).send("No posts directory found");
+      }
+
+      const files = fs.readdirSync(postsDir).filter((f: string) => f.endsWith(".md"));
+
+      interface RssPost {
+        slug: string;
+        title: string;
+        date: string;
+        excerpt: string;
+        category: string;
+      }
+
+      const posts: RssPost[] = files.map((file: string) => {
+        const raw = fs.readFileSync(path.join(postsDir, file), "utf-8");
+        const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+        const data: Record<string, string> = {};
+        if (match) {
+          for (const line of match[1].split("\n")) {
+            const idx = line.indexOf(":");
+            if (idx !== -1) {
+              const key = line.slice(0, idx).trim();
+              let val = line.slice(idx + 1).trim();
+              if (val.startsWith('"') && val.endsWith('"')) val = val.slice(1, -1);
+              data[key] = val;
+            }
+          }
+        }
+        return {
+          slug: file.replace(".md", ""),
+          title: data.title || file.replace(".md", ""),
+          date: data.date || "",
+          excerpt: data.excerpt || "",
+          category: data.category || "",
+        };
+      });
+
+      posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+      const siteUrl = "https://tkhongsap.io";
+      const escXml = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
+      const rss = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ta Khongsap</title>
+    <link>${siteUrl}</link>
+    <description>Essays and insights on AI, software craftsmanship, and the evolving nature of knowledge work.</description>
+    <language>en-us</language>
+    <atom:link href="${siteUrl}/api/rss" rel="self" type="application/rss+xml"/>
+    ${posts.map(p => `<item>
+      <title>${escXml(p.title)}</title>
+      <link>${siteUrl}/blog/${p.slug}</link>
+      <guid>${siteUrl}/blog/${p.slug}</guid>
+      <pubDate>${new Date(p.date).toUTCString()}</pubDate>
+      <description>${escXml(p.excerpt)}</description>
+      <category>${escXml(p.category)}</category>
+    </item>`).join("\n    ")}
+  </channel>
+</rss>`;
+
+      res.set("Content-Type", "application/rss+xml; charset=utf-8");
+      res.send(rss);
+    } catch (err) {
+      res.status(500).send("Error generating RSS feed");
+    }
+  });
+
   const httpServer = createServer(app);
 
   return httpServer;

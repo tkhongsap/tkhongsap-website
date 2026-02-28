@@ -34,6 +34,7 @@ export const projects: Project[] = [
     category: "apps",
     demoUrl: "https://talentum.tkhongsap.io",
     impactBadge: "Live App",
+    caseStudyUrl: "/projects/talentmatch-ai",
   },
   {
     id: "doc-extract",
@@ -45,6 +46,7 @@ export const projects: Project[] = [
     category: "apps",
     demoUrl: "https://doc-extract.tkhongsap.io",
     impactBadge: "Live App",
+    caseStudyUrl: "/projects/doc-extract",
   },
   {
     id: "airmood",
@@ -68,6 +70,7 @@ export const projects: Project[] = [
     category: "tools",
     githubUrl: "https://github.com/tkhongsap",
     impactBadge: "24/7 Autonomous",
+    caseStudyUrl: "/projects/ai-agent-system",
   },
   {
     id: "ava-hq",
