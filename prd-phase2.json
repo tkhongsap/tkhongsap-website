@@ -17,7 +17,7 @@
         "Typecheck passes"
       ],
       "priority": 1,
-      "passes": false,
+      "passes": true,
       "notes": "This is a Vite/React app — markdown loading needs to work client-side or via import. Consider using import.meta.glob for loading .md files."
     },
     {
@@ -31,7 +31,7 @@
         "Typecheck passes"
       ],
       "priority": 2,
-      "passes": false,
+      "passes": true,
       "notes": "Keep essays.ts working alongside new markdown system during migration"
     },
     {
@@ -48,7 +48,7 @@
         "Typecheck passes"
       ],
       "priority": 3,
-      "passes": false,
+      "passes": true,
       "notes": "File: client/src/pages/writing.tsx — may need significant refactor"
     },
     {
@@ -66,7 +66,7 @@
         "Typecheck passes"
       ],
       "priority": 4,
-      "passes": false,
+      "passes": true,
       "notes": "New page: client/src/pages/blog.tsx or client/src/pages/blog/[slug].tsx"
     },
     {
@@ -82,7 +82,7 @@
         "Typecheck passes"
       ],
       "priority": 5,
-      "passes": false,
+      "passes": true,
       "notes": "Content voice: Post 1 = Calm Observer, Post 2 = Teacher, Post 3 = Teacher/Builder mix. Fact-check all numbers."
     },
     {
@@ -97,7 +97,7 @@
         "Typecheck passes"
       ],
       "priority": 6,
-      "passes": false,
+      "passes": true,
       "notes": "For Vite/React SPA, may need to generate RSS at build time or via Express API route"
     },
     {
@@ -112,7 +112,7 @@
         "Typecheck passes"
       ],
       "priority": 7,
-      "passes": false,
+      "passes": true,
       "notes": "File: client/src/pages/home.tsx — update latest writing section"
     }
   ]
