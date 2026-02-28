@@ -61,10 +61,10 @@ export default function About() {
             {/* Intro */}
             <section className="mb-12">
               <p className="editorial-prose mb-4">
-                I'm a builder based in Bangkok. After years in corporate roles — supply chain, data science, AI — I decided to build on my own terms.
+                After years working in corporate roles across supply chain, data science, and AI, I decided to build on my own terms. Not because the work wasn't interesting — it was. But because I kept seeing the same gap: the distance between what AI could do and what most teams were actually doing with it.
               </p>
               <p className="editorial-prose">
-                Now I run AI agent systems that ship code, draft content, and manage workflows autonomously. Not as a concept. As a daily reality.
+                So I started building. First small tools. Then products. Then something unexpected happened — I built a team of AI agents that started shipping work while I slept.
               </p>
             </section>
 
@@ -75,7 +75,7 @@ export default function About() {
               <h2 className="editorial-subhead mb-6">What I'm Building</h2>
 
               <p className="editorial-prose mb-4">
-                My setup: 4 specialized agents with 20+ skills, running 24/7 on a single VPS. One orchestrates. One writes code. One handles content. One parses documents. They use GitHub, Notion, Postiz, and a growing list of integrations.
+                Today I run 4 specialized agents on a single VPS. They ship code, draft content, extract documents, and coordinate with each other. 20+ skills between them. It's not magic — it took weeks of careful iteration. But it works, and it compounds.
               </p>
 
               <p className="editorial-prose mb-4">
@@ -98,7 +98,7 @@ export default function About() {
               </ul>
 
               <p className="editorial-prose">
-                I teach what I learn on LinkedIn and X, and share the journey publicly.
+                I'm building in public because I think the best way to learn is to show your work. The wins and the failures. The elegant solutions and the ugly hacks that got things moving.
               </p>
             </section>
 
@@ -115,11 +115,11 @@ export default function About() {
               </blockquote>
 
               <p className="editorial-prose mb-4">
-                I'm not interested in AI as a buzzword. I'm interested in AI as a tool — one that lets a single person build things that used to require a team.
+                Ethics over hype. Shipping over polishing. Systems that compound while you live your life. Long-term thinking over short-term cash grabs. Always.
               </p>
 
               <p className="editorial-prose">
-                The goal isn't to automate everything. It's to automate the right things, so I can focus on the work that actually matters.
+                I'm not interested in AI as a buzzword. I'm interested in AI as a tool — one that lets a single person build things that used to require a team. The goal isn't to automate everything. It's to automate the right things, so I can focus on the work that actually matters.
               </p>
             </section>
 
