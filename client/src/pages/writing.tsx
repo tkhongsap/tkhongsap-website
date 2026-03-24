@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { publications } from "@/data/publications";
-import { getFeaturedEssay, essays } from "@/data/essays";
+import { getAllPosts, getFeaturedPost } from "@/lib/markdown";
 import SEO from "@/components/seo";
 import SchemaMarkup from "@/components/schema-markup";
 import { ArrowRight, BookOpen, Linkedin, Newspaper } from "lucide-react";
@@ -20,7 +20,9 @@ function MediumIcon({ className }: { className?: string }) {
 }
 
 export default function Writing() {
-  const featuredEssay = getFeaturedEssay();
+  const featuredPost = getFeaturedPost();
+  const allPosts = getAllPosts();
+  const nonFeaturedPosts = allPosts.filter((post) => !post.featured);
 
   const writingSchemaData = {
     name: "Ta Khongsap | Writing",
@@ -38,6 +40,15 @@ export default function Writing() {
       default:
         return <Newspaper className="h-5 w-5" />;
     }
+  };
+
+  // Format date for display
+  const formatDate = (dateStr: string) => {
+    return new Date(dateStr).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
   };
 
   return (
@@ -63,7 +74,7 @@ export default function Writing() {
       </section>
 
       {/* Featured Essay Section */}
-      {featuredEssay && (
+      {featuredPost && (
         <section className="pb-16 md:pb-20">
           <div className="container max-w-4xl mx-auto px-4 sm:px-6">
             <div className="text-center mb-8">
@@ -72,20 +83,24 @@ export default function Writing() {
                 Featured Essay
               </span>
             </div>
-            <Link href={`/essay/${featuredEssay.id}`}>
+            <Link href={`/essay/${featuredPost.id}`}>
               <article className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer border border-[#E8E4DF]">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#C45B3E]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="relative p-8 md:p-12">
                   <div className="flex items-center gap-3 text-sm text-[#5C5C5C] mb-4">
-                    <span>{featuredEssay.date}</span>
+                    <span>{formatDate(featuredPost.date)}</span>
                     <span className="w-1 h-1 rounded-full bg-[#5C5C5C]" />
-                    <span>{featuredEssay.readingTime}</span>
+                    <span>{featuredPost.readingTime}</span>
+                    <span className="w-1 h-1 rounded-full bg-[#5C5C5C]" />
+                    <span className="text-[#C45B3E]">
+                      {featuredPost.category}
+                    </span>
                   </div>
                   <h2 className="font-serif text-2xl md:text-3xl font-semibold text-[#1A1A1A] mb-4 group-hover:text-[#C45B3E] transition-colors duration-300 leading-tight">
-                    {featuredEssay.title}
+                    {featuredPost.title}
                   </h2>
                   <p className="text-[#5C5C5C] text-lg leading-relaxed mb-6 max-w-3xl">
-                    {featuredEssay.excerpt}
+                    {featuredPost.excerpt}
                   </p>
                   <span className="inline-flex items-center gap-2 text-[#C45B3E] font-medium group-hover:gap-3 transition-all duration-300">
                     Read essay
@@ -100,7 +115,7 @@ export default function Writing() {
       )}
 
       {/* More Essays Section */}
-      {essays.filter(essay => !essay.featured).length > 0 && (
+      {nonFeaturedPosts.length > 0 && (
         <section className="pb-16 md:pb-20">
           <div className="container max-w-4xl mx-auto px-4 sm:px-6">
             <div className="text-center mb-8">
@@ -112,26 +127,42 @@ export default function Writing() {
               </p>
             </div>
             <div className="space-y-6">
-              {essays.filter(essay => !essay.featured).map((essay) => (
-                <Link key={essay.id} href={`/essay/${essay.id}`}>
+              {nonFeaturedPosts.map((post) => (
+                <Link key={post.id} href={`/essay/${post.id}`}>
                   <article className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer border border-[#E8E4DF]">
                     <div className="absolute inset-0 bg-gradient-to-br from-[#C45B3E]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <div className="relative p-6 md:p-8">
                       <div className="flex items-center gap-3 text-sm text-[#5C5C5C] mb-3">
-                        <span>{essay.date}</span>
+                        <span>{formatDate(post.date)}</span>
                         <span className="w-1 h-1 rounded-full bg-[#5C5C5C]" />
-                        <span>{essay.readingTime}</span>
+                        <span>{post.readingTime}</span>
+                        <span className="w-1 h-1 rounded-full bg-[#5C5C5C]" />
+                        <span className="text-[#C45B3E]">{post.category}</span>
                       </div>
                       <h3 className="font-serif text-xl md:text-2xl font-semibold text-[#1A1A1A] mb-3 group-hover:text-[#C45B3E] transition-colors duration-300 leading-tight">
-                        {essay.title}
+                        {post.title}
                       </h3>
                       <p className="text-[#5C5C5C] leading-relaxed mb-4 line-clamp-2">
-                        {essay.excerpt}
+                        {post.excerpt}
                       </p>
-                      <span className="inline-flex items-center gap-2 text-[#C45B3E] font-medium group-hover:gap-3 transition-all duration-300">
-                        Read essay
-                        <ArrowRight className="h-4 w-4" />
-                      </span>
+                      <div className="flex items-center justify-between">
+                        <span className="inline-flex items-center gap-2 text-[#C45B3E] font-medium group-hover:gap-3 transition-all duration-300">
+                          Read essay
+                          <ArrowRight className="h-4 w-4" />
+                        </span>
+                        {post.tags.length > 0 && (
+                          <div className="hidden sm:flex gap-2">
+                            {post.tags.slice(0, 3).map((tag) => (
+                              <span
+                                key={tag}
+                                className="px-2 py-0.5 text-xs rounded-full bg-[#FAF9F6] text-[#5C5C5C] border border-[#E8E4DF]"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
                     </div>
                     <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#C45B3E] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                   </article>
@@ -184,7 +215,6 @@ export default function Writing() {
                         {getPlatformIcon(pub.platform)}
                       </div>
                     </div>
-                    {/* Decorative elements */}
                     <div
                       className="absolute top-4 right-4 w-24 h-24 rounded-full opacity-10"
                       style={{ backgroundColor: pub.accentColor }}
@@ -193,7 +223,6 @@ export default function Writing() {
                       className="absolute bottom-4 left-4 w-16 h-16 rounded-full opacity-5"
                       style={{ backgroundColor: pub.accentColor }}
                     />
-                    {/* Platform badge */}
                     <div className="absolute top-4 left-4">
                       <span
                         className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium text-white"
@@ -214,7 +243,6 @@ export default function Writing() {
                       {pub.synopsis}
                     </p>
 
-                    {/* Topic Tags */}
                     <div className="flex flex-wrap gap-2 mb-6">
                       {pub.topics.map((topic) => (
                         <span
@@ -226,7 +254,6 @@ export default function Writing() {
                       ))}
                     </div>
 
-                    {/* CTA */}
                     <div className="flex items-center justify-between">
                       <span
                         className="inline-flex items-center gap-2 font-medium group-hover:gap-3 transition-all duration-300"
@@ -240,7 +267,6 @@ export default function Writing() {
                     </div>
                   </div>
 
-                  {/* Bottom accent bar */}
                   <div
                     className="h-1 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"
                     style={{ backgroundColor: pub.accentColor }}
