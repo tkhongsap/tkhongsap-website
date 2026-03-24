@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { ArrowRight, Clock, Calendar, ExternalLink, Github } from "lucide-react";
-import { getFeaturedEssay, essays } from "@/data/essays";
+import { getAllPosts } from "@/lib/markdown";
 import { projects } from "@/data/projects";
 import SEO from "@/components/seo";
 import SchemaMarkup from "@/components/schema-markup";
@@ -10,7 +10,14 @@ export default function Home() {
     ["talentmatch-ai", "doc-extract", "airmood", "ai-agent-system"].includes(p.id)
   ).slice(0, 4);
 
-  const latestEssays = essays.slice(0, 3);
+  const latestEssays = getAllPosts().slice(0, 3);
+
+  const formatDate = (dateStr: string) =>
+    new Date(dateStr).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
 
   const homeSchemaData = {
     url: "https://tkhongsap.io/",
@@ -151,7 +158,7 @@ export default function Home() {
                     <div className="flex flex-wrap items-center gap-3 text-sm text-[#5C5C5C] mb-3">
                       <span className="flex items-center gap-1">
                         <Calendar className="h-3.5 w-3.5" />
-                        {essay.date}
+                        {formatDate(essay.date)}
                       </span>
                       <span className="flex items-center gap-1">
                         <Clock className="h-3.5 w-3.5" />
