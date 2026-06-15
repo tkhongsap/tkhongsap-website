@@ -18,6 +18,19 @@ export default {
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        // Dark editorial named tokens (map to hex CSS vars; no /opacity support)
+        bg: "var(--color-background)",
+        surface: "var(--color-card-background)",
+        "surface-2": "var(--color-surface-2)",
+        subtle: "var(--color-accent-subtle)",
+        line: "var(--color-border)",
+        "line-strong": "var(--color-border-strong)",
+        ink: "var(--color-text-primary)",
+        "ink-muted": "var(--color-text-secondary)",
+        "ink-faint": "var(--color-text-tertiary)",
+        brand: "var(--color-primary)",
+        "brand-text": "var(--color-accent-text)",
+        "brand-hover": "var(--color-primary-hover)",
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",

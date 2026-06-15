@@ -1,31 +1,42 @@
-import { Link } from "wouter";
+import { useState } from "react";
 import { publications } from "@/data/publications";
-import { getFeaturedEssay, essays } from "@/data/essays";
+import { getAllArticles, getFeatured } from "@/data/essays";
+import { columns, type ColumnSlug } from "@/data/columns";
 import SEO from "@/components/seo";
 import SchemaMarkup from "@/components/schema-markup";
-import { ArrowRight, BookOpen, Linkedin, Newspaper } from "lucide-react";
+import { ArrowRight, Linkedin, Newspaper } from "lucide-react";
+import { cn } from "@/lib/utils";
+import FeaturedArticle from "@/components/editorial/featured-article";
+import ArticleCard from "@/components/editorial/article-card";
+import NewsletterSection from "@/components/editorial/newsletter-section";
 
 // Custom Medium icon (lucide-react doesn't have one)
 function MediumIcon({ className }: { className?: string }) {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      className={className}
-      aria-hidden="true"
-    >
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
       <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z" />
     </svg>
   );
 }
 
+type Filter = ColumnSlug | "all";
+
 export default function Writing() {
-  const featuredEssay = getFeaturedEssay();
+  const [filter, setFilter] = useState<Filter>("all");
+
+  const featured = getFeatured();
+  const allArticles = getAllArticles();
+  const showFeatured = filter === "all" && featured;
+
+  const visible = allArticles.filter((a) => {
+    if (filter === "all") return a.id !== featured?.id; // featured shown in hero
+    return (a.column ?? "signal") === filter;
+  });
 
   const writingSchemaData = {
     name: "Ta Khongsap | Writing",
     description:
-      "Essays and insights on AI, software craftsmanship, and the evolving nature of knowledge work.",
+      "Essays and insights on AI developments, agent systems, and the evolving nature of knowledge work.",
     url: "https://tkhongsap.io/writing",
   };
 
@@ -41,109 +52,78 @@ export default function Writing() {
   };
 
   return (
-    <div className="bg-[#FAF9F6] min-h-screen">
+    <div className="bg-bg min-h-screen">
       <SEO
         title="Writing | Ta Khongsap"
-        description="Essays and insights on AI, software craftsmanship, and the evolving nature of knowledge work. Published on Medium and LinkedIn."
+        description="Essays on AI developments, agent systems, and the future of work. Organized into Frontier, Field Notes, and Signal."
         canonicalUrl="/writing"
         type="website"
-        keywords="AI insights, technology analysis, software development, machine learning, data science, AI strategy"
+        keywords="AI insights, AI developments, agent systems, technology analysis, future of work"
       />
       <SchemaMarkup type="website" data={writingSchemaData} />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-20">
+      <section className="pt-32 pb-10 md:pt-40 md:pb-12">
         <div className="editorial-container text-center">
           <h1 className="editorial-headline mb-6">Writing</h1>
-          <p className="editorial-prose max-w-2xl mx-auto text-[#5C5C5C]">
-            Thoughts on AI, technology, and the future of work—published across
-            platforms where ideas find their audience.
+          <p className="editorial-prose max-w-2xl mx-auto">
+            Developments, build logs, and trend analysis from the edge of AI —
+            organized into three columns.
           </p>
         </div>
       </section>
 
-      {/* Featured Essay Section */}
-      {featuredEssay && (
-        <section className="pb-16 md:pb-20">
-          <div className="container max-w-4xl mx-auto px-4 sm:px-6">
-            <div className="text-center mb-8">
-              <span className="inline-flex items-center gap-2 text-sm font-medium text-[#C45B3E] uppercase tracking-wider">
-                <BookOpen className="h-4 w-4" />
-                Featured Essay
-              </span>
-            </div>
-            <Link href={`/essay/${featuredEssay.id}`}>
-              <article className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer border border-[#E8E4DF]">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#C45B3E]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="relative p-8 md:p-12">
-                  <div className="flex items-center gap-3 text-sm text-[#5C5C5C] mb-4">
-                    <span>{featuredEssay.date}</span>
-                    <span className="w-1 h-1 rounded-full bg-[#5C5C5C]" />
-                    <span>{featuredEssay.readingTime}</span>
-                  </div>
-                  <h2 className="font-serif text-2xl md:text-3xl font-semibold text-[#1A1A1A] mb-4 group-hover:text-[#C45B3E] transition-colors duration-300 leading-tight">
-                    {featuredEssay.title}
-                  </h2>
-                  <p className="text-[#5C5C5C] text-lg leading-relaxed mb-6 max-w-3xl">
-                    {featuredEssay.excerpt}
-                  </p>
-                  <span className="inline-flex items-center gap-2 text-[#C45B3E] font-medium group-hover:gap-3 transition-all duration-300">
-                    Read essay
-                    <ArrowRight className="h-4 w-4" />
-                  </span>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#C45B3E] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-              </article>
-            </Link>
+      {/* Filter bar */}
+      <section className="pb-12">
+        <div className="container max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="flex flex-wrap justify-center gap-2 md:gap-4 border-b border-line pb-1">
+            <button
+              className={cn("filter-btn-maximalist", filter === "all" && "active")}
+              onClick={() => setFilter("all")}
+            >
+              All
+            </button>
+            {columns.map((col) => (
+              <button
+                key={col.slug}
+                className={cn("filter-btn-maximalist", filter === col.slug && "active")}
+                onClick={() => setFilter(col.slug)}
+              >
+                {col.name}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured (only on "All") */}
+      {showFeatured && (
+        <section className="pb-14 md:pb-16">
+          <div className="container max-w-5xl mx-auto px-4 sm:px-6">
+            <FeaturedArticle essay={featured} />
           </div>
         </section>
       )}
 
-      {/* More Essays Section */}
-      {essays.filter(essay => !essay.featured).length > 0 && (
-        <section className="pb-16 md:pb-20">
-          <div className="container max-w-4xl mx-auto px-4 sm:px-6">
-            <div className="text-center mb-8">
-              <h2 className="font-serif text-2xl md:text-3xl font-semibold text-[#1A1A1A] mb-4">
-                More Essays
-              </h2>
-              <p className="text-[#5C5C5C] max-w-xl mx-auto">
-                Previous writings on technology, AI, and the future of work.
-              </p>
-            </div>
-            <div className="space-y-6">
-              {essays.filter(essay => !essay.featured).map((essay) => (
-                <Link key={essay.id} href={`/essay/${essay.id}`}>
-                  <article className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer border border-[#E8E4DF]">
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#C45B3E]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    <div className="relative p-6 md:p-8">
-                      <div className="flex items-center gap-3 text-sm text-[#5C5C5C] mb-3">
-                        <span>{essay.date}</span>
-                        <span className="w-1 h-1 rounded-full bg-[#5C5C5C]" />
-                        <span>{essay.readingTime}</span>
-                      </div>
-                      <h3 className="font-serif text-xl md:text-2xl font-semibold text-[#1A1A1A] mb-3 group-hover:text-[#C45B3E] transition-colors duration-300 leading-tight">
-                        {essay.title}
-                      </h3>
-                      <p className="text-[#5C5C5C] leading-relaxed mb-4 line-clamp-2">
-                        {essay.excerpt}
-                      </p>
-                      <span className="inline-flex items-center gap-2 text-[#C45B3E] font-medium group-hover:gap-3 transition-all duration-300">
-                        Read essay
-                        <ArrowRight className="h-4 w-4" />
-                      </span>
-                    </div>
-                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#C45B3E] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-                  </article>
-                </Link>
+      {/* Article grid */}
+      <section className="pb-16 md:pb-20">
+        <div className="container max-w-5xl mx-auto px-4 sm:px-6">
+          {visible.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {visible.map((essay) => (
+                <ArticleCard key={essay.id} essay={essay} />
               ))}
             </div>
-          </div>
-        </section>
-      )}
+          ) : (
+            <p className="text-center text-ink-muted py-12">
+              No pieces in this column yet — more on the way.
+            </p>
+          )}
+        </div>
+      </section>
 
       {/* Divider */}
-      <div className="container max-w-4xl mx-auto px-4 sm:px-6">
+      <div className="container max-w-5xl mx-auto px-4 sm:px-6">
         <div className="divider-subtle" />
       </div>
 
@@ -151,10 +131,10 @@ export default function Writing() {
       <section className="py-16 md:py-20">
         <div className="container max-w-5xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
-            <h2 className="font-serif text-2xl md:text-3xl font-semibold text-[#1A1A1A] mb-4">
+            <h2 className="font-serif text-2xl md:text-3xl font-semibold text-ink mb-4">
               Where I Publish
             </h2>
-            <p className="text-[#5C5C5C] max-w-xl mx-auto">
+            <p className="text-ink-muted max-w-xl mx-auto">
               Follow along on the platforms where I share insights regularly.
             </p>
           </div>
@@ -168,31 +148,22 @@ export default function Writing() {
                 rel="noopener noreferrer"
                 className="group"
               >
-                <article className="relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-[#E8E4DF] h-full flex flex-col">
+                <article className="relative bg-surface rounded-2xl overflow-hidden border border-line hover:border-line-strong transition-all duration-300 h-full flex flex-col">
                   {/* Cover/Header Area */}
                   <div
-                    className="relative h-48 md:h-56 overflow-hidden"
+                    className="relative h-44 md:h-52 overflow-hidden"
                     style={{
-                      background: `linear-gradient(135deg, ${pub.accentColor}15 0%, ${pub.accentColor}05 100%)`,
+                      background: `linear-gradient(135deg, ${pub.accentColor}33 0%, ${pub.accentColor}0D 100%)`,
                     }}
                   >
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div
-                        className="text-6xl md:text-7xl opacity-20 group-hover:opacity-30 group-hover:scale-110 transition-all duration-500"
+                        className="text-6xl md:text-7xl opacity-40 group-hover:opacity-60 group-hover:scale-110 transition-all duration-500"
                         style={{ color: pub.accentColor }}
                       >
                         {getPlatformIcon(pub.platform)}
                       </div>
                     </div>
-                    {/* Decorative elements */}
-                    <div
-                      className="absolute top-4 right-4 w-24 h-24 rounded-full opacity-10"
-                      style={{ backgroundColor: pub.accentColor }}
-                    />
-                    <div
-                      className="absolute bottom-4 left-4 w-16 h-16 rounded-full opacity-5"
-                      style={{ backgroundColor: pub.accentColor }}
-                    />
                     {/* Platform badge */}
                     <div className="absolute top-4 left-4">
                       <span
@@ -207,19 +178,17 @@ export default function Writing() {
 
                   {/* Content */}
                   <div className="p-6 md:p-8 flex-1 flex flex-col">
-                    <h3 className="font-serif text-xl md:text-2xl font-semibold text-[#1A1A1A] mb-3 group-hover:text-[#C45B3E] transition-colors duration-300">
+                    <h3 className="font-serif text-xl md:text-2xl font-semibold text-ink mb-3 group-hover:text-brand-text transition-colors duration-300">
                       {pub.title}
                     </h3>
-                    <p className="text-[#5C5C5C] leading-relaxed mb-6 flex-1">
-                      {pub.synopsis}
-                    </p>
+                    <p className="text-ink-muted leading-relaxed mb-6 flex-1">{pub.synopsis}</p>
 
                     {/* Topic Tags */}
                     <div className="flex flex-wrap gap-2 mb-6">
                       {pub.topics.map((topic) => (
                         <span
                           key={topic}
-                          className="px-3 py-1 text-xs font-medium rounded-full bg-[#FAF9F6] text-[#5C5C5C] border border-[#E8E4DF] group-hover:border-[#C45B3E]/30 group-hover:text-[#C45B3E] transition-colors duration-300"
+                          className="px-3 py-1 text-xs font-medium rounded-full bg-subtle text-ink-muted border border-line"
                         >
                           {topic}
                         </span>
@@ -227,24 +196,14 @@ export default function Writing() {
                     </div>
 
                     {/* CTA */}
-                    <div className="flex items-center justify-between">
-                      <span
-                        className="inline-flex items-center gap-2 font-medium group-hover:gap-3 transition-all duration-300"
-                        style={{ color: pub.accentColor }}
-                      >
-                        {pub.platform === "LinkedIn"
-                          ? "Subscribe on LinkedIn"
-                          : "Read on Medium"}
-                        <ArrowRight className="h-4 w-4" />
-                      </span>
-                    </div>
+                    <span
+                      className="inline-flex items-center gap-2 font-medium group-hover:gap-3 transition-all duration-300"
+                      style={{ color: pub.accentColor }}
+                    >
+                      {pub.platform === "LinkedIn" ? "Subscribe on LinkedIn" : "Read on Medium"}
+                      <ArrowRight className="h-4 w-4" />
+                    </span>
                   </div>
-
-                  {/* Bottom accent bar */}
-                  <div
-                    className="h-1 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"
-                    style={{ backgroundColor: pub.accentColor }}
-                  />
                 </article>
               </a>
             ))}
@@ -252,13 +211,10 @@ export default function Writing() {
         </div>
       </section>
 
-      {/* Closing Note */}
+      {/* Newsletter */}
       <section className="pb-20 md:pb-28">
-        <div className="container max-w-2xl mx-auto px-4 sm:px-6 text-center">
-          <p className="text-[#5C5C5C] italic">
-            New essays and insights published regularly. Follow on your
-            preferred platform to stay updated.
-          </p>
+        <div className="container max-w-5xl mx-auto px-4 sm:px-6">
+          <NewsletterSection />
         </div>
       </section>
     </div>

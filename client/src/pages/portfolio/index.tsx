@@ -21,7 +21,7 @@ export default function Portfolio() {
     : projects.filter((p) => p.category === activeFilter);
 
   return (
-    <div className="bg-[#FAF9F6] min-h-screen">
+    <div className="bg-bg min-h-screen">
       <SEO
         title="Projects | Ta Khongsap"
         description="AI agents, products, and experiments. Things I've built and shipped."
@@ -32,10 +32,10 @@ export default function Portfolio() {
 
       <main className="container max-w-5xl mx-auto px-4 py-24 md:py-32">
         <div className="text-center mb-12">
-          <h1 className="font-serif text-3xl md:text-4xl font-bold text-[#1A1A1A] mb-4">
+          <h1 className="font-serif text-3xl md:text-4xl font-bold text-ink mb-4">
             Projects
           </h1>
-          <p className="text-[#5C5C5C] text-lg max-w-2xl mx-auto">
+          <p className="text-ink-muted text-lg max-w-2xl mx-auto">
             Things I've built — from production apps to agent systems to weekend experiments.
           </p>
         </div>
@@ -48,8 +48,8 @@ export default function Portfolio() {
               onClick={() => setActiveFilter(f.value)}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                 activeFilter === f.value
-                  ? "bg-[#C45B3E] text-white"
-                  : "bg-white text-[#5C5C5C] border border-[#E8E4DF] hover:border-[#C45B3E] hover:text-[#C45B3E]"
+                  ? "bg-brand text-[#0E0E10]"
+                  : "bg-surface text-ink-muted border border-line hover:border-brand hover:text-brand-text"
               }`}
             >
               {f.label}
@@ -70,19 +70,19 @@ export default function Portfolio() {
 
 function ProjectCard({ project }: { project: Project }) {
   return (
-    <div className="bg-white rounded-xl p-6 border border-[#E8E4DF] hover:shadow-md transition-shadow">
+    <div className="bg-surface rounded-xl p-6 border border-line hover:border-line-strong transition-shadow">
       <div className="flex items-start justify-between mb-3">
-        <h3 className="font-serif text-xl font-semibold text-[#1A1A1A]">
+        <h3 className="font-serif text-xl font-semibold text-ink">
           {project.title}
         </h3>
         {project.impactBadge && (
-          <Badge variant="outline" className="text-[#C45B3E] border-[#C45B3E]/30 bg-[#C45B3E]/5 whitespace-nowrap ml-2">
+          <Badge variant="outline" className="text-brand-text border-[#C45B3E]/30 bg-[#C45B3E]/5 whitespace-nowrap ml-2">
             {project.impactBadge}
           </Badge>
         )}
       </div>
 
-      <p className="text-[#5C5C5C] text-sm mb-4 leading-relaxed">
+      <p className="text-ink-muted text-sm mb-4 leading-relaxed">
         {project.shortDescription || project.description}
       </p>
 
@@ -90,7 +90,7 @@ function ProjectCard({ project }: { project: Project }) {
         {project.technologies.map((tech) => (
           <span
             key={tech}
-            className="text-xs px-2 py-1 bg-[#FAF9F6] text-[#5C5C5C] rounded border border-[#E8E4DF]"
+            className="text-xs px-2 py-1 bg-bg text-ink-muted rounded border border-line"
           >
             {tech}
           </span>
@@ -103,7 +103,7 @@ function ProjectCard({ project }: { project: Project }) {
             href={project.demoUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#C45B3E] hover:underline flex items-center"
+            className="text-brand-text hover:underline flex items-center"
           >
             <ExternalLink className="h-3.5 w-3.5 mr-1" /> Demo
           </a>
@@ -113,7 +113,7 @@ function ProjectCard({ project }: { project: Project }) {
             href={project.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#5C5C5C] hover:text-[#C45B3E] flex items-center"
+            className="text-ink-muted hover:text-brand-text flex items-center"
           >
             <Github className="h-3.5 w-3.5 mr-1" /> GitHub
           </a>

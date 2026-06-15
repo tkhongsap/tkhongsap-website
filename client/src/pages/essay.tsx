@@ -1,93 +1,13 @@
 import { useParams, Link } from "wouter";
 import { ArrowLeft, Clock, Calendar, Share2 } from "lucide-react";
 import { getEssayById } from "@/data/essays";
+import { getColumnOrDefault } from "@/data/columns";
 import SEO from "@/components/seo";
 import SchemaMarkup from "@/components/schema-markup";
 import NotFound from "@/pages/not-found";
-
-// Simple markdown-like parser for basic formatting
-function parseContent(content: string): React.ReactNode[] {
-  const lines = content.split('\n\n');
-  const elements: React.ReactNode[] = [];
-
-  lines.forEach((block, index) => {
-    const trimmed = block.trim();
-
-    if (!trimmed) return;
-
-    // Handle headers
-    if (trimmed.startsWith('## ')) {
-      elements.push(
-        <h2 key={index} className="font-serif text-2xl md:text-3xl font-semibold text-[#1A1A1A] mt-12 mb-6">
-          {trimmed.replace('## ', '')}
-        </h2>
-      );
-      return;
-    }
-
-    // Handle bold text with asterisks
-    let text = trimmed;
-    const parts: React.ReactNode[] = [];
-    let lastIndex = 0;
-    const boldRegex = /\*\*([^*]+)\*\*/g;
-    let match;
-
-    while ((match = boldRegex.exec(text)) !== null) {
-      if (match.index > lastIndex) {
-        parts.push(text.slice(lastIndex, match.index));
-      }
-      parts.push(
-        <strong key={`bold-${match.index}`} className="font-semibold text-[#1A1A1A]">
-          {match[1]}
-        </strong>
-      );
-      lastIndex = match.index + match[0].length;
-    }
-
-    if (lastIndex < text.length) {
-      parts.push(text.slice(lastIndex));
-    }
-
-    // Handle italic text with single asterisks
-    const processedParts: React.ReactNode[] = [];
-    parts.forEach((part, partIndex) => {
-      if (typeof part === 'string') {
-        const italicParts: React.ReactNode[] = [];
-        let italicLastIndex = 0;
-        const italicRegex = /\*([^*]+)\*/g;
-        let italicMatch;
-
-        while ((italicMatch = italicRegex.exec(part)) !== null) {
-          if (italicMatch.index > italicLastIndex) {
-            italicParts.push(part.slice(italicLastIndex, italicMatch.index));
-          }
-          italicParts.push(
-            <em key={`italic-${partIndex}-${italicMatch.index}`} className="italic">
-              {italicMatch[1]}
-            </em>
-          );
-          italicLastIndex = italicMatch.index + italicMatch[0].length;
-        }
-
-        if (italicLastIndex < part.length) {
-          italicParts.push(part.slice(italicLastIndex));
-        }
-
-        processedParts.push(...italicParts);
-      } else {
-        processedParts.push(part);
-      }
-    });
-
-    elements.push(
-      <p key={index} className="text-lg md:text-xl leading-relaxed text-[#5C5C5C] mb-6">
-        {processedParts.length > 0 ? processedParts : text}
-      </p>
-    );
-  });
-
-  return elements;
-}
+import ArticleContent from "@/components/article-content";
+import CoverArt from "@/components/editorial/cover-art";
+import ColumnBadge from "@/components/editorial/column-badge";
 
 export default function Essay() {
   const params = useParams();
@@ -98,6 +18,8 @@ export default function Essay() {
   if (!essay) {
     return <NotFound />;
   }
+
+  const accent = essay.coverAccent ?? getColumnOrDefault(essay.column).accent;
 
   const handleShare = async () => {
     if (navigator.share) {
@@ -123,7 +45,7 @@ export default function Essay() {
   };
 
   return (
-    <div className="bg-[#FAF9F6] min-h-screen">
+    <div className="bg-bg min-h-screen">
       <SEO
         title={`${essay.title} | Ta Khongsap`}
         description={essay.excerpt}
@@ -136,20 +58,22 @@ export default function Essay() {
       {/* Back navigation */}
       <div className="pt-28 md:pt-32">
         <div className="container max-w-3xl mx-auto px-4 sm:px-6">
-          <Link href="/">
-            <a className="inline-flex items-center text-[#5C5C5C] hover:text-[#C45B3E] transition-colors text-sm">
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to home
-            </a>
+          <Link
+            href="/writing"
+            className="inline-flex items-center text-ink-muted hover:text-brand-text transition-colors text-sm"
+          >
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Back to writing
           </Link>
         </div>
       </div>
 
       {/* Article Header */}
-      <header className="pt-8 pb-12 md:pt-12 md:pb-16">
+      <header className="pt-8 pb-8 md:pt-12 md:pb-10">
         <div className="container max-w-3xl mx-auto px-4 sm:px-6">
-          {/* Meta info */}
-          <div className="flex flex-wrap items-center gap-4 text-sm text-[#5C5C5C] mb-6">
+          {/* Column + meta info */}
+          <div className="flex flex-wrap items-center gap-4 text-sm text-ink-faint mb-6">
+            <ColumnBadge column={essay.column} size="md" />
             <span className="flex items-center gap-1.5">
               <Calendar className="h-4 w-4" />
               {essay.date}
@@ -160,7 +84,7 @@ export default function Essay() {
             </span>
             <button
               onClick={handleShare}
-              className="flex items-center gap-1.5 hover:text-[#C45B3E] transition-colors ml-auto"
+              className="flex items-center gap-1.5 hover:text-brand-text transition-colors ml-auto"
             >
               <Share2 className="h-4 w-4" />
               Share
@@ -168,52 +92,78 @@ export default function Essay() {
           </div>
 
           {/* Title */}
-          <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl font-semibold text-[#1A1A1A] leading-tight mb-6">
+          <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl font-semibold text-ink leading-tight mb-6">
             {essay.title}
           </h1>
 
           {/* Subtitle */}
           {essay.subtitle && (
-            <p className="text-xl md:text-2xl text-[#5C5C5C] italic leading-relaxed">
+            <p className="text-xl md:text-2xl text-ink-muted italic leading-relaxed">
               {essay.subtitle}
             </p>
+          )}
+
+          {essay.updatedDate && (
+            <p className="text-sm text-ink-faint mt-4">Updated {essay.updatedDate}</p>
           )}
         </div>
       </header>
 
-      {/* Divider */}
-      <div className="container max-w-3xl mx-auto px-4 sm:px-6">
-        <div className="h-px bg-gradient-to-r from-transparent via-[#E8E4DF] to-transparent" />
+      {/* Cover masthead */}
+      <div className="container max-w-4xl mx-auto px-4 sm:px-6 mb-12 md:mb-16">
+        <CoverArt
+          seed={essay.id}
+          label={essay.title}
+          src={essay.coverImage}
+          accent={accent}
+          aspect="hero"
+          priority
+          className="rounded-2xl border border-line"
+        />
       </div>
 
       {/* Article Content */}
-      <article className="py-12 md:py-16">
+      <article className="pb-12 md:pb-16">
         <div className="container max-w-3xl mx-auto px-4 sm:px-6">
-          <div className="prose-custom">
-            {parseContent(essay.content)}
-          </div>
+          <ArticleContent content={essay.content} />
+
+          {/* Tags */}
+          {essay.tags && essay.tags.length > 0 && (
+            <div className="flex flex-wrap gap-2 mt-12">
+              {essay.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="px-3 py-1 text-xs font-medium rounded-full bg-subtle text-ink-muted border border-line"
+                >
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
       </article>
 
       {/* Footer CTA */}
       <section className="pb-20 md:pb-32">
         <div className="container max-w-3xl mx-auto px-4 sm:px-6">
-          <div className="h-px bg-gradient-to-r from-transparent via-[#E8E4DF] to-transparent mb-12" />
+          <div className="h-px bg-gradient-to-r from-transparent via-line to-transparent mb-12" />
 
           <div className="text-center">
-            <p className="text-[#5C5C5C] text-lg mb-6">
+            <p className="text-ink-muted text-lg mb-6">
               Thanks for reading. Want to explore more?
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link href="/writing">
-                <a className="inline-flex items-center px-6 py-3 text-white font-medium bg-[#C45B3E] rounded-lg hover:bg-[#A84832] transition-colors">
-                  More essays
-                </a>
+              <Link
+                href="/writing"
+                className="inline-flex items-center px-6 py-3 text-[#0E0E10] font-medium bg-brand rounded-lg hover:bg-brand-hover transition-colors"
+              >
+                More essays
               </Link>
-              <Link href="/about">
-                <a className="inline-flex items-center px-6 py-3 text-[#1A1A1A] font-medium border border-[#E8E4DF] rounded-lg hover:border-[#C45B3E] hover:text-[#C45B3E] transition-colors">
-                  About me
-                </a>
+              <Link
+                href="/about"
+                className="inline-flex items-center px-6 py-3 text-ink font-medium border border-line rounded-lg hover:border-brand hover:text-brand-text transition-colors"
+              >
+                About me
               </Link>
             </div>
           </div>

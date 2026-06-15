@@ -11,7 +11,8 @@
       "Bash(git add:*)",
       "Bash(git commit -m \"$(cat <<''EOF''\nApply editorial design system across all pages\n\n- Add Source Serif 4 font for editorial headlines\n- Implement terracotta (#C45B3E) accent color palette\n- Create FeaturedArticle component for article cards\n- Update navbar with serif branding and terracotta accents\n- Redesign footer with dark (#1A1A1A) contrast styling\n- Update Writing page with search, filters, and pagination\n- Redesign Portfolio page with editorial project cards\n- Update Contact page with centered form layout\n- Style 404 page with editorial aesthetic\n- Update Confirm/Unsubscribe pages with consistent styling\n- Add editorial CSS utility classes (editorial-card, editorial-headline, etc.)\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
       "Bash(https://api.github.com/repos/tkhongsap/tkhongsap-website/pulls )",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(node -e \"const p=require\\('./package.json'\\); console.log\\(JSON.stringify\\(p.scripts,null,2\\)\\); console.log\\('DEPS:', Object.keys\\(p.dependencies||{}\\).join\\(', '\\)\\)\")"
     ],
     "deny": []
   }

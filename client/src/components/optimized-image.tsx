@@ -40,14 +40,14 @@ export default function OptimizedImage({
     return (
       <div 
         className={cn(
-          "bg-gray-200 flex items-center justify-center", 
+          "bg-surface-2 flex items-center justify-center",
           className
         )}
         style={{ width: width ? `${width}px` : '100%', height: height ? `${height}px` : '100%' }}
         aria-label={alt}
         role="img"
       >
-        <svg className="w-12 h-12 text-gray-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <svg className="w-12 h-12 text-ink-faint" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <rect width="24" height="24" fill="none"/>
           <path d="M4 5H20V19H4V5Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           <path d="M4 5L12 13L20 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>

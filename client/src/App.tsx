@@ -21,12 +21,13 @@ const ConfirmPage = lazy(() => import("@/pages/confirm"));
 const UnsubscribePage = lazy(() => import("@/pages/unsubscribe"));
 const MyThought = lazy(() => import("@/pages/my-thought"));
 const Essay = lazy(() => import("@/pages/essay"));
+const Column = lazy(() => import("@/pages/column"));
 
 // Loading fallback component
 function PageLoader() {
   return (
     <div className="min-h-[60vh] flex items-center justify-center">
-      <div className="animate-pulse text-[#5C5C5C]">Loading...</div>
+      <div className="animate-pulse text-ink-muted">Loading...</div>
     </div>
   );
 }
@@ -53,6 +54,7 @@ function Router() {
         <Route path="/writing" component={Writing} />
         <Route path="/my-thought" component={MyThought} />
         <Route path="/essay/:id" component={Essay} />
+        <Route path="/column/:slug" component={Column} />
         <Route path="/contact" component={Contact} />
         <Route path="/confirm" component={ConfirmPage} />
         <Route path="/unsubscribe" component={UnsubscribePage} />

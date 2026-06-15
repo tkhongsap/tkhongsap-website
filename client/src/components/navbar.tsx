@@ -47,15 +47,15 @@ export default function Navbar() {
 
   return (
     <header className={cn(
-      "fixed w-full bg-white z-50 transition-all duration-200",
-      isScrolled ? "shadow-sm" : ""
+      "fixed w-full bg-bg/80 backdrop-blur-md z-50 transition-all duration-200 border-b",
+      isScrolled ? "border-line-strong" : "border-line/60"
     )}>
       <div className="container">
         <div className="flex justify-between items-center py-6">
           <Link href="/" className="text-2xl font-bold">
-            <span className="font-serif text-[#C45B3E]">Ta</span> <span className="text-[#1A1A1A]">Khongsap</span>
+            <span className="font-serif text-brand-text">Ta</span> <span className="text-ink">Khongsap</span>
           </Link>
-          
+
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-10">
             {navLinks.map((link) => (
@@ -63,25 +63,25 @@ export default function Navbar() {
                 key={link.name}
                 href={link.path}
                 className={cn(
-                  "font-medium text-[#5C5C5C] hover:text-[#C45B3E] transition-colors",
-                  location === link.path && "text-[#C45B3E]"
+                  "font-medium text-ink-muted hover:text-brand-text transition-colors",
+                  location === link.path && "text-brand-text"
                 )}
                 onClick={() => handleLinkClick(link.path)}
               >
                 {link.name}
               </Link>
             ))}
-            <Button asChild variant="default" className="bg-[#C45B3E] hover:bg-[#A84832] text-white rounded-md px-6">
+            <Button asChild variant="default" className="bg-brand hover:bg-brand-hover text-[#0E0E10] rounded-md px-6">
               <Link href="/writing">
                 Read Essays
               </Link>
             </Button>
           </nav>
-          
+
           {/* Mobile Navigation Button */}
           <button
             type="button"
-            className="md:hidden text-[#1A1A1A] focus:outline-none"
+            className="md:hidden text-ink focus:outline-none"
             onClick={toggleMenu}
             aria-label="Toggle menu"
           >
@@ -90,7 +90,7 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Navigation Menu */}
-        <div className={cn("md:hidden overflow-hidden transition-all duration-300",
+        <div className={cn("md:hidden overflow-hidden transition-all duration-300 bg-bg",
           isOpen ? "max-h-96" : "max-h-0"
         )}>
           <div className="flex flex-col space-y-5 pb-6">
@@ -99,15 +99,15 @@ export default function Navbar() {
                 key={link.name}
                 href={link.path}
                 className={cn(
-                  "font-medium text-lg text-[#5C5C5C] hover:text-[#C45B3E] transition-colors",
-                  location === link.path && "text-[#C45B3E]"
+                  "font-medium text-lg text-ink-muted hover:text-brand-text transition-colors",
+                  location === link.path && "text-brand-text"
                 )}
                 onClick={() => handleLinkClick(link.path)}
               >
                 {link.name}
               </Link>
             ))}
-            <Button asChild variant="default" className="bg-[#C45B3E] hover:bg-[#A84832] text-white rounded-md w-full py-3 mt-4">
+            <Button asChild variant="default" className="bg-brand hover:bg-brand-hover text-[#0E0E10] rounded-md w-full py-3 mt-4">
               <Link href="/writing">
                 Read Essays
               </Link>

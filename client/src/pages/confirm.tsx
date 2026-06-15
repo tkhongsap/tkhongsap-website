@@ -142,7 +142,7 @@ export default function ConfirmPage() {
   // If no token is provided, show an error
   if (token === null) {
     return (
-      <div className="bg-[#FAF9F6] min-h-screen pt-32 pb-20">
+      <div className="bg-bg min-h-screen pt-32 pb-20">
         <div className="container max-w-md mx-auto px-4">
           <SEO
             title="Invalid Confirmation Link | Newsletter Subscription"
@@ -154,11 +154,11 @@ export default function ConfirmPage() {
           <SchemaMarkup type="website" data={confirmSchemaData} />
           <Card className="editorial-card">
             <CardHeader>
-              <CardTitle className="font-serif text-2xl text-[#1A1A1A]">Invalid Confirmation</CardTitle>
-              <CardDescription className="text-[#5C5C5C]">No confirmation token was provided.</CardDescription>
+              <CardTitle className="font-serif text-2xl text-ink">Invalid Confirmation</CardTitle>
+              <CardDescription className="text-ink-muted">No confirmation token was provided.</CardDescription>
             </CardHeader>
             <CardContent>
-              <Alert variant="destructive" className="border-red-200 bg-red-50">
+              <Alert variant="destructive" className="border-red-800 bg-red-950/40">
                 <XCircle className="h-4 w-4" />
                 <AlertTitle>Error</AlertTitle>
                 <AlertDescription>
@@ -167,7 +167,7 @@ export default function ConfirmPage() {
               </Alert>
             </CardContent>
             <CardFooter>
-              <Button onClick={() => setLocation('/')} className="bg-[#C45B3E] hover:bg-[#A84832] text-white">Return to Home</Button>
+              <Button onClick={() => setLocation('/')} className="bg-brand hover:bg-brand-hover text-[#0E0E10]">Return to Home</Button>
             </CardFooter>
           </Card>
         </div>
@@ -220,7 +220,7 @@ export default function ConfirmPage() {
   // Show loading state with debug button
   if (isLoading) {
     return (
-      <div className="bg-[#FAF9F6] min-h-screen pt-32 pb-20">
+      <div className="bg-bg min-h-screen pt-32 pb-20">
         <div className="container max-w-md mx-auto px-4">
           <SEO
             title="Confirming Your Subscription | Newsletter"
@@ -232,24 +232,24 @@ export default function ConfirmPage() {
           <SchemaMarkup type="website" data={confirmSchemaData} />
           <Card className="editorial-card">
             <CardHeader>
-              <CardTitle className="font-serif text-2xl text-[#1A1A1A]">Confirming Subscription</CardTitle>
-              <CardDescription className="text-[#5C5C5C]">Please wait while we confirm your subscription...</CardDescription>
+              <CardTitle className="font-serif text-2xl text-ink">Confirming Subscription</CardTitle>
+              <CardDescription className="text-ink-muted">Please wait while we confirm your subscription...</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="flex justify-center py-6">
-                <Loader2 className="h-12 w-12 animate-spin text-[#C45B3E]" />
+                <Loader2 className="h-12 w-12 animate-spin text-brand-text" />
               </div>
 
               <div className="mt-4">
-                <Alert className="border-[#E8E4DF] bg-[#F5F0EB]">
-                  <AlertTitle className="text-[#1A1A1A]">Is the page stuck loading?</AlertTitle>
-                  <AlertDescription className="text-[#5C5C5C]">
+                <Alert className="border-line bg-subtle">
+                  <AlertTitle className="text-ink">Is the page stuck loading?</AlertTitle>
+                  <AlertDescription className="text-ink-muted">
                     Try the manual confirmation button below:
                   </AlertDescription>
                 </Alert>
 
                 <div className="flex justify-center mt-4">
-                  <Button onClick={manuallyConfirm} className="flex items-center gap-2 bg-[#C45B3E] hover:bg-[#A84832] text-white">
+                  <Button onClick={manuallyConfirm} className="flex items-center gap-2 bg-brand hover:bg-brand-hover text-[#0E0E10]">
                     <ExternalLink className="h-4 w-4" />
                     Manually Confirm Subscription
                   </Button>
@@ -257,9 +257,9 @@ export default function ConfirmPage() {
               </div>
 
               {isDevelopment && (
-                <div className="mt-6 p-4 bg-[#F5F0EB] rounded-md text-xs overflow-auto max-h-48">
-                  <p className="font-semibold mb-2 text-[#1A1A1A]">Debug Information:</p>
-                  <pre className="whitespace-pre-wrap text-[#5C5C5C]">{debugInfo}</pre>
+                <div className="mt-6 p-4 bg-subtle rounded-md text-xs overflow-auto max-h-48">
+                  <p className="font-semibold mb-2 text-ink">Debug Information:</p>
+                  <pre className="whitespace-pre-wrap text-ink-muted">{debugInfo}</pre>
                 </div>
               )}
             </CardContent>
@@ -276,7 +276,7 @@ export default function ConfirmPage() {
       : 'An error occurred while confirming your subscription.';
 
     return (
-      <div className="bg-[#FAF9F6] min-h-screen pt-32 pb-20">
+      <div className="bg-bg min-h-screen pt-32 pb-20">
         <div className="container max-w-md mx-auto px-4">
           <SEO
             title="Confirmation Failed | Newsletter Subscription"
@@ -288,26 +288,26 @@ export default function ConfirmPage() {
           <SchemaMarkup type="website" data={confirmSchemaData} />
           <Card className="editorial-card">
             <CardHeader>
-              <CardTitle className="font-serif text-2xl text-[#1A1A1A]">Confirmation Failed</CardTitle>
-              <CardDescription className="text-[#5C5C5C]">We couldn't confirm your subscription.</CardDescription>
+              <CardTitle className="font-serif text-2xl text-ink">Confirmation Failed</CardTitle>
+              <CardDescription className="text-ink-muted">We couldn't confirm your subscription.</CardDescription>
             </CardHeader>
             <CardContent>
-              <Alert variant="destructive" className="border-red-200 bg-red-50">
+              <Alert variant="destructive" className="border-red-800 bg-red-950/40">
                 <XCircle className="h-4 w-4" />
                 <AlertTitle>Error</AlertTitle>
                 <AlertDescription>{errorMessage}</AlertDescription>
               </Alert>
 
               <div className="mt-4">
-                <Alert className="border-[#E8E4DF] bg-[#F5F0EB]">
-                  <AlertTitle className="text-[#1A1A1A]">Try Manual Confirmation</AlertTitle>
-                  <AlertDescription className="text-[#5C5C5C]">
+                <Alert className="border-line bg-subtle">
+                  <AlertTitle className="text-ink">Try Manual Confirmation</AlertTitle>
+                  <AlertDescription className="text-ink-muted">
                     The automatic confirmation failed. Try the manual confirmation button:
                   </AlertDescription>
                 </Alert>
 
                 <div className="flex justify-center mt-4">
-                  <Button onClick={manuallyConfirm} className="flex items-center gap-2 bg-[#C45B3E] hover:bg-[#A84832] text-white">
+                  <Button onClick={manuallyConfirm} className="flex items-center gap-2 bg-brand hover:bg-brand-hover text-[#0E0E10]">
                     <ExternalLink className="h-4 w-4" />
                     Manually Confirm Subscription
                   </Button>
@@ -315,14 +315,14 @@ export default function ConfirmPage() {
               </div>
 
               {isDevelopment && (
-                <div className="mt-6 p-4 bg-[#F5F0EB] rounded-md text-xs overflow-auto max-h-48">
-                  <p className="font-semibold mb-2 text-[#1A1A1A]">Debug Information:</p>
-                  <pre className="whitespace-pre-wrap text-[#5C5C5C]">{debugInfo}</pre>
+                <div className="mt-6 p-4 bg-subtle rounded-md text-xs overflow-auto max-h-48">
+                  <p className="font-semibold mb-2 text-ink">Debug Information:</p>
+                  <pre className="whitespace-pre-wrap text-ink-muted">{debugInfo}</pre>
                 </div>
               )}
             </CardContent>
             <CardFooter>
-              <Button onClick={() => setLocation('/')} className="bg-[#C45B3E] hover:bg-[#A84832] text-white">Return to Home</Button>
+              <Button onClick={() => setLocation('/')} className="bg-brand hover:bg-brand-hover text-[#0E0E10]">Return to Home</Button>
             </CardFooter>
           </Card>
         </div>
@@ -332,7 +332,7 @@ export default function ConfirmPage() {
   
   // Show success state
   return (
-    <div className="bg-[#FAF9F6] min-h-screen pt-32 pb-20">
+    <div className="bg-bg min-h-screen pt-32 pb-20">
       <div className="container max-w-md mx-auto px-4">
         <SEO
           title="Subscription Confirmed | Newsletter Success"
@@ -344,26 +344,26 @@ export default function ConfirmPage() {
         <SchemaMarkup type="website" data={confirmSchemaData} />
         <Card className="editorial-card">
           <CardHeader>
-            <CardTitle className="font-serif text-2xl text-[#1A1A1A]">Subscription Confirmed!</CardTitle>
-            <CardDescription className="text-[#5C5C5C]">You're now subscribed to my newsletter.</CardDescription>
+            <CardTitle className="font-serif text-2xl text-ink">Subscription Confirmed!</CardTitle>
+            <CardDescription className="text-ink-muted">You're now subscribed to my newsletter.</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="flex flex-col items-center py-6">
-              <CheckCircle2 className="h-16 w-16 text-[#C45B3E] mb-4" />
-              <p className="text-center mb-4 text-[#1A1A1A]">
+              <CheckCircle2 className="h-16 w-16 text-brand-text mb-4" />
+              <p className="text-center mb-4 text-ink">
                 Thank you for confirming your subscription! You'll now receive updates and insights straight to your inbox.
               </p>
             </div>
 
             {isDevelopment && (
-              <div className="mt-6 p-4 bg-[#F5F0EB] rounded-md text-xs overflow-auto max-h-48">
-                <p className="font-semibold mb-2 text-[#1A1A1A]">Debug Information:</p>
-                <pre className="whitespace-pre-wrap text-[#5C5C5C]">{debugInfo}</pre>
+              <div className="mt-6 p-4 bg-subtle rounded-md text-xs overflow-auto max-h-48">
+                <p className="font-semibold mb-2 text-ink">Debug Information:</p>
+                <pre className="whitespace-pre-wrap text-ink-muted">{debugInfo}</pre>
               </div>
             )}
           </CardContent>
           <CardFooter>
-            <Button onClick={() => setLocation('/')} className="bg-[#C45B3E] hover:bg-[#A84832] text-white">Return to Home</Button>
+            <Button onClick={() => setLocation('/')} className="bg-brand hover:bg-brand-hover text-[#0E0E10]">Return to Home</Button>
           </CardFooter>
         </Card>
       </div>

@@ -5,16 +5,16 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#1A1A1A] text-white py-16">
+    <footer className="bg-surface text-ink py-16 border-t border-line">
       <div className="container max-w-5xl mx-auto px-4 sm:px-6">
         {/* Top Section */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-10">
           <div className="mb-6 md:mb-0 text-center md:text-left">
             <h2 className="text-xl font-bold">
-              <span className="font-serif text-[#C45B3E]">Ta</span>{" "}
-              <span className="text-white">Khongsap</span>
+              <span className="font-serif text-brand-text">Ta</span>{" "}
+              <span className="text-ink">Khongsap</span>
             </h2>
-            <p className="text-gray-400 text-sm mt-1">
+            <p className="text-ink-muted text-sm mt-1">
               Building AI systems that work while I sleep
             </p>
           </div>
@@ -25,7 +25,7 @@ export default function Footer() {
               href="https://x.com/tkhongsap"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-[#C45B3E] transition-colors"
+              className="text-ink-muted hover:text-brand-text transition-colors"
               aria-label="X (Twitter)"
             >
               <Twitter size={20} />
@@ -34,7 +34,7 @@ export default function Footer() {
               href="https://linkedin.com/in/totrakool-khongsap"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-[#C45B3E] transition-colors"
+              className="text-ink-muted hover:text-brand-text transition-colors"
               aria-label="LinkedIn"
             >
               <Linkedin size={20} />
@@ -43,14 +43,14 @@ export default function Footer() {
               href="https://github.com/tkhongsap"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-[#C45B3E] transition-colors"
+              className="text-ink-muted hover:text-brand-text transition-colors"
               aria-label="GitHub"
             >
               <Github size={20} />
             </a>
             <a
               href="mailto:ta.khongsap@gmail.com"
-              className="text-gray-400 hover:text-[#C45B3E] transition-colors"
+              className="text-ink-muted hover:text-brand-text transition-colors"
               aria-label="Email"
             >
               <Mail size={20} />
@@ -59,9 +59,9 @@ export default function Footer() {
         </div>
 
         {/* Divider */}
-        <div className="border-t border-gray-800 pt-8">
+        <div className="border-t border-line pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-gray-500 text-sm">
+            <p className="text-ink-faint text-sm">
               &copy; {currentYear} Ta Khongsap
             </p>
 
@@ -69,25 +69,25 @@ export default function Footer() {
             <nav className="flex items-center gap-6 text-sm">
               <Link
                 href="/"
-                className="text-gray-400 hover:text-[#C45B3E] transition-colors"
+                className="text-ink-muted hover:text-brand-text transition-colors"
               >
                 Home
               </Link>
               <Link
                 href="/portfolio"
-                className="text-gray-400 hover:text-[#C45B3E] transition-colors"
+                className="text-ink-muted hover:text-brand-text transition-colors"
               >
                 Projects
               </Link>
               <Link
                 href="/writing"
-                className="text-gray-400 hover:text-[#C45B3E] transition-colors"
+                className="text-ink-muted hover:text-brand-text transition-colors"
               >
                 Writing
               </Link>
               <Link
                 href="/about"
-                className="text-gray-400 hover:text-[#C45B3E] transition-colors"
+                className="text-ink-muted hover:text-brand-text transition-colors"
               >
                 About
               </Link>

@@ -121,13 +121,13 @@ export default function Portfolio() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
             {/* Main headline - takes up most space */}
             <div className="lg:col-span-8">
-              <span className="inline-block text-[#C45B3E] font-sans text-sm font-medium tracking-widest uppercase mb-6 animate-fade-in-up">
+              <span className="inline-block text-brand-text font-sans text-sm font-medium tracking-widest uppercase mb-6 animate-fade-in-up">
                 The Workshop
               </span>
               <h1 className="maximalist-headline decorative-line animate-fade-in-up delay-100">
                 Built After
                 <br />
-                <span className="italic text-[#C45B3E]">Hours</span>
+                <span className="italic text-brand-text">Hours</span>
               </h1>
             </div>
 
@@ -146,14 +146,14 @@ export default function Portfolio() {
       <section className="py-16 md:py-24 relative z-10">
         <div className="container max-w-6xl mx-auto px-6 md:px-8">
           <div className="text-center mb-12 md:mb-16">
-            <span className="inline-block text-[#C45B3E] font-sans text-sm font-medium tracking-widest uppercase mb-4 animate-fade-in-up">
+            <span className="inline-block text-brand-text font-sans text-sm font-medium tracking-widest uppercase mb-4 animate-fade-in-up">
               The Foundation
             </span>
-            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-[#1A1A1A] animate-fade-in-up delay-100">
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-ink animate-fade-in-up delay-100">
               From Mathematics to{" "}
-              <span className="italic text-[#C45B3E]">Business Impact</span>
+              <span className="italic text-brand-text">Business Impact</span>
             </h2>
-            <p className="mt-4 max-w-2xl mx-auto text-[#5C5C5C] font-sans text-lg animate-fade-in-up delay-200">
+            <p className="mt-4 max-w-2xl mx-auto text-ink-muted font-sans text-lg animate-fade-in-up delay-200">
               Academic rigor meets real-world constraints. Here's how mathematical thinking translates into systems that work.
             </p>
           </div>
@@ -217,7 +217,7 @@ export default function Portfolio() {
 
           {filteredProjects.length === 0 && (
             <div className="text-center py-20">
-              <p className="font-display text-2xl text-[#5C5C5C] italic">
+              <p className="font-display text-2xl text-ink-muted italic">
                 No projects found in this category.
               </p>
             </div>
@@ -226,17 +226,17 @@ export default function Portfolio() {
       </section>
 
       {/* Who I Usually Help Section */}
-      <section className="py-16 md:py-24 relative z-10 bg-[#F5F0EB]/50">
+      <section className="py-16 md:py-24 relative z-10 bg-[#1C1C21]/50">
         <div className="container max-w-6xl mx-auto px-6 md:px-8">
           <div className="text-center mb-12 md:mb-16">
-            <span className="inline-block text-[#C45B3E] font-sans text-sm font-medium tracking-widest uppercase mb-4 animate-fade-in-up">
+            <span className="inline-block text-brand-text font-sans text-sm font-medium tracking-widest uppercase mb-4 animate-fade-in-up">
               Who I Work With
             </span>
-            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-[#1A1A1A] animate-fade-in-up delay-100">
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-ink animate-fade-in-up delay-100">
               Who I Usually{" "}
-              <span className="italic text-[#C45B3E]">Help</span>
+              <span className="italic text-brand-text">Help</span>
             </h2>
-            <p className="mt-4 max-w-2xl mx-auto text-[#5C5C5C] font-sans text-lg animate-fade-in-up delay-200">
+            <p className="mt-4 max-w-2xl mx-auto text-ink-muted font-sans text-lg animate-fade-in-up delay-200">
               Three types of teams that get the most value from working with me.
             </p>
           </div>

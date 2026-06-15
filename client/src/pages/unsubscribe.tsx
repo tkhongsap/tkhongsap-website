@@ -105,7 +105,7 @@ export default function UnsubscribePage() {
   // If no token is provided, show an error
   if (token === null) {
     return (
-      <div className="bg-[#FAF9F6] min-h-screen pt-32 pb-20">
+      <div className="bg-bg min-h-screen pt-32 pb-20">
         <div className="container max-w-md mx-auto px-4">
           <SEO
             title="Invalid Unsubscribe Link | Newsletter Management"
@@ -117,11 +117,11 @@ export default function UnsubscribePage() {
           <SchemaMarkup type="website" data={unsubscribeSchemaData} />
           <Card className="editorial-card">
             <CardHeader>
-              <CardTitle className="font-serif text-2xl text-[#1A1A1A]">Invalid Unsubscribe Link</CardTitle>
-              <CardDescription className="text-[#5C5C5C]">No unsubscribe token was provided.</CardDescription>
+              <CardTitle className="font-serif text-2xl text-ink">Invalid Unsubscribe Link</CardTitle>
+              <CardDescription className="text-ink-muted">No unsubscribe token was provided.</CardDescription>
             </CardHeader>
             <CardContent>
-              <Alert variant="destructive" className="border-red-200 bg-red-50">
+              <Alert variant="destructive" className="border-red-800 bg-red-950/40">
                 <XCircle className="h-4 w-4" />
                 <AlertTitle>Error</AlertTitle>
                 <AlertDescription>
@@ -130,7 +130,7 @@ export default function UnsubscribePage() {
               </Alert>
             </CardContent>
             <CardFooter>
-              <Button onClick={() => setLocation('/')} className="bg-[#C45B3E] hover:bg-[#A84832] text-white">Return to Home</Button>
+              <Button onClick={() => setLocation('/')} className="bg-brand hover:bg-brand-hover text-[#0E0E10]">Return to Home</Button>
             </CardFooter>
           </Card>
         </div>
@@ -175,7 +175,7 @@ export default function UnsubscribePage() {
   // Show loading state
   if (isLoading) {
     return (
-      <div className="bg-[#FAF9F6] min-h-screen pt-32 pb-20">
+      <div className="bg-bg min-h-screen pt-32 pb-20">
         <div className="container max-w-md mx-auto px-4">
           <SEO
             title="Processing Unsubscribe Request | Newsletter Management"
@@ -187,33 +187,33 @@ export default function UnsubscribePage() {
           <SchemaMarkup type="website" data={unsubscribeSchemaData} />
           <Card className="editorial-card">
             <CardHeader>
-              <CardTitle className="font-serif text-2xl text-[#1A1A1A]">Processing Unsubscribe Request</CardTitle>
-              <CardDescription className="text-[#5C5C5C]">Please wait while we process your request...</CardDescription>
+              <CardTitle className="font-serif text-2xl text-ink">Processing Unsubscribe Request</CardTitle>
+              <CardDescription className="text-ink-muted">Please wait while we process your request...</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="flex justify-center py-6">
-                <Loader2 className="h-12 w-12 animate-spin text-[#C45B3E]" />
+                <Loader2 className="h-12 w-12 animate-spin text-brand-text" />
               </div>
 
               <div className="mt-4">
-                <Alert className="border-[#E8E4DF] bg-[#F5F0EB]">
-                  <AlertTitle className="text-[#1A1A1A]">Is the page stuck loading?</AlertTitle>
-                  <AlertDescription className="text-[#5C5C5C]">
+                <Alert className="border-line bg-subtle">
+                  <AlertTitle className="text-ink">Is the page stuck loading?</AlertTitle>
+                  <AlertDescription className="text-ink-muted">
                     Try the manual unsubscribe button below:
                   </AlertDescription>
                 </Alert>
 
                 <div className="flex justify-center mt-4">
-                  <Button onClick={manuallyUnsubscribe} className="bg-[#C45B3E] hover:bg-[#A84832] text-white">
+                  <Button onClick={manuallyUnsubscribe} className="bg-brand hover:bg-brand-hover text-[#0E0E10]">
                     Manually Unsubscribe
                   </Button>
                 </div>
               </div>
 
               {isDevelopment && (
-                <div className="mt-6 p-4 bg-[#F5F0EB] rounded-md text-xs overflow-auto max-h-48">
-                  <p className="font-semibold mb-2 text-[#1A1A1A]">Debug Information:</p>
-                  <pre className="whitespace-pre-wrap text-[#5C5C5C]">{debugInfo}</pre>
+                <div className="mt-6 p-4 bg-subtle rounded-md text-xs overflow-auto max-h-48">
+                  <p className="font-semibold mb-2 text-ink">Debug Information:</p>
+                  <pre className="whitespace-pre-wrap text-ink-muted">{debugInfo}</pre>
                 </div>
               )}
             </CardContent>
@@ -230,7 +230,7 @@ export default function UnsubscribePage() {
       : 'An error occurred while processing your unsubscribe request.';
 
     return (
-      <div className="bg-[#FAF9F6] min-h-screen pt-32 pb-20">
+      <div className="bg-bg min-h-screen pt-32 pb-20">
         <div className="container max-w-md mx-auto px-4">
           <SEO
             title="Unsubscribe Failed | Newsletter Management"
@@ -242,40 +242,40 @@ export default function UnsubscribePage() {
           <SchemaMarkup type="website" data={unsubscribeSchemaData} />
           <Card className="editorial-card">
             <CardHeader>
-              <CardTitle className="font-serif text-2xl text-[#1A1A1A]">Unsubscribe Failed</CardTitle>
-              <CardDescription className="text-[#5C5C5C]">We couldn't process your unsubscribe request.</CardDescription>
+              <CardTitle className="font-serif text-2xl text-ink">Unsubscribe Failed</CardTitle>
+              <CardDescription className="text-ink-muted">We couldn't process your unsubscribe request.</CardDescription>
             </CardHeader>
             <CardContent>
-              <Alert variant="destructive" className="border-red-200 bg-red-50">
+              <Alert variant="destructive" className="border-red-800 bg-red-950/40">
                 <XCircle className="h-4 w-4" />
                 <AlertTitle>Error</AlertTitle>
                 <AlertDescription>{errorMessage}</AlertDescription>
               </Alert>
 
               <div className="mt-4">
-                <Alert className="border-[#E8E4DF] bg-[#F5F0EB]">
-                  <AlertTitle className="text-[#1A1A1A]">Try Manual Unsubscribe</AlertTitle>
-                  <AlertDescription className="text-[#5C5C5C]">
+                <Alert className="border-line bg-subtle">
+                  <AlertTitle className="text-ink">Try Manual Unsubscribe</AlertTitle>
+                  <AlertDescription className="text-ink-muted">
                     The automatic unsubscribe failed. Try the manual unsubscribe button:
                   </AlertDescription>
                 </Alert>
 
                 <div className="flex justify-center mt-4">
-                  <Button onClick={manuallyUnsubscribe} className="bg-[#C45B3E] hover:bg-[#A84832] text-white">
+                  <Button onClick={manuallyUnsubscribe} className="bg-brand hover:bg-brand-hover text-[#0E0E10]">
                     Manually Unsubscribe
                   </Button>
                 </div>
               </div>
 
               {isDevelopment && (
-                <div className="mt-6 p-4 bg-[#F5F0EB] rounded-md text-xs overflow-auto max-h-48">
-                  <p className="font-semibold mb-2 text-[#1A1A1A]">Debug Information:</p>
-                  <pre className="whitespace-pre-wrap text-[#5C5C5C]">{debugInfo}</pre>
+                <div className="mt-6 p-4 bg-subtle rounded-md text-xs overflow-auto max-h-48">
+                  <p className="font-semibold mb-2 text-ink">Debug Information:</p>
+                  <pre className="whitespace-pre-wrap text-ink-muted">{debugInfo}</pre>
                 </div>
               )}
             </CardContent>
             <CardFooter>
-              <Button onClick={() => setLocation('/')} className="bg-[#C45B3E] hover:bg-[#A84832] text-white">Return to Home</Button>
+              <Button onClick={() => setLocation('/')} className="bg-brand hover:bg-brand-hover text-[#0E0E10]">Return to Home</Button>
             </CardFooter>
           </Card>
         </div>
@@ -285,7 +285,7 @@ export default function UnsubscribePage() {
   
   // Show success state
   return (
-    <div className="bg-[#FAF9F6] min-h-screen pt-32 pb-20">
+    <div className="bg-bg min-h-screen pt-32 pb-20">
       <div className="container max-w-md mx-auto px-4">
         <SEO
           title="Successfully Unsubscribed | Newsletter Management"
@@ -297,31 +297,31 @@ export default function UnsubscribePage() {
         <SchemaMarkup type="website" data={unsubscribeSchemaData} />
         <Card className="editorial-card">
           <CardHeader>
-            <CardTitle className="font-serif text-2xl text-[#1A1A1A]">Successfully Unsubscribed</CardTitle>
-            <CardDescription className="text-[#5C5C5C]">You have been removed from the newsletter.</CardDescription>
+            <CardTitle className="font-serif text-2xl text-ink">Successfully Unsubscribed</CardTitle>
+            <CardDescription className="text-ink-muted">You have been removed from the newsletter.</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="flex flex-col items-center py-6">
-              <CheckCircle2 className="h-16 w-16 text-[#C45B3E] mb-4" />
-              <p className="text-center mb-4 text-[#1A1A1A]">
+              <CheckCircle2 className="h-16 w-16 text-brand-text mb-4" />
+              <p className="text-center mb-4 text-ink">
                 You have successfully unsubscribed from the newsletter.
                 You will no longer receive any emails from us.
               </p>
-              <p className="text-center text-[#5C5C5C] text-sm">
+              <p className="text-center text-ink-muted text-sm">
                 We're sorry to see you go. If you have any feedback on how we could improve,
                 please feel free to reach out.
               </p>
             </div>
 
             {isDevelopment && (
-              <div className="mt-6 p-4 bg-[#F5F0EB] rounded-md text-xs overflow-auto max-h-48">
-                <p className="font-semibold mb-2 text-[#1A1A1A]">Debug Information:</p>
-                <pre className="whitespace-pre-wrap text-[#5C5C5C]">{debugInfo}</pre>
+              <div className="mt-6 p-4 bg-subtle rounded-md text-xs overflow-auto max-h-48">
+                <p className="font-semibold mb-2 text-ink">Debug Information:</p>
+                <pre className="whitespace-pre-wrap text-ink-muted">{debugInfo}</pre>
               </div>
             )}
           </CardContent>
           <CardFooter>
-            <Button onClick={() => setLocation('/')} className="bg-[#C45B3E] hover:bg-[#A84832] text-white">Return to Home</Button>
+            <Button onClick={() => setLocation('/')} className="bg-brand hover:bg-brand-hover text-[#0E0E10]">Return to Home</Button>
           </CardFooter>
         </Card>
       </div>

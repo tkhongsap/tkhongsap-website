@@ -104,10 +104,10 @@ export default function NewsletterForm({
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input 
-                      placeholder="Your name" 
-                      className="w-full px-4 py-3 rounded-md border border-gray-300 focus:border-primary focus:ring-primary" 
-                      {...field} 
+                    <Input
+                      placeholder="Your name"
+                      className="w-full px-4 py-3 rounded-md border border-line focus:border-primary focus:ring-primary"
+                      {...field}
                     />
                   </FormControl>
                   <FormMessage />
@@ -127,15 +127,15 @@ export default function NewsletterForm({
                   <FormControl>
                     <div className="relative">
                       {!showNameField && (
-                        <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                        <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-ink-faint">
                           <Mail className="h-5 w-5" />
                         </span>
                       )}
-                      <Input 
-                        placeholder="Your email address" 
-                        className={`w-full rounded-md border border-gray-300 focus:border-primary focus:ring-primary ${!showNameField ? 'pl-10 py-3' : 'px-4 py-3'}`}
-                        {...field} 
-                        required 
+                      <Input
+                        placeholder="Your email address"
+                        className={`w-full rounded-md border border-line focus:border-primary focus:ring-primary ${!showNameField ? 'pl-10 py-3' : 'px-4 py-3'}`}
+                        {...field}
+                        required
                       />
                     </div>
                   </FormControl>
@@ -145,9 +145,9 @@ export default function NewsletterForm({
             />
           </div>
 
-          <Button 
-            type="submit" 
-            className={`bg-primary hover:bg-primary/90 text-white font-medium ${showNameField ? 'w-full py-3' : 'py-3 px-6'}`}
+          <Button
+            type="submit"
+            className={`bg-brand hover:bg-brand-hover text-[#0E0E10] font-medium ${showNameField ? 'w-full py-3' : 'py-3 px-6'}`}
             disabled={isSubmitting}
           >
             {isSubmitting ? "Subscribing..." : "Subscribe"}
@@ -155,7 +155,7 @@ export default function NewsletterForm({
         </div>
         
         {showNameField && (
-          <p className="text-sm text-[#666666] mt-4 text-center">
+          <p className="text-sm text-ink-muted mt-4 text-center">
             I respect your privacy. Unsubscribe at any time.
           </p>
         )}

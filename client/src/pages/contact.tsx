@@ -90,7 +90,7 @@ export default function Contact() {
       />
       <SchemaMarkup type="website" data={contactSchemaData} />
 
-      <div className="bg-[#FAF9F6] min-h-screen">
+      <div className="bg-bg min-h-screen">
         {/* Hero Section */}
         <section className="pt-32 pb-12 md:pt-40 md:pb-16">
           <div className="editorial-container text-center">
@@ -108,7 +108,7 @@ export default function Contact() {
             <div className="flex flex-wrap justify-center gap-6">
               <a
                 href="mailto:ta.khongsap@gmail.com"
-                className="flex items-center gap-3 px-6 py-3 bg-white rounded-lg border border-[#E8E4DF] text-[#5C5C5C] hover:border-[#C45B3E] hover:text-[#C45B3E] transition-colors"
+                className="flex items-center gap-3 px-6 py-3 bg-surface rounded-lg border border-line text-ink-muted hover:border-brand hover:text-brand-text transition-colors"
               >
                 <Mail className="h-5 w-5" />
                 <span className="font-medium">Email</span>
@@ -118,7 +118,7 @@ export default function Contact() {
                 href="https://linkedin.com/in/totrakool-k-b504a912"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 px-6 py-3 bg-white rounded-lg border border-[#E8E4DF] text-[#5C5C5C] hover:border-[#C45B3E] hover:text-[#C45B3E] transition-colors"
+                className="flex items-center gap-3 px-6 py-3 bg-surface rounded-lg border border-line text-ink-muted hover:border-brand hover:text-brand-text transition-colors"
               >
                 <Linkedin className="h-5 w-5" />
                 <span className="font-medium">LinkedIn</span>
@@ -128,7 +128,7 @@ export default function Contact() {
                 href="https://calendly.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 px-6 py-3 bg-white rounded-lg border border-[#E8E4DF] text-[#5C5C5C] hover:border-[#C45B3E] hover:text-[#C45B3E] transition-colors"
+                className="flex items-center gap-3 px-6 py-3 bg-surface rounded-lg border border-line text-ink-muted hover:border-brand hover:text-brand-text transition-colors"
               >
                 <Calendar className="h-5 w-5" />
                 <span className="font-medium">Schedule</span>
@@ -147,9 +147,9 @@ export default function Contact() {
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="bg-white p-8 rounded-xl editorial-card"
+                className="bg-surface p-8 rounded-xl editorial-card"
               >
-                <h2 className="font-serif text-2xl font-semibold text-[#1A1A1A] mb-6 text-center">
+                <h2 className="font-serif text-2xl font-semibold text-ink mb-6 text-center">
                   Send a Message
                 </h2>
 
@@ -158,13 +158,13 @@ export default function Contact() {
                   name="name"
                   render={({ field }) => (
                     <FormItem className="mb-5">
-                      <FormLabel className="text-[#1A1A1A] font-medium text-sm">
+                      <FormLabel className="text-ink font-medium text-sm">
                         Name
                       </FormLabel>
                       <FormControl>
                         <Input
                           placeholder="Your name"
-                          className="w-full px-4 py-3 bg-white border border-[#E8E4DF] rounded-lg text-[#1A1A1A] placeholder-[#5C5C5C] focus:outline-none focus:ring-2 focus:ring-[#C45B3E]/30 focus:border-[#C45B3E]"
+                          className="w-full px-4 py-3 bg-surface border border-line rounded-lg text-ink placeholder-ink-muted focus:outline-none focus:ring-2 focus:ring-[#C45B3E]/30 focus:border-brand"
                           {...field}
                         />
                       </FormControl>
@@ -178,13 +178,13 @@ export default function Contact() {
                   name="email"
                   render={({ field }) => (
                     <FormItem className="mb-5">
-                      <FormLabel className="text-[#1A1A1A] font-medium text-sm">
+                      <FormLabel className="text-ink font-medium text-sm">
                         Email
                       </FormLabel>
                       <FormControl>
                         <Input
                           placeholder="your@email.com"
-                          className="w-full px-4 py-3 bg-white border border-[#E8E4DF] rounded-lg text-[#1A1A1A] placeholder-[#5C5C5C] focus:outline-none focus:ring-2 focus:ring-[#C45B3E]/30 focus:border-[#C45B3E]"
+                          className="w-full px-4 py-3 bg-surface border border-line rounded-lg text-ink placeholder-ink-muted focus:outline-none focus:ring-2 focus:ring-[#C45B3E]/30 focus:border-brand"
                           {...field}
                         />
                       </FormControl>
@@ -198,13 +198,13 @@ export default function Contact() {
                   name="message"
                   render={({ field }) => (
                     <FormItem className="mb-6">
-                      <FormLabel className="text-[#1A1A1A] font-medium text-sm">
+                      <FormLabel className="text-ink font-medium text-sm">
                         Message
                       </FormLabel>
                       <FormControl>
                         <Textarea
                           placeholder="What would you like to discuss?"
-                          className="w-full px-4 py-3 bg-white border border-[#E8E4DF] rounded-lg text-[#1A1A1A] placeholder-[#5C5C5C] focus:outline-none focus:ring-2 focus:ring-[#C45B3E]/30 focus:border-[#C45B3E] resize-none"
+                          className="w-full px-4 py-3 bg-surface border border-line rounded-lg text-ink placeholder-ink-muted focus:outline-none focus:ring-2 focus:ring-[#C45B3E]/30 focus:border-brand resize-none"
                           rows={5}
                           {...field}
                         />
@@ -216,7 +216,7 @@ export default function Contact() {
 
                 <Button
                   type="submit"
-                  className="w-full py-3 bg-[#C45B3E] hover:bg-[#A84832] text-white font-medium rounded-lg transition-colors"
+                  className="w-full py-3 bg-brand hover:bg-brand-hover text-[#0E0E10] font-medium rounded-lg transition-colors"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? "Sending..." : "Send Message"}

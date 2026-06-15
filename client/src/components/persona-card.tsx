@@ -17,21 +17,21 @@ export default function PersonaCard({
 }: PersonaCardProps) {
   return (
     <div
-      className="group p-6 md:p-8 bg-white rounded-xl border border-[#E8E4DF] hover:border-[#C45B3E]/40 hover:shadow-lg transition-all duration-300 animate-fade-in-up h-full flex flex-col"
+      className="group p-6 md:p-8 bg-surface rounded-xl border border-line hover:border-[#C45B3E]/40 transition-all duration-300 animate-fade-in-up h-full flex flex-col"
       style={{ animationDelay: `${(index + 1) * 100}ms` }}
     >
       {/* Icon */}
-      <div className="w-14 h-14 rounded-full bg-[#F5F0EB] flex items-center justify-center mb-5 group-hover:bg-[#C45B3E]/10 transition-colors duration-300">
-        <Icon className="w-7 h-7 text-[#C45B3E]" />
+      <div className="w-14 h-14 rounded-full bg-subtle flex items-center justify-center mb-5 group-hover:bg-[#C45B3E]/10 transition-colors duration-300">
+        <Icon className="w-7 h-7 text-brand-text" />
       </div>
 
       {/* Title */}
-      <h3 className="font-serif text-xl md:text-2xl font-semibold text-[#1A1A1A] mb-3">
+      <h3 className="font-serif text-xl md:text-2xl font-semibold text-ink mb-3">
         {title}
       </h3>
 
       {/* Pain Point */}
-      <p className="text-[#5C5C5C] text-sm md:text-base leading-relaxed mb-4">
+      <p className="text-ink-muted text-sm md:text-base leading-relaxed mb-4">
         {painPoint}
       </p>
 
@@ -40,10 +40,10 @@ export default function PersonaCard({
 
       {/* What I Do */}
       <div>
-        <span className="text-xs font-semibold text-[#C45B3E] uppercase tracking-wider">
+        <span className="text-xs font-semibold text-brand-text uppercase tracking-wider">
           What I do
         </span>
-        <p className="mt-1 text-[#1A1A1A] text-sm md:text-base font-medium leading-relaxed">
+        <p className="mt-1 text-ink text-sm md:text-base font-medium leading-relaxed">
           {whatIDo}
         </p>
       </div>

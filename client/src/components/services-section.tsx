@@ -31,16 +31,16 @@ const services = [
 
 export default function ServicesSection() {
   return (
-    <section className="py-16 md:py-24 relative z-10 bg-[#1A1A1A]">
+    <section className="py-16 md:py-24 relative z-10 bg-surface">
       <div className="container max-w-6xl mx-auto px-6 md:px-8">
         {/* Header */}
         <div className="text-center mb-12 md:mb-16">
-          <span className="inline-block text-[#C45B3E] font-sans text-sm font-medium tracking-widest uppercase mb-4 animate-fade-in-up">
+          <span className="inline-block text-brand-text font-sans text-sm font-medium tracking-widest uppercase mb-4 animate-fade-in-up">
             Work With Me
           </span>
           <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-white animate-fade-in-up delay-100">
             How I Usually{" "}
-            <span className="italic text-[#C45B3E]">Help Teams</span>
+            <span className="italic text-brand-text">Help Teams</span>
           </h2>
         </div>
 
@@ -52,7 +52,7 @@ export default function ServicesSection() {
               className="group p-6 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:border-[#C45B3E]/40 hover:bg-white/10 transition-all duration-300 animate-fade-in-up"
               style={{ animationDelay: `${(index + 1) * 100}ms` }}
             >
-              <service.icon className="w-8 h-8 text-[#C45B3E] mb-4" />
+              <service.icon className="w-8 h-8 text-brand-text mb-4" />
               <h3 className="font-serif text-lg font-semibold text-white mb-2">
                 {service.title}
               </h3>
@@ -71,7 +71,7 @@ export default function ServicesSection() {
           </p>
           <Button
             asChild
-            className="bg-[#C45B3E] hover:bg-[#A84832] text-white px-8 py-6 text-lg font-medium rounded-lg transition-all duration-300 hover:scale-105"
+            className="bg-brand hover:bg-brand-hover text-[#0E0E10] px-8 py-6 text-lg font-medium rounded-lg transition-all duration-300 hover:scale-105"
           >
             <Link href="/contact" className="inline-flex items-center gap-2">
               <span>Get in Touch</span>

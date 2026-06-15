@@ -27,7 +27,7 @@ export default function About() {
       />
       <SchemaMarkup type="person" data={personSchemaData} />
 
-      <div className="bg-[#FAF9F6] min-h-screen">
+      <div className="bg-bg min-h-screen">
         {/* Header */}
         <section className="pt-32 pb-8 md:pt-40 md:pb-12">
           <div className="editorial-container">
@@ -44,10 +44,10 @@ export default function About() {
                 />
               </div>
               <div className="text-center sm:text-left">
-                <h1 className="font-serif text-3xl md:text-4xl font-bold text-[#1A1A1A] mb-2">
-                  <span className="text-[#C45B3E]">Ta</span> Khongsap
+                <h1 className="font-serif text-3xl md:text-4xl font-bold text-ink mb-2">
+                  <span className="text-brand-text">Ta</span> Khongsap
                 </h1>
-                <p className="text-[#5C5C5C] text-lg">
+                <p className="text-ink-muted text-lg">
                   Builder · AI Agent Systems · Solopreneur
                 </p>
               </div>
@@ -84,15 +84,15 @@ export default function About() {
 
               <ul className="space-y-3 mb-6 ml-1">
                 <li className="flex items-start editorial-prose">
-                  <span className="text-[#C45B3E] mr-3 font-bold">·</span>
+                  <span className="text-brand-text mr-3 font-bold">·</span>
                   <span><strong>TalentMatch AI</strong> — AI-powered candidate screening and matching</span>
                 </li>
                 <li className="flex items-start editorial-prose">
-                  <span className="text-[#C45B3E] mr-3 font-bold">·</span>
+                  <span className="text-brand-text mr-3 font-bold">·</span>
                   <span><strong>Doc Extract</strong> — pull structured data from PDFs and images using AI</span>
                 </li>
                 <li className="flex items-start editorial-prose">
-                  <span className="text-[#C45B3E] mr-3 font-bold">·</span>
+                  <span className="text-brand-text mr-3 font-bold">·</span>
                   <span><strong>Ava HQ</strong> — real-time dashboard for monitoring agent activity</span>
                 </li>
               </ul>
@@ -108,8 +108,8 @@ export default function About() {
             <section className="mb-12">
               <h2 className="editorial-subhead mb-6">What I Believe In</h2>
 
-              <blockquote className="border-l-4 border-[#C45B3E] pl-6 py-4 my-8 bg-[#F5F0EB] rounded-r-lg">
-                <p className="font-serif text-xl md:text-2xl italic text-[#1A1A1A] leading-relaxed">
+              <blockquote className="border-l-4 border-[#C45B3E] pl-6 py-4 my-8 bg-subtle rounded-r-lg">
+                <p className="font-serif text-xl md:text-2xl italic text-ink leading-relaxed">
                   Ethics over hype. Shipping over polishing. Systems that compound while you live your life.
                 </p>
               </blockquote>
@@ -134,7 +134,7 @@ export default function About() {
                   href="https://x.com/tkhongsap"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-[#E8E4DF] rounded-lg text-[#5C5C5C] hover:text-[#C45B3E] hover:border-[#C45B3E] transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-surface border border-line rounded-lg text-ink-muted hover:text-brand-text hover:border-brand transition-colors"
                 >
                   <Twitter size={18} /> X (@tkhongsap)
                 </a>
@@ -142,7 +142,7 @@ export default function About() {
                   href="https://linkedin.com/in/totrakool-khongsap"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-[#E8E4DF] rounded-lg text-[#5C5C5C] hover:text-[#C45B3E] hover:border-[#C45B3E] transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-surface border border-line rounded-lg text-ink-muted hover:text-brand-text hover:border-brand transition-colors"
                 >
                   <Linkedin size={18} /> LinkedIn
                 </a>
@@ -150,13 +150,13 @@ export default function About() {
                   href="https://github.com/tkhongsap"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-[#E8E4DF] rounded-lg text-[#5C5C5C] hover:text-[#C45B3E] hover:border-[#C45B3E] transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-surface border border-line rounded-lg text-ink-muted hover:text-brand-text hover:border-brand transition-colors"
                 >
                   <Github size={18} /> GitHub
                 </a>
                 <a
                   href="mailto:ta.khongsap@gmail.com"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-[#E8E4DF] rounded-lg text-[#5C5C5C] hover:text-[#C45B3E] hover:border-[#C45B3E] transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-surface border border-line rounded-lg text-ink-muted hover:text-brand-text hover:border-brand transition-colors"
                 >
                   <Mail size={18} /> Email
                 </a>
