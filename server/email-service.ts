@@ -24,6 +24,7 @@ export interface EmailOptions {
  * Email Service Interface
  */
 export interface IEmailService {
+  readonly isAvailable: boolean;
   // Sends a single email
   sendEmail(options: EmailOptions): Promise<boolean>;
   
@@ -49,6 +50,7 @@ export interface IEmailService {
  * For local development - logs emails instead of sending
  */
 export class MockEmailService implements IEmailService {
+  readonly isAvailable = false;
   constructor() {
     debugLog("MockEmailService initialized - emails will be logged but not sent");
   }
@@ -246,6 +248,7 @@ export class MockEmailService implements IEmailService {
  * Sends real emails via SendGrid API
  */
 export class SendGridEmailService implements IEmailService {
+  readonly isAvailable = true;
   constructor() {
     // Set SendGrid API key from environment variable
     const apiKey = process.env.SENDGRID_API_KEY;
@@ -466,9 +469,9 @@ export class SendGridEmailService implements IEmailService {
 /**
  * Determines which email service to use based on environment
  * Falls back to mock service if no real service is configured in development
- * In production, will throw an error if no email service is configured
+ * Production stays available without pretending email can be delivered.
  */
-function createEmailService(): IEmailService {
+export function createEmailService(): IEmailService {
   // Check if we have service credentials to use a real email service
   const emailService = process.env.EMAIL_SERVICE;
   const isDevelopment = process.env.NODE_ENV !== 'production';
@@ -477,14 +480,13 @@ function createEmailService(): IEmailService {
     try {
       return new SendGridEmailService();
     } catch (error) {
-      console.error('Failed to initialize SendGrid email service:', error);
+      console.warn('Email delivery unavailable: SendGrid configuration is incomplete.');
       
       if (isDevelopment) {
         debugLog('Falling back to mock email service in development environment');
         return new MockEmailService();
       } else {
-        // In production, we should fail if email service configuration is invalid
-        throw new Error('Email service configuration failed in production environment. Please check your settings.');
+        return new UnavailableEmailService();
       }
     }
   }
@@ -493,8 +495,25 @@ function createEmailService(): IEmailService {
     debugLog("Using mock email service for development environment");
     return new MockEmailService();
   } else {
-    // In production, we require a properly configured email service
-    throw new Error('No email service configured for production environment. Set EMAIL_SERVICE in your environment variables.');
+    console.warn('Email delivery unavailable: no supported email provider configured.');
+    return new UnavailableEmailService();
+  }
+}
+
+export class UnavailableEmailService implements IEmailService {
+  readonly isAvailable = false;
+  async sendEmail(): Promise<boolean> { return false; }
+  async sendConfirmationEmail(): Promise<boolean> { return false; }
+  async sendWelcomeEmail(): Promise<boolean> { return false; }
+  async sendNewsletterToSubscriber(): Promise<boolean> { return false; }
+  async sendNewsletterToAll(_newsletter: Newsletter, subscribers: Subscriber[]) {
+    return {
+      success: 0,
+      failed: subscribers.length,
+      details: subscribers.map(({ email }) => ({
+        email, success: false, error: "Email delivery is unavailable",
+      })),
+    };
   }
 }
 

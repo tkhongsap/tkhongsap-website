@@ -15,6 +15,15 @@ import { basicAuthMiddleware, adminOnlyMiddleware } from "./auth-middleware";
 import { debugLog } from "./logger";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  const emailUnavailable = (res: Response) => res.status(503).json({
+    success: false,
+    code: "EMAIL_UNAVAILABLE",
+    message: "Newsletter email delivery is temporarily unavailable. No email has been sent. Please try again later.",
+  });
+  app.get("/api/newsletter/status", (_req, res) => {
+    res.setHeader("Cache-Control", "no-store");
+    res.json({ available: emailService.isAvailable });
+  });
   // Create initial admin user
   app.post("/api/setup/admin", async (req, res) => {
     try {
@@ -111,6 +120,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   
   // Newsletter subscription endpoint
   app.post("/api/subscribe", async (req, res) => {
+    if (!emailService.isAvailable) return emailUnavailable(res);
     try {
       debugLog("Subscription request received:", req.body);
       
@@ -147,7 +157,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
             confirmationUrl = `${req.protocol || 'http'}://${req.headers.host}/confirm?token=${token}`;
           }
           debugLog("Generated confirmation URL:", confirmationUrl);
-          await emailService.sendConfirmationEmail(updatedSubscriber!, confirmationUrl);
+          if (!await emailService.sendConfirmationEmail(updatedSubscriber!, confirmationUrl)) {
+            return emailUnavailable(res);
+          }
           
           return res.status(200).json({ 
             success: true, 
@@ -198,7 +210,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
         confirmationUrl = `${req.protocol || 'http'}://${req.headers.host}/direct-confirm.html?token=${token}`;
       }
       debugLog("Generated confirmation URL:", confirmationUrl);
-      await emailService.sendConfirmationEmail(newSubscriber, confirmationUrl);
+      if (!await emailService.sendConfirmationEmail(newSubscriber, confirmationUrl)) {
+        return emailUnavailable(res);
+      }
       
       res.status(201).json({ 
         success: true, 
@@ -338,8 +352,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Send welcome email
       debugLog(`📤 Sending welcome email to: ${confirmedSubscriber.email}`);
       try {
-        await emailService.sendWelcomeEmail(confirmedSubscriber);
-        debugLog("✅ Welcome email sent successfully");
+        if (emailService.isAvailable) {
+          const sent = await emailService.sendWelcomeEmail(confirmedSubscriber);
+          if (sent) debugLog("Welcome email accepted by provider");
+          else console.warn("Welcome email delivery failed; subscription remains confirmed.");
+        }
       } catch (emailError) {
         // Don't fail if welcome email fails - just log it
         console.error("⚠️ Error sending welcome email:", emailError);
@@ -365,6 +382,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   
   // Resend confirmation email endpoint
   app.post("/api/newsletter/resend-confirmation", async (req, res) => {
+    if (!emailService.isAvailable) return emailUnavailable(res);
     try {
       const { email } = req.body;
       
@@ -413,7 +431,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
         confirmationUrl = `${req.protocol || 'http'}://${req.headers.host}/direct-confirm.html?token=${token}`;
       }
       debugLog("Generated confirmation URL:", confirmationUrl);
-      await emailService.sendConfirmationEmail(subscriber, confirmationUrl);
+      if (!await emailService.sendConfirmationEmail(subscriber, confirmationUrl)) {
+        return emailUnavailable(res);
+      }
       
       res.status(200).json({
         success: true,
@@ -657,6 +677,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   
   // Send newsletter immediately
   app.post("/api/newsletters/:id/send", basicAuthMiddleware, adminOnlyMiddleware, async (req, res) => {
+    if (!emailService.isAvailable) return emailUnavailable(res);
     try {
       const id = parseInt(req.params.id);
       

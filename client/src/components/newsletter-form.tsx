@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -32,6 +33,12 @@ export default function NewsletterForm({
   showNameField = false 
 }: NewsletterFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { data: status, isLoading, isError } = useQuery<{ available: boolean }>({
+    queryKey: ["/api/newsletter/status"],
+    staleTime: 0,
+    refetchOnWindowFocus: true,
+  });
+  const isAvailable = status?.available === true && !isError;
   const { toast } = useToast();
 
   const form = useForm<SubscribeValues>({
@@ -43,6 +50,7 @@ export default function NewsletterForm({
   });
 
   async function onSubmit(data: SubscribeValues) {
+    if (!isAvailable) return;
     setIsSubmitting(true);
     try {
       const response = await apiRequest("POST", "/api/subscribe", data);
@@ -148,11 +156,16 @@ export default function NewsletterForm({
           <Button
             type="submit"
             className={`bg-brand hover:bg-brand-hover text-[#0E0E10] font-medium ${showNameField ? 'w-full py-3' : 'py-3 px-6'}`}
-            disabled={isSubmitting}
+            disabled={isSubmitting || !isAvailable}
           >
-            {isSubmitting ? "Subscribing..." : "Subscribe"}
+            {isLoading ? "Checking availability..." : !isAvailable ? "Unavailable" : isSubmitting ? "Subscribing..." : "Subscribe"}
           </Button>
         </div>
+        {!isLoading && !isAvailable && (
+          <p role="status" className="text-sm text-ink-muted mt-4">
+            Newsletter subscriptions are temporarily unavailable. No subscription will be recorded or email sent. Please try again later.
+          </p>
+        )}
         
         {showNameField && (
           <p className="text-sm text-ink-muted mt-4 text-center">

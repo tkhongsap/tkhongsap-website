@@ -55,6 +55,8 @@ describe('public policy pages', () => {
     expect(html).toContain('Microsoft Copilot receives query results');
     expect(html).toContain('Do not send BNIC data, credentials or query results');
     expect(html).toContain('It does not forward submissions by email');
+    expect(html).toContain('new newsletter subscriptions and confirmation-email requests are unavailable and are not recorded');
+    expect(html).toContain('Existing newsletter records are retained; no email delivery is claimed.');
     expect(html).toContain('Server'); // Providers and server responsibilities remain explicit.
     expect(html).toContain('exact access-revocation process are also unconfirmed');
   });

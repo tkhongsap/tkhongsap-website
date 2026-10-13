@@ -11,4 +11,10 @@ The owner approved wording that explicitly retains unknown practices and describ
 
 **Why:** The owner selected “Approve wording; keep unpublished” after reviewing the notices and the contact-delivery distinction.
 
+The owner also approved keeping the website available without a configured email provider, with new newsletter subscriptions and confirmation-email requests unavailable and unrecorded, existing newsletter records retained, and no email delivery claimed.
+
+**Why:** The owner chose the explicit newsletter-unavailable behavior and its privacy-notice wording rather than setting up a provider. This approval does not authorize publication.
+
+**How to apply:** Do not silently enable production mock delivery. Obtain fresh permission for publication and separate approval before changing email-provider practices.
+
 **How to apply:** The owner confirms OAuth, access limited by the authenticated account’s permissions, authorized read-only Redshift queries and reviewed business knowledge through Microsoft Copilot; Copilot receives query results. The public website must not receive or display BNIC data, credentials or query results. Logging, caching, retention, email tracking, deletion procedures and exact revocation are unconfirmed: do not invent them or promise nothing is stored. Show revised wording and remaining unknowns for review before publication. Keep local implementation, publication and Microsoft verification distinct; do not change analytics/storage behavior as part of policy work.

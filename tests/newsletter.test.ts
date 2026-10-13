@@ -14,6 +14,7 @@ jest.mock('../server/storage', () => {
 });
 jest.mock('../server/email-service', () => ({
   emailService: {
+    isAvailable: true,
     sendConfirmationEmail: jest.fn().mockResolvedValue(true),
     sendWelcomeEmail: jest.fn().mockResolvedValue(true),
   },
@@ -47,6 +48,10 @@ function createTestApp() {
 describe('Newsletter API', () => {
   const app = createTestApp();
   const agent = request.agent(app);
+  beforeEach(() => {
+    (emailService as { isAvailable: boolean }).isAvailable = true;
+    jest.clearAllMocks();
+  });
 
   beforeAll(async () => {
     const tokenRes = await agent.get('/api/csrf-token');
@@ -68,6 +73,71 @@ describe('Newsletter API', () => {
     const subscriber = await storage.getSubscriberByEmail(email);
     expect(subscriber?.status).toBe('pending');
     expect(emailService.sendConfirmationEmail).toHaveBeenCalled();
+  });
+
+  test('unavailable subscription and resend leave existing records untouched', async () => {
+    const subscriber = await storage.createSubscriber({ email: 'existing@example.com', name: 'Existing' });
+    await storage.updateSubscriberStatus(subscriber.id, 'unsubscribed');
+    await storage.createConfirmationToken(subscriber.id, 'existing-token', new Date('2030-01-01'));
+    const before = await storage.getAllSubscribers();
+    (emailService as { isAvailable: boolean }).isAvailable = false;
+    const status = await agent.get('/api/newsletter/status').expect(200);
+    expect(status.body).toEqual({ available: false });
+    expect(status.headers['cache-control']).toBe('no-store');
+    const token = (await agent.get('/api/csrf-token')).body.csrfToken;
+    for (const [path, email] of [
+      ['/api/subscribe', 'not-recorded@example.com'],
+      ['/api/subscribe', subscriber.email],
+      ['/api/newsletter/resend-confirmation', subscriber.email],
+    ]) {
+      const response = await agent.post(path).set('x-csrf-token', token).send({ email }).expect(503);
+      expect(response.body).toMatchObject({ success: false, code: 'EMAIL_UNAVAILABLE' });
+      expect(response.body.message).toContain('No email has been sent');
+    }
+    expect(await storage.getAllSubscribers()).toEqual(before);
+    expect(emailService.sendConfirmationEmail).not.toHaveBeenCalled();
+  });
+
+  test('unavailable admin send changes no newsletter or tracking records', async () => {
+    (emailService as { isAvailable: boolean }).isAvailable = false;
+    const token = (await agent.get('/api/csrf-token')).body.csrfToken;
+    const lookup = jest.spyOn(storage, 'getNewsletterById');
+    const tracking = jest.spyOn(storage, 'createNewsletterTracking');
+    const sentDate = jest.spyOn(storage, 'updateNewsletterSentDate');
+    const auth = 'Basic ' + Buffer.from('admin:strongpassword123').toString('base64');
+    await agent.post('/api/newsletters/1/send').set('Authorization', auth)
+      .set('x-csrf-token', token).send({}).expect(503);
+    expect(lookup).not.toHaveBeenCalled();
+    expect(tracking).not.toHaveBeenCalled();
+    expect(sentDate).not.toHaveBeenCalled();
+    lookup.mockRestore();
+    tracking.mockRestore();
+    sentDate.mockRestore();
+  });
+
+  test('provider rejection does not falsely claim a confirmation email was sent', async () => {
+    const token = (await agent.get('/api/csrf-token')).body.csrfToken;
+    (emailService.sendConfirmationEmail as jest.Mock).mockResolvedValueOnce(false);
+    const response = await agent.post('/api/subscribe').set('x-csrf-token', token)
+      .send({ email: 'rejected@example.com' }).expect(503);
+    expect(response.body.success).toBe(false);
+    const pending = await storage.getSubscriberByEmail('rejected@example.com');
+    expect(pending?.status).toBe('pending');
+    (emailService.sendConfirmationEmail as jest.Mock).mockResolvedValueOnce(false);
+    await agent.post('/api/newsletter/resend-confirmation').set('x-csrf-token', token)
+      .send({ email: 'rejected@example.com' }).expect(503);
+    await storage.updateSubscriberStatus(pending!.id, 'unsubscribed');
+    (emailService.sendConfirmationEmail as jest.Mock).mockResolvedValueOnce(false);
+    await agent.post('/api/subscribe').set('x-csrf-token', token)
+      .send({ email: 'rejected@example.com' }).expect(503);
+  });
+
+  test('unsubscribe remains usable while email is unavailable', async () => {
+    const subscriber = await storage.createSubscriber({ email: 'unsubscribe@example.com' });
+    await storage.updateUnsubscribeToken(subscriber.id, 'unsubscribe-test-token');
+    (emailService as { isAvailable: boolean }).isAvailable = false;
+    await agent.get('/api/newsletter/unsubscribe?token=unsubscribe-test-token').expect(200);
+    expect((await storage.getSubscriberById(subscriber.id))?.status).toBe('unsubscribed');
   });
 
   test('subscription confirmation sets subscriber to confirmed', async () => {
