@@ -1,0 +1,150 @@
+Sign-in is successful, but the connector has not been created. Microsoft rejected it because the developer name is missing; data retrieval remains untested.
+I need the approved developer/company name, website, privacy-policy URL and terms URL. These aren’t in the manual. Once supplied, I can retry creation and run the read-only test.
+
+
+
+9:57 AM
+
+
+
+
+
+
+
+Worked for 10s
+
+
+
+Microsoft still shows the same creation error. Authentication succeeded, but retrieval cannot be tested until the connector is created.
+The pending step is to supply approved developer/company details and the website, privacy-policy and terms URLs. The setup remains saved and ready to continue.
+
+
+9:58 AM
+
+
+
+
+
+
+
+Worked for 12s
+
+
+
+The goal is blocked. Microsoft still rejects creation with: “Developer name is mandatory; cannot build the MOS app package.”
+Sign-in succeeded; Microsoft data retrieval remains untested. Please provide the approved developer/company name, website, privacy-policy URL and terms URL so I can continue.
+
+
+9:58 AM
+
+
+
+
+
+
+
+Microsoft rejected creation with “Developer name is mandatory; cannot build the MOS app package.” The manual does not provide package metadata. What developer/company name, website, privacy-policy URL and terms-of-use URL should this internal BNIC connector use? Please provide approved values; the BNIC owner can supply them.Can you help me on this one? Just give me my name.  tkhongsap
+
+
+
+
+
+
+
+
+
+10:15 AM
+
+
+
+
+
+
+Worked for 1m 13s
+
+
+
+I entered tkhongsap as the developer name.
+Microsoft also requires three URLs: website, privacy policy, and terms of use. Please provide existing approved pages, or I can help draft them for hosting. The connector is not created yet.
+
+
+
+10:17 AM
+
+
+
+
+
+
+
+I entered tkhongsap as the developer name. The fresh Microsoft form also marks website, privacy-policy and terms-of-use URLs as required. Do you have existing pages for this internal connector, or can the BNIC owner provide the three approved URLs? I can help draft pages if none exist, but they need a real hosted location.https://tkhongsap.io/
+
+
+
+
+
+
+
+
+
+10:18 AM
+
+
+
+
+
+
+Worked for 35s
+
+
+
+Website set to https://tkhongsap.io/.
+I checked the site and found no privacy-policy or terms links. Those two required URLs are still missing. I can draft short internal-test pages for you to publish there; creation and data retrieval remain pending.
+
+
+10:18 AM
+
+
+
+
+
+
+
+I set https://tkhongsap.io/ as the website, but its homepage has no privacy-policy or terms links. What two URLs should I use for those required fields? If the pages don’t exist, I can prepare short internal-test drafts for you to publish on your site.can you not use tkhongsap.io?
+
+
+
+
+
+
+
+
+
+10:24 AM
+
+
+
+
+
+
+We can use tkhongsap.io for the website. The other two fields need URLs that display a privacy policy and terms; the homepage currently contains neither.
+I can draft both pages for your site, then use their published URLs to finish setup.
+
+
+10:24 AM
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Goal stalledVerify retrieval from the supplied BNIC read-only MCP server in Microsoft Copilot using the prepared Microsoft OAuth connection. Complete the test setup, run a minimal native connection query and a data freshness query, and record actual results or exact blocking evidence. Do not substitute Codex retrieval for Microsoft Copilot verification. •3m 17s
