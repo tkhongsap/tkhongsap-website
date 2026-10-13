@@ -31,3 +31,4 @@ pids
 # Build artifacts
 build/
 coverage/
+/generated-artifacts/
