@@ -1,13 +1,25 @@
 import request from 'supertest';
 import express from 'express';
 import session from 'express-session';
-import MemoryStore from 'memorystore';
 import csurf from 'csurf';
 import { registerRoutes } from '../server/routes';
 import { storage } from '../server/storage';
+import { emailService } from '../server/email-service';
+
+// Never connect to a configured database or send real email during tests.
+jest.mock('../server/pg-storage', () => ({ PgStorage: jest.fn() }));
+jest.mock('../server/storage', () => {
+  const actual = jest.requireActual('../server/storage');
+  return { ...actual, storage: new actual.MemStorage() };
+});
+jest.mock('../server/email-service', () => ({
+  emailService: {
+    sendConfirmationEmail: jest.fn().mockResolvedValue(true),
+    sendWelcomeEmail: jest.fn().mockResolvedValue(true),
+  },
+}));
 
 function createTestApp() {
-  const MemoryStoreSession = MemoryStore(session);
   const app = express();
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
@@ -15,7 +27,7 @@ function createTestApp() {
     secret: 'test-secret',
     resave: false,
     saveUninitialized: false,
-    store: new MemoryStoreSession({ checkPeriod: 86400000 }),
+    store: new session.MemoryStore(),
     cookie: { secure: false, httpOnly: true, maxAge: 1000 * 60 * 60 }
   }));
 
@@ -34,35 +46,38 @@ function createTestApp() {
 
 describe('Newsletter API', () => {
   const app = createTestApp();
+  const agent = request.agent(app);
 
   beforeAll(async () => {
-    process.env.NODE_ENV = 'test';
-    const tokenRes = await request(app).get('/api/csrf-token');
-    await request(app)
+    const tokenRes = await agent.get('/api/csrf-token');
+    await agent
       .post('/api/setup/admin')
       .set('x-csrf-token', tokenRes.body.csrfToken)
-      .send({ username: 'admin', password: 'strongpassword123' });
+      .send({ username: 'admin', password: 'strongpassword123' })
+      .expect(201);
   });
 
   test('newsletter subscription creates pending subscriber', async () => {
-    const tokenRes = await request(app).get('/api/csrf-token');
+    const tokenRes = await agent.get('/api/csrf-token');
     const email = 'sub1@example.com';
-    const res = await request(app)
+    const res = await agent
       .post('/api/subscribe')
       .set('x-csrf-token', tokenRes.body.csrfToken)
       .send({ name: 'Tester', email });
     expect(res.status).toBe(201);
     const subscriber = await storage.getSubscriberByEmail(email);
     expect(subscriber?.status).toBe('pending');
+    expect(emailService.sendConfirmationEmail).toHaveBeenCalled();
   });
 
   test('subscription confirmation sets subscriber to confirmed', async () => {
-    const tokenRes = await request(app).get('/api/csrf-token');
+    const tokenRes = await agent.get('/api/csrf-token');
     const email = 'sub2@example.com';
-    await request(app)
+    await agent
       .post('/api/subscribe')
       .set('x-csrf-token', tokenRes.body.csrfToken)
-      .send({ name: 'Tester', email });
+      .send({ name: 'Tester', email })
+      .expect(201);
     const subscriber = await storage.getSubscriberByEmail(email);
     expect(subscriber).toBeTruthy();
     const confirmRes = await request(app)
@@ -80,5 +95,28 @@ describe('Newsletter API', () => {
     const resAuth = await request(app).get('/api/subscribers').set('Authorization', auth);
     expect(resAuth.status).toBe(200);
     expect(Array.isArray(resAuth.body)).toBe(true);
+  });
+
+  test('contact submissions save only with a matching session and CSRF token', async () => {
+    const message = { name: 'Test Visitor', email: 'visitor@example.com', message: 'A test contact message.' };
+    const before = (await storage.getAllContactMessages()).length;
+    await request(app).post('/api/contact').send(message).expect(403);
+    const tokenRes = await agent.get('/api/csrf-token');
+    // A token without its corresponding session cookie must also be rejected.
+    await request(app).post('/api/contact')
+      .set('x-csrf-token', tokenRes.body.csrfToken).send(message).expect(403);
+    expect(await storage.getAllContactMessages()).toHaveLength(before);
+    await agent.post('/api/contact')
+      .set('x-csrf-token', tokenRes.body.csrfToken).send(message).expect(201);
+    expect(await storage.getAllContactMessages()).toHaveLength(before + 1);
+    expect((await storage.getAllContactMessages())[before]).toMatchObject(message);
+  });
+
+  test('invalid contact data is not saved', async () => {
+    const before = (await storage.getAllContactMessages()).length;
+    const tokenRes = await agent.get('/api/csrf-token');
+    await agent.post('/api/contact')
+      .set('x-csrf-token', tokenRes.body.csrfToken).send({}).expect(400);
+    expect(await storage.getAllContactMessages()).toHaveLength(before);
   });
 });

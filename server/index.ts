@@ -54,6 +54,9 @@ app.use((req, res, next) => {
 
 // Session configuration
 const isProduction = process.env.NODE_ENV === 'production';
+// Replit terminates HTTPS at its reverse proxy. Trust that hop so secure
+// session cookies are issued for the token request in production.
+if (isProduction) app.set("trust proxy", 1);
 const SESSION_SECRET = process.env.SESSION_SECRET || 'please-change-this-secret-in-production';
 
 if (isProduction && SESSION_SECRET === 'please-change-this-secret-in-production') {
@@ -123,6 +126,7 @@ app.use('/api', (req: Request, res: Response, next: NextFunction) => {
 
 // Add CSRF token generation route
 app.get('/api/csrf-token', csrfProtection, (req: Request, res: Response) => {
+  res.setHeader("Cache-Control", "no-store");
   res.json({ csrfToken: req.csrfToken() });
 });
 
@@ -143,7 +147,8 @@ app.get('/api/csrf-token', csrfProtection, (req: Request, res: Response) => {
     const message = err.message || "Internal Server Error";
 
     res.status(status).json({ message });
-    throw err;
+    // A rejected form request must not terminate the server after responding.
+    if (status >= 500) console.error(`Request failed with status ${status}`);
   });
 
   // Serve static files from the public directory in both dev and production

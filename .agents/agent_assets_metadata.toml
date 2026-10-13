@@ -1,0 +1,30 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "A0klUAFAflCRM6fdgiv8D"
+uri = "file://generated-artifacts/policy-owner-review.html"
+type = "html"
+title = "Privacy Policy and Terms — final review copy"
+description = "Full revised wording for both pages, including the confirmed UAT scope, website providers, separate BNIC/Microsoft responsibilities and remaining unknowns. Not published."
+logical_id = "76ba6fd6-7a82-4c3e-bf4b-079d861c834a"
+content_hash = "sha256:0d80aa5ccea75483d0e4cf7eb5f70d67a4336ed445ae0dfe91a4002a0ee22b40"
+size = 16696
+mtime_ms = 1791867427160
+storage_uri = "gcs://replit-rams-assets-sisko/rams/assets/repl:8c610f07-e52d-4213-a31c-784b8a0df730/76ba6fd6-7a82-4c3e-bf4b-079d861c834a/7cdd1067-bf07-4234-beb2-85b9639b38ce"
+storage_version_token = "1791867445903605"
+content_type = "text/html"
+
+[[outputs]]
+id = "3Iz040Jt-5tUHKuYc9K6F"
+uri = "file://generated-artifacts/approved-policies.html"
+type = "html"
+title = "Approved Privacy Policy and Terms"
+description = "Owner-approved wording for the two implemented pages. Local copy only; the site has not been republished."
+logical_id = "9f037060-7d94-4162-af01-e2ef0021a640"
+content_hash = "sha256:6c28b1c1f38754e65acda7fdae32ceff902a456e1e4399a4a196983ca3e657aa"
+size = 16432
+mtime_ms = 1791867548084
+storage_uri = "gcs://replit-rams-assets-sisko/rams/assets/repl:8c610f07-e52d-4213-a31c-784b8a0df730/9f037060-7d94-4162-af01-e2ef0021a640/9c7703c5-e0ac-4047-bb94-08233fe9c894"
+storage_version_token = "1791867567622163"
+content_type = "text/html"

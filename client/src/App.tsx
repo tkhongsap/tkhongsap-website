@@ -22,6 +22,8 @@ const UnsubscribePage = lazy(() => import("@/pages/unsubscribe"));
 const MyThought = lazy(() => import("@/pages/my-thought"));
 const Essay = lazy(() => import("@/pages/essay"));
 const Column = lazy(() => import("@/pages/column"));
+const PrivacyPolicy = lazy(() => import("@/pages/privacy-policy"));
+const TermsOfUse = lazy(() => import("@/pages/terms-of-use"));
 
 // Loading fallback component
 function PageLoader() {
@@ -56,6 +58,8 @@ function Router() {
         <Route path="/essay/:id" component={Essay} />
         <Route path="/column/:slug" component={Column} />
         <Route path="/contact" component={Contact} />
+        <Route path="/privacy-policy" component={PrivacyPolicy} />
+        <Route path="/terms-of-use" component={TermsOfUse} />
         <Route path="/confirm" component={ConfirmPage} />
         <Route path="/unsubscribe" component={UnsubscribePage} />
         <Route component={NotFound} />

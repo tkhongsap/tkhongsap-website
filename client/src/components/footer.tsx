@@ -66,7 +66,7 @@ export default function Footer() {
             </p>
 
             {/* Navigation Links */}
-            <nav className="flex items-center gap-6 text-sm">
+            <nav aria-label="Footer navigation" className="flex flex-wrap justify-center md:justify-end items-center gap-x-6 gap-y-3 text-sm min-w-0">
               <Link
                 href="/"
                 className="text-ink-muted hover:text-brand-text transition-colors"
@@ -90,6 +90,18 @@ export default function Footer() {
                 className="text-ink-muted hover:text-brand-text transition-colors"
               >
                 About
+              </Link>
+              <Link
+                href="/privacy-policy"
+                className="text-ink-muted hover:text-brand-text transition-colors"
+              >
+                Privacy Policy
+              </Link>
+              <Link
+                href="/terms-of-use"
+                className="text-ink-muted hover:text-brand-text transition-colors"
+              >
+                Terms of Use
               </Link>
             </nav>
           </div>

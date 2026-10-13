@@ -12,10 +12,29 @@ export async function apiRequest(
   url: string,
   data?: unknown | undefined,
 ): Promise<Response> {
+  const headers: Record<string, string> =
+    data !== undefined ? { "Content-Type": "application/json" } : {};
+  const normalizedMethod = method.toUpperCase();
+
+  if (!["GET", "HEAD", "OPTIONS"].includes(normalizedMethod)) {
+    // Fetch a fresh token with the same session cookie as the mutation.
+    // Do not retry mutations automatically: a retry could duplicate a message.
+    const tokenResponse = await fetch("/api/csrf-token", {
+      credentials: "include",
+      cache: "no-store",
+    });
+    await throwIfResNotOk(tokenResponse);
+    const { csrfToken } = await tokenResponse.json();
+    if (typeof csrfToken !== "string" || !csrfToken) {
+      throw new Error("Unable to verify this form. Please refresh and try again.");
+    }
+    headers["X-CSRF-Token"] = csrfToken;
+  }
+
   const res = await fetch(url, {
-    method,
-    headers: data ? { "Content-Type": "application/json" } : {},
-    body: data ? JSON.stringify(data) : undefined,
+    method: normalizedMethod,
+    headers,
+    body: data !== undefined ? JSON.stringify(data) : undefined,
     credentials: "include",
   });
 

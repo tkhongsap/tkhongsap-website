@@ -59,9 +59,9 @@ export default function Contact() {
       const result = await response.json();
 
       toast({
-        title: "Message sent!",
+        title: "Message received",
         description:
-          result.message || "Thank you for reaching out. I'll respond soon.",
+          result.message || "Your message has been saved on this website.",
       });
 
       form.reset();
@@ -152,6 +152,11 @@ export default function Contact() {
                 <h2 className="font-serif text-2xl font-semibold text-ink mb-6 text-center">
                   Send a Message
                 </h2>
+                <p className="text-sm text-ink-muted mb-6 leading-relaxed">
+                  This form stores messages on this website; it does not forward
+                  them by email. For direct email, use the Email link above.
+                  Do not submit BNIC data, credentials or query results.
+                </p>
 
                 <FormField
                   control={form.control}

@@ -1,0 +1,2 @@
+- [Policy approval boundary](policy-approval.md) — connector registration pages require owner-confirmed practices, not inferred promises.
+- [Safe form tests](safe-form-tests.md) — isolate database and email in tests regardless of workspace configuration.

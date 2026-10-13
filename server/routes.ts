@@ -233,7 +233,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       res.status(201).json({ 
         success: true, 
-        message: "Message sent successfully! I'll get back to you soon." 
+        message: "Your message has been saved on this website. For direct email, use the Email link on the contact page."
       });
     } catch (error) {
       if (error instanceof z.ZodError) {
