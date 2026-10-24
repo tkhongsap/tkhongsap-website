@@ -114,6 +114,23 @@ SENDGRID_API_KEY=your-sendgrid-key
 SENDGRID_FROM_EMAIL=your-verified-email
 ```
 
+The server does not load `.env` by itself. Export these variables in the process that runs `npm run dev`.
+
+Cloud Agents use a local PostgreSQL 16 database instead of hosted Neon. The app's Neon HTTP driver cannot talk to that database until `NODE_OPTIONS=--import /opt/cloud-agent/neon-preload.mjs` is set. The environment start script already exports:
+
+```
+DATABASE_URL=postgresql://website:website@127.0.0.1:5432/tkhongsap
+SITE_URL=http://127.0.0.1:5000
+NODE_ENV=development
+NODE_OPTIONS=--import /opt/cloud-agent/neon-preload.mjs
+```
+
+It also starts Postgres, the HTTP proxy on `127.0.0.1:4444`, pushes the Drizzle schema, and runs `npm run dev` on port 5000. Keep that preload when restarting the server by hand.
+
+`package-lock.json` still records some tarball URLs on `package-firewall.replit.local`. `npm ci` cannot resolve that host. Rewrite those URLs to `https://registry.npmjs.org/` for the install, then restore the lockfile. Do not commit that temporary rewrite.
+
+Newsletter signup stays unavailable until `EMAIL_SERVICE=sendgrid` and `SENDGRID_API_KEY` are set. The contact form stores messages in Postgres without email.
+
 ## Deployment
 
 Configured for multiple platforms:
